@@ -48,6 +48,9 @@
 \setlength{\leftmargini}{0pt}
 \makeatother
 
+\usepackage{biblatex}
+\addbibresource{sources.bib}
+
 \begin{document}
 
 \maketitle
@@ -138,10 +141,13 @@
 
 \begin{frame}{Post-Quanten Kryptografie: Wird bereits standardisiert}
 
-\begin{columns}[onlytextwidth]
-\begin{column}{.30\textwidth}
+\begin{columns}[T]
+\begin{column}{.50\textwidth}
 
-\large Durch NIST\footnote{National Institut for standards and technology – Amerikanische Standardisierungsbehörde} standardisiert\footnote{Quelle: https://csrc.nist.gov/Projects/post-quantum-cryptography/selected-algorithms-2022} \normalsize
+\large Durch NIST\footnotemark standardisiert \cite{nist-selected-algorithms}
+\normalsize
+
+%\footnote{Quelle: https://csrc.nist.gov/Projects/post-quantum-cryptography/selected-algorithms-2022} \normalsize
 
 \vspace{2mm}
 
@@ -153,9 +159,10 @@
 \end{itemize}
 
 \end{column}
+\footnotetext{National Institut for standards and technology – Amerikanische Standardisierungsbehörde} 
 
-\begin{column}{.30\textwidth}
-\large Das BSI\footnote{Bundesamt für Sicherheit in der Informationstechnik} empfiehlt\footnote{Quelle: https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/Broschueren/Kryptografie-quantensicher-gestalten.pdf} \normalsize
+\begin{column}{.50\textwidth}
+\large Das BSI\footnotemark empfiehlt \cite{bsi-quantensicher-gestalten}\normalsize
 
 \vspace{2mm}
 
@@ -165,6 +172,7 @@
 \end{itemize}
 
 \end{column}
+\footnotetext{Bundesamt für Sicherheit in der Informationstechnik} 
 \end{columns}
 
 \end{frame}
@@ -191,14 +199,15 @@
     Die meisten Protokolle inklusive WireGuard nutzen NIKEs    
 \end{frame}
 
-\begin{frame}{Schlüsseltauschmethoden: Mit NIKEs\footnote{\say{Non-interactive key exchange} -- Nichtinteraktiver Schlüsseltausch}}
-\usetikzlibrary{shapes,decorations,decorations.pathreplacing,arrows,calc,arrows.meta,fit,chains,positioning,shadows}
+\begin{frame}{Schlüsseltauschmethoden:}
+\framesubtitle{Mt NIKEs\footnote{\say{Non-interactive key exchange} -- Nichtinteraktiver Schlüsseltausch}}
 \begin{tikzpicture}[
 rosenpass-diagram,
   % define multiple syles for consistency
   boxed-node/.style = {draw, rectangle, fill=white, text width = 5em, align = center, minimum height = 1.75em, rounded corners},
   swimming-lane/.style = {very thick},
   message-flow/.style = {-{Stealth[length = 0.5em]}, shorten >= 0.25em, shorten <= 0.25em},
+  yscale=.7
 ]
 
   % iterate over i, multiply with 1cm, creating a vertical, down moving row of coordinates
@@ -243,7 +252,10 @@ Static-static Schlüsseltausch mit NIKEs.
 
 \end{frame}
 
-\begin{frame}{Schlüsseltauschmethoden: Mit KEMs\footnote{\say{Key-Encapsulation Method} -- Schlüsselverpackungsmethode} wird es komplizierter}
+%\end{document}
+%
+\begin{frame}{Schlüsseltauschmethoden:}
+\framesubtitle{Mit KEMs\footnote{\say{Key-Encapsulation Method} -- Schlüsselverpackungsmethode} wird es komplizierter}
 \begin{tikzpicture}[
   % define multiple syles for consistency
   boxed-node/.style = {draw, rectangle, fill=white, text width = 5em, align = center, minimum height = 1.75em, rounded corners},
