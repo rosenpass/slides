@@ -257,6 +257,7 @@ Static-static Schlüsseltausch mit NIKEs.
 \begin{frame}{Schlüsseltauschmethoden:}
 \framesubtitle{Mit KEMs\footnote{\say{Key-Encapsulation Method} -- Schlüsselverpackungsmethode} wird es komplizierter}
 \begin{tikzpicture}[
+rosenpass-diagram,
   % define multiple syles for consistency
   boxed-node/.style = {draw, rectangle, fill=white, text width = 5em, align = center, minimum height = 1.75em, rounded corners},
   swimming-lane/.style = {very thick},
@@ -268,8 +269,13 @@ Static-static Schlüsseltausch mit NIKEs.
     \coordinate (n-\i) at (0,-\i);
 
   % set two initial nodes, positioned relative to the coordinates
-  \node[boxed-node] (ini) at (n-0) {Initiator};
-  \node[boxed-node,right = of ini] (res) {Response};
+%  \node[boxed-node] (ini) at (n-0) {Initiator};
+%  \node[boxed-node,right = of ini] (res) {Response};
+	 \draw[initiator](-1,0) node(initiator){Initiator} coordinate(ini) ++(0,.1)to
+		coordinate[pos=.2](spki-y)
+		coordinate[pos=.6](spkr-y)
+		coordinate[pos=.76](ack-y)+(0,-5) coordinate(result-y);
+	  \draw[responder] (1,0) node(responder){Response} coordinate (res)++(0,.1)to +(0,-5);
 
   % place a text on the intersection of the ini node and the n-1 coordinate
   \node[anchor = east] (sski) at (n-1 -| ini) {(sski, spki) $\leftarrow$ keygen()};

@@ -55,9 +55,9 @@
 \begin{tcolorbox}[width=\dim_eval:n {\paperwidth-\box_wd:N \g__ptxcd_logo_box - 1em-\beamer@leftmargin},arc=.1ex,colback=bg,coltext=fg,fontupper=\usebeamerfont{frametitle},sharp~corners=west,grow~to~left~ by=\beamer@leftmargin,left=\beamer@leftmargin,after=,capture=hbox]
 \parbox{\dim_eval:n {\paperwidth-\box_wd:N \g__ptxcd_logo_box - 1em-\beamer@leftmargin-1em}}{
 \raggedright
- \insertframetitle
+\strut\insertframetitle\strut
  \ifx\insertframesubtitle\@empty\else\\
- \insertframesubtitle
+ \strut\insertframesubtitle\strut
  \fi
  }
  \end{tcolorbox}
