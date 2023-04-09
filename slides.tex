@@ -111,6 +111,7 @@
 \end{frame}
 
 \begin{frame}{Rosenpass ist…}
+\setlength{\leftmargini}{2em}
 
 	Software
 \begin{itemize}
@@ -555,9 +556,42 @@ In unserem Fall:
   \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-message-handling-code.pdf}
 \end{frame}
 
+\begin{frame}{Konversationsstarter}
+
+\begin{itemize}
+\item
+  Zurzeit wird Rosenpass via CLI konfiguriert
+\item
+  Das lässt zu wünschen:
+  \begin{itemize}
+  \item
+    hinzufügen/entfernen von peers \textbf{ohne} neustart
+  \item\relax
+    <23 CLI Argumente für exchange mit einem peer
+  \item
+    simple integration mit anderen Programmiersprachen
+  \end{itemize}
+\item
+  Lösungsansätze:
+  \begin{itemize}
+  \item
+    Konfigurationsdatei: \texttt{rosenpass\ rp-config.toml}
+  \item
+    Unix Domain Socket:
+    \texttt{add\ peer\ /opt/peer-pub.key\ rosenpass.eu:9999}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
 % TODO: Posterfolie? KEMs statt Diffie-Hellmann; 
 
-\maketitle
+\appendix
+
+\begin{frame}
+\centering
+\includegraphics[width=.4\linewidth]{RosenPass-Logo}\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
