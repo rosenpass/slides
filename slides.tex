@@ -309,11 +309,8 @@ rosenpass-diagram,
      \draw [request](sski) -- node[above]{spki} (sski -| res);
      \draw [response](n-2 -| ini) -- node[above]{spkr} (n-2 -| res);
   \end{scope}
-\end{tikzpicture}%
-%
-\hfill
-\begingroup\footnotesize
-\raisebox{-\baselineskip}{%\makebox[4cm][l]{%
+\end{tikzpicture}\hfill\begingroup\footnotesize
+\raisebox{-\baselineskip}{\makebox[4cm][l]{%
 	\begin{tikzpicture}[outer sep=1mm]
 		\namepart{s=Static,e=Ephemeral}
 		\namepart[2cm]{sk=Secret Key,pk=Public Key,ct=Ciphertext}
@@ -324,10 +321,9 @@ rosenpass-diagram,
 			\namebraceright{sk}{ct}
 			\namebraceleft{i}{r}
 		\end{scope}
-\end{tikzpicture}}
+\end{tikzpicture}}}
 \endgroup
 %Static-static Schlüsselaustausch mit NIKEs.
-
 \end{frame}
 
 %\end{document}
