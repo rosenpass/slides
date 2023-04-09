@@ -52,8 +52,14 @@
 	\vspace*{-\dp\strutbox}
 	\usebeamercolor{frametitle}
 	\makebox[\linewidth][r]{\rlap{\raisebox{-.95\height}[0pt][0pt]{\box_use:N \g__ptxcd_logo_box}}\hspace{-.5em}}\par\nointerlineskip
-\begin{tcolorbox}[width=\dim_eval:n {\paperwidth-\box_wd:N \g__ptxcd_logo_box - 1em-\beamer@leftmargin},arc=.1ex,colback=bg,coltext=fg,fontupper=\usebeamerfont{frametitle},sharp~corners=west,grow~to~left~ by=\beamer@leftmargin,left=\beamer@leftmargin,after=,]
+\begin{tcolorbox}[width=\dim_eval:n {\paperwidth-\box_wd:N \g__ptxcd_logo_box - 1em-\beamer@leftmargin},arc=.1ex,colback=bg,coltext=fg,fontupper=\usebeamerfont{frametitle},sharp~corners=west,grow~to~left~ by=\beamer@leftmargin,left=\beamer@leftmargin,after=,capture=hbox]
+\parbox{\dim_eval:n {\paperwidth-\box_wd:N \g__ptxcd_logo_box - 1em-\beamer@leftmargin-1em}}{
+\raggedright
  \insertframetitle
+ \ifx\insertframesubtitle\@empty\else\\
+ \insertframesubtitle
+ \fi
+ }
  \end{tcolorbox}
  \vspace{\dp\strutbox}
 }
