@@ -1,10 +1,16 @@
 \documentclass{rosenpass-beamer}
 
-\usepackage[english]{babel}
+\usepackage[german]{babel}
 \usepackage[autostyle]{csquotes}
 \usepackage{emoji}
-\usepackage{dirtytalk}
+%\usepackage{dirtytalk}
+\let\say\enquote
+
+\usepackage{xurl}
+
 \usepackage{textcomp}
+
+\usetikzlibrary{positioning}
 
 \definecolor{RPPink}{rgb}{274,4,132}
 \definecolor{RPOrange}{rgb}{255, 166, 48}
@@ -13,11 +19,29 @@
 \definecolor{RPTurquoise}{rgb}{114, 161, 229}
 
 \title{Rosenpass}
-\author{Wanja Zaeske, Stephan Ajuvo, Marei Peischl, Benjamin Lipp, Lisa Schmidt, Karolin Varner}
+\author{Wanja Zaeske, Stephan Ajuvo, Marei Peischl, Benjamin Lipp, Lisa~Schmidt, Karolin Varner}
 \institute{\url{https://rosenpass.eu}}
 
 \conference{Easterhegg20}
 \date{2023-04-09}
+
+\parskip\smallskipamount
+
+\ExplSyntaxOn
+\newcommand*{\sourcename}{Quelle}
+\newcommand*{\sourcesep}{:~}
+\newcommand*{\ImgSource}[2]{%
+%\hbox_set:Nn \l_tmpa_box {#1}
+
+\hbox_set:Nn \l_tmpa_box {#1}
+
+\hbox_set:Nn \l_tmpa_box {
+\dim_set:Nn \l_tmpa_dim {\box_ht:N \l_tmpa_box}
+\hbox_unpack_drop:N \l_tmpa_box \rotatebox{90}{\parbox{\l_tmpa_dim}{\tiny\sourcename\sourcesep#2}}
+}
+\box_use:N \l_tmpa_box
+}
+\ExplSyntaxOff
 
 \begin{document}
 
@@ -44,8 +68,8 @@
   \item Ein Schlüsseltauschverfahren
   \item Post-Quantum Sicher
   \item Formell Verifiziert
-\end{itemize}
-\begin{itemize}
+%\end{itemize}
+%\begin{itemize}
   \item Eine WissKomm-Initiative um Kryptografie der Breiten Öffentlichkeit zugänglich zu machen
 \end{itemize}
 \end{frame}
@@ -57,7 +81,9 @@
 
 \textbf{Jargon}: Löst das \emph{Hidden Subgroup Problem} in \emph{Endlichen Abelianisch Gruppen} effizient. U.a. viele Probleme auf denen moderne Krypto basiert:
 
-\vspace{5mm}
+%\vspace{5mm}
+
+
 
 \begin{itemize}
     \item RSA\footnote{\say{Rivest-Shamir–Adleman} -- Ron Rivest, Adi Shamir, Leonard Adleman} (das \emph{Faktorisierungsproblem} – Primzahlzerlegung)
@@ -65,7 +91,7 @@
     \item ECDH\footnote{Elliptic Curve Diffie-Hellmann} (\emph{Diskreter Logarithmus auf Elliptischen Kurven})
 \end{itemize}
 
-\vspace{5mm}
+%\vspace{5mm}
 
 \textbf{Weniger Jargon}: Bricht so ziemlich alle moderne, asymmetrische Kryptografie.
 
@@ -83,27 +109,26 @@
 \end{frame}
 
 \begin{frame}{Quantencomputer: Ein ganz heißes Eisen}
-  \includegraphics[height=.6\textheight]{assets/xkcd_678.png}
-  \footnote{Quelle: https://xkcd.com/678/}
+  \ImgSource{\includegraphics[height=.8\textheight]{assets/xkcd_678.png}}{https://xkcd.com/678/}
 \end{frame}
 
 \begin{frame}{Post-Quanten-Kryptografie: Munch now decrypt later}
-\begin{columns}[onlytextwidth]
-\begin{column}{.60\textwidth}
+\begin{columns}[c]
+\column{.5\textwidth}
 \begin{itemize}
     \item Post-quanten Kryptografie ist standardisiert
-    \item Wir müssen sehr früh deployen; wenn die Krypto kaputt ist, dann ist es zu spät.
+    \item Wir müssen sehr früh deployen;\\
+    wenn die Krypto kaputt ist, dann ist es zu spät.
 \end{itemize}
-\end{column}
-
-\begin{column}{.30\textwidth}
-  \includegraphics[height=.6\textheight]{assets/gray-hamster-eating-sunflower-seed.jpeg}
-  \footnote{Quelle: https://foto.wuestenigel.com/gray-hamster-eating-sunflower-seed/}
+\column{.30\textwidth}
+\ImgSource{%
+\makebox[\linewidth][c]{
+  \includegraphics[height=.6\textheight]{assets/gray-hamster-eating-sunflower-seed.jpeg}}}{%
+   \url{https://foto.wuestenigel.com/gray-hamster-eating-sunflower-seed/}}
   
-  \say{Munch now decrypt later}
-  \footnote{\say{Jetzt speichern später entschlüsseln}. Warnung: Geheimdienste sind nicht so cute wie dieser Hamster.}
-\end{column}
+  \say{Munch now decrypt later}\footnotemark
 \end{columns}
+\footnotetext{\say{Jetzt speichern später entschlüsseln}. Warnung: Geheimdienste sind nicht so cute wie dieser Hamster.}
 \end{frame}
 
 \begin{frame}{Post-Quanten Kryptografie: Wird bereits standardisiert}
@@ -164,6 +189,7 @@
 \begin{frame}{Schlüsseltauschmethoden: Mit NIKEs\footnote{\say{Non-interactive key exchange} -- Nichtinteraktiver Schlüsseltausch}}
 \usetikzlibrary{shapes,decorations,decorations.pathreplacing,arrows,calc,arrows.meta,fit,chains,positioning,shadows}
 \begin{tikzpicture}[
+rosenpass-diagram,
   % define multiple syles for consistency
   boxed-node/.style = {draw, rectangle, fill=white, text width = 5em, align = center, minimum height = 1.75em, rounded corners},
   swimming-lane/.style = {very thick},
@@ -175,8 +201,13 @@
     \coordinate (n-\i) at (0,-\i);
 
   % set two initial nodes, positioned relative to the coordinates
-  \node[boxed-node] (ini) at (n-0) {Initiator};
-  \node[boxed-node,right = of ini] (res) {Response};
+	 \draw[initiator](-1,0) node(initiator){Initiator} coordinate(ini) ++(0,.1)to
+		coordinate[pos=.2](spki-y)
+		coordinate[pos=.6](spkr-y)
+		coordinate[pos=.76](ack-y)+(0,-5) coordinate(result-y);
+	  \draw[responder] (1,0) node(responder){Response} coordinate (res)++(0,.1)to +(0,-5);
+%  \node[boxed-node] (ini) at (n-0) {Initiator};
+%  \node[boxed-node,right = of ini] (res) {Response};
 
   % place a text on the intersection of the ini node and the n-1 coordinate
   \node[anchor = east] (sski) at (n-1 -| ini) {(sski, spki) $\leftarrow$ keygen()};
@@ -191,15 +222,15 @@
   % TODO: Horizontale (gestrichelte) linie um zu zeigen wo das setup endet?
 
   % define the vertical swimming lanes
-  \begin{scope}[style = swimming-lane]
-     \draw (ini) -- (n-5 -| ini);
-     \draw (res) -- (n-5 -| res);
-  \end{scope}
+%  \begin{scope}[style = swimming-lane]
+%     \draw (ini) -- (n-5 -| ini);
+%     \draw (res) -- (n-5 -| res);
+%  \end{scope}
 
   % define the message flows
   \begin{scope}[style = message-flow]
-     \draw (sski) -> node[above]{spki} (sski -| res);
-     \draw (n-2 -| res) -> node[above]{spkr} (n-2 -| ini);
+     \draw [request](sski) -- node[above]{spki} (sski -| res);
+     \draw [response](n-2 -| ini) -- node[above]{spkr} (n-2 -| res);
   \end{scope}
 \end{tikzpicture}
 
