@@ -46,10 +46,8 @@
 }
 \ExplSyntaxOff
 
-\makeatletter
 % reduce itemize indent
 \setlength{\leftmargini}{0pt}
-\makeatother
 
 \usepackage{biblatex}
 \addbibresource{sources.bib}
@@ -59,9 +57,9 @@
 \ExplSyntaxOn
 \int_new:N \l__ptxcd_namepart_int
 \fp_new:N \l__ptxcd_namepos_fp
-\def\namepartsep{1.4}
+\def\namepartsep{1.1}
 \dim_new:N \l__ptxcd_namepart_sep_dim
-\dim_set:Nn \l__ptxcd_namepart_sep_dim  {7mm}
+\dim_set:Nn \l__ptxcd_namepart_sep_dim  {3mm}
 
 \newcommand*{\namepart}[2][0]{
 	\int_set:Nn \l__ptxcd_namepart_int {\clist_count:n {#2}}
@@ -82,7 +80,6 @@
 	\node[above] at (#1.north) {\footnotesize #2};
 }
 
-\newenvironment{namepartpicture}{\par\medskip\begin{tikzpicture}}{\end{tikzpicture}\par\medskip\csname @afterheading\endcsname\AddToHookNext{para/begin}{\para_omit_indent:}}
 
 \newcommand*{\namebraceleft}[2] {
 	\draw[decorate]([xshift=-\l__ptxcd_namepart_sep_dim]#2.south~west)--([xshift=-\l__ptxcd_namepart_sep_dim]#1.north~west) ;
@@ -248,24 +245,26 @@ symmetrische Kryptographie ist kaum betroffen.
 
 \againframe{NIKE}
 
-\begin{frame}{naming scheme}
-	\begin{namepartpicture}
-		\namepart{s=Static,e=Ephemeral}
-		\namepart[3.5cm]{sk=Secret Key,pk=Public Key,pt=Plaintext,ct=Ciphertext}
-		\namepart[7cm]{i=Initiator,r=Responder,m=Mine,t=Theirs}
-		\begin{scope}[decoration={brace,amplitude=5mm},thick]
-			\namebraceright{s}{e}
-			\namebraceleft{sk}{ct}
-			\namebraceright{sk}{ct}
-			\namebraceleft{i}{t}
-		\end{scope}
-	\end{namepartpicture}
-\end{frame}
+%\begin{frame}{naming scheme}
+%\begin{block}{}
+%	\begin{tikzpicture}
+%		\namepart{s=Static,e=Ephemeral}
+%		\namepart[2.2cm]{sk=Secret Key,pk=Public Key,pt=Plaintext,ct=Ciphertext}
+%		\namepart[4.4cm]{i=Initiator,r=Responder,m=Mine,t=Theirs}
+%		\begin{scope}[decoration={brace,amplitude=3mm},thick]
+%			\namebraceright{s}{e}
+%			\namebraceleft{sk}{ct}
+%			\namebraceright{sk}{ct}
+%			\namebraceleft{i}{t}
+%		\end{scope}
+%	\end{tikzpicture}
+%\end{block}
+%\end{frame}
 
 
-\begin{frame}{Schlüsselaustauschmethoden:}
-\framesubtitle{Mit NIKEs\footnote{\say{Non-Interactive Key Exchange} -- Nichtinteraktiver Schlüsselaustausch}}
-\begin{tikzpicture}[
+\begin{frame}[b]{Schlüsselaustauschmethoden:}
+\framesubtitle{Static-static Schlüsselaustausch mit NIKEs\footnote{\say{Non-Interactive Key Exchange} -- Nichtinteraktiver Schlüsselaustausch}}
+\hspace*{-.9\csname beamer@leftmargin\endcsname}\begin{tikzpicture}[
 rosenpass-diagram,
   % define multiple syles for consistency
   boxed-node/.style = {draw, rectangle, fill=white, text width = 5em, align = center, minimum height = 1.75em, rounded corners},
@@ -310,16 +309,31 @@ rosenpass-diagram,
      \draw [request](sski) -- node[above]{spki} (sski -| res);
      \draw [response](n-2 -| ini) -- node[above]{spkr} (n-2 -| res);
   \end{scope}
-\end{tikzpicture}
-
-Static-static Schlüsselaustausch mit NIKEs.
+\end{tikzpicture}%
+%
+\hfill
+\begingroup\footnotesize
+\raisebox{-\baselineskip}{%\makebox[4cm][l]{%
+	\begin{tikzpicture}[outer sep=1mm]
+		\namepart{s=Static,e=Ephemeral}
+		\namepart[2cm]{sk=Secret Key,pk=Public Key,ct=Ciphertext}
+		\namepart[4cm]{i=Initiator,r=Responder}
+		\begin{scope}[decoration={brace,amplitude=3mm},thick]
+			\namebraceright{s}{e}
+			\namebraceleft{sk}{ct}
+			\namebraceright{sk}{ct}
+			\namebraceleft{i}{r}
+		\end{scope}
+\end{tikzpicture}}
+\endgroup
+%Static-static Schlüsselaustausch mit NIKEs.
 
 \end{frame}
 
 %\end{document}
 %
-\begin{frame}{Einfachst-möglicher Schlüsseltausch mit KEMs\footnote{\say{Key-Encapsulation Method} -- Schlüsseltransportmethode}}
-\begin{tikzpicture}[
+\begin{frame}[b]{Einfachst-möglicher Schlüsseltausch mit KEMs\footnote{\say{Key-Encapsulation Method} -- Schlüsseltransportmethode}}
+\hspace*{-.9\csname beamer@leftmargin\endcsname}\begin{tikzpicture}[
 rosenpass-diagram,
   % define multiple syles for consistency
   boxed-node/.style = {draw, rectangle, fill=white, text width = 5em, align = center, minimum height = 1.75em, rounded corners},
@@ -358,7 +372,23 @@ rosenpass-diagram,
      \draw [response](n-1 -| ini) -> node[above]{spkr} (n-1 -| res);
      \draw [request](sctr) -> node[above]{sctr} (sctr -| res);
   \end{scope}
-\end{tikzpicture}
+\end{tikzpicture}%
+\hfill
+\begingroup\footnotesize
+\raisebox{-\baselineskip}{%
+\makebox[4cm][l]{%
+	\begin{tikzpicture}[outer sep=1mm]
+		\namepart{s=Static,e=Ephemeral}
+		\namepart[2cm]{sk=Secret Key,pk=Public Key,ct=Ciphertext}
+		\namepart[4cm]{i=Initiator,r=Responder}
+		\begin{scope}[decoration={brace,amplitude=3mm},thick]
+			\namebraceright{s}{e}
+			\namebraceleft{sk}{ct}
+			\namebraceright{sk}{ct}
+			\namebraceleft{i}{r}
+		\end{scope}
+\end{tikzpicture}}}
+\endgroup
 \end{frame}
 \begin{frame}{Schlüsselaustauschmethoden:}
 \framesubtitle{Mit KEMs
