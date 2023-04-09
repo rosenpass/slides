@@ -92,7 +92,7 @@
 \tcbset{frame-number/.style={colback=rosenpass-lightblue,frame empty,top=.25ex,bottom=.25ex,left=.25ex,right=.25ex,colupper=rosenpass-gray,fontupper=\usebeamerfont{frame number},before=,after=,box align=base}}
 
 \defbeamertemplate*{frame numbering}{rosenpass}{%
-	\tcbox[frame-number]{\makebox[5ex]{\insertframenumber}}%
+	\tcbox[frame-number]{\makebox[5ex]{\insertframenumber/\inserttotalframenumber}}%
 }
 
 \defbeamertemplate*{frame footer}{rosenpass}{%

@@ -528,6 +528,23 @@ Static-static Schlüsselaustausch mit KEMs.
   \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-key-exchange-protocol-rgb.pdf}
 \end{frame}
 
+\begin{frame}{Sicherheitsanalyse}
+  Symbolische Protokoll-Analyse
+	\begin{itemize}
+		\item kann automatisiert logische Fehler im Protokoll finden.
+		\item Genauer: Kommunikationsabläufe, die Sicherheitseigenschaften brechen
+\end{itemize}
+
+In unserem Fall:
+  \begin{itemize}
+    \item Wir nutzen ProVerif~\cite{proverif} als Tool um Protokoll-Bugs auszuschließen
+    \item Wir haben die Laufzeit optimiert; symbolische Analyse läuft in fünf Minuten
+    \item Beweise sind Teil des Software-Repositories; laufen in der CI
+  \end{itemize}
+
+	Wir arbeiten an Beweisen in einem stärkeren Angreifermodell: kryptographische Beweise (mit CryptoVerif~\cite{cryptoverif})
+\end{frame}
+
 \begin{frame}{ProVerif in Technicolor}
   \includegraphics[height=.9\textheight]{assets/2023-03-20-symbolic-analysis-screenshot.png}
 \end{frame}
@@ -561,6 +578,10 @@ Static-static Schlüsselaustausch mit KEMs.
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Zum Nachbauen… aus dem Whitepaper:}
+  \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-message-handling-code.pdf}
+\end{frame}
+
 \begin{frame}{Konversationsstarter}
 
 \begin{itemize}
@@ -587,6 +608,9 @@ Static-static Schlüsselaustausch mit KEMs.
   \end{itemize}
 \end{itemize}
 \end{frame}
+
+
+\edef\totalcontentframes{\theframenumber}
 
 % TODO: Posterfolie? KEMs statt Diffie-Hellmann; 
 
@@ -635,5 +659,10 @@ In unserem Fall:
 \end{frame}
 
 \printbibliography
+
+\clearpage
+\setcounter{framenumber}{\totalcontentframes}
+
+
 
 \end{document}
