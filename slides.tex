@@ -103,7 +103,7 @@
   \item Rosenpass-Demo!
   \item Wie funktioniert Rosenpass?
   \item Bunte Checkmarks: Kryptobeweise im CI-Setup
-  \item Details: Was für kryptographische Bausteine nutzen wir nun eigentlich?
+  \item Integration mit WireGuard \& Chiffren
 \end{itemize}
 \end{frame}
 
@@ -528,23 +528,6 @@ Static-static Schlüsselaustausch mit KEMs.
   \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-key-exchange-protocol-rgb.pdf}
 \end{frame}
 
-\begin{frame}{Sicherheitsanalyse}
-  Symbolische Protokoll-Analyse
-	\begin{itemize}
-		\item kann automatisiert logische Fehler im Protokoll finden.
-		\item Genauer: Kommunikationsabläufe, die Sicherheitseigenschaften brechen
-\end{itemize}
-
-In unserem Fall:
-  \begin{itemize}
-    \item Wir nutzen ProVerif~\cite{proverif} als Tool um Protokoll-Bugs auszuschließen
-    \item Wir haben die Laufzeit optimiert; symbolische Analyse läuft in fünf Minuten
-    \item Beweise sind Teil des Software-Repositories; laufen in der CI
-  \end{itemize}
-
-	Wir arbeiten an Beweisen in einem stärkeren Angreifermodell: kryptographische Beweise (mit CryptoVerif~\cite{cryptoverif})
-\end{frame}
-
 \begin{frame}{ProVerif in Technicolor}
   \includegraphics[height=.9\textheight]{assets/2023-03-20-symbolic-analysis-screenshot.png}
 \end{frame}
@@ -556,7 +539,7 @@ In unserem Fall:
 \begin{frame}{Verwendete Chiffren}
   \begin{itemize}
     \item Authentifikation und Vertraulichkeit: \textbf{Classic McEliece}\\
-	    (erfunden 1979, codebasiert)
+	    (erfunden 1978, codebasiert)
     \item Forward Secrecy: \textbf{Kyber}\\
 	    (von NIST zur Standardisierung ausgewählt, gitterbasiert)
     \item Kryptoagilität: Wir planen die Möglichkeit einzubauen, die Chiffren zu wechseln\\
@@ -576,10 +559,6 @@ In unserem Fall:
   \begin{itemize}
     \item Wir suchen High-Assurance-Kryptographieprojekte um mit uns zusammenzuarbeiten. Rosenpass ist klein und kann als Demonstrator dienen.
   \end{itemize}
-\end{frame}
-
-\begin{frame}{Zum Nachbauen… aus dem Whitepaper:}
-  \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-message-handling-code.pdf}
 \end{frame}
 
 \begin{frame}{Konversationsstarter}
@@ -609,8 +588,6 @@ In unserem Fall:
 \end{itemize}
 \end{frame}
 
-
-
 % TODO: Posterfolie? KEMs statt Diffie-Hellmann; 
 
 \appendix
@@ -620,6 +597,27 @@ In unserem Fall:
 \includegraphics[width=.4\linewidth]{RosenPass-Logo}\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Zum Nachbauen… aus dem Whitepaper:}
+  \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-message-handling-code.pdf}
+\end{frame}
+
+\begin{frame}{Sicherheitsanalyse}
+  Symbolische Protokoll-Analyse
+	\begin{itemize}
+		\item kann automatisiert logische Fehler im Protokoll finden.
+		\item Genauer: Kommunikationsabläufe, die Sicherheitseigenschaften brechen
+\end{itemize}
+
+In unserem Fall:
+  \begin{itemize}
+    \item Wir nutzen ProVerif~\cite{proverif} als Tool um Protokoll-Bugs auszuschließen
+    \item Wir haben die Laufzeit optimiert; symbolische Analyse läuft in fünf Minuten
+    \item Beweise sind Teil des Software-Repositories; laufen in der CI
+  \end{itemize}
+
+	Wir arbeiten an Beweisen in einem stärkeren Angreifermodell: kryptographische Beweise (mit CryptoVerif~\cite{cryptoverif})
+\end{frame}
 
 \begin{frame}{CVE-2021-46873 – DOS against WireGuard through NTP}
 \begin{itemize}
