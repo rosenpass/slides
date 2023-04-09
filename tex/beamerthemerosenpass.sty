@@ -32,7 +32,7 @@
 \end{beamercolorbox}
 \begin{beamercolorbox}[wd=\dimexpr\paperwidth]{title page}
 \centering
-	\begin{tcolorbox}[width=\textwidth,colbacktitle=rosenpass-gray,colframe=rosenpass-gray,coltitle=white,title=\inserttitle,rounded corners,boxrule=.2ex,halign=center,halign title=center,fonttitle=\usebeamerfont{title},boxsep=1ex,toptitle=1ex,bottomtitle=1ex,]
+	\begin{tcolorbox}[width=\textwidth,colbacktitle=rosenpass-gray,colframe=rosenpass-gray,coltitle=white,title=\ifx\insertsubtitle\@empty\inserttitle\else\insertsubtitle\fi,rounded corners,boxrule=.2ex,halign=center,halign title=center,fonttitle=\usebeamerfont{title},boxsep=1ex,toptitle=1ex,bottomtitle=1ex,]
 	{\usebeamerfont{author}\insertauthor}\par
 	{\usebeamerfont{institute}\insertinstitute}
 	\end{tcolorbox}
@@ -64,6 +64,7 @@
  \vspace{\dp\strutbox}
 }
 
+
 \setbeamersize{text~margin~right=\dim_eval:n {\box_wd:N \g__ptxcd_logo_box + 1em}}
 
 \ExplSyntaxOff
@@ -83,7 +84,8 @@
 	\vspace*{\dp\strutbox}
 	\begin{beamercolorbox}[leftskip=\beamer@leftmargin]{headline}
 	\usebeamerfont{headline}
-	\insertshorttitle
+%	\insertshorttitle
+\ifx\insertshortsubtitle\@empty\insertshorttitle\else\insertshortsubtitle\fi
 	\end{beamercolorbox}
 }
 
