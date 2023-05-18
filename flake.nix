@@ -24,7 +24,7 @@
             biber;
         };
 
-        documents = [ "2023-04-easterhegg" ];
+        documents = [ "2023-02-03-yrcs2023" "2023-03-25-rwpqc23" "2023-04-08-eh20" ];
       in
       {
         packages = pkgs.lib.genAttrs documents (name:
