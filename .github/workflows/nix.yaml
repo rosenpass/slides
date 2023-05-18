@@ -1,0 +1,54 @@
+name: Nix
+permissions:
+  contents: write
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build ${{ matrix.derivation }} on ${{ matrix.nix-system }}
+    runs-on:
+      - nix
+      - ${{ matrix.nix-system }}
+    strategy:
+      fail-fast: false
+      matrix:
+        nix-system:
+          - x86_64-linux
+        derivation:
+          - 2023-04-easterhegg
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build ${{ matrix.derivation }}@${{ matrix.nix-system }}
+        run: |
+          # build the package
+          nix build .#packages.${{ matrix.nix-system }}.${{ matrix.derivation }} --print-build-logs
+
+          # copy over the results
+          if [[ -f $(readlink --canonicalize result ) ]]; then
+            mkdir -- ${{ matrix.derivation }}-${{ matrix.nix-system }}
+          fi
+          cp --recursive -- $(readlink --canonicalize result) ${{ matrix.derivation }}-${{ matrix.nix-system }}
+          chmod --recursive ug+rw -- ${{ matrix.derivation }}-${{ matrix.nix-system }}
+
+          # add version information
+          git rev-parse HEAD > ${{ matrix.derivation }}-${{ matrix.nix-system }}/git-sha
+      - name: Deploy PDF artifacts
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{ matrix.derivation }}-${{ matrix.nix-system }}
+          publish_branch: pdf/${{ matrix.derivation }}
+          force_orphan: true
+  checks:
+    name: Run Nix checks
+    runs-on: nixos
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Checks
+        run: nix flake check . --print-build-logs

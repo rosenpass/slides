@@ -14,22 +14,41 @@
             inherit system;
             overlays = [ devshell.overlays.default ];
           };
+        tex = pkgs.texlive.combine {
+          inherit (pkgs.texlive)
+            scheme-basic amsfonts beamer babel-german tcolorbox emoji environ
+            ccicons csquotes csvsimple doclicense fancyvrb fontspec gobble
+            koma-script ifmtarg latexmk lm markdown mathtools minted noto
+            nunito pgf soul unicode-math lualatex-math gitinfo2 eso-pic
+            biblatex biblatex-trad biblatex-software xkeyval xurl xifthen
+            biber;
+        };
+
+        documents = [ "2023-04-easterhegg" ];
       in
       {
+        packages = pkgs.lib.genAttrs documents (name:
+          pkgs.stdenvNoCC.mkDerivation {
+            inherit name;
+            src = ./. + "/${name}";
+            nativeBuildInputs = with pkgs; [
+              tex
+            ];
+            buildPhase = ''
+              export HOME=$(mktemp -d)
+              latexmk
+            '';
+            installPhase = ''
+              mkdir --parent -- $out
+              mv *.pdf $out/
+            '';
+          }
+        );
+
         devShells.default = (pkgs.devshell.mkShell {
           imports = [ "${devshell}/extra/git/hooks.nix" ];
           name = "rosenpass-slides-dev-shell";
-          packages = with pkgs; [
-            (pkgs.texlive.combine {
-              inherit (pkgs.texlive)
-                scheme-basic amsfonts beamer babel-german tcolorbox emoji environ
-                ccicons csquotes csvsimple doclicense fancyvrb fontspec gobble
-                koma-script ifmtarg latexmk lm markdown mathtools minted noto
-                nunito pgf soul unicode-math lualatex-math gitinfo2 eso-pic
-                biblatex biblatex-trad biblatex-software xkeyval xurl xifthen
-                biber;
-            })
-          ];
+          packages = with pkgs; [ tex nixpkgs-fmt nodePackages.prettier ];
           git.hooks = {
             enable = true;
             pre-commit.text = ''
@@ -53,6 +72,17 @@
             }
           ];
         });
+
+        checks = {
+          nixpkgs-fmt = pkgs.runCommand "check-nixpkgs-fmt"
+            { nativeBuildInputs = [ pkgs.nixpkgs-fmt ]; } ''
+            nixpkgs-fmt --check ${./.} && touch $out
+          '';
+          prettier-check = pkgs.runCommand "check-with-prettier"
+            { nativeBuildInputs = [ pkgs.nodePackages.prettier ]; } ''
+            cd ${./.} && prettier --check . && touch $out
+          '';
+        };
       }
     );
 }
