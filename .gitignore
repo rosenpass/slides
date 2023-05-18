@@ -2,6 +2,7 @@ reports
 *.zip
 *.tar*
 _*
+*.pdf
 # Created by https://www.toptal.com/developers/gitignore/api/linux,windows,latex,osx,vim,emacs
 # Edit at https://www.toptal.com/developers/gitignore?templates=linux,windows,latex,osx,vim,emacs
 
