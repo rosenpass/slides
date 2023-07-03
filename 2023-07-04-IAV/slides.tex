@@ -36,6 +36,8 @@ Wanja Zaeske, Stephan Ajuvo, Marei Peischl, Benjamin Lipp, Lisa~Schmidt, Karolin
 \ExplSyntaxOn
 \newcommand*{\sourcename}{Quelle}
 \newcommand*{\sourcesep}{:~}
+
+\newcommand*{\imgNote}[1]{\begin{center}\setlength{\parskip}{0pt}\tiny\raggedright#1\end{center}}
 \NewDocumentCommand{\ImgSource}{smm}{%
 %\hbox_set:Nn \l_tmpa_box {#1}
 
@@ -100,36 +102,32 @@ Wanja Zaeske, Stephan Ajuvo, Marei Peischl, Benjamin Lipp, Lisa~Schmidt, Karolin
 \maketitle
 
 \begin{frame}{Das Rosenpass-Projekt}
-\begin{columns}[c]
-
-\column{.6\textwidth}
+\begin{columns}[c,onlytextwidth]
+\begin{column}{.6\textwidth}
 \begin{itemize}
   \item Quantencomputer-sichere Kryptografie
   \item Forschung
   \item Ergebnisse in die Anwendung bringen
   \item Zusammenarbeit mit Industrie
 \end{itemize}
-
-\column{.4\textwidth}
-\ImgSource{%
-\makebox[\linewidth][c]{
-  \includegraphics[height=.5\textheight]{graphics/qc.png}}}{}
-
+\end{column}
+\begin{column}{.4\textwidth}
+\centering
+  \includegraphics[width=\linewidth]{graphics/qc.png}
+\end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Warum sind Quantencomputer (k)eine Bedrohung?
-}
+\begin{frame}{Warum sind Quantencomputer (k)eine Bedrohung?}
 \begin{columns}[b]
-
-\column{.75\textwidth}
+\begin{column}{.75\textwidth}
 \begin{itemize}
-  \item Grovers Algorithmus \textbf{schwächt} symmetrische Kryptografie
+  \item Grovers Algorithmus \strong{schwächt} symmetrische Kryptografie
   \begin{itemize}
     \item AES, SHA-2, SHA-3, Chacha20
     \item Lösung: größere Keys
   \end{itemize}
-  \item Shors Algorithmus \textbf{bricht} asymmetrische Kryptografie
+  \item Shors Algorithmus \strong{bricht} asymmetrische Kryptografie
   \begin{itemize}
     \item RSA, DSA, DH, ECDH
     \item Lösung: alternative Kryptografie
@@ -140,14 +138,134 @@ Wanja Zaeske, Stephan Ajuvo, Marei Peischl, Benjamin Lipp, Lisa~Schmidt, Karolin
     \item Problem: Store now, decrypt later
   \end{itemize}
 \end{itemize}
-
-\column{.25\textwidth}
-\ImgSource*{%
-\makebox[\linewidth][r]{\includegraphics[width=1.5\linewidth]{graphics/qc and crypto.png}}}{Quantencomputer überschatten Kryptografieverfahren.}
-
+\end{column}
+\begin{column}{.25\textwidth}
+\makebox[\linewidth][r]{%
+\includegraphics[width=1.5\linewidth]{graphics/qc and crypto.png}
+}%
+\par
+\imgNote{\makebox[\linewidth][r]{Quantencomputer überschatten Kryptografieverfahren.}}
+\end{column}
 \end{columns}
 \end{frame}
 
+\begin{frame}{Sichere Kommunikation durch VPN}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+%\begin{block}{Traffic durch VPN}
+\begin{itemize}
+\item  Ermöglicht Sicherheit ohne Anpassung von Applikationen
+\item  Protokoll: WireGuard \raisebox{\dimexpr-.5\height+.5\ht\strutbox}[0pt][0pt]{\includegraphics[height=1.5\baselineskip]{graphics/wireguard}}
+
+  \begin{itemize}
+    \item Schnell
+  \item Effizient
+  \item Open Source
+  \item Kompatibel
+  \item Etabliert
+  \item Problem: nutzt ECDH, also angreifbar!
+  \end{itemize}
+\end{itemize}
+%\end{block}
+\end{column}
+
+\begin{column}{0.4\textwidth}
+\includegraphics[width=\textwidth]{graphics/qc and crypto.png}
+
+\imgNote{Quantencomputer überschatten Kryptografieverfahren.}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Wie löst Rosenpass das Problem?}
+\begin{itemize}
+\item  Basiert auf PQ-sicherer asymmetrisch Kryptografie
+
+  \begin{itemize}
+  \item Classic McEliece
+  \item Kyber
+  \end{itemize}
+\item  Benötigt: Public Key von anderen Peers
+\item  Erzeugt: Shared Secrets zwischen Peers
+\item  Angriff mit Quantencomputer nicht effizient
+\item  Rosenpass, das Protokoll
+
+  \begin{itemize}
+    \item Nutzt 3-Way Handshake
+  \item Secret wird alle 2 Minuten rotiert
+  \item Authentication, Secrecy und Integrity
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{PQ-sichere Kommunikation: WireGuard + Rosenpass}
+\begin{itemize}
+\item  Hybride Sicherheit
+
+  \begin{itemize}
+    \item Bricht nur, wenn Rosenpass \textbf{und} WireGuard versagen
+  \end{itemize}
+\item  Überall nutzbar, wo WireGuard schon läuft
+\item  Ohne Anpassung vom WireGuard Source Code
+
+  \begin{itemize}
+    \item Shared Secret aus Rosenpass = PSK für WireGuard
+  \end{itemize}
+\item  Aber:
+
+  \begin{itemize}
+    \item Ein Prozess mehr
+  \item Handshake alle 2 Minuten
+  \end{itemize}
+\end{itemize}
+
+\makebox[\linewidth][c]{%
+\includegraphics[width=.6\linewidth]{graphics/wireguard and rp.png}}
+
+\imgNote{\makebox[\linewidth][c]{WireGuard mit Rosenpass.}}
+\end{frame}
+
+\begin{frame}{Rosenpass Struktur}
+\begin{columns}[c]
+\begin{column}{0.7\textwidth}
+\begin{itemize}
+\item  Zusammenkunft von Kryptografie, Dev und SciComm Experten
+\item  Idee: Team festigen
+\item  Mittel: Rosenpass e.\,V.
+
+  \begin{itemize}
+    \item Zusammenarbeit mit Industrie
+  \item Ansprechpartner für Integratoren
+  \end{itemize}
+\item  Rosenpass Roadmap
+
+  \begin{itemize}
+    \item Rosenpass in Embedded
+  \item Rosenpass in Datacenter
+  \item Integration in andere Apps
+  \end{itemize}
+\item  Kryptografie + Safety Forschung
+
+  \begin{itemize}
+    \item Decryption Despite Error
+  \end{itemize}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.2\textwidth}
+\includegraphics[width=\linewidth]{graphics/rosenpass in anderen apps.png}
+
+\medskip
+\includegraphics[width=\linewidth]{graphics/Illu-install.png}
+
+\imgNote{Anwendungsfälle.}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\end{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Wozu braucht es Post-Quantum Krypto
