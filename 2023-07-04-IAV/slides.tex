@@ -36,14 +36,14 @@ Wanja Zaeske, Stephan Ajuvo, Marei Peischl, Benjamin Lipp, Lisa~Schmidt, Karolin
 \ExplSyntaxOn
 \newcommand*{\sourcename}{Quelle}
 \newcommand*{\sourcesep}{:~}
-\newcommand*{\ImgSource}[2]{%
+\NewDocumentCommand{\ImgSource}{smm}{%
 %\hbox_set:Nn \l_tmpa_box {#1}
 
-\hbox_set:Nn \l_tmpa_box {#1}
+\hbox_set:Nn \l_tmpa_box {#2}
 
 \hbox_set:Nn \l_tmpa_box {
 \dim_set:Nn \l_tmpa_dim {\box_ht:N \l_tmpa_box}
-\hbox_unpack_drop:N \l_tmpa_box \rotatebox{90}{\parbox{\l_tmpa_dim}{\tiny\sourcename\sourcesep#2}}
+\hbox_unpack_drop:N \l_tmpa_box \rotatebox{90}{\parbox{\dim_eval:n {\IfBooleanTF {#1} {\linewidth} {\l_tmpa_dim}}}{\tiny\raggedright\sourcename\sourcesep#3}}
 }
 \box_use:N \l_tmpa_box
 }
@@ -120,16 +120,16 @@ Wanja Zaeske, Stephan Ajuvo, Marei Peischl, Benjamin Lipp, Lisa~Schmidt, Karolin
 
 \begin{frame}{Warum sind Quantencomputer (k)eine Bedrohung?
 }
-\begin{columns}[c]
+\begin{columns}[b]
 
-\column{.6\textwidth}
+\column{.75\textwidth}
 \begin{itemize}
-  \item Grovers Algorithmus \textbb{schwächt} symmetrische Kryptografie
+  \item Grovers Algorithmus \textbf{schwächt} symmetrische Kryptografie
   \begin{itemize}
     \item AES, SHA-2, SHA-3, Chacha20
     \item Lösung: größere Keys
   \end{itemize}
-  \item Shors Algorithmus \textbb{bricht} asymmetrische Kryptografie
+  \item Shors Algorithmus \textbf{bricht} asymmetrische Kryptografie
   \begin{itemize}
     \item RSA, DSA, DH, ECDH
     \item Lösung: alternative Kryptografie
@@ -141,10 +141,9 @@ Wanja Zaeske, Stephan Ajuvo, Marei Peischl, Benjamin Lipp, Lisa~Schmidt, Karolin
   \end{itemize}
 \end{itemize}
 
-\column{.4\textwidth}
-\ImgSource{%
-\makebox[\linewidth][c]{
-  \includegraphics[height=.5\textheight]{graphics/qc and crypto.png}}}{Quantencomputer überschatten Kryptografieverfahren.}
+\column{.25\textwidth}
+\ImgSource*{%
+\makebox[\linewidth][r]{\includegraphics[width=1.5\linewidth]{graphics/qc and crypto.png}}}{Quantencomputer überschatten Kryptografieverfahren.}
 
 \end{columns}
 \end{frame}
