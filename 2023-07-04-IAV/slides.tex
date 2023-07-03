@@ -1,0 +1,687 @@
+\documentclass{rosenpass-beamer}
+
+\usepackage[german]{babel}
+\usepackage[autostyle]{csquotes}
+\usepackage{emoji}
+%\usepackage{dirtytalk}
+\let\say\enquote
+
+\usepackage{xurl}
+
+\urlstyle{same}
+
+\usepackage{textcomp}
+
+\usetikzlibrary{positioning,decorations.pathreplacing,svg.path}
+
+\definecolor{RPPink}{rgb}{274,4,132}
+\definecolor{RPOrange}{rgb}{255, 166, 48}
+\definecolor{RPAquamarine}{rgb}{255, 166, 48}
+\definecolor{RPLightGray}{rgb}{160, 159, 164}
+\definecolor{RPTurquoise}{rgb}{114, 161, 229}
+
+\title{Rosenpass}
+\subtitle{VPN \& Struktur für Translationsforschung in der Kryptografie}
+\author{
+Wanja Zaeske, Stephan Ajuvo, Marei Peischl, Benjamin Lipp, Lisa~Schmidt, Karolin Varner
+}
+\institute{\url{https://rosenpass.eu}}
+
+
+\conference{IAV – Regelrunde Embedded Security}
+\date{2023-07-03}
+
+\parskip\smallskipamount
+
+\ExplSyntaxOn
+\newcommand*{\sourcename}{Quelle}
+\newcommand*{\sourcesep}{:~}
+\newcommand*{\ImgSource}[2]{%
+%\hbox_set:Nn \l_tmpa_box {#1}
+
+\hbox_set:Nn \l_tmpa_box {#1}
+
+\hbox_set:Nn \l_tmpa_box {
+\dim_set:Nn \l_tmpa_dim {\box_ht:N \l_tmpa_box}
+\hbox_unpack_drop:N \l_tmpa_box \rotatebox{90}{\parbox{\l_tmpa_dim}{\tiny\sourcename\sourcesep#2}}
+}
+\box_use:N \l_tmpa_box
+}
+\ExplSyntaxOff
+
+% reduce itemize indent
+\setlength{\leftmargini}{0pt}
+
+\usepackage{biblatex}
+\addbibresource{sources.bib}
+
+
+%namepartpicturesetup
+\ExplSyntaxOn
+\int_new:N \l__ptxcd_namepart_int
+\fp_new:N \l__ptxcd_namepos_fp
+\def\namepartsep{1.1}
+\dim_new:N \l__ptxcd_namepart_sep_dim
+\dim_set:Nn \l__ptxcd_namepart_sep_dim  {3mm}
+
+\newcommand*{\namepart}[2][0]{
+	\int_set:Nn \l__ptxcd_namepart_int {\clist_count:n {#2}}
+	\begin{scope}[xshift=#1]
+	\fp_set:Nn \l__ptxcd_namepos_fp {\l__ptxcd_namepart_int / 2}
+	\keyval_parse:nnn {\__ptxcd_namepart_item:nn {}}{ \__ptxcd_namepart_item:nn } {#2}
+	\end{scope}
+}
+
+\newcommand*{\SingleNamePart}[4][0]{
+		\node[rounded~corners,fill=rosenpass-lightblue] (#2) at (#1,-.7) {\ttfamily#3};
+		\node[above] at (#2.north) {\footnotesize #4};
+}
+
+\cs_new:Nn \__ptxcd_namepart_item:nn {
+	\fp_sub:Nn \l__ptxcd_namepos_fp {1}
+	\node[rounded~corners,fill=rosenpass-lightblue] (#1) at (0,\fp_use:N \l__ptxcd_namepos_fp * \namepartsep) {\ttfamily#1};
+	\node[above] at (#1.north) {\footnotesize #2};
+}
+
+
+\newcommand*{\namebraceleft}[2] {
+	\draw[decorate]([xshift=-\l__ptxcd_namepart_sep_dim]#2.south~west)--([xshift=-\l__ptxcd_namepart_sep_dim]#1.north~west) ;
+}
+
+\newcommand*{\namebraceright}[2]{
+	\draw[decorate]([xshift=\l__ptxcd_namepart_sep_dim]#1.north~east) --([xshift=\l__ptxcd_namepart_sep_dim]#2.south~east);
+}
+\ExplSyntaxOff
+
+\graphicspath{{}{graphics/}}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Das Rosenpass-Projekt}
+\begin{columns}[c]
+
+\column{.6\textwidth}
+\begin{itemize}
+  \item Quantencomputer-sichere Kryptografie
+  \item Forschung
+  \item Ergebnisse in die Anwendung bringen
+  \item Zusammenarbeit mit Industrie
+\end{itemize}
+
+\column{.4\textwidth}
+\ImgSource{%
+\makebox[\linewidth][c]{
+  \includegraphics[height=.5\textheight]{graphics/qc.png}}}{}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{Warum sind Quantencomputer (k)eine Bedrohung?
+}
+\begin{columns}[c]
+
+\column{.6\textwidth}
+\begin{itemize}
+  \item Grovers Algorithmus \textbb{schwächt} symmetrische Kryptografie
+  \begin{itemize}
+    \item AES, SHA-2, SHA-3, Chacha20
+    \item Lösung: größere Keys
+  \end{itemize}
+  \item Shors Algorithmus \textbb{bricht} asymmetrische Kryptografie
+  \begin{itemize}
+    \item RSA, DSA, DH, ECDH
+    \item Lösung: alternative Kryptografie
+  \end{itemize}
+  \item  Nur auf großen Quantencomputern
+  \begin{itemize}
+    \item Die existieren noch nicht
+    \item Problem: Store now, decrypt later
+  \end{itemize}
+\end{itemize}
+
+\column{.4\textwidth}
+\ImgSource{%
+\makebox[\linewidth][c]{
+  \includegraphics[height=.5\textheight]{graphics/qc and crypto.png}}}{Quantencomputer überschatten Kryptografieverfahren.}
+
+\end{columns}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Wozu braucht es Post-Quantum Krypto
+
+\begin{frame}{Angriffe von Quantencomputern: Shors\footnote{Peter Shor} Algorithmus}
+
+\textbf{Jargon}: Löst einige mathematische Probleme effizient, auf denen moderne Krypto basiert:
+
+%\vspace{5mm}
+
+
+
+\begin{itemize}
+    \item RSA\footnote{\say{Rivest-Shamir-Adleman} -- Ron Rivest, Adi Shamir, Leonard Adleman} (das \emph{Faktorisierungsproblem} – Primzahlzerlegung)
+    \item DH\footnote{\say{Diffie-Hellmann} -- Whitfield Diffie, Martin Hellmann} (Berechnen des \emph{Diskreten Logarithmus})
+    \item ECDH\footnote{Elliptic Curve Diffie-Hellmann} (Berechnen des \emph{Diskreten Logarithmus auf Elliptischen Kurven})
+\end{itemize}
+
+%\vspace{5mm}
+
+\textbf{Weniger Jargon}: Bricht so ziemlich alle moderne, asymmetrische Kryptographie.
+
+\end{frame}
+
+\begin{frame}{Angriffe von Quantencomputern: Grovers\footnote{Lov Grover} Algorithmus}
+
+\textbf{Jargon}: Suche durch ungeordnete Listen in $O(\sqrt{n})$ statt klassisch $O(n)$ im Durchschnitt.
+
+\vspace{5mm}
+
+
+\textbf{Weniger Jargon}: Mostly harmless (\say{im wesentlichen harmlos});\\
+symmetrische Kryptographie ist kaum betroffen.
+
+\end{frame}
+
+\begin{frame}{Quantencomputer: Ein ganz heißes Eisen}
+  \ImgSource{\includegraphics[height=.8\textheight]{assets/xkcd_678.png}}{https://xkcd.com/678/}
+\end{frame}
+
+\begin{frame}{Post-Quanten-Kryptographie: Munch now decrypt later}
+\begin{columns}[c]
+\column{.6\textwidth}
+\begin{itemize}
+    \item Post-Quanten-Kryptographie ist auf dem Weg der Standardisierung
+    \item Wir müssen sehr früh deployen;\\
+    wenn die Krypto kaputt ist, dann ist es zu spät.
+\end{itemize}
+\column{.4\textwidth}
+\ImgSource{%
+\makebox[\linewidth][c]{
+  \includegraphics[height=.5\textheight]{assets/gray-hamster-eating-sunflower-seed.jpeg}}}{%
+   \url{https://foto.wuestenigel.com/gray-hamster-eating-sunflower-seed/}}
+  
+  \say{Munch now decrypt later}\footnotemark
+\end{columns}
+\footnotetext{\say{Jetzt speichern später entschlüsseln}. Warnung: Geheimdienste sind nicht so cute wie dieser Hamster.}
+\end{frame}
+
+\begin{frame}{Post-Quanten-Kryptographie: Wird bereits standardisiert}
+
+\begin{columns}[T]
+\begin{column}{.50\textwidth}
+
+\large Durch NIST\footnotemark zur Standardisierung ausgewählt \cite{nist-selected-algorithms}:
+\normalsize
+
+%\footnote{Quelle: https://csrc.nist.gov/Projects/post-quantum-cryptography/selected-algorithms-2022} \normalsize
+
+\vspace{2mm}
+
+\begin{itemize}
+    \item Crystals-Kyber (Verschlüsselung)
+    \item Crystals-Dilithium (Signatur)
+    \item Falcon (Signatur)
+    \item Sphincs+ (Signatur)
+\end{itemize}
+
+\end{column}
+\footnotetext{National Institut for Standards and Technology – US-Amerikanische Standardisierungsbehörde} 
+
+\begin{column}{.50\textwidth}
+\large Das BSI\footnotemark empfiehlt \cite{bsi-quantensicher-gestalten}\normalsize:
+
+\vspace{2mm}
+
+\begin{itemize}
+    \item Frodo (Verschlüsselung)
+    \item Classic McEliece (Verschlüsselung)
+\end{itemize}
+
+\end{column}
+\footnotetext{Bundesamt für Sicherheit in der Informationstechnik} 
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[label=NIKE]{Verschlüsselung im Angesicht von Quantencomputern}
+    \includegraphics[height=.6\textheight]{graphics/Primitivenpyramide.pdf}
+      
+    Die meisten Schlüsselaustausch-Protokolle inklusive WireGuard nutzen NIKEs    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Rosenpass Demo
+
+\begin{frame}{Rosenpass Demo!}
+  \includegraphics[height=.9\textheight]{assets/2023-03-20-rg-tutorial-screenshot.png}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Wie funktioniert Rosenpass
+
+\againframe{NIKE}
+
+%\begin{frame}{naming scheme}
+%\begin{block}{}
+%	\begin{tikzpicture}
+%		\namepart{s=Static,e=Ephemeral}
+%		\namepart[2.2cm]{sk=Secret Key,pk=Public Key,pt=Plaintext,ct=Ciphertext}
+%		\namepart[4.4cm]{i=Initiator,r=Responder,m=Mine,t=Theirs}
+%		\begin{scope}[decoration={brace,amplitude=3mm},thick]
+%			\namebraceright{s}{e}
+%			\namebraceleft{sk}{ct}
+%			\namebraceright{sk}{ct}
+%			\namebraceleft{i}{t}
+%		\end{scope}
+%	\end{tikzpicture}
+%\end{block}
+%\end{frame}
+
+
+\begin{frame}[b]{Schlüsselaustauschmethoden:}
+\framesubtitle{Static-static Schlüsselaustausch mit NIKEs\footnote{\say{Non-Interactive Key Exchange} -- Nichtinteraktiver Schlüsselaustausch}}
+\hspace*{-.9\csname beamer@leftmargin\endcsname}\begin{tikzpicture}[
+rosenpass-diagram,
+  % define multiple syles for consistency
+  boxed-node/.style = {draw, rectangle, fill=white, text width = 5em, align = center, minimum height = 1.75em, rounded corners},
+  swimming-lane/.style = {very thick},
+  message-flow/.style = {-{Stealth[length = 0.5em]}, shorten >= 0.25em, shorten <= 0.25em},
+  yscale=.7
+]
+
+  % iterate over i, multiply with 1cm, creating a vertical, down moving row of coordinates
+  \foreach \i [evaluate=\i as \angle using { \i * 1cm}] in {0,...,5}
+    \coordinate (n-\i) at (0,-\i);
+
+  % set two initial nodes, positioned relative to the coordinates
+	 \draw[initiator](-1,0) node(initiator){Initiator} coordinate(ini) ++(0,.1)to
+		coordinate[pos=.2](spki-y)
+		coordinate[pos=.6](spkr-y)
+		coordinate[pos=.76](ack-y)+(0,-5) coordinate(result-y);
+	  \draw[responder] (1,0) node(responder){Response} coordinate (res)++(0,.1)to +(0,-5);
+%  \node[boxed-node] (ini) at (n-0) {Initiator};
+%  \node[boxed-node,right = of ini] (res) {Response};
+
+  % place a text on the intersection of the ini node and the n-1 coordinate
+  \node[anchor = east] (sski) at (n-1 -| ini) {(sski, spki) $\leftarrow$ keygen()};
+
+  % place a text on the intersection of the res node and the n-2 coordinate
+  \node[anchor = west] (sskr) at (n-2 -| res) {(sskr, spkr) $\leftarrow$ keygen()};
+
+  % place text on below ini and res node on the height of the n-3 coordinate
+  \node[anchor = east] (dhi) at (n-4 -| ini) {key $\leftarrow$ dh(sski, spkr)};
+  \node[anchor = west] (dhr) at (n-4 -| res) {key $\leftarrow$ dh(sskr, spki)};
+
+  % TODO: Horizontale (gestrichelte) linie um zu zeigen wo das setup endet?
+
+  % define the vertical swimming lanes
+%  \begin{scope}[style = swimming-lane]
+%     \draw (ini) -- (n-5 -| ini);
+%     \draw (res) -- (n-5 -| res);
+%  \end{scope}
+
+  % define the message flows
+  \begin{scope}[style = message-flow]
+     \draw [request](sski) -- node[above]{spki} (sski -| res);
+     \draw [response](n-2 -| ini) -- node[above]{spkr} (n-2 -| res);
+  \end{scope}
+\end{tikzpicture}\hfill\begingroup\footnotesize
+\raisebox{-\baselineskip}{\makebox[4cm][l]{%
+	\begin{tikzpicture}[outer sep=1mm]
+		\namepart{s=Static,e=Ephemeral}
+		\namepart[2cm]{sk=Secret Key,pk=Public Key,ct=Ciphertext}
+		\namepart[4cm]{i=Initiator,r=Responder}
+		\begin{scope}[decoration={brace,amplitude=3mm},thick]
+			\namebraceright{s}{e}
+			\namebraceleft{sk}{ct}
+			\namebraceright{sk}{ct}
+			\namebraceleft{i}{r}
+		\end{scope}
+\end{tikzpicture}}}
+\endgroup
+%Static-static Schlüsselaustausch mit NIKEs.
+\end{frame}
+
+%\end{document}
+%
+\begin{frame}[b]{Einfachst-möglicher Schlüsseltausch mit KEMs\footnote{\say{Key-Encapsulation Method} -- Schlüsseltransportmethode}}
+\hspace*{-.9\csname beamer@leftmargin\endcsname}\begin{tikzpicture}[
+rosenpass-diagram,
+  % define multiple syles for consistency
+  boxed-node/.style = {draw, rectangle, fill=white, text width = 5em, align = center, minimum height = 1.75em, rounded corners},
+  swimming-lane/.style = {very thick},
+  message-flow/.style = {-{Stealth[length = 0.5em]}, shorten >= 0.25em, shorten <= 0.25em},
+  yscale=.8
+]
+
+  % iterate over i, multiply with 1cm, creating a vertical, down moving row of coordinates
+  \foreach \i [evaluate=\i as \angle using { \i * .8cm}] in {0,...,6}
+    \coordinate (n-\i) at (0,-\i);
+
+  % set two initial nodes, positioned relative to the coordinates
+		 \draw[initiator](-1,0) node(initiator){Initiator} coordinate(ini) ++(0,.1)to
+			coordinate[pos=.2](spki-y)
+			coordinate[pos=.6](spkr-y)
+			coordinate[pos=.76](ack-y)+(0,-5) coordinate(result-y);
+		  \draw[responder] (1,0) node(responder){Response} coordinate (res)++(0,.1)to +(0,-5);
+	
+
+  % place a text on the intersection of the res node and the n-2 coordinate
+  \node[anchor = west] (sskr) at (n-1 -| res) {(sskr, spkr) $\leftarrow$ keygen()};
+
+  % place a text on the intersection of the res node and the n-2 coordinate
+  \node[anchor = east] (sctr) at (n-3 -| ini) {(key, sctr) $\leftarrow$ encaps(spkr)};
+  \node[anchor = west] (decapsr) at (n-3 -| res) {key $\leftarrow$ decaps(sctr)};
+
+  % define the vertical swimming lanes
+%  \begin{scope}[style = swimming-lane]
+%     \draw (ini) -- (n-6 -| ini);
+%     \draw (res) -- (n-6 -| res);
+%  \end{scope}
+
+  % define the message flows
+  \begin{scope}[style = message-flow]
+     \draw [response](n-1 -| ini) -> node[above]{spkr} (n-1 -| res);
+     \draw [request](sctr) -> node[above]{sctr} (sctr -| res);
+  \end{scope}
+\end{tikzpicture}%
+\hfill
+\begingroup\footnotesize
+\raisebox{-\baselineskip}{%
+\makebox[4cm][l]{%
+	\begin{tikzpicture}[outer sep=1mm]
+		\namepart{s=Static,e=Ephemeral}
+		\namepart[2cm]{sk=Secret Key,pk=Public Key,ct=Ciphertext}
+		\namepart[4cm]{i=Initiator,r=Responder}
+		\begin{scope}[decoration={brace,amplitude=3mm},thick]
+			\namebraceright{s}{e}
+			\namebraceleft{sk}{ct}
+			\namebraceright{sk}{ct}
+			\namebraceleft{i}{r}
+		\end{scope}
+\end{tikzpicture}}}
+\endgroup
+\end{frame}
+\begin{frame}{Schlüsselaustauschmethoden:}
+\framesubtitle{Mit KEMs
+%\footnote{\say{Key-Encapsulation Method} -- Schlüsseltransportmethode}
+wird es komplizierter}
+\begin{tikzpicture}[
+rosenpass-diagram,
+  % define multiple syles for consistency
+  boxed-node/.style = {draw, rectangle, fill=white, text width = 5em, align = center, minimum height = 1.75em, rounded corners},
+  swimming-lane/.style = {very thick},
+  message-flow/.style = {-{Stealth[length = 0.5em]}, shorten >= 0.25em, shorten <= 0.25em},
+  yscale=.8
+]
+
+  % iterate over i, multiply with 1cm, creating a vertical, down moving row of coordinates
+  \foreach \i [evaluate=\i as \angle using { \i * .8cm}] in {0,...,6}
+    \coordinate (n-\i) at (0,-\i);
+
+  % set two initial nodes, positioned relative to the coordinates
+%  \node[boxed-node] (ini) at (n-0) {Initiator};
+%  \node[boxed-node,right = of ini] (res) {Response};
+	 \draw[initiator](-1,0) node(initiator){Initiator} coordinate(ini) ++(0,.1)to
+		coordinate[pos=.2](spki-y)
+		coordinate[pos=.6](spkr-y)
+		coordinate[pos=.76](ack-y)+(0,-5) coordinate(result-y);
+	  \draw[responder] (1,0) node(responder){Response} coordinate (res)++(0,.1)to +(0,-5);
+
+  % place a text on the intersection of the ini node and the n-1 coordinate
+  \node[anchor = east] (sski) at (n-1 -| ini) {(sski, spki) $\leftarrow$ keygen()};
+
+  % place a text on the intersection of the res node and the n-2 coordinate
+  \node[anchor = west] (sskr) at (n-2 -| res) {(sskr, spkr) $\leftarrow$ keygen()};
+
+  % place a text on the intersection of the res node and the n-2 coordinate
+  \node[anchor = east] (sctr) at (n-4 -| ini) {(key1, sctr) $\leftarrow$ encaps(spkr)};
+  \node[anchor = west] (decapsr) at (n-4 -| res) {key1 $\leftarrow$ decaps(sctr)};
+
+  \node[anchor = west] (scti) at (n-5 -| res) {(key2, scti) $\leftarrow$ encaps(spki)};
+  \node[anchor = east] (decapsi) at (n-5 -| ini) {key2 $\leftarrow$ decaps(scti)};
+
+  % define the vertical swimming lanes
+%  \begin{scope}[style = swimming-lane]
+%     \draw (ini) -- (n-6 -| ini);
+%     \draw (res) -- (n-6 -| res);
+%  \end{scope}
+
+  % define the message flows
+  \begin{scope}[style = message-flow]
+     \draw[request] (sski) -> node[above]{spki} (sski -| res);
+     \draw[response]  (n-2 -| ini)-> node[above]{spkr} (n-2 -| res);
+
+     \draw[request] (sctr) -> node[above]{sctr} (sctr -| res);
+     \draw [response] (n-5 -| ini)   -> node[above]{scti}  (n-5 -| res);
+  \end{scope}
+\end{tikzpicture}
+
+Static-static Schlüsselaustausch mit KEMs.
+
+\end{frame}
+
+
+\begin{frame}{Post-Quanten-WireGuard: 3 Schlüsseltransporte~\cite{pqwg}}
+\begin{columns}[onlytextwidth]
+
+\begin{column}{.30\textwidth}
+\begin{tikzpicture}[rosenpass-diagram]
+	 \draw[initiator] (-1,0) node(initiator){Initiator} ++(0,.1)to
+		coordinate[pos=.2](spki-y)
+		coordinate[pos=.6](Hspki-y)
+		coordinate[pos=.76] (scti-y)
+		coordinate[pos=.92](ack-y)+(0,-5);
+	 \draw[responder] (1,0) node (responder){Responder} ++(0,.1)to+(0,-5)coordinate(result-y);;
+
+	 \draw[request](spki-y-|initiator) -- node[above]{spki} (spki-y-|responder);
+	 \draw[request](Hspki-y-|initiator) -- node[above] {peer\_id} (Hspki-y-|responder);
+
+	  \draw[response,response](scti-y-|initiator) -- node[above]{scti} (scti-y-|responder);
+
+	 \draw[request](ack-y-|initiator) -- node[above] {(ack)} (ack-y-|responder);
+	\path[result] node at (result-y-|0,0){Initiator Auth};
+\end{tikzpicture}
+\end{column}
+
+\begin{column}{.30\textwidth}
+\begin{tikzpicture}[rosenpass-diagram]
+	 \draw[initiator](-1,0) node(initiator){Initiator} ++(0,.1)to
+		coordinate[pos=.2](spkr-y)
+		coordinate[pos=.6](sctr-y)
+		coordinate[pos=.76](ack-y)+(0,-5) coordinate(result-y);
+	  \draw[responder] (1,0) node(responder){Responder} ++(0,.1)to +(0,-5);
+		\draw[response](spkr-y-|initiator) -- node[above]{spkr} (spkr-y-|responder);
+		\draw[request](sctr-y-|initiator) -- node[above] {sctr} (sctr-y-|responder);
+		\draw[response](ack-y-|initiator) -- node[above] {(ack)} (ack-y-|responder);
+	\path[result] node at (result-y-|0,0){Responder Auth};
+\end{tikzpicture}
+\end{column}
+
+
+\begin{column}{.30\textwidth}
+\begin{tikzpicture}[rosenpass-diagram]
+	 \draw[initiator] (-1,0) node(initiator){Initiator}  ++(0,.1)to
+		coordinate[pos=.6](epki-y)
+		coordinate[pos=.76] (ecti-y)
+		coordinate[pos=.92](ack-y)+(0,-5);
+	 \draw[responder] (1,0) node(responder){Responder} ++(0,.1)to +(0,-5)coordinate(result-y);;
+
+	 \draw[request](epki-y-|initiator) -- node[above]{epki} (epki-y-|responder);
+	 \draw[response](ecti-y-|initiator) -- node[above]{ecti} (ecti-y-|responder);
+	 \draw[request](ack-y-|initiator) -- node[above] {(ack)} (ack-y-|responder);
+	\path[result] node at (result-y-|0,0){Forward secrecy};
+\end{tikzpicture}
+\end{column}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{Alle 3 Schlüsseltransporte in einem Protokoll}
+
+\begin{tikzpicture}[rosenpass-diagram]
+	\draw[initiator] (-3,0) node(initiator){Initiator}  ++(0,.1)to coordinate[pos=.2](spki-y)
+	coordinate[pos=.35](spkr-y)
+	coordinate[pos=.6](epki-y)
+	coordinate[pos=.75](scti-y)
+	coordinate[pos=.9](ack-y)+(0,-5);
+	\draw[responder] (3,0) node(responder){Responder} ++(0,.1)to+(0,-5);
+
+	 \draw[request](spki-y-|initiator) -- node[above] {spki} (spki-y-|responder);
+	 \draw[response](spkr-y-|initiator) -- node[above] {spkr} (spkr-y-|responder);
+	 \draw[request](epki-y-|initiator) -- node[above] {epki, sctr, peer\_id} (epki-y-|responder);
+	 \draw[response](scti-y-|initiator) -- node[above] {scti, ecti} (scti-y-|responder);
+	  \draw[request](ack-y-|initiator) -- node[above] {(ack)} (ack-y-|responder);
+
+\end{tikzpicture}
+
+  Der Initiator ist erst authentifiziert, nachdem
+  \enquote{(ack)} empfangen wurde.
+
+\end{frame}
+
+\begin{frame}{Das Rosenpass-Protokoll}
+  \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-key-exchange-protocol-rgb.pdf}
+\end{frame}
+
+\begin{frame}{Sicherheitsanalyse}
+  Symbolische Protokoll-Analyse
+	\begin{itemize}
+		\item kann automatisiert logische Fehler im Protokoll finden.
+		\item Genauer: Kommunikationsabläufe, die Sicherheitseigenschaften brechen
+\end{itemize}
+
+In unserem Fall:
+  \begin{itemize}
+    \item Wir nutzen ProVerif~\cite{proverif} als Tool um Protokoll-Bugs auszuschließen
+    \item Wir haben die Laufzeit optimiert; symbolische Analyse läuft in fünf Minuten
+    \item Beweise sind Teil des Software-Repositories; laufen in der CI
+  \end{itemize}
+
+	Wir arbeiten an Beweisen in einem stärkeren Angreifermodell: kryptographische Beweise (mit CryptoVerif~\cite{cryptoverif})
+\end{frame}
+
+\begin{frame}{ProVerif in Technicolor}
+  \includegraphics[height=.9\textheight]{assets/2023-03-20-symbolic-analysis-screenshot.png}
+\end{frame}
+
+%\begin{frame}{Rosenpass/WireGuard integration}
+  \input{graphics/rpwg.tex}
+%\end{frame}
+
+\begin{frame}{Verwendete Chiffren}
+  \begin{itemize}
+    \item Authentifikation und Vertraulichkeit: \textbf{Classic McEliece}\\
+	    (erfunden 1978, codebasiert)
+    \item Forward Secrecy: \textbf{Kyber}\\
+	    (von NIST zur Standardisierung ausgewählt, gitterbasiert)
+    \item Kryptoagilität: Wir planen die Möglichkeit einzubauen, die Chiffren zu wechseln\\
+	    (das ist \emph{nicht} ciphersuite negotiation)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Ausblick}
+  \begin{itemize}
+    \item Rosenpass in Kubernetes
+    \item Isolation, Micro-VMs, Docker
+    \item Formal verifizierte Implementierung
+  \end{itemize}
+  \begin{itemize}
+    \item Mehr WissKomm zu Kryptographie. Kryptographie braucht verständliche Erklärungen!
+  \end{itemize}
+  \begin{itemize}
+    \item Wir suchen High-Assurance-Kryptographieprojekte um mit uns zusammenzuarbeiten. Rosenpass ist klein und kann als Demonstrator dienen.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Zum Nachbauen… aus dem Whitepaper:}
+  \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-message-handling-code.pdf}
+\end{frame}
+
+\begin{frame}{Konversationsstarter}
+
+\begin{itemize}
+\item
+  Zurzeit wird Rosenpass via CLI konfiguriert
+\item
+  Das lässt zu wünschen:
+  \begin{itemize}
+  \item
+    hinzufügen/entfernen von peers \textbf{ohne} neustart
+  \item\relax
+    <23 CLI Argumente für exchange mit einem peer
+  \item
+    simple integration mit anderen Programmiersprachen
+  \end{itemize}
+\item
+  Lösungsansätze:
+  \begin{itemize}
+  \item
+    Konfigurationsdatei: \texttt{rosenpass\ rp-config.toml}
+  \item
+    Unix Domain Socket:
+    \texttt{add\ peer\ /opt/peer-pub.key\ rosenpass.eu:9999}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\edef\totalcontentframes{\theframenumber}
+
+% TODO: Posterfolie? KEMs statt Diffie-Hellmann; 
+
+\appendix
+
+\begin{frame}
+\centering
+\includegraphics[width=.4\linewidth]{RosenPass-Logo}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Zum Nachbauen… aus dem Whitepaper:}
+  \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-message-handling-code.pdf}
+\end{frame}
+
+\begin{frame}{Sicherheitsanalyse}
+  Symbolische Protokoll-Analyse
+	\begin{itemize}
+		\item kann automatisiert logische Fehler im Protokoll finden.
+		\item Genauer: Kommunikationsabläufe, die Sicherheitseigenschaften brechen
+\end{itemize}
+
+In unserem Fall:
+  \begin{itemize}
+    \item Wir nutzen ProVerif~\cite{proverif} als Tool um Protokoll-Bugs auszuschließen
+    \item Wir haben die Laufzeit optimiert; symbolische Analyse läuft in fünf Minuten
+    \item Beweise sind Teil des Software-Repositories; laufen in der CI
+  \end{itemize}
+
+	Wir arbeiten an Beweisen in einem stärkeren Angreifermodell: kryptographische Beweise (mit CryptoVerif~\cite{cryptoverif})
+\end{frame}
+
+\begin{frame}{CVE-2021-46873 – DOS against WireGuard through NTP}
+\begin{itemize}
+  \item The replay protection in classic WireGuard assumes a monotonic counter
+  \item But the system time is attacker-controlled because NTP is insecure
+  \item This generates a kill packet that abuses replay protection and renders the initiator's key-pair useless
+  \item Attack is possible in the real world!
+  \item Similar attack in post-quantum WireGuard is worse since InitHello is unauthenticated
+  \item Solution: Biscuits
+\end{itemize}
+\end{frame}
+
+\begin{frame}{New Hashing/Domain separation scheme}
+  \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-hashing-tree.pdf}
+\end{frame}
+
+\printbibliography
+
+\clearpage
+\setcounter{framenumber}{\totalcontentframes}
+
+
+
+\end{document}
