@@ -24,31 +24,34 @@
             biber;
         };
 
-        documents = [
-          "2023-04-easterhegg"
-          "2023-07-04-IAV"
-          "2023-09-03-MRMCD2023"
-        ];
+        documents = (builtins.fromTOML (builtins.readFile ./documents.toml)).documents;
       in
       {
-        packages = pkgs.lib.genAttrs documents (name:
-          pkgs.stdenvNoCC.mkDerivation {
-            inherit name;
-            srcs = [ (./. + "/${name}") ./tex ];
-            sourceRoot = "./${name}";
-            nativeBuildInputs = with pkgs; [
-              tex
-            ];
-            buildPhase = ''
-              export HOME=$(mktemp -d)
-              latexmk
-            '';
-            installPhase = ''
-              mkdir --parent -- $out
-              mv *.pdf $out/
-            '';
-          }
-        );
+        packages = builtins.listToAttrs (
+          builtins.map
+            ({ name, ... } @ meta:
+              {
+                inherit name;
+                value = pkgs.stdenvNoCC.mkDerivation {
+                  inherit name;
+                  srcs = [ (./. + "/${name}") ./tex ];
+                  sourceRoot = "./${name}";
+                  nativeBuildInputs = with pkgs; [
+                    tex
+                  ];
+                  buildPhase = ''
+                    export HOME=$(mktemp -d)
+                    latexmk
+                  '';
+                  installPhase = ''
+                    mkdir --parent -- $out
+                    mv *.pdf $out/
+                  '';
+                  passthru = meta;
+                };
+              }
+            )
+            documents);
 
         devShells.default = (pkgs.devshell.mkShell {
           imports = [ "${devshell}/extra/git/hooks.nix" ];
@@ -87,6 +90,13 @@
             { nativeBuildInputs = [ pkgs.nodePackages.prettier ]; } ''
             cd ${./.} && prettier --check . && touch $out
           '';
+
+          # 1. for every folder that is not hidden there must be a package
+          # consistency-check = pkgs.runCommand "check-consistency"
+          #   { nativeBuildInputs = [ ]; } ''
+          #   cd ${./.}
+          #   find -mindepth 1 -maxdepth 1 -type d -not -path '*/.*'
+          # '';
         };
       }
     );
