@@ -1,0 +1,240 @@
+\documentclass{rosenpass-beamer}
+
+\usepackage[german]{babel}
+\usepackage[autostyle]{csquotes}
+\usepackage{emoji}
+%\usepackage{dirtytalk}
+\let\say\enquote
+
+\usepackage{xurl}
+
+\urlstyle{same}
+
+\usepackage{textcomp}
+
+\usetikzlibrary{positioning,decorations.pathreplacing,svg.path}
+
+\definecolor{RPPink}{rgb}{274,4,132}
+\definecolor{RPOrange}{rgb}{255, 166, 48}
+\definecolor{RPAquamarine}{rgb}{255, 166, 48}
+\definecolor{RPLightGray}{rgb}{160, 159, 164}
+\definecolor{RPTurquoise}{rgb}{114, 161, 229}
+
+\title{Rosenpass}
+\subtitle{Update MRMCD 2023}
+\author{kora, emil, ajuvo (@chaos.social)}
+\institute{\url{https://rosenpass.eu}}
+
+
+\conference{MRMCD 2023}
+\date{2023-09-03}
+
+\parskip\smallskipamount
+
+\ExplSyntaxOn
+\newcommand*{\sourcename}{Quelle}
+\newcommand*{\sourcesep}{:~}
+\newcommand*{\ImgSource}[2]{%
+%\hbox_set:Nn \l_tmpa_box {#1}
+
+\hbox_set:Nn \l_tmpa_box {#1}
+
+\hbox_set:Nn \l_tmpa_box {
+\dim_set:Nn \l_tmpa_dim {\box_ht:N \l_tmpa_box}
+\hbox_unpack_drop:N \l_tmpa_box \rotatebox{90}{\parbox{\l_tmpa_dim}{\tiny\sourcename\sourcesep#2}}
+}
+\box_use:N \l_tmpa_box
+}
+\ExplSyntaxOff
+
+% reduce itemize indent
+\setlength{\leftmargini}{0pt}
+
+\usepackage{biblatex}
+\addbibresource{sources.bib}
+
+
+%namepartpicturesetup
+\ExplSyntaxOn
+\int_new:N \l__ptxcd_namepart_int
+\fp_new:N \l__ptxcd_namepos_fp
+\def\namepartsep{1.1}
+\dim_new:N \l__ptxcd_namepart_sep_dim
+\dim_set:Nn \l__ptxcd_namepart_sep_dim  {3mm}
+
+\newcommand*{\namepart}[2][0]{
+	\int_set:Nn \l__ptxcd_namepart_int {\clist_count:n {#2}}
+	\begin{scope}[xshift=#1]
+	\fp_set:Nn \l__ptxcd_namepos_fp {\l__ptxcd_namepart_int / 2}
+	\keyval_parse:nnn {\__ptxcd_namepart_item:nn {}}{ \__ptxcd_namepart_item:nn } {#2}
+	\end{scope}
+}
+
+\newcommand*{\SingleNamePart}[4][0]{
+		\node[rounded~corners,fill=rosenpass-lightblue] (#2) at (#1,-.7) {\ttfamily#3};
+		\node[above] at (#2.north) {\footnotesize #4};
+}
+
+\cs_new:Nn \__ptxcd_namepart_item:nn {
+	\fp_sub:Nn \l__ptxcd_namepos_fp {1}
+	\node[rounded~corners,fill=rosenpass-lightblue] (#1) at (0,\fp_use:N \l__ptxcd_namepos_fp * \namepartsep) {\ttfamily#1};
+	\node[above] at (#1.north) {\footnotesize #2};
+}
+
+
+\newcommand*{\namebraceleft}[2] {
+	\draw[decorate]([xshift=-\l__ptxcd_namepart_sep_dim]#2.south~west)--([xshift=-\l__ptxcd_namepart_sep_dim]#1.north~west) ;
+}
+
+\newcommand*{\namebraceright}[2]{
+	\draw[decorate]([xshift=\l__ptxcd_namepart_sep_dim]#1.north~east) --([xshift=\l__ptxcd_namepart_sep_dim]#2.south~east);
+}
+\ExplSyntaxOff
+
+\graphicspath{{}{graphics/}}
+
+\begin{document}
+
+\maketitle
+
+
+% Folie 2:
+	\begin{frame}{Recap}
+		\begin{itemize}
+			\item Release Vortrag zum Easterhegg23
+				\begin{itemize}
+					\item Media.ccc.de > Rosenpass
+				\end{itemize}
+			
+			\item Whitepaper
+				\begin{itemize}
+					\item Rosenpass.eu > whitepaper
+				\end{itemize}
+			
+			\item @rosenpass@chaos.social
+	
+			\item Github > rosenpass
+				\begin{itemize}
+					\item https://github.com/rosenpass/rosenpass
+				\end{itemize}
+		\end{itemize}
+	\end{frame}
+		
+		
+% Folie 3:
+	\begin{frame}{Was ist Rosenpass}
+		\begin{itemize}
+			\item Ein Open-Source Software-Projekt, das Post-Quantum-sichere Kryptographie zur Verfügung stellt
+			\item Erste Implementierung: PQS für WireGuard
+		\end{itemize}
+	\end{frame}		
+
+
+% Folie 4:
+	\begin{frame}{Warum PQS}
+		\begin{itemize}
+			\item Rosenpass nutzt das McEliese-Kryptosystem
+			\item Store now, decrypt later
+			\item Der „Quantencomputer“
+			\item Die praktische Relevanz
+			\item Warum jetzt?
+		\end{itemize}
+	\end{frame}
+
+
+% Folie 5:
+	\begin{frame}{What next}
+		\begin{itemize}
+			\item WireGuard ist erst der Anfang
+				\begin{itemize}
+					\item Cloud
+					\item Messenger
+					\item Mail
+					\item Netzwerke
+					\item alles	
+				\end{itemize}
+		\end{itemize}
+	\end{frame}	
+
+
+% Folie 6:
+	\begin{frame}{Nicht nur Software}
+		\begin{itemize}
+			\item (Wissenschafts-) Kommunikation
+			\item Kryptographie = Mathematik und Vertrauen
+			\item Propagation und Translation
+		\end{itemize}
+	\end{frame}	
+
+
+% Folie 7:
+	\begin{frame}{Was seitdem geschah}
+		\begin{itemize}
+			\item Team Evolution
+			\item Finanzierung
+			\item Kooperation mit Wirtschaft und Wissenschaft
+			\item Institution und Organisation: Rosenpass e.V.
+		\end{itemize}
+	\end{frame}
+
+
+% Folie 8:
+	\begin{frame}{Was jetzt gerade geschieht}
+		\begin{itemize}
+			\item Formaler Beweis
+			\item Distributionen
+			\item Implementationen
+			\item Neue Versionen
+		\end{itemize}
+	\end{frame}	
+
+
+% Folie 9:
+	\begin{frame}{Was jetzt gerade geschieht}
+		\begin{itemize}
+			\item Vernetzung in Organisation und Konsortium
+			\item Finanzierung
+			\item Evolution in der Kommunikation: Neue Medienformate
+			\item Dialog mit Wissenschaft, Entwicklern, Dienstleistern, Anwendern
+		\end{itemize}
+	\end{frame}	
+
+
+% Folie 10:
+	\begin{frame}{Was bald geschieht}
+		\begin{itemize}
+			\item Releases
+			\item Distributionen
+			\item Neue Anwendungen
+			\item Papers,Talks, Medien
+		\end{itemize}
+	
+		\begin{itemize}
+			\item \textbf{Spaß am Gerät und zusammen mit Euch !}
+		\end{itemize}
+	\end{frame}	
+
+
+% Folie 11:
+	\begin{frame}{Hoffentlich: Fragen!}
+		\begin{itemize}
+			\item rosenpass.eu
+			\item github > rosenpass
+			\item onboarden?
+		\end{itemize}
+	
+		\begin{itemize}
+			\item \textbf{Vielen Dank !}
+			\begin{itemize}
+				\item \textbf{kora   emil   ajuvo}
+			\end{itemize}	
+		\end{itemize}
+	\end{frame}	
+
+
+\clearpage
+\setcounter{framenumber}{\totalcontentframes}
+
+
+
+\end{document}

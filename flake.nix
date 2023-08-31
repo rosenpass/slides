@@ -27,6 +27,7 @@
         documents = [
           "2023-04-easterhegg"
           "2023-07-04-IAV"
+          "2023-09-03-MRMCD2023"
         ];
       in
       {
