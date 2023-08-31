@@ -34,7 +34,8 @@
         packages = pkgs.lib.genAttrs documents (name:
           pkgs.stdenvNoCC.mkDerivation {
             inherit name;
-            src = ./. + "/${name}";
+            srcs = [ (./. + "/${name}") ./tex ];
+            sourceRoot = "./${name}";
             nativeBuildInputs = with pkgs; [
               tex
             ];
