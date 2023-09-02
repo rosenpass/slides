@@ -11,6 +11,7 @@
 \urlstyle{same}
 
 \usepackage{textcomp}
+\usepackage{tcolorbox}
 
 \usetikzlibrary{positioning,decorations.pathreplacing,svg.path}
 
@@ -32,8 +33,34 @@
 }
 
 \author{Emil~Engler, \ Stephan~Ajuvo, \ Karolin~Varner}
-\contributor{Marei~Peischl, Lisa~Schmidt, Alice~Bowman, Wanja~Zaeske, Sven~Friedrich, Benjamin~Lipp}
+\contributor{
+  \relscale{.90}
+  Marei~Peischl, Lisa~Schmidt, Steffen~Vogel, Alice~Bowman, Wanja~Zaeske, Sven~Friedrich, Benjamin~Lipp
+}
 \funding{Funding: NLNet \& Prototype Fund}
+
+% https://tex.stackexchange.com/questions/2541/beamer-frame-numbering-in-appendix
+\newcommand{\backupbegin}{
+  \newcounter{framenumberappendix}
+  \setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+  \addtocounter{framenumberappendix}{-\value{framenumber}}
+  \addtocounter{framenumber}{\value{framenumberappendix}} 
+}
+
+\newcommand*{\outrobegin}{
+  \setbeamercolor{footnoteblock}{bg=rosenpass-lightorange,fg=black}
+  \tcbset{frame-number/.style={colback=rosenpass-lightorange,frame empty,top=.25ex,bottom=.25ex,left=.25ex,right=.25ex,colupper=rosenpass-gray,fontupper=\usebeamerfont{frame number},before=,after=,box align=base}}
+}
+
+\newcommand*{\outro}{
+  \nonumbernote{
+      rosenpass.eu | @rosenpass@chaos.social | info@rosenpass.eu
+      \scriptsize
+      \\ Emil Engler @engler@chaos.social | Stephan Ajuvo @ajuvo@chaos.social | Karolin Varner @kora@chaos.social
+  }
+}
 
 \newcommand*{\heading}[1]{
   {
@@ -45,6 +72,19 @@
 \usepackage{bbding}
 \newcommand*\itemtick{\item[\Checkmark]}
 \newcommand*\itemfail{\item[\XSolidBrush]}
+
+% https://tex.stackexchange.com/questions/404429/align-beamer-color-box-at-bottom-of-frame
+\newcommand{\nonumbernote}[1]{%
+  {%
+      \setbeamertemplate{footnote}{%
+        \parindent 1em\noindent%
+        \raggedright
+        \insertfootnotetext\par%
+    }
+    \footnotetext[42]{#1}
+  }
+}
+
 
 \parskip\smallskipamount
 
@@ -121,16 +161,12 @@
 \begin{itemize}
   \item Was bisher geschah
   \item Zusammenfassung vom EH20 Talk: Was ist Rosenpass
-  \item Was nach dem Easterheggh passiert ist
+  \item Was nach dem Easterhegg passiert ist
   \item Was wir nun vor haben
     \begin{itemize}
       \item go-rosenpass
       \item NetBird
       \item Broker-Architektur \& Schnittstellen zum Einbinden
-    \end{itemize}
-  \item Ideenrunde: Wir wollen euer Feedback
-    \begin{itemize}
-      \item Kryptografie: Metapher als Notar
     \end{itemize}
 \end{itemize}
 \end{frame}
@@ -139,9 +175,9 @@
   \begin{itemize}
     \item Seit 2020: Entwicklung der Kryptografie \& der Software
     \item Feb. 2023: Softwarerelease \& Whitepaper
-    \item März 2023: Beginn des Projektes 
+    \item März 2023: NLNet Projekt um Sicherheitsbeweis mit CryptoVerif zu erzeugen
     \item März 2023: Talk auf dem Real World Post-Quantum Krypto Workshop in Tokyo
-    \item April 2023: Vorstellung/Erklärung auf dem Easterheggh\footnote{\url{https://media.ccc.de/search/?q=rosenpass}}
+    \item April 2023: Vorstellung/Erklärung auf dem Easterhegg\footnote{\url{https://media.ccc.de/search/?q=rosenpass}}
     \item Aug. 2023: Release Kandidat 0.2.0 mit FreeBSD unterstützung
     \item Sep. 2023: Beginn des Prototype Fund 14 Projektes für Isolation in Rosenpass
   \end{itemize}
@@ -252,6 +288,10 @@
 \end{frame}
 
 \begin{frame}{Zum Nachbauen… go-rosenpass – Steffen Vogel FTW}
+  \includegraphics[height=.9\textheight]{assets/2023-09-02-go-rosenpass-gh.png}
+\end{frame}
+
+\begin{frame}{Zum Nachbauen… go-rosenpass – Steffen Vogel FTW}
   \includegraphics[height=.9\textheight]{assets/2023-09-02-steffen-proof-read.png}
 \end{frame}
 
@@ -320,14 +360,15 @@
 
 \end{frame}
 
-\begin{frame}{Rosenpass Roadmap}
+\outrobegin
+
+\begin{frame}[fragile]{Rosenpass Roadmap}
 \begin{columns}[c]
 \begin{column}{0.7\textwidth}
 \begin{itemize}
   \item Sicherheitsbeweis
   \item Formelle Verifikation der Implementierung
-  \item Separakte Komponenten? Zertifikate, Schlüsseltausch und verschlüsselte Verbindung
-  \item Vereinfachung
+  \item Einfachere Benutzbarkeit
 
   \item  Kryptografie + Safety Forschung:
   \begin{itemize}
@@ -345,18 +386,18 @@
 
 \end{column}
 \end{columns}
+
+\outro
+
 \end{frame}
 
-\begin{frame}{Rosenpass Struktur}
+\begin{frame}{Rosenpass Strukturpläne}
 \begin{columns}[c]
 \begin{column}{0.7\textwidth}
 \begin{itemize}
-  \item Zusammenkunft von Kryptografie, Dev und SciComm Experten
-  \item Zusammenarbeit mit Industrie
-  \item Ansprechpartner für Integratoren
-  \item Antihirarchisches Arbeiten
-  \item Mit mehreren Firmen arbeiten; Open-Source R\&D
   \item Translationsforschung: Schnittstelle zwischen Industrie und Wissenschaft
+  \item Mit mehreren Integratoren arbeiten; Open-Source R\&D-Abteilung
+  \item Antihierarchisches Arbeiten
   \item Karo hätte gerne mal wieder Freizeit
 \end{itemize}
 \end{column}
@@ -369,7 +410,12 @@
 
 \end{column}
 \end{columns}
+
+\outro
+
 \end{frame}
+
+\backupbegin
 
 \begin{frame}{Idee: Kryptografie als Notar Erklären}
 \begin{columns}[c]
@@ -385,8 +431,8 @@
       \begin{itemize}
         \item Elliptic-Curve Pairings
         \item Multi-Party Computation
-        \item Homomorphische Verschlüsselung
-        \item Dankenbanken mit anonymem Zugriff
+        \item Homomorpe Verschlüsselung
+        \item Datenbanken mit anonymem Zugriff
         \item Anonyme Kommunikation
       \end{itemize}
   \end{itemize}
@@ -396,10 +442,13 @@
   \ImgSource{
     \includegraphics[height=.5\textheight]{assets/rabbit-with-clock.png}
   }{White Rabbit aus Alice in Wonderland – CC0}
-  \imgNote{Häßchen sind die besseren Menschen.}
+  \imgNote{Häschen sind die besseren Menschen.}
 \end{column}
 
 \end{columns}
+
+\outro
+
 \end{frame}
 
 \begin{frame}{Idee: Kryptografie als Notar Erklären}
@@ -427,6 +476,9 @@
 \end{column}
 
 \end{columns}
+\outro
 \end{frame}
+
+\backupend
 
 \end{document}
