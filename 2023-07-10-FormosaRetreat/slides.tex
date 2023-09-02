@@ -1,0 +1,237 @@
+\documentclass{rosenpass-beamer}
+
+\usepackage[ngerman]{babel}
+\usepackage[autostyle]{csquotes}
+\usepackage{emoji}
+%\usepackage{dirtytalk}
+\let\say\enquote
+
+\usepackage{xurl}
+
+\urlstyle{same}
+
+\usepackage{textcomp}
+
+\usetikzlibrary{positioning,decorations.pathreplacing,svg.path}
+
+\definecolor{RPPink}{rgb}{274,4,132}
+\definecolor{RPOrange}{rgb}{255, 166, 48}
+\definecolor{RPAquamarine}{rgb}{255, 166, 48}
+\definecolor{RPLightGray}{rgb}{160, 159, 164}
+\definecolor{RPTurquoise}{rgb}{114, 161, 229}
+
+\usepackage{bbding}
+\newcommand*\itemtick{\item[\Checkmark]}
+\newcommand*\itemfail{\item[\XSolidBrush]}
+
+\newcommand*{\heading}[1]{
+  {
+    \hspace*{-0.5cm}#1
+    \vspace{1.0em}
+  }
+}
+
+\title{Rosenpass}
+%\subtitle{VPN \& Struktur für Translationsforschung in der Kryptografie}
+\author{
+Wanja Zaeske, Stephan Ajuvo, Marei Peischl, Benjamin Lipp, Lisa~Schmidt, Karolin Varner
+}
+\institute{\url{https://rosenpass.eu}}
+
+
+\conference{Formosa Retreat Juli 2023}
+\date{2023-07-11}
+
+\parskip\smallskipamount
+
+\ExplSyntaxOn
+\newcommand*{\sourcename}{Quelle}
+\newcommand*{\sourcesep}{:~}
+
+\newcommand*{\imgNote}[1]{\begin{center}\setlength{\parskip}{0pt}\tiny\raggedright#1\end{center}}
+\NewDocumentCommand{\mgSource}{smm}{%
+%\hbox_set:Nn \l_tmpa_box {#1}
+
+\hbox_set:Nn \l_tmpa_box {#2}
+
+\hbox_set:Nn \l_tmpa_box {
+\dim_set:Nn \l_tmpa_dim {\box_ht:N \l_tmpa_box}
+\hbox_unpack_drop:N \l_tmpa_box \rotatebox{90}{\parbox{\dim_eval:n {\IfBooleanTF {#1} {\linewidth} {\l_tmpa_dim}}}{\tiny\raggedright\sourcename\sourcesep#3}}
+}
+\box_use:N \l_tmpa_box
+}
+\ExplSyntaxOff
+
+% reduce itemize indent
+\setlength{\leftmargini}{0pt}
+
+\usepackage{biblatex}
+\addbibresource{sources.bib}
+
+
+%namepartpicturesetup
+\ExplSyntaxOn
+\int_new:N \l__ptxcd_namepart_int
+\fp_new:N \l__ptxcd_namepos_fp
+\def\namepartsep{1.1}
+\dim_new:N \l__ptxcd_namepart_sep_dim
+\dim_set:Nn \l__ptxcd_namepart_sep_dim  {3mm}
+
+\newcommand*{\namepart}[2][0]{
+	\int_set:Nn \l__ptxcd_namepart_int {\clist_count:n {#2}}
+	\begin{scope}[xshift=#1]
+	\fp_set:Nn \l__ptxcd_namepos_fp {\l__ptxcd_namepart_int / 2}
+	\keyval_parse:nnn {\__ptxcd_namepart_item:nn {}}{ \__ptxcd_namepart_item:nn } {#2}
+	\end{scope}
+}
+
+\newcommand*{\SingleNamePart}[4][0]{
+		\node[rounded~corners,fill=rosenpass-lightblue] (#2) at (#1,-.7) {\ttfamily#3};
+		\node[above] at (#2.north) {\footnotesize #4};
+}
+
+\cs_new:Nn \__ptxcd_namepart_item:nn {
+	\fp_sub:Nn \l__ptxcd_namepos_fp {1}
+	\node[rounded~corners,fill=rosenpass-lightblue] (#1) at (0,\fp_use:N \l__ptxcd_namepos_fp * \namepartsep) {\ttfamily#1};
+	\node[above] at (#1.north) {\footnotesize #2};
+}
+
+
+\newcommand*{\namebraceleft}[2] {
+	\draw[decorate]([xshift=-\l__ptxcd_namepart_sep_dim]#2.south~west)--([xshift=-\l__ptxcd_namepart_sep_dim]#1.north~west) ;
+}
+
+\newcommand*{\namebraceright}[2]{
+	\draw[decorate]([xshift=\l__ptxcd_namepart_sep_dim]#1.north~east) --([xshift=\l__ptxcd_namepart_sep_dim]#2.south~east);
+}
+\ExplSyntaxOff
+
+\graphicspath{{}{graphics/}}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Hello, I am Karolin Varner}
+\begin{itemize}
+  \item Worked with about every industry tech; incl. Java Web Apps, Microcontrollers, and legacy database system from the 80s
+  \item Did a lot of project management and some people management
+  \item Did a lot of open-source development, privacy- and internet politics activism
+  \item Planning to get involved in the Formosa space
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Rosenpass}
+
+\vspace{0.5em}
+\begin{columns}[t]
+\begin{column}{.30\textwidth}
+\heading{WireGuard}
+\begin{itemize}
+  \itemtick Session-key secrecy
+  \itemtick \dots
+  \itemtick Identity Hiding
+  \itemfail \textbf{Non-Interruptability} \footnote[frame]{Assuming a trusted system time}
+  \itemfail \textbf{Post-Quantum Security}
+\end{itemize}
+\end{column}
+
+\begin{column}{.30\textwidth}
+\heading{
+  PQ WireGuard
+  \footnote[frame]{
+	  Hülsing, Ning, Schwabe, Weber, Zimmermann. “Post-quantum WireGuard”. https://ia.cr/2020/379
+	}
+}
+\begin{itemize}
+  \itemtick \textbf{Post-Quantum Security}
+  \itemfail \textbf{Hybrid security}
+  \itemfail \textbf{Non-Interruptability} \footnote[frame]{Assuming a PSK}
+\end{itemize}
+\end{column}
+
+\begin{column}{.30\textwidth}
+\heading{Rosenpass}
+\begin{itemize}
+  \itemtick \textbf{Non-Interruptability} \footnote[frame]{Through cookies}
+  \itemtick \textbf{Hybrid security} \footnote[frame]{Used together with standard WireGuard}
+\end{itemize}
+\end{column}
+
+\end{columns}
+\vspace{1.5em}
+
+\end{frame}
+
+%\begin{frame}{Rosenpass/WireGuard integration}
+  \input{graphics/rpwg.tex}
+%\end{frame}
+
+\begin{frame}{Rosenpass can be used right now}
+  \includegraphics[height=.9\textheight]{assets/2023-03-20-rg-tutorial-screenshot.png}
+\end{frame}
+
+\begin{frame}{ProVerif in Technicolor}
+  \includegraphics[height=.9\textheight]{assets/2023-03-20-symbolic-analysis-screenshot.png}
+\end{frame}
+
+\begin{frame}{Having worked in industry has some advantages}
+\begin{itemize}
+  \item Knowing how to get projects done
+  \item Coordinating teams instead of working on my own
+  \item Product and user focused perspective
+  \item Building tools that I can use to be more productive
+  \item Open-Source approach: How to catch new contributors
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The spec makes it easy to implement Rosenpass}
+  \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-message-handling-code.pdf}
+\end{frame}
+
+\begin{frame}{Professional illustrators create stunning graphics}
+  \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-hashing-tree.pdf}
+\end{frame}
+
+\begin{frame}{Creating successful projects by knowing what not to do}
+\begin{itemize}
+  \item Rosenpass avoids targeting: GUIs, VPN data transport, support for many platforms
+  \item Instead we: Created a core technology; working with companies to integrate Rosenpass (e.g. Open-Source VPN startups)
+  \item \textbf{Vitally we} chose to focus on API; making it easy to integrate Rosenpass
+  \item \textbf{Vitally we} integrate with the existing ecosystem (i.e. WireGuard) instead of trying to replace it
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Starting partnerships\dots}
+\begin{itemize}
+  \item with Open-Source VPN companies
+  \item with Kubernetes VPN companies
+  \item with Quantum-Key-Distribution Projects
+  \item to verify the Rosenpass source code
+  \item to apply isolation features to Rosenpass (Micro-VMs)
+  \item with university teaching departments to use the project as a simple example of bleeding-edge modern crypto
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Talk to me about\dots}
+\vspace{0.5cm}
+\begin{itemize}
+  \item using Rosenpass as demonstrator-project to integrate new cryptographic technologies in
+  \item figuring out how to attract independent contributors to Formosa Projects
+  \item applying API-focused techniques to Formosa projects to emphasize interoperability
+  \item \textbf{Idea:} Providing XML-representations of proof assistants'\footnote{EasyCrypt, CryptoVerif, ProVerif, Tamarin} inputs and outputs to allow easy integration with external tools
+  \item \textbf{Idea:} Python libraries to work with Formosa tools as everybody knows python
+\end{itemize}
+\vspace*{1.5cm}
+\end{frame}
+
+\end{document}
+
+\printbibliography
+
+\clearpage
+\setcounter{framenumber}{\totalcontentframes}
+
+
+
+\end{document}

@@ -1,0 +1,41 @@
+# Formosa Retreat – Rosenpass
+
+- What is rosenpass?
+    - Crypto: Post quantum WireGuard
+        - SLIDE: Rosenpass Security Properties
+    - Implementation
+        - Hybrid security through interop with WG
+            - SLIDE: RP/WG parallel operation
+            - SLIDE: Tutorial screenshot
+    - Proofs: ProVerif
+        - SLIDE: ProVerif in technicolor
+    - Comms:
+        - Having worked in industry has some advantages
+        - Digestable specifications; 
+            - SLIDE: Specification graphic
+            - => Somebody just did a go implementation
+        - Professional illustration
+            - SLIDE: Hashing scheme
+            - SLIDE: Mullana graphik haus/ciphers
+        - We want to do more science communication in general
+        - Professionals for didactics
+- Why am I telling you this?
+    - Testbed for interesting crypto technologies
+        - Looking at applying hacspec
+        - Proof of work based DOS
+        - Getting McEliece running on microcontrollers
+        - Isolation technologies (virtualization, MicroVMs)
+    - Translation research
+        - Cooperations between industry and research
+        - Just create an implementation 
+        - Talking to many orgs to figure out what to do
+            - University departments cryptography
+            - Other university departments
+            - Politicians
+            - Activists
+            - Companies
+        - Maybe that is useful for your projects?
+- My intentions in the formosa space
+    - Proof tool usability
+    - Often written tools first and then 
+
