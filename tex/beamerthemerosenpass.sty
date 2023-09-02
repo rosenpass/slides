@@ -5,10 +5,27 @@
 \RequirePackage{rosenpass-diagram}
 
 \RequirePackage{tcolorbox}
+\RequirePackage{relsize}
 
 \newcommand*{\conference}[1]{\def\@conference{#1}}
 \conference{}
 \def\insertconference{\@conference}
+
+\newcommand*{\homepage}[1]{\def\@homepage{#1}}
+\homepage{}
+\def\inserthomepage{\@homepage}
+
+\newcommand*{\social}[1]{\def\@social{#1}}
+\social{}
+\def\insertsocial{\@social}
+
+\newcommand*{\contributor}[1]{\def\@contributor{#1}}
+\contributor{}
+\def\insertcontributor{\@contributor}
+
+\newcommand*{\funding}[1]{\def\@funding{#1}}
+\funding{}
+\def\insertfunding{\@funding}
 
 \setbeamertemplate{title page}{%
 \leavevmode
@@ -19,10 +36,23 @@
 }
 \end{beamercolorbox}
 \begin{beamercolorbox}[wd=\dimexpr\paperwidth-6ex,sep=3ex,]{title page}
-\raggedleft
-{\usebeamerfont{conference}\insertconference}\par
-{\usebeamerfont{date}\insertdate}
+  \begin{columns}[onlytextwidth]
+
+    \begin{column}{.5\linewidth}
+      \raggedright
+      {\usebeamerfont{homepage}\inserthomepage}\par
+      {\usebeamerfont{social}\insertsocial}
+    \end{column}
+
+    \begin{column}{.5\linewidth}
+      \raggedleft
+      {\usebeamerfont{conference}\insertconference}\par
+      {\usebeamerfont{date}\insertdate}
+    \end{column}
+
+  \end{columns}
 \end{beamercolorbox}
+
 \vspace{\ht\strutbox}
 \begin{beamercolorbox}[wd=\dimexpr\paperwidth]{title page}
 \centering
@@ -34,7 +64,15 @@
 \centering
 	\begin{tcolorbox}[width=\textwidth,colbacktitle=rosenpass-gray,colframe=rosenpass-gray,coltitle=white,title=\ifx\insertsubtitle\@empty\inserttitle\else\insertsubtitle\fi,rounded corners,boxrule=.2ex,halign=center,halign title=center,fonttitle=\usebeamerfont{title},boxsep=1ex,toptitle=1ex,bottomtitle=1ex,]
 	{\usebeamerfont{author}\insertauthor}\par
-	{\usebeamerfont{institute}\insertinstitute}
+	{
+    \ifdefvoid{\insertcontributor}{}{\vspace{2px}}
+    \usebeamerfont{contributor}\insertcontributor
+  }\par
+	{\usebeamerfont{institute}\insertinstitute}\par
+  {
+    \ifdefvoid{\insertfunding}{}{\vspace{5px}}
+    \usebeamerfont{funding}\insertfunding
+  }\par
 	\end{tcolorbox}
 \end{beamercolorbox}
 \vspace{\baselineskip}
@@ -101,10 +139,14 @@
 
 \setbeamerfont{frame numer}{size=\small}
 \setbeamerfont{conference}{series=\bfseries,size=\footnotesize}
+\setbeamerfont{homepage}{size=\footnotesize}
+\setbeamerfont{social}{size=\scriptsize\relscale{.90}}
 \setbeamerfont{date}{size=\footnotesize}
 \setbeamerfont{title}{size=\normalsize,series=\fontseries{md}\selectfont}
 \setbeamerfont{author}{size=\normalsize}
-\setbeamerfont{institute}{series=\bfseries}
+\setbeamerfont{contributor}{size=\scriptsize}
+\setbeamerfont{institute}{size=\normalsize, series=\bfseries}
+\setbeamerfont{funding}{size=\scriptsize\relscale{.90}}
 \setbeamerfont{frametitle}{series=\fontseries{md}\selectfont}
 \setbeamerfont{headline}{size=\footnotesize}
 
