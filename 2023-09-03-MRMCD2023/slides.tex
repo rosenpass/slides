@@ -28,30 +28,43 @@
 
 \title{Rosenpass}
 \subtitle{
-  Post-quantum sicherheit für VPNs und andere Anwendungen.
+  Sichere Kryptografie trotz Quantencomputern: Projektupdate
 }
 
 \author{Emil~Engler, \ Stephan~Ajuvo, \ Karolin~Varner}
 \contributor{Marei~Peischl, Lisa~Schmidt, Alice~Bowman, Wanja~Zaeske, Sven~Friedrich, Benjamin~Lipp}
 \funding{Funding: NLNet \& Prototype Fund}
 
+\newcommand*{\heading}[1]{
+  {
+    \hspace*{-0.5cm}#1
+    \vspace{1.0em}
+  }
+}
+
+\usepackage{bbding}
+\newcommand*\itemtick{\item[\Checkmark]}
+\newcommand*\itemfail{\item[\XSolidBrush]}
+
 \parskip\smallskipamount
 
 \ExplSyntaxOn
 \newcommand*{\sourcename}{Quelle}
 \newcommand*{\sourcesep}{:~}
-\newcommand*{\ImgSource}[2]{%
+\newcommand*{\imgNote}[1]{\begin{center}\setlength{\parskip}{0pt}\tiny\raggedright#1\end{center}}
+\NewDocumentCommand{\ImgSource}{smm}{%
 %\hbox_set:Nn \l_tmpa_box {#1}
 
-\hbox_set:Nn \l_tmpa_box {#1}
+\hbox_set:Nn \l_tmpa_box {#2}
 
 \hbox_set:Nn \l_tmpa_box {
 \dim_set:Nn \l_tmpa_dim {\box_ht:N \l_tmpa_box}
-\hbox_unpack_drop:N \l_tmpa_box \rotatebox{90}{\parbox{\l_tmpa_dim}{\tiny\sourcename\sourcesep#2}}
+\hbox_unpack_drop:N \l_tmpa_box \rotatebox{90}{\parbox{\dim_eval:n {\IfBooleanTF {#1} {\linewidth} {\l_tmpa_dim}}}{\tiny\raggedright\sourcename\sourcesep#3}}
 }
 \box_use:N \l_tmpa_box
 }
 \ExplSyntaxOff
+
 
 % reduce itemize indent
 \setlength{\leftmargini}{0pt}
@@ -103,138 +116,317 @@
 
 \maketitle
 
-
-% Folie 2:
-	\begin{frame}{Recap}
-		\begin{itemize}
-			\item Release Vortrag zum Easterhegg23
-				\begin{itemize}
-					\item Media.ccc.de > Rosenpass
-				\end{itemize}
-			
-			\item Whitepaper
-				\begin{itemize}
-					\item Rosenpass.eu > whitepaper
-				\end{itemize}
-			
-			\item @rosenpass@chaos.social
-	
-			\item Github > rosenpass
-				\begin{itemize}
-					\item https://github.com/rosenpass/rosenpass
-				\end{itemize}
-		\end{itemize}
-	\end{frame}
 		
+\begin{frame}{Was passiert im Talk?}
+\begin{itemize}
+  \item Was bisher geschah
+  \item Zusammenfassung vom EH20 Talk: Was ist Rosenpass
+  \item Was nach dem Easterheggh passiert ist
+  \item Was wir nun vor haben
+    \begin{itemize}
+      \item go-rosenpass
+      \item NetBird
+      \item Broker-Architektur \& Schnittstellen zum Einbinden
+    \end{itemize}
+  \item Ideenrunde: Wir wollen euer Feedback
+    \begin{itemize}
+      \item Kryptografie: Metapher als Notar
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Was bisher geschah}
+  \begin{itemize}
+    \item Seit 2020: Entwicklung der Kryptografie \& der Software
+    \item Feb. 2023: Softwarerelease \& Whitepaper
+    \item März 2023: Beginn des Projektes 
+    \item März 2023: Talk auf dem Real World Post-Quantum Krypto Workshop in Tokyo
+    \item April 2023: Vorstellung/Erklärung auf dem Easterheggh\footnote{\url{https://media.ccc.de/search/?q=rosenpass}}
+    \item Aug. 2023: Release Kandidat 0.2.0 mit FreeBSD unterstützung
+    \item Sep. 2023: Beginn des Prototype Fund 14 Projektes für Isolation in Rosenpass
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Warum sind Quantencomputer (k)eine Bedrohung?}
+\begin{columns}[b]
+\begin{column}{.75\textwidth}
+\begin{itemize}
+  \item Grovers Algorithmus \strong{schwächt} symmetrische Kryptografie
+  \begin{itemize}
+    \item AES, SHA-2, SHA-3, Chacha20
+    \item Lösung: größere Keys
+  \end{itemize}
+  \item Shors Algorithmus \strong{bricht} asymmetrische Kryptografie
+  \begin{itemize}
+    \item RSA, DSA, DH, ECDH
+    \item Lösung: alternative Kryptografie
+  \end{itemize}
+  \item  Nur auf großen Quantencomputern
+  \begin{itemize}
+    \item Die existieren noch nicht
+    \item Problem: Store now, decrypt later
+  \end{itemize}
+\end{itemize}
+\end{column}
+\begin{column}{.25\textwidth}
+\makebox[\linewidth][r]{%
+\includegraphics[width=1.5\linewidth]{graphics/qc and crypto.png}
+}%
+\par
+\imgNote{\makebox[\linewidth][r]{Quantencomputer überschatten Kryptografieverfahren.}}
+\end{column}
+\end{columns}
+\end{frame}
 		
-% Folie 3:
-	\begin{frame}{Was ist Rosenpass}
-		\begin{itemize}
-			\item Ein Open-Source Software-Projekt, das Post-Quantum-sichere Kryptographie zur Verfügung stellt
-			\item Erste Implementierung: PQS für WireGuard
-		\end{itemize}
-	\end{frame}		
+\begin{frame}{PQ-sichere VPNs: WireGuard + Rosenpass}
+  \begin{itemize}
+    \item  Hybride Sicherheit
 
+    \begin{itemize}
+      \item Bricht nur, wenn Rosenpass \textbf{und} WireGuard versagen
+    \end{itemize}
+    \item  Überall nutzbar, wo WireGuard schon läuft
+    \item  Ohne Anpassung vom WireGuard Source Code
 
-% Folie 4:
-	\begin{frame}{Warum PQS}
-		\begin{itemize}
-			\item Rosenpass nutzt das McEliese-Kryptosystem
-			\item Store now, decrypt later
-			\item Der „Quantencomputer“
-			\item Die praktische Relevanz
-			\item Warum jetzt?
-		\end{itemize}
-	\end{frame}
+    \begin{itemize}
+      \item Shared Secret aus Rosenpass = PSK für WireGuard
+    \end{itemize}
+    \item  Aber:
 
+    \begin{itemize}
+      \item Ein Prozess mehr
+      \item Handshake alle 2 Minuten
+    \end{itemize}
+  \end{itemize}
 
-% Folie 5:
-	\begin{frame}{What next}
-		\begin{itemize}
-			\item WireGuard ist erst der Anfang
-				\begin{itemize}
-					\item Cloud
-					\item Messenger
-					\item Mail
-					\item Netzwerke
-					\item alles	
-				\end{itemize}
-		\end{itemize}
-	\end{frame}	
+\makebox[\linewidth][c]{%
+\includegraphics[width=.6\linewidth]{graphics/wireguard and rp.png}}
 
+\imgNote{\makebox[\linewidth][c]{WireGuard mit Rosenpass.}}
+\end{frame}
 
-% Folie 6:
-	\begin{frame}{Nicht nur Software}
-		\begin{itemize}
-			\item (Wissenschafts-) Kommunikation
-			\item Kryptographie = Mathematik und Vertrauen
-			\item Propagation und Translation
-		\end{itemize}
-	\end{frame}	
+\begin{frame}{Rosenpass: Sicherheitseigenschaften}
 
+\vspace{0.5em}
+\begin{columns}[t]
+\begin{column}{.30\textwidth}
+\heading{WireGuard}
+\begin{itemize}
+  \itemtick Session-key secrecy
+  \itemtick \dots
+  \itemtick Identity Hiding
+  \itemfail \textbf{Non-Interruptability} \footnote[frame]{Angenommen der Systemzeit wird Vertraut}
+  \itemfail \textbf{Post-Quantum Security}
+\end{itemize}
+\end{column}
 
-% Folie 7:
-	\begin{frame}{Was seitdem geschah}
-		\begin{itemize}
-			\item Team Evolution
-			\item Finanzierung
-			\item Kooperation mit Wirtschaft und Wissenschaft
-			\item Institution und Organisation: Rosenpass e.V.
-		\end{itemize}
-	\end{frame}
+\begin{column}{.30\textwidth}
+\heading{
+  PQ WireGuard
+  \footnote[frame]{
+	  Hülsing, Ning, Schwabe, Weber, Zimmermann. “Post-quantum WireGuard”. https://ia.cr/2020/379
+	}
+}
+\begin{itemize}
+  \itemtick \textbf{Post-Quantum Security}
+  \itemfail \textbf{Hybrid security}
+  \itemfail \textbf{Non-Interruptability} \footnote[frame]{Assuming a PSK}
+\end{itemize}
+\end{column}
 
+\begin{column}{.30\textwidth}
+\heading{Rosenpass}
+\begin{itemize}
+  \itemtick \textbf{Non-Interruptability} \footnote[frame]{Through cookies}
+  \itemtick \textbf{Hybrid security} \footnote[frame]{Wenn es mit WireGuard benutzt wird}
+\end{itemize}
+\end{column}
 
-% Folie 8:
-	\begin{frame}{Was jetzt gerade geschieht}
-		\begin{itemize}
-			\item Formaler Beweis
-			\item Distributionen
-			\item Implementationen
-			\item Neue Versionen
-		\end{itemize}
-	\end{frame}	
+\end{columns}
+\vspace{1.5em}
 
+\end{frame}
 
-% Folie 9:
-	\begin{frame}{Was jetzt gerade geschieht}
-		\begin{itemize}
-			\item Vernetzung in Organisation und Konsortium
-			\item Finanzierung
-			\item Evolution in der Kommunikation: Neue Medienformate
-			\item Dialog mit Wissenschaft, Entwicklern, Dienstleistern, Anwendern
-		\end{itemize}
-	\end{frame}	
+\begin{frame}{Zum Nachbauen… aus dem Whitepaper:}
+  \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-message-handling-code.pdf}
+\end{frame}
 
+\begin{frame}{Zum Nachbauen… go-rosenpass – Steffen Vogel FTW}
+  \includegraphics[height=.9\textheight]{assets/2023-09-02-steffen-proof-read.png}
+\end{frame}
 
-% Folie 10:
-	\begin{frame}{Was bald geschieht}
-		\begin{itemize}
-			\item Releases
-			\item Distributionen
-			\item Neue Anwendungen
-			\item Papers,Talks, Medien
-		\end{itemize}
-	
-		\begin{itemize}
-			\item \textbf{Spaß am Gerät und zusammen mit Euch !}
-		\end{itemize}
-	\end{frame}	
+\begin{frame}{Zum Nachbauen… go-rosenpass – Steffen Vogel FTW}
+  \includegraphics[height=.9\textheight]{assets/2023-09-02-steffen-proof-read-issues.png}
+\end{frame}
 
+\begin{frame}{Zum Integrieren… NetBird}
+  \includegraphics[height=.9\textheight]{assets/2023-09-02-netbird-gh.png}
+\end{frame}
 
-% Folie 11:
-	\begin{frame}{Hoffentlich: Fragen!}
-		\begin{itemize}
-			\item rosenpass.eu
-			\item github > rosenpass
-			\item onboarden?
-		\end{itemize}
-	
-		\begin{itemize}
-			\item \textbf{Vielen Dank !}
-			\begin{itemize}
-				\item \textbf{kora   emil   ajuvo}
-			\end{itemize}	
-		\end{itemize}
-	\end{frame}	
+\begin{frame}{Zum Integrieren… NetBird}
+  \includegraphics[height=.9\textheight]{assets/2023-09-02-netbird-gh-rosenpass-testemonial.png}
+\end{frame}
+
+\begin{frame}{Zum Integrieren… NetBird}
+\begin{columns}[c]
+\begin{column}{0.7\textwidth}
+  \begin{itemize}
+    \item Netbird: Einfaches user interface
+    \item Rosenpass: Hochsichere PQ-Crypto
+    \item
+      go-rosenpass: Um Plattformen zu unterstützen auf denen die Rust Variante schwer zu integrieren ist
+      \begin{itemize}
+        \item Android
+        \item iOS
+        \item Windows
+        \item \dots
+      \end{itemize}
+  \end{itemize}
+\end{column}
+
+\begin{column}{0.2\textwidth}
+\includegraphics[width=\linewidth]{graphics/rosenpass in anderen apps.png}
+
+\medskip
+\includegraphics[width=\linewidth]{graphics/Illu-install.png}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Zum Integrieren… Prototypefund 14 Projekt}
+\begin{columns}[c]
+\begin{column}{0.7\textwidth}
+  \begin{itemize}
+    \item Schnittstelle zwischen Komponenten
+    \item Kommunikation über Unix-Sockets
+    \item Spezielle Serialisierungsbibliothek für Schlüsseldaten\footnotemark
+    \item Broker-Pattern für Rosenpass– Jede Komponente in einem eigenen Prozess
+    \item Mikro-VMs um wirklich hohe sicherheit zu haben
+    \item Minimale Privilegien; Sandboxing
+  \end{itemize}
+\end{column}
+
+\begin{column}{0.2\textwidth}
+\includegraphics[width=\linewidth]{graphics/rosenpass in anderen apps.png}
+
+\medskip
+\includegraphics[width=\linewidth]{graphics/Illu-install.png}
+
+\end{column}
+\end{columns}
+
+\footnotetext{Externes Memory-Management}
+
+\end{frame}
+
+\begin{frame}{Rosenpass Roadmap}
+\begin{columns}[c]
+\begin{column}{0.7\textwidth}
+\begin{itemize}
+  \item Sicherheitsbeweis
+  \item Formelle Verifikation der Implementierung
+  \item Separakte Komponenten? Zertifikate, Schlüsseltausch und verschlüsselte Verbindung
+  \item Vereinfachung
+
+  \item  Kryptografie + Safety Forschung:
+  \begin{itemize}
+    \item Kryptografie in der Avionik
+    \item Decryption Despite Error
+  \end{itemize}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.2\textwidth}
+\includegraphics[width=\linewidth]{graphics/rosenpass in anderen apps.png}
+
+\medskip
+\includegraphics[width=\linewidth]{graphics/Illu-install.png}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Rosenpass Struktur}
+\begin{columns}[c]
+\begin{column}{0.7\textwidth}
+\begin{itemize}
+  \item Zusammenkunft von Kryptografie, Dev und SciComm Experten
+  \item Zusammenarbeit mit Industrie
+  \item Ansprechpartner für Integratoren
+  \item Antihirarchisches Arbeiten
+  \item Mit mehreren Firmen arbeiten; Open-Source R\&D
+  \item Translationsforschung: Schnittstelle zwischen Industrie und Wissenschaft
+  \item Karo hätte gerne mal wieder Freizeit
+\end{itemize}
+\end{column}
+
+\begin{column}{0.2\textwidth}
+\includegraphics[width=\linewidth]{graphics/rosenpass in anderen apps.png}
+
+\medskip
+\includegraphics[width=\linewidth]{graphics/Illu-install.png}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Idee: Kryptografie als Notar Erklären}
+\begin{columns}[c]
+
+\begin{column}{0.7\textwidth}
+  \begin{itemize}
+    \item Problem: Kryptografie wird als schwarze Magie verstanden
+    \item Problem: Krude vorschläge zur Verwaltungsautomatisierung
+    \item Problem: Und Strafverfolgung
+    \item Problem: Krypto wird auf Verschlüsselung reduziert
+    \item
+      Problem: Kaum jemand weiß was moderne Verfahren tun
+      \begin{itemize}
+        \item Elliptic-Curve Pairings
+        \item Multi-Party Computation
+        \item Homomorphische Verschlüsselung
+        \item Dankenbanken mit anonymem Zugriff
+        \item Anonyme Kommunikation
+      \end{itemize}
+  \end{itemize}
+\end{column}
+
+\begin{column}{0.2\textwidth}
+  \ImgSource{
+    \includegraphics[height=.5\textheight]{assets/rabbit-with-clock.png}
+  }{White Rabbit aus Alice in Wonderland – CC0}
+  \imgNote{Häßchen sind die besseren Menschen.}
+\end{column}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{Idee: Kryptografie als Notar Erklären}
+\begin{columns}[c]
+
+\begin{column}{0.7\textwidth}
+  \begin{itemize}
+    \item Krypto: Einsatzfähig für viele Prozesse in denen Information Übertragen wird
+    \item Datenschutz: Anonyme, Nutzergesteuerte Prozesse
+    \item Idee: Metapher von Kryptografie als Notar
+      \begin{itemize}
+        \item Notare werden Bestraft wenn sie Dinge Zusichern die sie nicht können
+        \item Oder wenn sie gegen Regeln verstoßen
+        \item Spezieller schutz vor dem Recht
+        \item Kryptografie: Ähnlich, nur Matematisch, statt mit Staatsgewalt
+      \end{itemize}
+  \end{itemize}
+\end{column}
+
+\begin{column}{0.2\textwidth}
+  \ImgSource{
+    \includegraphics[height=.5\textheight]{assets/rabbit-with-clock.png}
+  }{White Rabbit aus Alice in Wonderland – CC0}
+  \imgNote{Häßchen sind die besseren Menschen.}
+\end{column}
+
+\end{columns}
+\end{frame}
 
 \end{document}
