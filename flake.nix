@@ -19,9 +19,9 @@
             scheme-basic amsfonts beamer babel-german tcolorbox emoji environ
             ccicons csquotes csvsimple doclicense fancyvrb fontspec gobble
             koma-script ifmtarg latexmk lm markdown mathtools minted noto
-            nunito pgf soul unicode-math lualatex-math gitinfo2 eso-pic
-            biblatex biblatex-trad biblatex-software xkeyval xurl xifthen
-            biber;
+            nunito pgf relsize soul unicode-math lualatex-math gitinfo2
+            eso-pic biblatex biblatex-trad biblatex-software xkeyval xurl
+            xifthen biber;
         };
 
         documents = (builtins.fromTOML (builtins.readFile ./documents.toml)).documents;
