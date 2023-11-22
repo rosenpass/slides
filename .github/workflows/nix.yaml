@@ -7,8 +7,8 @@ on:
     branches:
       - main
 jobs:
-  x86_64-linux---2023-04-easterhegg:
-    name: Build x86_64-linux.2023-04-easterhegg
+  x86_64-linux---2023-04-08-easterhegg:
+    name: Build x86_64-linux.2023-04-08-easterhegg
     runs-on:
       - ubuntu-latest
     needs: []
@@ -22,14 +22,14 @@ jobs:
           name: rosenpass-slides
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build
-        run: nix build .#packages.x86_64-linux.2023-04-easterhegg --print-build-logs
+        run: nix build .#packages.x86_64-linux.2023-04-08-easterhegg --print-build-logs
       - name: Deploy PDF artifacts
         uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: result/
-          publish_branch: pdf/2023-04-easterhegg
+          publish_branch: pdf/2023-04-08-easterhegg
           force_orphan: true
   x86_64-linux---2023-07-04-IAV:
     name: Build x86_64-linux.2023-07-04-IAV
