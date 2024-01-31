@@ -1,0 +1,26 @@
+\documentclass{rosenpass-beamer}
+
+\usepackage[english]{babel}
+\usepackage[autostyle]{csquotes}
+
+\title{Rosenpass Post-Quantum VPN with Minimal Privileges}
+\author{Marei Peischl with Karolin Varner, Alice Bowman}
+\institute{\url{https://rosenpass.eu}}
+
+\conference{PTF Demo Day}
+\date{2024-03-01}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Introduction}
+\begin{itemize}
+\item Rosenpass is a post-quantum VPN that uses WireGuard for data transport
+\item This project will reduce the privilege level required for Rosenpass to send post-quantum secure keys to WireGuard
+\item We will do this using Docker, Micro-VM’s (exceptionally small virtual machines), and broker architectures to sandbox the Rosenpass software
+\end{itemize}
+\end{frame}
+
+\end{document}
+
