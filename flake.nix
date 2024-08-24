@@ -21,7 +21,8 @@
             koma-script ifmtarg latexmk lm markdown mathtools minted noto
             nunito pgf relsize soul unicode-math lualatex-math gitinfo2
             eso-pic biblatex biblatex-trad biblatex-software xkeyval xurl
-            xifthen biber;
+            xifthen biber dirtytalk tikzsymbols pgfornament pgfopts bbding
+            transparent pdfpc hyperxmp luacode luatexbase;
         };
 
         documents = (builtins.fromTOML (builtins.readFile ./documents.toml)).documents;

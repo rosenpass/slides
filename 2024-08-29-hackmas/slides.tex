@@ -1,0 +1,124 @@
+\documentclass{rosenpass-beamer}
+
+\usepackage[english]{babel}
+\usepackage[autostyle]{csquotes}
+\usepackage{dirtytalk}
+\usepackage{tikzsymbols}
+\usepackage{pgfornament}
+\usetikzlibrary{calc}
+
+\usetikzlibrary{positioning,decorations.pathreplacing,svg.path}
+
+\definecolor{RPPink}{rgb}{274,4,132}
+\definecolor{RPOrange}{rgb}{255, 166, 48}
+\definecolor{RPAquamarine}{rgb}{255, 166, 48}
+\definecolor{RPLightGray}{rgb}{160, 159, 164}
+\definecolor{RPTurquoise}{rgb}{114, 161, 229}
+
+\usepackage{bbding}
+\newcommand*\itemtick{\item[\Checkmark]}
+\newcommand*\itemfail{\item[\XSolidBrush]}
+\newcommand*{\heading}[1]{%
+  {
+    \hspace*{-0.5cm}#1
+    \vspace{1.0em}
+  }
+}
+
+\title[Developing a high-security cryptographic protocol]{The Rosenpass protocol and attacks we found against WireGuard while developing it}
+\subtitle{Computer-Aided Verification of a KEM-based Authenticated Key Exchange Protocol}
+\author{Benjamin Lipp, \textbf{Karolin Varner} \\ \strut \footnotesize with support from Alice Bowman, Marei Peischl, and Lisa Schmidt}
+\institute{\url{https://rosenpass.eu}}
+
+\conference{Håck ma's 2024, Schloss in Ottenschlag}
+\date{2024-08-29}
+
+\usepackage{biblatex}
+\addbibresource{sources.bib}
+
+\graphicspath{{}{graphics/}}
+
+\ExplSyntaxOn
+\makeatletter
+\tl_new:N \l__ptxcd_rosenpass_interlude_tl
+\tl_set_eq:NN \l__ptxcd_rosenpass_interlude_tl \c_novalue_tl
+\int_new:N \g__ptxcd_interlude_page_int
+\defbeamertemplate{background}{rosenpass-interlude}{
+	\exp_args:NV \tl_if_novalue:nTF {\l__ptxcd_rosenpass_interlude_tl} {
+		\int_gincr:N \g__ptxcd_interlude_page_int
+		\file_if_exist:nF {graphics/rosenpass-interlude-generic-\int_use:N \g__ptxcd_interlude_page_int.jpeg} {
+				\file_if_exist:nF {rosenpass-interlude-generic-\int_use:N \g__ptxcd_interlude_page_int.jpeg} {\int_gset:Nn \g__ptxcd_interlude_page_int {1}}
+		}
+		\includegraphics[width=\paperwidth,height=\paperheight]{rosenpass-interlude-generic-\int_use:N \g__ptxcd_interlude_page_int}
+	} {
+		\includegraphics[width=\paperwidth,height=\paperheight]{rosenpass-interlude-\l__ptxcd_rosenpass_interlude_tl}
+	}
+}
+
+
+\cs_new:cpn {ps@interlude} {%
+	\setbeamertemplate{background}[rosenpass-interlude]
+	\use:c {ps@navigation}%
+}
+
+\setbeamercolor{interlude}{fg=white,bg=}
+
+%\keys_define:nn {ptxcd/rosenpass-interlude}{
+
+\NewDocumentCommand{\interlude}{sD<>{}O{\c_novalue_tl}d<>md<>}{
+	\begingroup
+		\tl_set:Nn \l__ptxcd_rosenpass_interlude_tl  {#3}
+%		\IfNoValueF{#2}{\keys_set:nn {ptxcd/rosenpass-interlude}{#2}}
+		\begin{frame}[c]
+			\leavevmode
+			\thispagestyle{interlude}
+			\IfBooleanT{#1}{\setbeamercolor{interlude}{fg=black}}
+			\begin{beamercolorbox}[wd=\dimexpr\paperwidth-6ex,sep=3ex,center,#2]{interlude}
+				\IfNoValueF{#4}{{\usebeamerfont{interlude-annotation}#4}\par}
+				\usebeamerfont{interlude}#5\par
+				\IfNoValueF{#6}{{\usebeamerfont{interlude-annotation}#6}\par}
+			\end{beamercolorbox}
+		\end{frame}
+	\endgroup
+}
+
+\setbeamerfont{interlude}{size=\Huge}
+\setbeamerfont{interlude-annotation}{size=\large}
+
+\newcounter{enumblock}[page]
+\ExplSyntaxOff
+\newenvironment<>{enumblock}[1]{\renewcommand*{\theenumblock}{\Alph{enumblock}.}\refstepcounter{enumblock}\begin{block}#2{\theenumblock~#1}}{\end{block}}
+\newenvironment<>{enumblock*}[1]{\renewcommand*{\theenumblock}{(\arabic{enumblock})}\refstepcounter{enumblock}\begin{block}#2{\theenumblock~#1}}{\end{block}}
+
+\newcommand{\tikzmark}[2][south]{\tikz[overlay,remember picture] \node[anchor=#1] (#2) {\strut};}
+\usepackage{transparent}
+
+
+\AddToHook{env/columns/begin}{%
+	\setlength\leftmargini{\labelwidth-\labelsep}% spacing adjustment inside the blocks
+}
+
+
+\RenewDocumentCommand{\blockquote}{o+m}{%
+\begingroup%
+\arrayrulecolor{rosenpass-blue}\setlength{\arrayrulewidth}{1pt}%
+\begin{tabular}{|p{\dimexpr\linewidth-\tabcolsep-\arrayrulewidth}@{}}
+#2
+\IfNoValueF{#1}{ \tabularnewline\vskip-\parskip\raggedleft#1}
+\end{tabular}\par
+\endgroup
+}
+
+\usepackage{colortbl}
+
+\usepackage{pdfpc}
+
+\begin{document}
+
+
+
+\maketitle
+
+\input{readme}
+
+\end{document}

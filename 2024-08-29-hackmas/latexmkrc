@@ -1,0 +1,8 @@
+$pdf_mode=4;
+$pdflatex = 'lualatex';
+
+# ensure_path('TEXINPUTS','../tex/');
+# ensure_path('LUAINPUTS','../tex/');
+# ensure_path('OSFONTDIR', '../tex/');
+
+@default_files=("slides.tex");
