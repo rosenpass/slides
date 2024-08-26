@@ -1,5 +1,5 @@
 $pdf_mode=4;
-$pdflatex = 'lualatex';
+$lualatex = 'lualatex -shell-escape';
 
 # ensure_path('TEXINPUTS','../tex/');
 # ensure_path('LUAINPUTS','../tex/');
