@@ -3,6 +3,39 @@
 
 \interlude*<left,leftskip=7cm,>[90]<Tribulations \textasciitilde\ Tooling>{Oh These\\Proof Tools}<Vive la Révolution! Against the Bourgeoisie of Proof Assistants!>
 
+\begin{frame}{In the following slides, you will hear…}
+
+  %$\dots$ and mechanised proofs have not covered this thus far.
+
+  %\vspace{5em}
+
+  \blockquote[Helen Keller (1880-1968) in The Day Language Came into My Life]{
+    Everything had a name, and each name gave birth to a new thought.
+  }
+
+% We do not want to be typecast into people who just do usability or accessibility
+
+% language creates awareness, consciousness
+
+% neces. prerequisite 
+
+% in order to be able to reason mathematically
+
+% math is the process of giving, of express math
+% concepts in the form of language
+% 
+
+% math is something fundamentally kommunikatives
+
+% that's an aspect that mechanised proofs haven't covered thus far
+
+% Everything had a name, and each name gave birth to a new thought.
+% --- Helen Keller (1880-1968) in The Day Language Came into My Life
+
+
+% https://www.pval.org/cms/lib/NY19000481/Centricity/Domain/105/The%20Day%20Language%20Came%20into%20my%20Life.pdf
+
+\end{frame}
 
 
 
@@ -40,6 +73,7 @@
     \end{column}
     \hspace{1.2em}
     \begin{column}{.68\linewidth}
+      \small
 
       Bellare and Rogaway: [BR06]\\
       \hspace{1.618em} many “essentially unverifiable” proofs, “crisis of rigor”\\[1.5em]
@@ -48,7 +82,7 @@
       \hspace{1.618em} some reasons are social, but “our proofs are truly complex”\\[1.5em]
 
       Joseph Jaeger: [ProTeCS 2024, Workshop at Eurocrypt]\\
-      \hspace{1.618em} technical and social reasons\\
+      \hspace{1.618em} technical and social reasons
       \hspace{1.618em} why and for whom do we write proofs?\\[1.5em]%
 
       We'd like to add:\\
@@ -57,5 +91,64 @@
 
       Can proofs become part of a continuous engineering effort?%
     \end{column}
+  \end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Friction \& Frustration for the Working Cryptographer}
+  \hypertarget{friction-frustration}{}
+  \textbf{Tooling}
+  \begin{itemize}
+    \item Syntax highlighting, favorite editor
+    \item Engineering for large models: syntax rewriting, syntactic sugar, macros
+    \item Comfortable tooling to inspect intermediate games (CryptoVerif)
+  \end{itemize}
+  \vspace{1em}
+  \textbf{Documentation:} Often incomplete; step from example to research too big\\[.8em]
+
+  \textbf{Output:} hard to understand for non-experts\\[.8em]
+
+  \textbf{Input Language:} Unintuitive? Inaccessible? Mixed signals!\\[.8em]
+
+  \textbf{Proof Language:} not enough flexibility and leeway compared to pen-and-paper
+  \begin{itemize}
+    \item hand-waving, unsafe blocks
+      % pen-and-paper get way more leeway, mechanized proofs are often all or nothing
+    \item support for incremental process
+  \end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+
+
+\begin{frame}{Rosenpass going Rube-Goldberg}
+  \hypertarget{rosenpass-going-rube-goldberg}{}
+  \begin{columns}[fullwidth,T]
+
+    \begin{column}{.8\linewidth}
+      \includegraphics[height=.85\textheight]{graphics/python-proofs.pdf}
+    \end{column}
+
+    \begin{column}{.2\linewidth}
+      \textbf{Idea:} Build a framework around existing tools
+      \medskip
+
+      \textbf{Keep} expressivity and preciseness
+
+      \medskip
+      \textbf{Generate and parse} their languages
+
+      \medskip
+      \textbf{Open them up} to ecosystems in Python, Lisp, XML
+    \end{column}
+
   \end{columns}
 \end{frame}

@@ -2,7 +2,16 @@
 \hypertarget{state-disruption}{%
 \section{State Disruption}\label{state-disruption}}
 
+\begin{frame}{In the following slides, you will learn…}
+\hypertarget{you-will-learn-hybrid}{}
+  …that denial of service can happen on the level of cryptography protocols!
 
+  \vspace{2em}
+  …that the wall clock is not to be trusted.
+
+  \vspace{2em}
+  …how to accept replay attacks and face them without fear!
+\end{frame}
 
 
 \begin{frame}{What are Non-Interruptability\\and State Disruption Attacks?}
@@ -23,20 +32,23 @@
 \begin{frame}{Retransmission Protection in WireGuard}
 \hypertarget{retransmission-protection-in-wireguard}{}
 \begin{columns}[fullwidth,T]
+
   \begin{column}{.5\linewidth}
-  \rlap{\includegraphics[height=.85\textheight]{graphics/wg-retransmission-protection-bare.pdf}}
+    \vspace{-0.2cm}
+    \rlap{\includegraphics[width=1.08\linewidth,page=3,clip=true,trim=0cm 2cm 0cm 1.9cm]{graphics/rosenpass-attack-types.pdf}}
   \end{column}
+
   \begin{column}{.46\linewidth}
-  \small
+    \vspace{0.4cm} % Manual alignment with blue box in graphic
     \begin{itemize}
-    \item Replay attacks thwarted by counter
-    \item Counter is based on real-time clock
-    \item Responder is semi-stateful (one retransmission at program start may be accepted, but this does not affect protocol security)
-    \item[$\Rightarrow$]
-       WG requires \emph{either} reliable real-time clock \emph{or} stateful initiator
-    \item[$\Rightarrow$]
-      Adversary can attempt replay, but this cannot interrupt a valid handshake by the initiator
-    \item[!] Assumption of reliable system time is invalid in practice!
+      \item Replay attacks thwarted by counter
+      \item Counter is based on real-time clock
+      \item Responder is semi-stateful (one retransmission at program start may be accepted, but this does not affect protocol security)
+      \item[$\Rightarrow$]
+         WG requires \emph{either} reliable real-time clock \emph{or} stateful initiator
+      \item[$\Rightarrow$]
+        Adversary can attempt replay, but this cannot interrupt a valid handshake by the initiator
+      \item[!] Assumption of reliable system time is invalid in practice!
     \end{itemize}
   \end{column}
 \end{columns}
@@ -48,7 +60,8 @@
 \begin{frame}{ChronoTrigger Attack}
 \begin{columns}[fullwidth,T]
   \begin{column}{.5\linewidth}
-          \rlap{\includegraphics[height=.85\textheight]{graphics/chronotrigger-bare.pdf}}
+    \vspace{-0.2cm}
+    \rlap{\includegraphics[width=1.08\linewidth,page=5,clip=true,trim=0cm 2cm 0cm 1.9cm]{graphics/rosenpass-attack-types.pdf}}
   \end{column}
 
   \begin{column}{.46\linewidth}
@@ -112,17 +125,42 @@
 
 \begin{frame}{ChronoTrigger: Changes in Rosenpass}
   \begin{columns}[fullwidth,c]
-    \begin{column}{.64\linewidth}
-      %\includegraphics[keepaspectratio,width=.9\textwidth]{graphics/pqwg-rosenpass-compare.png}
-      \includegraphics[keepaspectratio,width=\linewidth]{graphics/chronotrigger-compare.pdf}
-    \end{column}%
-    \begin{column}{.3\linewidth}
+
+    \begin{column}{.2\linewidth}
+      \vspace{-0.2cm}
+      \rlap{\includegraphics[height=\textheight,page=7,clip=true,trim=0.5cm 0.1cm 13cm 3cm]{graphics/rosenpass-attack-types.pdf}}
+    \end{column}
+
+    \begin{column}{.2\linewidth}
+      \vspace{-0.2cm}
+      \rlap{\includegraphics[height=\textheight,page=7,clip=true,trim=13cm 0.1cm 0.5cm 3cm]{graphics/rosenpass-attack-types.pdf}}
+    \end{column}
+
+    \begin{column}{.56\linewidth}
       \begin{itemize}
-        \item InitHello remains unauthenticated
-        \item PSK used in InitHello exclusively
-        \item Responder state is moved into a cookie called \emph{Biscuit}
+        \item InitHello is unauthenticated because responder still needs to encapsulate secret with initiator key
+        \item Since InitHello is unauthenticated, retransmission protection is impossible
+        \item Responder state is moved into a cookie called \emph{Biscuit}; this renders the responder stateless
+        \item Retransmission of InitHello is now easily possible, but does not lead to a state disruption attack
         \item[$\Rightarrow$] Stateless responder prevents ChronoTrigger attack
       \end{itemize}
     \end{column}
   \end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}{Rosenpass Key Derivation Chain: Spot the Biscuit}
+  \hypertarget{rosenpass-kdf-chain-spot-the-biscuit}{}
+  \centering
+  \includegraphics[height=.85\textheight]{graphics/rosenpass-wp-hashing-tree-rgb.pdf}
+\end{frame}
+
+
+
+
+\begin{frame}{Rosenpass Protocol Messages: Spot the Biscuit}
+  \hypertarget{rosenpass-protocol-messages-spot-the-biscuit}{}
+    \includegraphics[height=.85\textheight]{graphics/rp-messages-04-all-rgb.pdf}
 \end{frame}
