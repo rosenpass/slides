@@ -364,7 +364,179 @@ assert!(nike(sk1, pk2) = nike(pk2, sk1));
  % TODO(karo): Go to https://rosenpass.eu
 \end{frame}
 
-\interlude[2]{Attack-time}
+\interlude[2]<Trials \textasciitilde\ Attacks found>{ChronoTrigger}
+\hypertarget{state-disruption}{%
+\section{State Disruption}\label{state-disruption}}
+
+\begin{frame}{What are Non-Interruptability\\and State Disruption Attacks?}
+  \begin{itemize}
+    \item Attacker trying to perform a protocol-level DOS attack
+    \item Attacker may observe messages
+    \item Attacker may insert messages, but they may not drop or modify messages
+    \item Halfway between an active and passive attacker:
+    \begin{itemize}
+    \item For a fully active attacker state disruption is trivial; they can just drop messages
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Retransmission Protection in WireGuard}
+\hypertarget{retransmission-protection-in-wireguard}{}
+\begin{columns}[fullwidth,T]
+  \begin{column}{.5\linewidth}
+  \rlap{\includegraphics[height=.85\textheight]{graphics/wg-retransmission-protection-bare.pdf}}
+  \end{column}
+  \begin{column}{.46\linewidth}
+  \small
+    \begin{itemize}
+    \item Replay attacks thwarted by counter
+    \item Counter is based on real-time clock
+    \item Responder is semi-stateful (one retransmission at program start may be accepted, but this does not affect protocol security)
+    \item[$\Rightarrow$]
+       WG requires \emph{either} reliable real-time clock \emph{or} stateful initiator
+    \item[$\Rightarrow$]
+      Adversary can attempt replay, but this cannot interrupt a valid handshake by the initiator
+    \item[!] Assumption of reliable system time is invalid in practice!
+    \end{itemize}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{ChronoTrigger Attack}
+\begin{columns}[fullwidth,T]
+  \begin{column}{.5\linewidth}
+          \rlap{\includegraphics[height=.85\textheight]{graphics/chronotrigger-bare.pdf}}
+  \end{column}
+
+  \begin{column}{.46\linewidth}
+    \small\leavevmode
+    \only<+|handout:+>{
+      \begin{enumblock}{Preparation phase:}
+      \begin{enumerate}
+        \item \textbf{Attacker} sets \emph{initiator system time} to a future value
+        \item \textbf{Attacker} records \emph{InitHello} as \emph{KillToken} while both peers are performing a valid handshake
+      \end{enumerate}
+      \end{enumblock}
+\centerline{ \small … both peers are being reset … }
+      \begin{enumblock}{Delayed execution phase:}
+      \begin{enumerate}
+        \item \textbf{Attacker} sends \emph{KillToken} to responder, setting their timestamp to a future value
+        \item[$\Rightarrow$] Initiation now fails again due to timestamp mismatch
+      \end{enumerate}
+      \end{enumblock}
+    }
+
+    \only<+|handout:+>{%
+      \begin{block}{Gaining access to system time:}
+      \begin{itemize}
+        \item Network Time Protocol is insecure,\\
+        Mitigations are of limited use
+        \item[$\Rightarrow$] Break NTP \emph{once}; kill token lasts forever
+      \end{itemize}
+      \unskip
+      \end{block}
+    }
+
+    \only<+|handout:+>{%
+      \leavevmode\begin{block}{Attacker gains}
+      \begin{itemize}
+        \item Extremely cheap protocol-level DOS
+      \end{itemize}
+      \unskip
+      \end{block}
+
+      \begin{block}{Preparation phase, attacker needs:}
+      \begin{itemize}
+        \item Eavesdropping of initiator packets
+        \item Access to system time
+      \end{itemize}
+      \unskip
+      \end{block}
+
+      \begin{block}{Delayed execution, attacker needs:}
+      \begin{itemize}
+        \item No access beyond message transmission to responder
+      \end{itemize}
+      \unskip
+      \end{block}
+      
+}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{ChronoTrigger: Changes in Rosenpass}
+  \begin{columns}[fullwidth,c]
+    \begin{column}{.64\linewidth}
+      %\includegraphics[keepaspectratio,width=.9\textwidth]{graphics/pqwg-rosenpass-compare.png}
+      \includegraphics[keepaspectratio,width=\linewidth]{graphics/chronotrigger-compare.pdf}
+    \end{column}%
+    \begin{column}{.3\linewidth}
+      \begin{itemize}
+        \item InitHello remains unauthenticated
+        \item PSK used in InitHello exclusively
+        \item Responder state is moved into a cookie called \emph{Biscuit}
+        \item[$\Rightarrow$] Stateless responder prevents ChronoTrigger attack
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\hypertarget{section-better-proof-tools}{%
+\section{Section: Better proof tools}\label{section-better-proof-tools}}
+
+\interlude*<left,leftskip=7cm,>[90]<Tribulations \textasciitilde\ Tooling>{Oh These\\Proof Tools}<Vive la Révolution! Against the Bourgeoisie of Proof Assistants!>
+
+\begin{frame}{Symbolic Modeling of Rosenpass}
+\hypertarget{analysis-usability-colorful-proverif-voice}{}
+  \begin{columns}[c]
+    \begin{column}{.5\linewidth}
+     \rlap{\includegraphics[keepaspectratio,height=.85\textheight]{graphics/2023-03-20-symbolic-analysis-screenshot.png}}
+    \end{column}
+	\pause
+    \begin{column}{.5\linewidth}
+    \tikz\node[rectangle,fill opacity=1,fill=white,minimum height=.85\textheight, text width=\linewidth]{
+      \begin{itemize}
+        \item Symbolic modeling using ProVerif
+        \item Proofs treated as part of the codebase
+        \item Uses a model internally that is based on a fairly comprehensive Maximum Exposure Attacks (MEX) variant
+        \item Covers non-interruptability (resistance to disruption attacks)
+        \item Mechanized proof in the computational model is an open issue
+      \end{itemize}};
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Problematic Parts of Pen-and-Paper Proofs}
+\hypertarget{problematic-proofs}{}
+  \begin{columns}[fullwidth,c]
+    \begin{column}{.3\linewidth}
+      \includegraphics[width=\linewidth]{graphics/this-is-fine-crop.png}\\
+      \visible<3->{%
+        \includegraphics[width=\linewidth]{graphics/this-is-not-fine-crop.jpg}%
+      }
+    \end{column}
+    \hspace{1.2em}
+    \begin{column}{.68\linewidth}
+
+      Bellare and Rogaway: [BR06]\\
+      \hspace{1.618em} many “essentially unverifiable” proofs, “crisis of rigor”\\[1.5em]
+
+      Halevi: [Hal05]\\
+      \hspace{1.618em} some reasons are social, but “our proofs are truly complex”\\[1.5em]
+
+      Joseph Jaeger: [ProTeCS 2024, Workshop at Eurocrypt]\\
+      \hspace{1.618em} technical and social reasons\\
+      \hspace{1.618em} why and for whom do we write proofs?\\[1.5em]%
+
+      We'd like to add:\\
+      \hspace{1.618em} pen-and-paper proofs are hard to maintain, update, reuse\\
+      \hspace{1.618em} especially for 3rd parties\\[1.5em]%
+
+      Can proofs become part of a continuous engineering effort?%
+    \end{column}
+  \end{columns}
+\end{frame}
 
 % \begin{frame}{Hybrid Security with WireGuard}
 % \begin{itemize}
@@ -543,32 +715,6 @@ assert!(nike(sk1, pk2) = nike(pk2, sk1));
 %TODO(marei) Can this code be better/more LaTeX-y?
 \interlude[1]<Triumphs \textasciitilde\ Secrecy \& Non-Interruptability>{Modeling of Rosenpass}<Using ProVerif>
 
-\begin{frame}{Symbolic Modeling of Rosenpass}
-\hypertarget{analysis-usability-colorful-proverif-voice}{}
-
-% TODO(marei) We would like some overlay effect, if possible:
-%             column with half-transparent background such that the text is readable
-%             with the image in the background?
-% Marei: Well works … but I'd realle prefer to reduce the screenshot to the minimum if somehow possible.
-  \begin{columns}[c]
-    \begin{column}{.5\linewidth}
-     \rlap{\includegraphics[keepaspectratio,height=.85\textheight]{graphics/2023-03-20-symbolic-analysis-screenshot.png}}
-    \end{column}
-	\pause
-    \begin{column}{.5\linewidth}
-    \tikz\node[rectangle,fill opacity=1,fill=white,minimum height=.85\textheight, text width=\linewidth]{
-      \begin{itemize}
-        \item Symbolic modeling using ProVerif
-        \item Proofs treated as part of the codebase
-        \item Uses a model internally that is based on a fairly comprehensive Maximum Exposure Attacks (MEX) variant
-        \item Covers non-interruptability (resistance to disruption attacks)
-        \item Mechanized proof in the computational model is an open issue
-      \end{itemize}};
-    \end{column}
-  \end{columns}
-
-\end{frame}
-
 % TODO Blipp: Insert example as discussed
 % \begin{frame}{Symbolic modeling: Exposure scenario enumeration}
 % \hypertarget{analysis-usability-colorful-proverif-voice}{}
@@ -578,26 +724,6 @@ assert!(nike(sk1, pk2) = nike(pk2, sk1));
 %   \item Modeling of various exposure scenarious such as ephemeral key and both peer keys being the same key
 % \end{itemize}
 % \end{frame}
-
-\begin{frame}{What are Non-Interruptability\\and State Disruption Attacks?}
-%  \begin{columns}[c]
-%    \begin{column}{.5\textwidth}
-      \begin{itemize}
-        \item Attacker trying to perform a protocol-level DOS attack
-        \item Attacker may observe messages
-        \item Attacker may insert messages, but they may not drop or modify messages
-        \item Halfway between an active and passive attacker:
-        \begin{itemize}
-        \item For a fully active attacker state disruption is trivial; they can just drop messages
-        \end{itemize}
-      \end{itemize}
-%    \end{column}
-%
-%    \begin{column}{.5\textwidth}
-%      % TODO: Blipp: Decoration
-%    \end{column}
-%  \end{columns}
-\end{frame}
 
 \begin{frame}{Non-Interruptability: More Formally}
     For every pair of traces $\mathtt{tmin}, \mathtt{tmax}$ where trace $\mathtt{tmax}$ can be formed by
@@ -675,39 +801,6 @@ assert!(nike(sk1, pk2) = nike(pk2, sk1));
 %   \end{columns}
 % \end{frame}
 
-
-\interlude[2]<Trials \textasciitilde\ Attacks found>{ChronoTrigger}
-
-\hypertarget{state-disruption}{%
-\section{State Disruption}\label{state-disruption}}
-
-
-\begin{frame}{Retransmission Protection in WireGuard}
-\hypertarget{retransmission-protection-in-wireguard}{}
-% :information\_source: (done) Scientific illustration created by Karo
-
-\begin{columns}[fullwidth,T]
-  \begin{column}{.5\linewidth}
-    %             while still allowing for _some_ distance to the slide borders and the text?
-  \rlap{\includegraphics[height=.85\textheight]{graphics/wg-retransmission-protection-bare.pdf}}
-  \end{column}%
-  \begin{column}{.46\linewidth}
-  \small
-    \begin{itemize}
-    \item Replay attacks thwarted by counter
-    \item Counter is based on real-time clock
-    \item Responder is semi-stateful (one retransmission at program start may be accepted, but this does not affect protocol security)
-    \item[$\Rightarrow$]
-       WG requires \emph{either} reliable real-time clock \emph{or} stateful initiator
-    \item[$\Rightarrow$]
-      Adversary can attempt replay, but this cannot interrupt a valid handshake by the initiator
-    \item[!] Assumption of reliable system time is invalid in practice!
-    \end{itemize}
-  \end{column}
-\end{columns}
-
-\end{frame}
-
 \begin{frame}{ChronoTrigger Attack: Immediate Execution}
 \begin{columns}[fullwidth,T]
   \begin{column}{.5\linewidth}
@@ -728,70 +821,6 @@ assert!(nike(sk1, pk2) = nike(pk2, sk1));
         \item[=>] Initiation now fails due to counter mismatch
       \end{enumerate}
       \end{enumblock}
-  \end{column}
-\end{columns}
-\end{frame}
-
-\begin{frame}{ChronoTrigger Attack: Delayed Execution}
-\begin{columns}[fullwidth,T]
-  \begin{column}{.5\linewidth}
-          \rlap{\includegraphics[height=.85\textheight]{graphics/chronotrigger-bare.pdf}}
-  \end{column}
-
-  \begin{column}{.46\linewidth}
-    \small\leavevmode
-    \only<+|handout:+>{
-      \begin{enumblock}{Preparation phase:}
-      \begin{enumerate}
-        \item \textbf{Attacker} sets \emph{initiator system time} to a future value
-        \item \textbf{Attacker} records \emph{InitHello} as \emph{KillToken} while both peers are performing a valid handshake
-      \end{enumerate}
-      \end{enumblock}
-\centerline{ \small … both peers are being reset … }
-      \begin{enumblock}{Delayed execution phase:}
-      \begin{enumerate}
-        \item \textbf{Attacker} sends \emph{KillToken} to responder, setting their timestamp to a future value
-        \item[$\Rightarrow$] Initiation now fails again due to timestamp mismatch
-      \end{enumerate}
-      \end{enumblock}
-    }
-
-    \only<+|handout:+>{%
-      \leavevmode\begin{block}{Attacker gains}
-      \begin{itemize}
-        \item Extremely cheap protocol-level DOS
-      \end{itemize}
-      \unskip
-      \end{block}
-
-      \begin{block}{Preparation phase, attacker needs:}
-      \begin{itemize}
-        \item Eavesdropping of initiator packets
-        \item Access to system time
-      \end{itemize}
-      \unskip
-      \end{block}
-
-      \begin{block}{Delayed execution, attacker needs:}
-      \begin{itemize}
-        \item No access beyond message transmission to responder
-      \end{itemize}
-      \unskip
-      \end{block}
-      
-}
-
-\only<+|handout:+>{%
-
-      \begin{block}{Gaining access to system time:}
-      \begin{itemize}
-        \item Network Time Protocol is insecure,\\
-        Mitigations are of limited use
-        \item[$\Rightarrow$] Break NTP \emph{once}; kill token lasts forever
-      \end{itemize}
-      \unskip
-      \end{block}
-    }
   \end{column}
 \end{columns}
 \end{frame}
@@ -833,23 +862,6 @@ assert!(nike(sk1, pk2) = nike(pk2, sk1));
         \item Replay attack with NTP access from classic WireGuard still applies
       \end{itemize}
       \end{block}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{ChronoTrigger: Changes in Rosenpass}
-  \begin{columns}[fullwidth,c]
-    \begin{column}{.64\linewidth}
-      %\includegraphics[keepaspectratio,width=.9\textwidth]{graphics/pqwg-rosenpass-compare.png}
-      \includegraphics[keepaspectratio,width=\linewidth]{graphics/chronotrigger-compare.pdf}
-    \end{column}%
-    \begin{column}{.3\linewidth}
-      \begin{itemize}
-        \item InitHello remains unauthenticated
-        \item PSK used in InitHello exclusively
-        \item Responder state is moved into a cookie called \emph{Biscuit}
-        \item[$\Rightarrow$] Stateless responder prevents ChronoTrigger attack
-      \end{itemize}
     \end{column}
   \end{columns}
 \end{frame}
@@ -1297,47 +1309,6 @@ Identity hiding + CPU DOS mitig.\\
   \end{columns}
 \end{frame}
 
-\hypertarget{section-better-proof-tools}{%
-\section{Section: Better proof tools}\label{section-better-proof-tools}}
-
-\interlude*<left,leftskip=7cm,>[90]<Tribulations \textasciitilde\ Tooling>{Oh These\\Proof Tools}<Vive la Révolution! Against the Bourgeoisie of Proof Assistants!>
-
-\begin{frame}{Problematic Parts of Pen-and-Paper Proofs}
-\hypertarget{problematic-proofs}{}
-  \begin{columns}[fullwidth,c]
-    \begin{column}{.3\linewidth}
-      \includegraphics[width=\linewidth]{graphics/this-is-fine-crop.png}\\
-      \visible<3->{%
-        \includegraphics[width=\linewidth]{graphics/this-is-not-fine-crop.jpg}%
-      }
-    \end{column}
-    \hspace{1.2em}
-    \begin{column}{.68\linewidth}
-
-      Bellare and Rogaway: [BR06]\\
-      \hspace{1.618em} many “essentially unverifiable” proofs, “crisis of rigor”\\[1.5em]
-
-      Halevi: [Hal05]\\
-      \hspace{1.618em} some reasons are social, but “our proofs are truly complex”\\[1.5em]
-
-      \visible<2->{%
-        Joseph Jaeger: [ProTeCS 2024, Workshop at Eurocrypt]\\
-        \hspace{1.618em} technical and social reasons\\
-        \hspace{1.618em} why and for whom do we write proofs?\\[1.5em]%
-      }%
-
-      \visible<3->{%
-        We'd like to add:\\
-        \hspace{1.618em} pen-and-paper proofs are hard to maintain, update, reuse\\
-        \hspace{1.618em} especially for 3rd parties\\[1.5em]%
-      }%
-
-      \visible<3->{%
-        Can proofs become part of a continuous engineering effort?%
-      }
-    \end{column}
-  \end{columns}
-\end{frame}
 
 \begin{frame}{Tools to the Table!}
 Bellare and Rogaway [BR06], Halevi [Hal05]:\\
