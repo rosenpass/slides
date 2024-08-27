@@ -4,26 +4,66 @@
 
 \begin{frame}{In the following slides, you will learn…}
 \hypertarget{you-will-learn-hybrid}{}
-  …that denial of service can happen on the level of cryptography protocols!
+\begin{columns}[fullwidth]
+  \begin{column}{.58\linewidth}
+    …that denial of service can happen on the level of cryptography protocols!
 
-  \vspace{2em}
-  …that the wall clock is not to be trusted.
+    \vspace{2em}
+    …that the wall clock is not to be trusted.
 
-  \vspace{2em}
-  …how to accept replay attacks and face them without fear!
+    \vspace{2em}
+    …how to accept replay attacks and face them without fear!
+  \end{column}
+  \begin{column}{.20\linewidth}
+    \includegraphics[width=\linewidth]{graphics/big-ben.jpg}
+    \vspace{0.4cm}
+  \end{column}
+  \begin{column}{.20\linewidth}
+    \vspace{1.6cm}
+    \includegraphics[width=\linewidth]{graphics/sad-bunny-looking-left.jpg}
+  \end{column}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}{What are Non-Interruptability\\and State Disruption Attacks?}
-  \begin{itemize}
-    \item Attacker trying to perform a protocol-level DOS attack
-    \item Attacker may observe messages
-    \item Attacker may insert messages, but they may not drop or modify messages
-    \item Halfway between an active and passive attacker:
-    \begin{itemize}
-    \item For a fully active attacker state disruption is trivial; they can just drop messages
-    \end{itemize}
-  \end{itemize}
+\begin{frame}{What are State Disruption Attacks?}
+  \raisebox{0pt}[0pt][0pt]{
+    \begin{minipage}{\textwidth}
+      \vspace{2.2cm}
+      \begin{columns}[T,fullwidth]
+        \begin{column}{.325\linewidth}
+          \reflectbox{\includegraphics[width=0.9\linewidth,height=.454\textheight,padding=0cm 0cm .5cm 3cm,right,clip,trim={0cm 16cm 0cm 40cm}]{graphics/bunny-2.jpg}}
+        \end{column}
+        \begin{column}{.35\linewidth}
+          \centering
+          \includegraphics[width=0.9\linewidth,height=.85\textheight,trim={7cm 38cm 5cm 10cm},clip]{graphics/wires.jpg}
+        \end{column}
+        \begin{column}{.325\linewidth}
+          \includegraphics[width=0.9\linewidth,padding=0cm 0cm 0cm 0cm]{graphics/bunny-3.jpg}
+        \end{column}
+      \end{columns}
+    \end{minipage}
+  }
+  \raisebox{0pt}[0pt][0pt]{
+    \begin{minipage}{\textwidth}
+      \centering
+      \vspace{0.7cm}
+      \hspace{1.3cm}\tikz\node[rectangle,fill opacity=1,fill=white,minimum height=4em, text width=0.38\linewidth]{
+        \Large
+        \hspace{0.1cm}Protocol level DOS
+      };
+    \end{minipage}
+  }
+
+  % \begin{itemize}
+  %   \item Attacker trying to perform a protocol-level DOS attack
+  %   \item Attacker may observe messages
+  %   \item Attacker may insert messages, but they may not drop or modify messages
+  %   \item Halfway between an active and passive attacker:
+  %   \begin{itemize}
+  %   \item For a fully active attacker state disruption is trivial; they can just drop messages
+  %   \end{itemize}
+  % \end{itemize}
 \end{frame}
 
 
