@@ -1,7 +1,5 @@
 \interlude[0]{The design of Rosenpass \\ \vspace{0.8em} \small and how to build post-quantum protocols}
-\hypertarget{rosenpass}{
-  \section{The design of Rosenpass}\label{rosenpass}
-}
+\section{The design of Rosenpass}
 
 
 
@@ -9,7 +7,6 @@
 % I would like to visually distinguish these slides from the content and achieve a bit of a "floating in thin" are
 % effect before grounding the theses in context in the next slides
 \begin{frame}{In the following slides, you will learn…}
-\hypertarget{you-will-lean-post-quantum}{}
   \begin{columns}[c]
     \begin{column}{.40\linewidth}
       \includegraphics[width=.6\linewidth,right,padding=-.2cm .2cm 0cm .2cm]{graphics/bunny-looking-at-camera.jpg}
@@ -34,7 +31,6 @@
 
 
 \begin{frame}{Glossary: Post-quantum security}
-\hypertarget{pqc-glossary}{}
 \vspace{-\ht\strutbox}
   \begin{columns}[t]
     \begin{column}{.30\linewidth}
@@ -88,7 +84,6 @@
 
 
 \begin{frame}{What post-quantum got}
-\hypertarget{pq-got}{}
   \centering
   \includegraphics[width=\linewidth,page=1,clip=true,trim=1cm 1cm 0cm 3cm]{graphics/rosenpass-key-exchanges-nike-kem.pdf}
 \end{frame}
@@ -98,7 +93,6 @@
 
 
 \begin{frame}[fragile,t]{NIKEs and KEMs}
-\hypertarget{nike-kem-2}{}
   \vspace{-1.5em}
   \begin{columns}[t]
     \begin{column}{.5\linewidth}
@@ -160,7 +154,6 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
 
 
 \begin{frame}[fragile,t]{NIKEs and KEMs: Key exchange}
-\hypertarget{nike-kem-3}{}
   \vspace{-1.5em}
   \begin{columns}[t]
     \begin{column}{.5\linewidth}
@@ -198,7 +191,6 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
 
 
 \begin{frame}[fragile,t]{NIKEs and KEMs}
-\hypertarget{nike-kem-1}{}
   \vspace{-1.5em}
   \begin{columns}[t]
     \begin{column}{.5\linewidth}
@@ -253,7 +245,6 @@ fn test<N: Nike>() {
 
 
 \begin{frame}{Rosenpass Kex Exchange Parts}
-  \hypertarget{rosenpass-flow}{}
   \centering
   \includegraphics[width=.9\linewidth,page=6,clip=true,trim=1cm 4cm 0cm 2cm]{graphics/rosenpass-key-exchanges-nike-kem.pdf}
 \end{frame}
@@ -262,7 +253,6 @@ fn test<N: Nike>() {
 
 
 % \begin{frame}{Rosenpass Unified Key Exchange}
-%   \hypertarget{rosenpass-flow-unified}{}
 %   \centering
 %   \begin{columns}[fullwidth,c]
 %     \begin{column}{.6\linewidth}
@@ -280,7 +270,6 @@ fn test<N: Nike>() {
 
 
 \begin{frame}{Rosenpass Protocol Features}
-\hypertarget{the-rosenpass-protocol-1}{}
   \begin{columns}[fullwidth,c]
     \begin{column}{.6\linewidth}
       \includegraphics[width=\linewidth]{graphics/rosenpass-wp-key-exchange-protocol-rgb.pdf}

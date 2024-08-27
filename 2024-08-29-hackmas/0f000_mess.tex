@@ -28,7 +28,6 @@
 % \end{frame}
 
 % \begin{frame}{Rosenpass Usability Goals}
-% \hypertarget{rosenpass-usability-goals}{}
 % % :information\_source: (done) Insert infographic kem value naming scheme
 % % (sski/spki/\ldots)
 % % :information\_source: (done) Insert Infographic ID naming
@@ -82,7 +81,6 @@
 % \end{frame}
 
 \begin{frame}{Rosenpass and WireGuard: Advanced Security}
-\hypertarget{wireguard-advanced-security-properties}{}
 \vspace{-\ht\strutbox}
 \begin{columns}[fullwidth,T]
   \begin{column}{.49\linewidth}
@@ -129,7 +127,6 @@
 \end{frame}
 
 % \begin{frame}{Rosenpass Security Properties}
-% \hypertarget{rosenpass-security-properties}{}
 
 % % TODO(blipp) Make this look more balanced
 % % TODO(marei) can the items start further on the left, i.e., no padding on the left?
@@ -181,7 +178,6 @@
 
 % TODO Blipp: Insert example as discussed
 % \begin{frame}{Symbolic modeling: Exposure scenario enumeration}
-% \hypertarget{analysis-usability-colorful-proverif-voice}{}
 % \begin{itemize}
 %   \item Covers a broad range of exposure scenarious
 %   \item Plain listing of minimum conditions for secrecy of the output key to hold
@@ -214,7 +210,6 @@
   % && event(RHSent(ih, rh, psk, sskr, kem_pub(sski)))
   % && event(ICSent(rh, ic, psk, sski, kem_pub(sskr))).
 % \begin{frame}{Symbolic modeling: Non-Interruptability}
-% \hypertarget{analysis-usability-colorful-proverif-voice}{}
 % \begin{itemize}
 %   \item Non-Interruptability is security from disruption attacks
 %   \item 
@@ -224,7 +219,6 @@
 
 
 % \begin{frame}{Rosenpass Security Analysis}
-% \hypertarget{rosenpass-security-analysis}{}
 % % TODO(marei) see line below
 % % :information\_source: Insert proverif in technicolor screenshot in
 % % the right side. Cut off. Clearly marked as decoration
@@ -290,7 +284,6 @@
 \end{frame}
 
 \begin{frame}{ChronoTrigger: Changes in Post-Quantum WG}
-\hypertarget{wireguard-and-post-quantum-wireguard}{}
   \begin{columns}[fullwidth,T]
     \begin{column}{.5\linewidth}
       \rlap{\includegraphics[height=.85\textheight]{graphics/chronotrigger-compare-wg-pqwg.pdf}}
@@ -333,7 +326,6 @@
 \interlude[3]<Trials \textasciitilde\ Attacks found>{CookieCutter}
 
 \begin{frame}{CookieCutter Attack}
-\hypertarget{cookiecutter-attack}{}
 \only<+|handout:+>{
     \begin{columns}[fullwidth,c]
       \begin{column}{.5\linewidth}
@@ -446,7 +438,6 @@
 % \end{frame}
 
 % \begin{frame}{CookieCutter: Post-Quantum WireGuard and Rosenpass}
-% \hypertarget{post-quantum-wireguard-and-rosenpass}{}
 %   \begin{columns}[c]
 %     \begin{column}{.4\textwidth}
 %       \includegraphics[keepaspectratio,width=.9\textwidth]{graphics/pqwg-rosenpass-compare.png}
@@ -477,7 +468,6 @@
 
 
 % \begin{frame}{ChronoTrigger Protocol Comparison}
-% \hypertarget{chronotrigger-protocol-comparison}{}
 % % :information\_source: (done) Dedicated scientific illustration
 
 % % TODO(marei) see line below
@@ -535,7 +525,6 @@
 \interlude[4]<Trials \textasciitilde\ Advanced Security Properties>{Knock Patterns}
 
 \begin{frame}{Rosenpass and WireGuard: Advanced Security}
-\hypertarget{wireguard-advanced-security-properties}{}
 \vspace*{-\baselineskip}
 \small
 \begin{columns}[fullwidth,T]
@@ -578,7 +567,6 @@
 \end{frame}
 
 % \begin{frame}{Rosenpass Advanced Security Properties}
-% \hypertarget{rosenpass-advanced-security-properties}{}
 % % :information\_source: (done) Insert protocol time diagram on left side
 
 %   \begin{columns}[c]
@@ -798,7 +786,6 @@ They mostly help the \emph{formal verification experts} to:
 
 
 %\begin{frame}{Pen and Paper proofs}
-%\hypertarget{pen-and-paper-proofs}{}
 %
 %% Karo talk:
 %% * proof should be part of the engineering effort
@@ -842,7 +829,6 @@ They mostly help the \emph{formal verification experts} to:
 %
 %
 %\begin{frame}{ProVerif}
-%\hypertarget{proverif}{}
 %% :information\_source: Insert screen-shot of our ProVerif analysis
 %
 %% :information\_source: Cut off screen-shot of our code
@@ -875,7 +861,6 @@ They mostly help the \emph{formal verification experts} to:
 %\end{frame}
 %
 %\begin{frame}{CryptoVerif}
-%\hypertarget{cryptoverif}{}
 %% :information\_source: Insert screen-shot of HPKE or WG analysis by
 %% blipp
 %
@@ -903,7 +888,6 @@ They mostly help the \emph{formal verification experts} to:
 %\end{frame}
 %
 %\begin{frame}{Tamarin}
-%\hypertarget{tamarin}{}
 %% :information\_source: Insert screen-shot of horn clause in text
 %
 %\begin{itemize}
@@ -918,7 +902,6 @@ They mostly help the \emph{formal verification experts} to:
 %\end{frame}
 %
 %\begin{frame}{EasyCrypt}
-%\hypertarget{easycrypt}{}
 %% :information\_source: Insert screen-shot of nice EC code
 %
 %\begin{itemize}
@@ -951,7 +934,6 @@ They mostly help the \emph{formal verification experts} to:
 %\end{frame}
 %
 %\begin{frame}{Protocol proof approaches}
-%\hypertarget{protocol-proof-approaches}{}
 %\begin{itemize}
 %\item
 %  Pen and paper proofs are hard to vet and error prone
@@ -997,7 +979,6 @@ They mostly help the \emph{formal verification experts} to:
 %\end{frame}
 %
 %\begin{frame}{Protocol proof approaches}
-%\hypertarget{protocol-proof-approaches-1}{}
 %% :information\_source: Center text, no decorations (i.e.~no top bar),
 %% big letters.
 %
@@ -1005,7 +986,6 @@ They mostly help the \emph{formal verification experts} to:
 %\end{frame}
 %
 %\begin{frame}{Oracle declarations in the Rosenpass ProVerif model}
-%\hypertarget{oracle-declarations-in-the-rosenpass-proverif-model}{}
 %% :information\_source: Screen shot of one verbose oracle declaration
 %in the Rosenpass symbolic model
 %
@@ -1036,8 +1016,7 @@ They mostly help the \emph{formal verification experts} to:
 %\end{frame}
 
 
-\hypertarget{section-epilogue}{%
-\section{Section: Epilogue}\label{section-epilogue}}
+\section{Section: Epilogue}
 
 \interlude[6]{Epilogue}
 
@@ -1045,11 +1024,10 @@ They mostly help the \emph{formal verification experts} to:
 \setbeamertemplate{background canvas}{\vbox to .9\paperheight {\vspace*{\fill}\transparent{.1}\makebox[\paperwidth][c]{\includegraphics[width=\linewidth]{graphics/wireguard-and-rp-bunny-rose.png}}}}
 
 \begin{frame}{Conclusion}
-\hypertarget{conclusion}{}
 \vspace{-\ht\strutbox}
   \begin{columns}[t]
     \begin{column}{.30\linewidth}
-      \begin{block}{Rosenpass\hypertarget{rosenpass-1}{}\strut}
+      \begin{block}{Rosenpass\strut}
       \begin{itemize}
       \item
         Post-quantum secure AKE
@@ -1064,7 +1042,7 @@ They mostly help the \emph{formal verification experts} to:
     \end{column}
 
     \begin{column}{.33\linewidth}
-      \begin{block}{Protocol Findings\hypertarget{protocol-finding}{}\strut}
+      \begin{block}{Protocol Findings\strut}
       \begin{itemize}
       \item
         \textbf{CookieCutter}: DOS exploiting WireGuard cookie mechanism
@@ -1078,7 +1056,7 @@ They mostly help the \emph{formal verification experts} to:
     \end{column}
 
     \begin{column}{.36\linewidth}
-      \begin{block}{Talk To Us\hypertarget{talk-to-us}{}\strut}
+      \begin{block}{Talk To Us\strut}
       \begin{itemize}
       \item
         About why we should use Tamarin (or SAPIC+?) over ProVerif
@@ -1099,7 +1077,6 @@ They mostly help the \emph{formal verification experts} to:
 
 
 \begin{frame}{Rosenpass going Rube-Goldberg: The Details}
-\hypertarget{rosenpass-going-rube-goldberg-details}{}
 % :information\_source: Architecture diagram of python based proofs
 
 % :information\_source: Scale graphic to allow for points
