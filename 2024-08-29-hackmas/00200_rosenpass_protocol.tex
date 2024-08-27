@@ -89,7 +89,7 @@
 
 \begin{frame}[fragile,T]{NIKEs and KEMs}
   \begin{columns}[t,fullwidth]
-    \begin{column}{.5\linewidth}
+    \begin{column}{.49\linewidth}
 \begin{rustblock}{Key Encapsulation Method}
 fn Kem::encaps(Pk) -> (Shk, Ct);
 fn Kem::decaps(Pk, Ct) -> Shk;
@@ -108,8 +108,8 @@ assert!(decaps(sk, ct) = shk)
             (assuming they have the shared key, they must
             also have their secret key)
         \end{itemize}
-    \end{column}%
-    \begin{column}{.5\linewidth}
+    \end{column}\hfill
+    \begin{column}{.49\linewidth}
 \begin{rustblock}{Non Interactive Key Exchange}
 fn nike(sk: Sk, pk: Pk) -> Shk;
 
@@ -137,10 +137,9 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
 
 
 
-\begin{frame}[fragile,t]{NIKEs and KEMs: Key exchange}
-  \vspace{-1.5em}
-  \begin{columns}[t]
-    \begin{column}{.5\linewidth}
+\begin{frame}[fragile,T]{NIKEs and KEMs: Key exchange}
+  \begin{columns}[t,fullwidth]
+    \begin{column}{.49\linewidth}
       \begin{block}{Key Encapsulation Method}
         % TODO(marei): Can you fix this?
         \begin{description}
@@ -154,8 +153,8 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
         \end{description}
       \end{block}
     \end{column}
-
-    \begin{column}{.5\linewidth}
+\hfill
+    \begin{column}{.49\linewidth}
       \begin{block}{Non Interactive Key Exchange}
         \begin{description}[leftmargin=0cm]
           \item[\textbf{Responder Authentication}:] Static-static NIKE since NIKE gives mutual authentication.
