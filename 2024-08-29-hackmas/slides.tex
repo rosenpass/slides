@@ -1,4 +1,4 @@
-\documentclass{rosenpass-beamer}
+\documentclass[aspectratio=169]{rosenpass-beamer}
 
 \usepackage[english]{babel}
 \usepackage[autostyle]{csquotes}
@@ -6,8 +6,27 @@
 \usepackage{tikzsymbols}
 \usepackage{pgfornament}
 \usetikzlibrary{calc}
-\usepackage{minted}
 \usepackage[export]{adjustbox}
+\usepackage{minted}
+\tcbuselibrary{minted}
+
+\makeatletter
+ \newenvironment{rustblock}[2][]
+    {\VerbatimEnvironment
+    \begin{block}{#2}
+      \let\FVB@VerbatimOut\minted@FVB@VerbatimOut
+      \let\FVE@VerbatimOut\minted@FVE@VerbatimOut
+      \minted@configlang{rust}%
+      \setkeys{minted@opt@cmd}{fontsize=\small,#1}%
+      \minted@fvset
+      \begin{VerbatimOut}[codes={\catcode`\^^I=12},firstline,lastline]{\minted@jobname.pyg}}%
+    {\end{VerbatimOut}%
+        \minted@langlinenoson
+        \expandafter\minted@pygmentize\expandafter{\minted@lang}%
+        \minted@langlinenosoff%
+        \end{block}%
+        }
+\makeatother
 
 \usetikzlibrary{positioning,decorations.pathreplacing,svg.path}
 
@@ -98,6 +117,7 @@
 
 \AddToHook{env/columns/begin}{%
 	\setlength\leftmargini{\labelwidth-\labelsep}% spacing adjustment inside the blocks
+ 	\setbeamertemplate{block begin}[rosenpass]
 }
 
 
@@ -114,6 +134,23 @@
 \usepackage{colortbl}
 
 \usepackage{pdfpc}
+
+% test to adjust column spacing
+    \defbeamertemplate{block begin}{rosenpass}
+    {%
+      \begin{beamercolorbox}[colsep*=.75ex]{block title}
+        \usebeamerfont*{block title}\insertblocktitle%
+      \end{beamercolorbox}%
+      {\parskip0pt\par}%
+      \ifbeamercolorempty[bg]{block title}
+      {}
+      {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+      \usebeamerfont{block body}%
+      \begin{beamercolorbox}[colsep*=.75ex,vmode]{block body}%
+        \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+    }
+
+
 
 \begin{document}
 

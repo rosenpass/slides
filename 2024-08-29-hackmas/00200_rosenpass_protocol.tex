@@ -1,11 +1,6 @@
 \interlude[0]{The design of Rosenpass \\ \vspace{0.8em} \small and how to build post-quantum protocols}
 \section{The design of Rosenpass}
 
-
-
-% TODO(marei): Can we make the "you will learn" slides not have a dark bar on the top?
-% I would like to visually distinguish these slides from the content and achieve a bit of a "floating in thin" are
-% effect before grounding the theses in context in the next slides
 \begin{frame}[light]{In the following slides, you will learn…}
   \begin{columns}[c]
     \begin{column}{.40\linewidth}
@@ -96,16 +91,13 @@
   \vspace{-1.5em}
   \begin{columns}[t]
     \begin{column}{.5\linewidth}
-      \begin{block}{Key Encapsulation Method}
-
-        \small
-        \begin{minted}{rust}
+\begin{rustblock}{Key Encapsulation Method}
 fn Kem::encaps(Pk) -> (Shk, Ct);
 fn Kem::decaps(Pk, Ct) -> Shk;
 
 (shk, ct) = encaps(pk);
 assert!(decaps(sk, ct) = shk)
-        \end{minted}  
+\end{rustblock}
         \vspace{1em}
         Think of it a encrypting a key and sending it
         to the partner.
@@ -117,19 +109,14 @@ assert!(decaps(sk, ct) = shk)
             (assuming they have the shared key, they must
             also have their secret key)
         \end{itemize}
-      \end{block}
     \end{column}
 
     \begin{column}{.5\linewidth}
-      \begin{block}{Non Interactive Key Exchange}
-        \small
-        \begin{minted}{rust}
+\begin{rustblock}{Non Interactive Key Exchange}
 fn nike(sk: Sk, pk: Pk) -> Shk;
 
 assert!(nike(sk1, pk2) = nike(sk2, pk1));
-
-
-        \end{minted}  
+\end{rustblock}
 
         % TODO(marei): Can you align these using latex instead of empty lines above?
         \vspace{1em}
@@ -144,7 +131,6 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
             (for each party: assuming they have the shared key, they must
             also have their secret key)
         \end{itemize}
-      \end{block}
     \end{column}
 
   \end{columns}
@@ -194,10 +180,7 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
   \vspace{-1.5em}
   \begin{columns}[t]
     \begin{column}{.5\linewidth}
-      \begin{block}{Key Encapsulation Method}
-
-        \small
-        \begin{minted}{rust}
+\begin{rustblock}{Key Encapsulation Method}
 trait Kem {
   // Secret, Public, Symmetric, Ciphertext
   type Sk; type Pk; type Shk; type Ct;
@@ -212,14 +195,11 @@ fn test<K: Kem>() {
   let shk2 = K::decaps(sk, ct);
   assert_eq!(shk1, shk2);
 }
-        \end{minted}  
-      \end{block}
+\end{rustblock}
     \end{column}
 
     \begin{column}{.5\linewidth}
-      \begin{block}{Non Interactive Key Exchange}
-        \small
-        \begin{minted}{rust}
+\begin{rustblock}{Non Interactive Key Exchange}
 trait Nike {
   // Secret, Public, Symmetric
   type Sk; type Pk; type Shk;
@@ -234,8 +214,7 @@ fn test<N: Nike>() {
   let ct2 = N::nike(sk2, pk1);
   assert_eq!(ct1, ct2);
 }
-        \end{minted}  
-      \end{block}
+\end{rustblock}
     \end{column}
 
   \end{columns}
