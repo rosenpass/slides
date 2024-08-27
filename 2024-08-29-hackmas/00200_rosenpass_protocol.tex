@@ -10,7 +10,7 @@
     \end{column}
 
     \begin{column}{.60\linewidth}
-      …that most cryprographic applications today are susceptible against attacks from quantum computers.
+      …that most cryptographic applications today are susceptible against attacks from quantum computers.
 
       \vspace{2em}
       …that this is not fundamental to cryptography, but that pre-quantum protocols are simply a more efficient.
@@ -25,9 +25,9 @@
 
 
 
-\begin{frame}{Glossary: Post-quantum security}
-\vspace{-\ht\strutbox}
-  \begin{columns}[t]
+\begin{frame}[T]{Glossary: Post-quantum security}
+\small
+  \begin{columns}[t,fullwidth]
     \begin{column}{.30\linewidth}
       \begin{block}{Pre-quantum Cryptography is… \strut}
 
@@ -42,8 +42,8 @@
       \end{itemize}
       \end{block}
     \end{column}
-
-    \begin{column}{.33\linewidth}
+\hfill
+    \begin{column}{.3\linewidth}
       \begin{block}{Post-quantum cryptography is…}
 
         …not susceptible to attacks from quantum computers.
@@ -58,7 +58,7 @@
       \end{itemize}
       \end{block}
     \end{column}
-
+\hfill
     \begin{column}{.36\linewidth}
       \begin{block}{Hybrid cryptography combines…}
         …the combination of the previous two. It is…
@@ -97,32 +97,32 @@ fn Kem::decaps(Pk, Ct) -> Shk;
 (shk, ct) = encaps(pk);
 assert!(decaps(sk, ct) = shk)
 \end{rustblock}
-        \vspace{1em}
-        Think of it a encrypting a key and sending it
+\end{column}\hfill
+\begin{column}{.49\linewidth}
+\begin{rustblock}{Non Interactive Key Exchange}
+fn nike(sk: Sk, pk: Pk) -> Shk;
+
+assert!(nike(sk1, pk2) = nike(sk2, pk1));
+\end{rustblock}
+\end{column}
+\end{columns}
+\begin{columns}[t,fullwidth]
+\begin{column}{.49\linewidth}
+  Think of it a encrypting a key and sending it
         to the partner.
 
-        \vspace{0.7em}
         \begin{itemize}
           \item Secrecy
           \item Implicit authentication of recipient
             (assuming they have the shared key, they must
             also have their secret key)
         \end{itemize}
-    \end{column}\hfill
-    \begin{column}{.49\linewidth}
-\begin{rustblock}{Non Interactive Key Exchange}
-fn nike(sk: Sk, pk: Pk) -> Shk;
-
-assert!(nike(sk1, pk2) = nike(sk2, pk1));
-\end{rustblock}
-
-        % TODO(marei): Can you align these using latex instead of empty lines above?
-        \vspace{1em}
+\end{column}\hfill
+\begin{column}{.49\linewidth}
         Aka. Diffie-Hellman.
         I don't know a good analogy, but ote how the
         keypairs are \emph{crossing over} to each other.
 
-        \vspace{0.7em}
         \begin{itemize}
           \item Secrecy
           \item Mutual authentication
@@ -130,7 +130,6 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
             also have their secret key)
         \end{itemize}
     \end{column}
-
   \end{columns}
 \end{frame}
 
@@ -141,8 +140,7 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
   \begin{columns}[t,fullwidth]
     \begin{column}{.49\linewidth}
       \begin{block}{Key Encapsulation Method}
-        % TODO(marei): Can you fix this?
-        \begin{description}
+        \begin{description}[]
           \item[\textbf{Responder Authentication}:] Initiator encapsulates key under the responder public key.
           \item[\textbf{Initiator Authentication}:] Responder encapsulates key under the initiator public key.
           \item[\textbf{Forward-secrecy}:] In case the secret keys get stolen, either party generates a temporary
@@ -156,7 +154,7 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
 \hfill
     \begin{column}{.49\linewidth}
       \begin{block}{Non Interactive Key Exchange}
-        \begin{description}[leftmargin=0cm]
+        \begin{description}[]
           \item[\textbf{Responder Authentication}:] Static-static NIKE since NIKE gives mutual authentication.
           \item[\textbf{Initiator Authentication}:] Static-static NIKE since NIKE gives mutual authentication.
           \item[\textbf{Forward-secrecy}:] Another nike, involving a temporary keypair.
