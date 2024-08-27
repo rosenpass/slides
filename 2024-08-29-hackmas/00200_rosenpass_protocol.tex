@@ -87,9 +87,8 @@
 
 
 
-\begin{frame}[fragile,t]{NIKEs and KEMs}
-  \vspace{-1.5em}
-  \begin{columns}[t]
+\begin{frame}[fragile,T]{NIKEs and KEMs}
+  \begin{columns}[t,fullwidth]
     \begin{column}{.5\linewidth}
 \begin{rustblock}{Key Encapsulation Method}
 fn Kem::encaps(Pk) -> (Shk, Ct);
@@ -109,8 +108,7 @@ assert!(decaps(sk, ct) = shk)
             (assuming they have the shared key, they must
             also have their secret key)
         \end{itemize}
-    \end{column}
-
+    \end{column}%
     \begin{column}{.5\linewidth}
 \begin{rustblock}{Non Interactive Key Exchange}
 fn nike(sk: Sk, pk: Pk) -> Shk;
@@ -176,9 +174,8 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
 
 
 
-\begin{frame}[fragile,t]{NIKEs and KEMs}
-  \vspace{-1.5em}
-  \begin{columns}[t]
+\begin{frame}[fragile,T]{NIKEs and KEMs}
+  \begin{columns}[t,fullwidth]
     \begin{column}{.5\linewidth}
 \begin{rustblock}{Key Encapsulation Method}
 trait Kem {
@@ -196,8 +193,7 @@ fn test<K: Kem>() {
   assert_eq!(shk1, shk2);
 }
 \end{rustblock}
-    \end{column}
-
+    \end{column}%
     \begin{column}{.5\linewidth}
 \begin{rustblock}{Non Interactive Key Exchange}
 trait Nike {
