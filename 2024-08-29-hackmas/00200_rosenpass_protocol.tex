@@ -3,10 +3,10 @@
 
 \begin{frame}[light]{}
   \vspace{1cm}
-  \begin{columns}[c]
-    \large
-    \vollkorn
+  \large
+  \vollkorn
 
+  \begin{columns}[c]
     \begin{column}{.30\linewidth}
       \includegraphics[width=.6\linewidth,right,padding=-.2cm .2cm 0cm .2cm]{graphics/bunny-looking-at-camera.jpg}
       \par
@@ -16,29 +16,25 @@
     \begin{column}{.40\linewidth}
       %Most cryptographic applications today are susceptible against attacks from quantum computers.
 
-      %\vspace{2em}
+      %\vfil
       %There is no fundamental reason for this – post-quantum cryptography can do many things pre-quantum crypto can do.
 
       In the following slides you will learn…
-
-      \vspace{2em}
+      \vfil
       …that, to a crypto protocol designer, post-quantum cryptography is not much more than a subtle difference in function interface.
     \end{column}
   \end{columns}
 \end{frame}
 
-
-
-
 \begin{frame}[T]{Glossary: Post-quantum security}
 \small
   \begin{columns}[t,fullwidth]
     \begin{column}{.30\linewidth}
-      \begin{block}{Pre-quantum Cryptography is… \strut}
+      \begin{block}{Pre-quantum cryptography is… }
 
       …susceptible to attacks from quantum computers.
 
-      \vspace{0.5em}
+\bigskip
       \begin{itemize}
         \item Specifically, to \emph{Shor's Algorithm} % TODO(karolin): Citation needed
         \item Quite fast
@@ -53,7 +49,7 @@
 
         …not susceptible to attacks from quantum computers.
 
-      \vspace{0.5em}
+\bigskip
       \begin{itemize}
         \item generally less efficient.
         \item much bigger ciphertexts.
@@ -64,12 +60,11 @@
       \end{block}
     \end{column}
 \hfill
-    \begin{column}{.36\linewidth}
+    \begin{column}{.3\linewidth}
       \begin{block}{Hybrid cryptography combines…}
         …the combination of the previous two. It is…
 
-
-        \vspace{0.3em}
+\bigskip
         \begin{itemize}
           \item about as inefficient as post-quantum cryptography.
           \item not widely adopted, which is a major problem.
@@ -84,17 +79,14 @@
 
 
 \begin{frame}{What post-quantum got}
-  \centering
-  \includegraphics[width=\linewidth,page=1,clip=true,trim=1cm 1cm 0cm 3cm]{graphics/rosenpass-key-exchanges-nike-kem.pdf}
+  \includegraphics[width=\linewidth,page=1,clip=true,trim=39 314 39 85]{rosenpass-key-exchanges-nike-kem}
 \end{frame}
 
 
 
-
-
-\begin{frame}[fragile,T]{NIKEs and KEMs}
+\begin{frame}[fragile,T]{KEMs and NIKEs}
   \begin{columns}[t,fullwidth]
-    \begin{column}{.49\linewidth}
+    \begin{column}{.48\linewidth}
 \begin{rustblock}{Key Encapsulation Method}
 fn Kem::encaps(Pk) -> (Shk, Ct);
 fn Kem::decaps(Pk, Ct) -> Shk;
@@ -110,10 +102,10 @@ fn nike(sk: Sk, pk: Pk) -> Shk;
 assert!(nike(sk1, pk2) = nike(sk2, pk1));
 \end{rustblock}
 \end{column}
-\end{columns}
+\end{columns}\hfill
 \begin{columns}[t,fullwidth]
-\begin{column}{.49\linewidth}
-        Think of it as encrypting a key and sending it
+\begin{column}{.48\linewidth}
+  Think of it a encrypting a key and sending it
         to the partner.
 
         \begin{itemize}
@@ -123,7 +115,7 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
             also have their secret key)
         \end{itemize}
 \end{column}\hfill
-\begin{column}{.49\linewidth}
+\begin{column}{.48\linewidth}
         Aka. Diffie-Hellman.
         I don't know a good analogy, but note how the
         keypairs are \emph{crossing over} to each other.
@@ -184,9 +176,10 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
 \end{frame}
 
 
-\begin{frame}[fragile,T]{NIKEs and KEMs: Key exchange}
+
+\begin{frame}[fragile,T]{KEMs and NIKEs: Key exchange}
   \begin{columns}[t,fullwidth]
-    \begin{column}{.49\linewidth}
+    \begin{column}{.48\linewidth}
       \begin{block}{Key Encapsulation Method}
         \begin{description}[]
           \item[\textbf{Responder Authentication}:] Initiator encapsulates key under the responder public key.
@@ -194,20 +187,20 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
           \item[\textbf{Forward-secrecy}:] In case the secret keys get stolen, either party generates a temporary
             and has the other party encapsulate a secret under that keypair.
 
-          \vspace{1em}
+          \bigskip
           \item[How to do this properly?] See Rosenpass. % TODO: Cite
         \end{description}
       \end{block}
     \end{column}
-    \hfill
-    \begin{column}{.49\linewidth}
+\hfill
+    \begin{column}{.48\linewidth}
       \begin{block}{Non Interactive Key Exchange}
         \begin{description}[]
           \item[\textbf{Responder Authentication}:] Static-static NIKE since NIKE gives mutual authentication.
           \item[\textbf{Initiator Authentication}:] Static-static NIKE since NIKE gives mutual authentication.
           \item[\textbf{Forward-secrecy}:] Another nike, involving a temporary keypair.
 
-          \vspace{1em}
+		\bigskip
           \item[How to do this properly?] See the Noise Protocol Framework. % TODO: Cite
         \end{description}
       \end{block}
@@ -219,9 +212,9 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
 
 
 
-\begin{frame}[fragile,T]{NIKEs and KEMs}
+\begin{frame}[fragile,T]{KEMs and NIKEs}
   \begin{columns}[t,fullwidth]
-    \begin{column}{.5\linewidth}
+    \begin{column}{.48\linewidth}
 \begin{rustblock}{Key Encapsulation Method}
 trait Kem {
   // Secret, Public, Symmetric, Ciphertext
@@ -238,8 +231,8 @@ fn test<K: Kem>() {
   assert_eq!(shk1, shk2);
 }
 \end{rustblock}
-    \end{column}%
-    \begin{column}{.5\linewidth}
+    \end{column}\hfill
+    \begin{column}{.48\linewidth}
 \begin{rustblock}{Non Interactive Key Exchange}
 trait Nike {
   // Secret, Public, Symmetric
@@ -261,15 +254,10 @@ fn test<N: Nike>() {
   \end{columns}
 \end{frame}
 
-
-
-
 \begin{frame}{Rosenpass Kex Exchange Parts}
   \centering
-  \includegraphics[width=.9\linewidth,page=6,clip=true,trim=1cm 4cm 0cm 2cm]{graphics/rosenpass-key-exchanges-nike-kem.pdf}
+  \includegraphics[height=\defaultframetextheight,page=6,clip=true,trim=40 189 41 74]{rosenpass-key-exchanges-nike-kem}
 \end{frame}
-
-
 
 
 % \begin{frame}{Rosenpass Unified Key Exchange}

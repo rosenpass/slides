@@ -5,4 +5,4 @@ $lualatex = 'lualatex -shell-escape';
 # ensure_path('LUAINPUTS','../tex/');
 # ensure_path('OSFONTDIR', '../tex/');
 
-@default_files=("slides.tex");
+@default_files=("*slides*.tex");
