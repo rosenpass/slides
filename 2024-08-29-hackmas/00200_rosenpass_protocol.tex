@@ -84,7 +84,7 @@
 
 \begin{frame}[fragile,T]{KEMs and NIKEs}
   \begin{columns}[t,fullwidth]
-    \begin{column}{.49\linewidth}
+    \begin{column}{.48\linewidth}
 \begin{rustblock}{Key Encapsulation Method}
 fn Kem::encaps(Pk) -> (Shk, Ct);
 fn Kem::decaps(Pk, Ct) -> Shk;
@@ -100,9 +100,9 @@ fn nike(sk: Sk, pk: Pk) -> Shk;
 assert!(nike(sk1, pk2) = nike(sk2, pk1));
 \end{rustblock}
 \end{column}
-\end{columns}
+\end{columns}\hfill
 \begin{columns}[t,fullwidth]
-\begin{column}{.49\linewidth}
+\begin{column}{.48\linewidth}
   Think of it a encrypting a key and sending it
         to the partner.
 
@@ -113,7 +113,7 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
             also have their secret key)
         \end{itemize}
 \end{column}\hfill
-\begin{column}{.49\linewidth}
+\begin{column}{.48\linewidth}
         Aka. Diffie-Hellman.
         I don't know a good analogy, but ote how the
         keypairs are \emph{crossing over} to each other.
@@ -129,9 +129,9 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
 \end{frame}
 
 
-\begin{frame}[fragile,T]{NIKEs and KEMs: Key exchange}
+\begin{frame}[fragile,T]{KEMs and NIKEs: Key exchange}
   \begin{columns}[t,fullwidth]
-    \begin{column}{.49\linewidth}
+    \begin{column}{.48\linewidth}
       \begin{block}{Key Encapsulation Method}
         \begin{description}[]
           \item[\textbf{Responder Authentication}:] Initiator encapsulates key under the responder public key.
@@ -139,20 +139,20 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
           \item[\textbf{Forward-secrecy}:] In case the secret keys get stolen, either party generates a temporary
             and has the other party encapsulate a secret under that keypair.
 
-          \vspace{1em}
+          \bigskip
           \item[How to do this properly?] See Rosenpass. % TODO: Cite
         \end{description}
       \end{block}
     \end{column}
 \hfill
-    \begin{column}{.49\linewidth}
+    \begin{column}{.48\linewidth}
       \begin{block}{Non Interactive Key Exchange}
         \begin{description}[]
           \item[\textbf{Responder Authentication}:] Static-static NIKE since NIKE gives mutual authentication.
           \item[\textbf{Initiator Authentication}:] Static-static NIKE since NIKE gives mutual authentication.
           \item[\textbf{Forward-secrecy}:] Another nike, involving a temporary keypair.
 
-          \vspace{1em}
+		\bigskip
           \item[How to do this properly?] See the Noise Protocol Framework. % TODO: Cite
         \end{description}
       \end{block}
@@ -166,7 +166,7 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
 
 \begin{frame}[fragile,T]{KEMs and NIKEs}
   \begin{columns}[t,fullwidth]
-    \begin{column}{.5\linewidth}
+    \begin{column}{.48\linewidth}
 \begin{rustblock}{Key Encapsulation Method}
 trait Kem {
   // Secret, Public, Symmetric, Ciphertext
@@ -183,8 +183,8 @@ fn test<K: Kem>() {
   assert_eq!(shk1, shk2);
 }
 \end{rustblock}
-    \end{column}%
-    \begin{column}{.5\linewidth}
+    \end{column}\hfill
+    \begin{column}{.48\linewidth}
 \begin{rustblock}{Non Interactive Key Exchange}
 trait Nike {
   // Secret, Public, Symmetric
