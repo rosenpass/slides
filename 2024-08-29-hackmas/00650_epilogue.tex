@@ -1,22 +1,27 @@
 \interlude[7]{Epilogue}
 
 \begin{frame}[T]{Epilogue}
-  \begin{columns}[t]
-    \begin{column}{.30\linewidth}
+  \begin{columns}[fullwidth]
+    \begin{column}{.3\linewidth}
+	\stretchcolumn{
       \begin{block}{Rosenpass\strut}
+      \small
         \begin{itemize}
           \item Post-quantum secure AKE
           \item Same security as WireGuard
           \item Improved state disruption resistance
           \item Transfers key to WireGuard for hybrid security
         \end{itemize}
-        \vspace{2em}
-        \hfill\textbf{\url{rosenpass.eu}}
       \end{block}
+	\vfill
+        \hfill\textbf{\url{rosenpass.eu}}
+	}
     \end{column}
 
-    \begin{column}{.33\linewidth}
-      \begin{block}{About Protocols}
+    \begin{column}{.3\linewidth}
+	\stretchcolumn{
+      \begin{block}{About Protocols\strut}
+      \small
         \begin{itemize}
           \item It is possible to treat NIKEs as KEMs with DHKEM
           \item The GHP Combiner can be used to combine multiple KEMs
@@ -24,10 +29,14 @@
           \item Wall clocks are not to be trusted
         \end{itemize}
       \end{block}
+\vfill
+}
     \end{column}
 
-    \begin{column}{.36\linewidth}
+    \begin{column}{.3\linewidth}
+\stretchcolumn{
       \begin{block}{Talk To Us\strut}
+      \small
         \begin{itemize}
           \item Adding syntax rewriting to the tool belt of mechanized verification in cryptography
           \item Using broker architectures to write more secure system applications
@@ -35,6 +44,8 @@
           \item More use-cases for rosenpass
         \end{itemize}
       \end{block}
+\vfill
+}
     \end{column}
   \end{columns}
 \end{frame}
