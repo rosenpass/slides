@@ -22,7 +22,8 @@
             nunito pgf relsize soul unicode-math lualatex-math gitinfo2
             eso-pic biblatex biblatex-trad biblatex-software xkeyval xurl
             xifthen biber dirtytalk tikzsymbols pgfornament pgfopts bbding
-            transparent pdfpc hyperxmp luacode luatexbase adjustbox;
+            transparent pdfpc hyperxmp luacode luatexbase adjustbox
+            tikzfill;
         };
 
         documents = (builtins.fromTOML (builtins.readFile ./documents.toml)).documents;
