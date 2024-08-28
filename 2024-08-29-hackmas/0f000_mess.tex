@@ -103,7 +103,7 @@
   \end{column}
 
   \begin{column}{.49\linewidth}
-    \begin{block}{CPU DOS mitigation:\strut}
+    \begin{block}{CPU DoS mitigation:\strut}
     % TODO(blipp,karo) why is it limited? 
     %  -- Because an attacker who knows the public keys can still cause 
     \begin{itemize}
@@ -353,7 +353,7 @@
       \only<.|handout:.>{
       	\vspace{-\ht\strutbox}
           \begin{enumerate}
-            \item \textbf{Attacker} begins continuous DOS attack against responder
+            \item \textbf{Attacker} begins continuous DoS attack against responder
             \item \textbf{Initiator} begins handshake, sends \emph{InitHello}
             \item \textbf{Responder} replies with \emph{CookieReply}
               \blockquote{\textbf{CookieReply:} I am under load. Prove you are not using an IP spoofing attack with this \emph{cookie key}.}
@@ -367,7 +367,7 @@
         \only<+|handout:+>{%
           \vspace{-\ht\strutbox}\begin{block}{Attacker gains:}
           \begin{itemize}
-            \item Cheap protocol-level DOS
+            \item Cheap protocol-level DoS
           \end{itemize}
           \unskip
           \end{block}
@@ -406,7 +406,7 @@
       \begin{block}{Rosenpass}
       \begin{itemize}
         \item Immediate retransmission of \emph{InitHello} upon receiving \emph{CookieReply}
-        \item \emph{CookieReply} and \emph{InitHello} must be of same size to prevent DOS amplication attacks
+        \item \emph{CookieReply} and \emph{InitHello} must be of same size to prevent DoS amplication attacks
         \item[$\Rightarrow$] Rosenpass is protected from CookieCutter attacks
       \end{itemize}
       \end{block}
@@ -531,7 +531,7 @@
 	\setlength\leftmargini{\labelwidth+\labelsep}
   \begin{column}{.48\linewidth}
 % TODO(marei): Can we make the smilies look nicer
-    \begin{block}{\strut CPU DOS mitigation:}
+    \begin{block}{\strut CPU DoS mitigation:}
     \begin{itemize}
       \item No change on the protocol level.
       \item[{\Sey[][green!60!white]} ] Slightly worsened in practice because PQ operations are more expensive than elliptic curves
@@ -542,7 +542,7 @@
     \begin{itemize}
       \item No change in Rosenpass, but we should have \textbf{full stealth}!
       \item[$\Rightarrow$] Remove cookie mechanism?
-      \item[{\Sey[][green!60!white]} ] This would affect the CPU DOS mitigation too much.
+      \item[{\Sey[][green!60!white]} ] This would affect the CPU DoS mitigation too much.
     \end{itemize}
     \unskip
     \end{block}
@@ -554,7 +554,7 @@
     \begin{itemize}
       \item No change in Rosenpass, but we should have \textbf{full identity hiding}!
       \item[$\Rightarrow$] Do not use pre-authentication with public key?
-      \item[{\Sey[][green!60!white]} ] This would affect the CPU DOS mitigation, possibly too much.
+      \item[{\Sey[][green!60!white]} ] This would affect the CPU DoS mitigation, possibly too much.
     \end{itemize}
         \unskip
     \end{block}
@@ -601,11 +601,11 @@
 %       }
 
 %       \only<2-3>{
-%         \textbf{Limited CPU DOS protection:}
+%         \textbf{Limited CPU DoS protection:}
 
 %         \begin{itemize}
 %         \item
-%           Preventing CPU-exhaustion DOS involving network amplification
+%           Preventing CPU-exhaustion DoS involving network amplification
 %           attacks
 %         \item
 %           Proof of IP ownership
@@ -638,25 +638,25 @@
 %   \end{columns}
 % \end{frame}
 
-\begin{frame}{Choose Two: Stealth, Identity Hiding, CPU DOS Mit.}
+\begin{frame}{Choose Two: Stealth, Identity Hiding, CPU DoS Mit.}
   \centering
   \includegraphics[height=.85\textheight]{graphics/preauth-tradeoff-bare.pdf}
 \pdfpcnote{Stealth + Identity Hiding\\
 * Disable pre-auth with public key in symmetric MAC\\
 * Disable cookie-mechanism\\
-* => No CPU DOS mitigation\\
+* => No CPU DoS mitigation\\
 \\
-Stealth + CPU DOS mitig.\\
+Stealth + CPU DoS mitig.\\
 * Disable cookie-mechanism\\
 * => Limited identity hiding due to public key in symmetric MAC\\
 \\
-Identity hiding + CPU DOS mitig.\\
+Identity hiding + CPU DoS mitig.\\
 * Disable pre-auth with public key in symmetric MAC\\
 * => Limited stealth due to cookie mechanism
 }
 \end{frame}
 
-%\begin{frame}{Choose Two: Stealth, Identity Hiding, CPU DOS Mit.}
+%\begin{frame}{Choose Two: Stealth, Identity Hiding, CPU DoS Mit.}
 %\begin{columns}[fullwidth,T]
 %\begin{column}{.53\linewidth}
 %\begin{overlayarea}{\linewidth}{ .85\textheight}
@@ -673,11 +673,11 @@ Identity hiding + CPU DOS mitig.\\
 %      \begin{itemize}
 %        \item Disable pre-auth with public key in symmetric MAC
 %        \item Disable cookie-mechanism
-%        \item[$\Rightarrow$] No CPU DOS mitigation
+%        \item[$\Rightarrow$] No CPU DoS mitigation
 %      \end{itemize}
 %      \unskip}
 %      \end{enumblock*}
-%      \begin{enumblock*}{Stealth + CPU DOS mitig.:}
+%      \begin{enumblock*}{Stealth + CPU DoS mitig.:}
 %      \only<+>{
 %      \begin{itemize}
 %        \item Disable cookie-mechanism
@@ -685,7 +685,7 @@ Identity hiding + CPU DOS mitig.\\
 %      \end{itemize}
 %      \unskip}
 %      \end{enumblock*}
-%      \begin{enumblock*}{Identity hiding + CPU DOS mitig.:}
+%      \begin{enumblock*}{Identity hiding + CPU DoS mitig.:}
 %    \only<+>{
 %      \begin{itemize}
 %        \item Disable pre-auth with public key in symmetric MAC
@@ -709,11 +709,11 @@ Identity hiding + CPU DOS mitig.\\
 \end{column}
     \begin{column}{.45\linewidth}
     \small
-      \begin{block}{CPU DOS Mitigation:}
+      \begin{block}{CPU DoS Mitigation:}
       \only<+|handout:+>{
       \begin{itemize}
         \item There is no clear optimum here.
-        \item CPU DOS mitigation is never calling asymmetric crypto unless we know it succeeds (circular reasoning)
+        \item CPU DoS mitigation is never calling asymmetric crypto unless we know it succeeds (circular reasoning)
       \end{itemize}
       \unskip
       }
@@ -721,7 +721,7 @@ Identity hiding + CPU DOS mitig.\\
        \begin{block}{Stealth:\vphantom{g}}
       \only<+|handout:+>{
       \begin{itemize}
-        \item Broken on DOS attacks assuming recipient is known % TODO(blipp): Fact check
+        \item Broken on DoS attacks assuming recipient is known % TODO(blipp): Fact check
         \item[$\Rightarrow$] This seems acceptable
       \end{itemize}
       \unskip
@@ -732,7 +732,7 @@ Identity hiding + CPU DOS mitig.\\
       \begin{itemize}
         \item Broken on knowledge of public keys
         \item[$\Rightarrow$] This seems inacceptable!
-        \item[$\Rightarrow$] Investigate proper identity hiding without overly impacting stealth and CPU DOS mitig.
+        \item[$\Rightarrow$] Investigate proper identity hiding without overly impacting stealth and CPU DoS mitig.
       \end{itemize}
       \unskip
       }
@@ -1045,12 +1045,12 @@ They mostly help the \emph{formal verification experts} to:
       \begin{block}{Protocol Findings\strut}
       \begin{itemize}
       \item
-        \textbf{CookieCutter}: DOS exploiting WireGuard cookie mechanism
+        \textbf{CookieCutter}: DoS exploiting WireGuard cookie mechanism
       \item
-        \textbf{ChronoTrigger}: DOS exploiting insecure system time to attack WireGuard
+        \textbf{ChronoTrigger}: DoS exploiting insecure system time to attack WireGuard
       \item
         There is a \textbf{trade-off} between identity hiding, stealth, and
-        CPU-exhaustion DOS protection
+        CPU-exhaustion DoS protection
       \end{itemize}
       \end{block}
     \end{column}

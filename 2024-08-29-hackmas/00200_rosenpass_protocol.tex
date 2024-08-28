@@ -1,5 +1,5 @@
-\interlude[0]{The design of Rosenpass \\ \vspace{0.8em} \small and how to build post-quantum protocols}
-\section{The design of Rosenpass}
+\interlude[0]{The Design of Rosenpass \\ \vspace{0.8em} \small and how to build post-quantum protocols}
+\section{The Design of Rosenpass}
 
 \begin{frame}[light]{}
   \vspace{1cm}
@@ -19,24 +19,24 @@
       %\vfil
       %There is no fundamental reason for this – post-quantum cryptography can do many things pre-quantum crypto can do.
 
-      In the following slides you will learn…
+      In the following slides you will learn …
       \par\vspace{1.5em}
-      …that, to a crypto protocol designer, post-quantum cryptography is not much more than a subtle difference in function interface.
+      … that, to a crypto protocol designer, post-quantum cryptography is not much more than a subtle difference in function interface.
     \end{column}
   \end{columns}
 \end{frame}
 
-\begin{frame}[T]{Glossary: Post-quantum security}
+\begin{frame}[T]{Glossary: Post-Quantum Security}
 \small
   \begin{columns}[t,fullwidth]
     \begin{column}{.30\linewidth}
-      \begin{block}{Pre-quantum cryptography is… }
+      \begin{block}{Pre-quantum cryptography is …}
 
-      …susceptible to attacks from quantum computers.
+      … susceptible to attacks from quantum computers.
 
 \bigskip
       \begin{itemize}
-        \item Specifically, to \emph{Shor's Algorithm} % TODO(karolin): Citation needed
+        \item Specifically, to\\\emph{Shor's Algorithm} % TODO(karolin): Citation needed
         \item Quite fast
         %\item Widely used
         \item Widely widely trusted
@@ -45,9 +45,9 @@
     \end{column}
 \hfill
     \begin{column}{.3\linewidth}
-      \begin{block}{Post-quantum cryptography is…}
+      \begin{block}{Post-quantum cryptography is …}
 
-        …not susceptible to attacks from quantum computers.
+        … not susceptible to attacks from quantum computers.
 
 \bigskip
       \begin{itemize}
@@ -61,8 +61,8 @@
     \end{column}
 \hfill
     \begin{column}{.3\linewidth}
-      \begin{block}{Hybrid cryptography combines…}
-        …the combination of the previous two. It is…
+      \begin{block}{Hybrid cryptography combines …}
+        … the combination of the previous two. It is …
 
 \bigskip
         \begin{itemize}
@@ -78,7 +78,7 @@
 
 
 
-\begin{frame}{What post-quantum got}
+\begin{frame}{What Post-Quantum Got}
   \includegraphics[width=\linewidth,page=1,clip=true,trim=39 314 39 85]{rosenpass-key-exchanges-nike-kem}
 \end{frame}
 
@@ -96,10 +96,11 @@ assert!(decaps(sk, ct) = shk)
 \end{rustblock}
 \end{column}\hfill
 \begin{column}{.49\linewidth}
-\begin{rustblock}{Non Interactive Key Exchange}
+\begin{rustblock}{Non-Interactive Key Exchange}
 fn nike(sk: Sk, pk: Pk) -> Shk;
 
-assert!(nike(sk1, pk2) = nike(sk2, pk1));
+assert!(nike(sk1, pk2) =
+        nike(sk2, pk1));
 \end{rustblock}
 \end{column}
 \end{columns}\hfill
@@ -131,7 +132,7 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
 \end{frame}
 
 
-\begin{frame}[fragile,T]{Protocol security properties}
+\begin{frame}[fragile,T]{Protocol Security Properties}
   \small
 
   \vspace{.2em}
@@ -146,7 +147,7 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
 
     \begin{column}{.54\linewidth}
       \begin{block}{Explicit authentication}
-        \say{I know you have access to this shared key because checked by making you use it, therefor you also have a particular asymmetric secret key.}
+        \say{I know you have access to this shared key because I checked by making you use it, therefore you also have a particular asymmetric secret key.}
       \end{block}
     \end{column}
   \end{columns}
@@ -156,20 +157,20 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
   \begin{columns}[t,fullwidth]
     \begin{column}{.54\linewidth}
       \begin{block}{Secrecy}
-        \say{The data we exchange can not be decrypted unless someone gets their hands on some of our static keys!}
+        \say{The data we exchange cannot be decrypted unless someone gets their hands on some of our static keys!}
       \end{block}
     \end{column}
     \hfill
     \begin{column}{.44\linewidth}
       \begin{block}{Forward secrecy}
-       \say{Even if our static keys are exposed, the data we exchanged can not be retroactively decrypted!}*
+       \say{Even if our static keys are exposed, the data we exchanged cannot be retroactively decrypted!} *
       \end{block}
     \end{column}
   \end{columns}
 
   \vspace{1.5em}
   \footnotesize
-  *Terms and conditions apply: We are using an extra key, that we do not call a \emph{static} key. This key is generated on the fly,
+  * Terms and conditions apply: We are using an extra key that we do not call a \emph{static} key. This key is generated on the fly,
   not written to disk and immediately erased after use, so it is more secure than our static keys. Engaging in cryptography is a magical
   experience but technological constructs can – at best – be asymptotically indistinguishable from miracles.
 
@@ -177,14 +178,14 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
 
 
 
-\begin{frame}[fragile,T]{KEMs and NIKEs: Key exchange}
+\begin{frame}[fragile,T]{KEMs and NIKEs: Key Exchange}
   \begin{columns}[t,fullwidth]
     \begin{column}{.48\linewidth}
       \begin{block}{Key Encapsulation Method}
         \begin{description}[]
           \item[\textbf{Responder Authentication}:] Initiator encapsulates key under the responder public key.
           \item[\textbf{Initiator Authentication}:] Responder encapsulates key under the initiator public key.
-          \item[\textbf{Forward-secrecy}:] In case the secret keys get stolen, either party generates a temporary
+          \item[\textbf{Forward Secrecy}:] For the case the secret keys get stolen, either party generates a temporary keypair
             and has the other party encapsulate a secret under that keypair.
 
           \bigskip
@@ -194,11 +195,11 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
     \end{column}
 \hfill
     \begin{column}{.48\linewidth}
-      \begin{block}{Non Interactive Key Exchange}
+      \begin{block}{Non-Interactive Key Exchange}
         \begin{description}[]
           \item[\textbf{Responder Authentication}:] Static-static NIKE since NIKE gives mutual authentication.
           \item[\textbf{Initiator Authentication}:] Static-static NIKE since NIKE gives mutual authentication.
-          \item[\textbf{Forward-secrecy}:] Another nike, involving a temporary keypair.
+          \item[\textbf{Forward-secrecy}:] Another NIKE, involving a temporary keypair.
 
 		\bigskip
           \item[How to do this properly?] See the Noise Protocol Framework. % TODO: Cite
@@ -233,7 +234,7 @@ fn test<K: Kem>() {
 \end{rustblock}
     \end{column}\hfill
     \begin{column}{.48\linewidth}
-\begin{rustblock}{Non Interactive Key Exchange}
+\begin{rustblock}{Non-Interactive Key Exchange}
 trait Nike {
   // Secret, Public, Symmetric
   type Sk; type Pk; type Shk;
@@ -254,7 +255,7 @@ fn test<N: Nike>() {
   \end{columns}
 \end{frame}
 
-\begin{frame}{Rosenpass Kex Exchange Parts}
+\begin{frame}{Rosenpass Key Exchange Parts}
   \centering
   \includegraphics[height=\defaultframetextheight,page=6,clip=true,trim=40 189 41 74]{rosenpass-key-exchanges-nike-kem}
 \end{frame}
