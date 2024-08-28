@@ -10,30 +10,29 @@
     \end{column}
 
     \begin{column}{.60\linewidth}
+    \stretchcolumn{
       …that most cryptographic applications today are susceptible against attacks from quantum computers.
 
-      \vspace{2em}
+      \vfil
       …that this is not fundamental to cryptography, but that pre-quantum protocols are simply a more efficient.
 
-      \vspace{2em}
+      \vfil
       …that – cryptographically speaking – the difference between pre-quantum and post-quantum crypto is about a subtle
       difference in function interface.
+      }
     \end{column}
   \end{columns}
 \end{frame}
-
-
-
 
 \begin{frame}[T]{Glossary: Post-quantum security}
 \small
   \begin{columns}[t,fullwidth]
     \begin{column}{.30\linewidth}
-      \begin{block}{Pre-quantum Cryptography is… \strut}
+      \begin{block}{Pre-quantum cryptography is… }
 
       …susceptible to attacks from quantum computers.
 
-      \vspace{0.5em}
+\bigskip
       \begin{itemize}
         \item Specifically, to \emph{Shor's Algorithm} % TODO(karolin): Citation needed
         \item Quite fast
@@ -48,7 +47,7 @@
 
         …not susceptible to attacks from quantum computers.
 
-      \vspace{0.5em}
+\bigskip
       \begin{itemize}
         \item generally less efficient.
         \item much bigger ciphertexts.
@@ -59,12 +58,11 @@
       \end{block}
     \end{column}
 \hfill
-    \begin{column}{.36\linewidth}
+    \begin{column}{.3\linewidth}
       \begin{block}{Hybrid cryptography combines…}
         …the combination of the previous two. It is…
 
-
-        \vspace{0.3em}
+\bigskip
         \begin{itemize}
           \item about as inefficient as post-quantum cryptography.
           \item not widely adopted, which is a major problem.
@@ -79,11 +77,8 @@
 
 
 \begin{frame}{What post-quantum got}
-  \centering
   \includegraphics[width=\linewidth,page=1,clip=true,trim=1cm 1cm 0cm 3cm]{graphics/rosenpass-key-exchanges-nike-kem.pdf}
 \end{frame}
-
-
 
 
 
@@ -132,8 +127,6 @@ assert!(nike(sk1, pk2) = nike(sk2, pk1));
     \end{column}
   \end{columns}
 \end{frame}
-
-
 
 
 \begin{frame}[fragile,T]{NIKEs and KEMs: Key exchange}
