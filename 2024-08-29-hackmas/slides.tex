@@ -150,7 +150,26 @@
         \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
     }
 
-
+\newlength{\defaultframetextheight}
+\ExplSyntaxOn
+\hook_gput_code:nnn {begindocument/end} {calculate-defaultframetextheight} {
+\begingroup
+	\def\insertframetitle{\strut}
+	\vbox_set:Nn \l_tmpa_box {
+		\vbox{}%
+		{\parskip0pt\usebeamertemplate***{frametitle}\vskip0.25em}%
+	}%
+	\dim_gset:Nn \defaultframetextheight {\textheight - \box_ht:N \l_tmpa_box -  \box_dp:N \l_tmpa_box -\ht\strutbox-\dp\strutbox}
+\endgroup
+}
+\newcommand{\stretchcolumn}[1]{
+	\vbox_to_ht:nn {\defaultframetextheight} {
+		\skip_vertical:n {\c_zero_dim plus .5fil}
+		#1
+		\skip_vertical:n {\c_zero_dim plus .5fil}
+	}
+}
+\ExplSyntaxOff
 
 \begin{document}
 
