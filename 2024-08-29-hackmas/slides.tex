@@ -1,5 +1,5 @@
+\pdfvariable minorversion 7\relax
 \documentclass[aspectratio=169]{rosenpass-beamer}
-
 \usepackage[english]{babel}
 \usepackage{tikzsymbols}
 \usepackage{pgfornament}
@@ -156,6 +156,7 @@
     }
 
 \newlength{\defaultframetextheight}
+\newlength{\extendedframetextheight}
 \ExplSyntaxOn
 \hook_gput_code:nnn {begindocument/end} {calculate-defaultframetextheight} {
 \begingroup
@@ -165,16 +166,19 @@
 		{\parskip0pt\usebeamertemplate***{frametitle}\vskip0.25em}%
 	}%
 	\dim_gset:Nn \defaultframetextheight {\textheight - \box_ht:N \l_tmpa_box -  \box_dp:N \l_tmpa_box -\ht\strutbox-\dp\strutbox}
+	\dim_gset:Nn {\extendedframetextheight}{\defaultframetextheight + \ht\strutbox}
 \endgroup
 }
 \newcommand{\stretchcolumn}[1]{
-	\vbox_to_ht:nn {\defaultframetextheight} {
+	\vbox_to_ht:nn {\ifrosenpass@notopskip\defaultframetextheight\else\extendedframetextheight\fi} {
 		\skip_vertical:n {\c_zero_dim plus .5fil}
 		#1
 		\skip_vertical:n {\c_zero_dim plus .5fil}
 	}
 }
 \ExplSyntaxOff
+
+\setbeamercolor{overlaybox}{bg=white}
 
 \begin{document}
 
