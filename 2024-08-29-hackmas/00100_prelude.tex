@@ -1,20 +1,14 @@
-\hypertarget{section-prelude}{%
-\section{Section: Prelude}\label{section-prelude}}
+\section{Section: Prelude}
 
-\hypertarget{section-intro}{%
-\section{Section Intro}\label{section-intro}}
-
-
+\section{Section Intro}
 
 \begin{frame}[s]{This is the Plan}
-  \hypertarget{todays-talk}{}
   \begin{enumerate}
-   \setlength{\itemsep}{1ex plus 1 fil}
-    \item \textbf{Introducing Rosenpass,} briefly!
-    \item \textbf{The design of Rosenpass} and basics about post-quantum protocols!
-    \item \textbf{Hybrid Security} how it can be done and how we do it!
-    \item \textbf{ChronoTrigger Attack!}
-    \item \textbf{Protocol proofs} what they are and why they give me headaches!
+    \item \textbf{Introducing Rosenpass,} briefly.
+    \item \textbf{The design of Rosenpass} and basics about post-quantum protocols.
+    \item \textbf{Hybrid Security} how it can be done and how we do it.
+    \item \textbf{ChronoTrigger Attack} and not trusting wall clocks.
+    \item \textbf{Protocol proofs} – big old rant!
   \end{enumerate}
 
   \begin{center}
@@ -25,7 +19,6 @@
 
 
 \begin{frame}{Introducing Rosenpass, briefly}
-\hypertarget{rosenpass-introduction}{}
   \begin{columns}[fullwidth,c]
 
     \begin{column}{.5\linewidth}
@@ -36,15 +29,13 @@
         \item A way to secure WireGuard setups against quantum attacks
         \item A \textbf{post-quantum secure VPN}
         \item A governance \textbf{organization} to facilitate development, maintenance and adoption of said protocol
-        \item A translation research organization
+        %\item A translation research organization
       \end{itemize}
-      \vspace{2em}
-      \textbf{\href{https://rosenpass.eu}{rosenpass.eu}}
+      \bigskip
+      \textbf{\url{rosenpass.eu}}
     \end{column}%
-
     \begin{column}{.5\linewidth}
       \includegraphics[ width=\linewidth]{graphics/rosenpass-wp-key-exchange-protocol-rgb.pdf}
     \end{column}
-
   \end{columns}
 \end{frame}

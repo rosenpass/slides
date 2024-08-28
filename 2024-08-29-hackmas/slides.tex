@@ -1,12 +1,36 @@
-\documentclass{rosenpass-beamer}
+\documentclass[aspectratio=169]{rosenpass-beamer}
 
 \usepackage[english]{babel}
-\usepackage[autostyle]{csquotes}
-\usepackage{dirtytalk}
 \usepackage{tikzsymbols}
 \usepackage{pgfornament}
 \usetikzlibrary{calc}
+\usepackage[export]{adjustbox}
 \usepackage{minted}
+\tcbuselibrary{minted}
+\usepackage[autostyle]{csquotes}
+\usepackage{dirtytalk}
+\usepackage{fontspec}
+\usepackage{caption}
+
+\newfontfamily\vollkorn{Pompiere}
+
+\makeatletter
+ \newenvironment{rustblock}[2][]
+    {\VerbatimEnvironment
+    \begin{block}{#2}
+      \let\FVB@VerbatimOut\minted@FVB@VerbatimOut
+      \let\FVE@VerbatimOut\minted@FVE@VerbatimOut
+      \minted@configlang{rust}%
+      \setkeys{minted@opt@cmd}{fontsize=\small,#1}%
+      \minted@fvset
+      \begin{VerbatimOut}[codes={\catcode`\^^I=12},firstline,lastline]{\minted@jobname.pyg}}%
+    {\end{VerbatimOut}%
+        \minted@langlinenoson
+        \expandafter\minted@pygmentize\expandafter{\minted@lang}%
+        \minted@langlinenosoff%
+        \end{block}%
+        }
+\makeatother
 
 \usetikzlibrary{positioning,decorations.pathreplacing,svg.path}
 
@@ -26,9 +50,10 @@
   }
 }
 
-\title{The Rosenpass protocol and attacks we found against WireGuard while developing it}
+%TODO Short title for the headline?
+\title{How to build post-quantum cryptographic protocols and why wall clocks are not to be trusted.}
 \subtitle{}
-\author{Benjamin Lipp, \textbf{Karolin Varner} \\ \strut \footnotesize with support from Alice Bowman, Marei Peischl, and Lisa Schmidt}
+\author{Benjamin Lipp, \textbf{Karolin Varner}, and \textbf{Lisa Schmidt}\\ \strut \footnotesize with support from Alice Bowman, and Marei Peischl}
 \institute{\url{https://rosenpass.eu}}
 
 \conference{Håck ma's 2024, Schloss in Ottenschlag}
@@ -97,6 +122,7 @@
 
 \AddToHook{env/columns/begin}{%
 	\setlength\leftmargini{\labelwidth-\labelsep}% spacing adjustment inside the blocks
+ 	\setbeamertemplate{block begin}[rosenpass]
 }
 
 
@@ -113,6 +139,42 @@
 \usepackage{colortbl}
 
 \usepackage{pdfpc}
+
+% test to adjust column spacing
+    \defbeamertemplate{block begin}{rosenpass}
+    {%
+      \begin{beamercolorbox}[colsep*=.75ex]{block title}
+        \usebeamerfont*{block title}\insertblocktitle%
+      \end{beamercolorbox}%
+      {\parskip0pt\par}%
+      \ifbeamercolorempty[bg]{block title}
+      {}
+      {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+      \usebeamerfont{block body}%
+      \begin{beamercolorbox}[colsep*=.75ex,vmode]{block body}%
+        \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+    }
+
+\newlength{\defaultframetextheight}
+\ExplSyntaxOn
+\hook_gput_code:nnn {begindocument/end} {calculate-defaultframetextheight} {
+\begingroup
+	\def\insertframetitle{\strut}
+	\vbox_set:Nn \l_tmpa_box {
+		\vbox{}%
+		{\parskip0pt\usebeamertemplate***{frametitle}\vskip0.25em}%
+	}%
+	\dim_gset:Nn \defaultframetextheight {\textheight - \box_ht:N \l_tmpa_box -  \box_dp:N \l_tmpa_box -\ht\strutbox-\dp\strutbox}
+\endgroup
+}
+\newcommand{\stretchcolumn}[1]{
+	\vbox_to_ht:nn {\defaultframetextheight} {
+		\skip_vertical:n {\c_zero_dim plus .5fil}
+		#1
+		\skip_vertical:n {\c_zero_dim plus .5fil}
+	}
+}
+\ExplSyntaxOff
 
 \begin{document}
 

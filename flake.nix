@@ -22,7 +22,8 @@
             nunito pgf relsize soul unicode-math lualatex-math gitinfo2
             eso-pic biblatex biblatex-trad biblatex-software xkeyval xurl
             xifthen biber dirtytalk tikzsymbols pgfornament pgfopts bbding
-            transparent pdfpc hyperxmp luacode luatexbase;
+            transparent pdfpc hyperxmp luacode luatexbase adjustbox
+            tikzfill caption;
         };
 
         documents = (builtins.fromTOML (builtins.readFile ./documents.toml)).documents;
@@ -38,6 +39,7 @@
                   srcs = [ (./. + "/${name}") ./tex ];
                   sourceRoot = "./${name}";
                   nativeBuildInputs = with pkgs; [
+                    google-fonts
                     tex
                   ];
                   buildPhase = ''
@@ -57,7 +59,7 @@
         devShells.default = (pkgs.devshell.mkShell {
           imports = [ "${devshell}/extra/git/hooks.nix" ];
           name = "rosenpass-slides-dev-shell";
-          packages = with pkgs; [ tex nixpkgs-fmt nodePackages.prettier ];
+          packages = with pkgs; [ tex nixpkgs-fmt google-fonts nodePackages.prettier ];
           git.hooks = {
             enable = true;
             pre-commit.text = ''
