@@ -1,57 +1,54 @@
 \interlude*<left,leftskip=7cm,>[90]<Tribulations \textasciitilde\ Tooling>{Oh These\\Proof Tools}<Vive la Révolution! Against the Bourgeoisie of Proof Assistants!>
 \section{Section: Better proof tools}
 
-\begin{frame}{Pen and Paper}
-  \begin{columns}[c]
-    \begin{column}{.35\linewidth}
-      \includegraphics[width=\linewidth]{graphics/this-is-fine-crop.png}\\
+\begin{frame}[T]{Pen and Paper}
+  \begin{columns}[fullwidth,t]
+    \begin{column}{.29\linewidth}
+      \raisebox{\dimeval{-\height}}{\includegraphics[width=\linewidth]{graphics/this-is-fine-crop.png}}\par\nointerlineskip
       \includegraphics[width=\linewidth]{graphics/this-is-not-fine-crop.jpg}%
     \end{column}
-    \hspace{1.2em}
+    \hfill
     \begin{column}{.68\linewidth}
       \small
 
-      Bellare and Rogaway: [BR06]\\
-      \hspace{1.618em} many “essentially unverifiable” proofs,\\
-      \hspace{1.618em} “crisis of rigor”\\[1.5em]
+\begin{description}[]
+\item[{Bellare and Rogaway: [BR06]}]\leavevmode\newline many \enquote{essentially unverifiable} proofs, \enquote{crisis of rigor}
 
-      Halevi: [Hal05]\\
-      \hspace{1.618em} some reasons are social,\\
-      \hspace{1.618em} but “our proofs are truly complex”\\[1.5em]
+\item[{Halevi: [Hal05]}]\leavevmode\newline
+	some reasons are social,
+but \enquote{our proofs are truly complex}
 
-      % Joseph Jaeger: [ProTeCS 2024, Workshop at Eurocrypt]\\
-      % \hspace{1.618em} technical and social reasons
-      % \hspace{1.618em} why and for whom do we write proofs?\\[1.5em]%
+%\item[{Joseph Jaeger: [ProTeCS 2024, Workshop at Eurocrypt]}]\leavevmode\newline
+%technical and social reasons
+%why and for whom do we write proofs?
 
-      % We'd like to add:\\
-      % \hspace{1.618em} pen-and-paper proofs are hard to maintain, update, reuse\\
-      % \hspace{1.618em} especially for 3rd parties\\[1.5em]%
+%\item[We'd like to add:]\leavevmode\newline
+%pen-and-paper proofs are hard to maintain, update, reuse
+%especially for 3rd parties
 
-      % Can proofs become part of a continuous engineering effort?%
+%Can proofs become part of a continuous engineering effort?
+\end{description}
     \end{column}
   \end{columns}
 \end{frame}
 
-
-
-
+\setbeamercolor{overlaybox}{bg=white}
 \begin{frame}{Symbolic Modeling of Rosenpass}
   \begin{columns}[c]
     \begin{column}{.5\linewidth}
-     \rlap{\includegraphics[keepaspectratio,height=.85\textheight]{graphics/2023-03-20-symbolic-analysis-screenshot.png}}
-    \end{column}
-
+     \hspace*{-\UseName{beamer@leftmargin}}\rlap{\includegraphics[keepaspectratio,height=\defaultframetextheight]{graphics/2023-03-20-symbolic-analysis-screenshot.png}}
+    \end{column}%
 	  %\pause
-
     \begin{column}{.5\linewidth}
-    \tikz\node[rectangle,fill opacity=1,fill=white,minimum height=.85\textheight, text width=\linewidth]{
+    \begin{beamercolorbox}[colsep*=1ex,ht=\dimeval{\defaultframetextheight+2pt}]{overlaybox}
       \begin{itemize}
         \item Symbolic modeling using ProVerif
         \item Proofs treated as part of the codebase
         \item Uses a model internally that is based on a fairly comprehensive Maximum Exposure Attacks (MEX) variant
         \item Covers non-interruptability (resistance to disruption attacks)
         \item Mechanized proof in the computational model is an open issue
-      \end{itemize}};
+      \end{itemize}
+  \end{beamercolorbox}
     \end{column}
   \end{columns}
 \end{frame}
@@ -89,7 +86,7 @@
 
   %\vspace{5em}
 
-  \blockquote[Helen Keller (1880-1968) in The Day Language Came into My Life]{
+  \blockquote[Helen Keller (1880--1968) in The Day Language Came into My Life]{
     Everything had a name, and each name gave birth to a new thought.
   }
 
@@ -97,20 +94,20 @@
 
 % language creates awareness, consciousness
 
-% neces. prerequisite 
+% neces. prerequisite
 
 % in order to be able to reason mathematically
 
 % math is the process of giving, of express math
 % concepts in the form of language
-% 
+%
 
 % math is something fundamentally kommunikatives
 
 % that's an aspect that mechanised proofs haven't covered thus far
 
 % Everything had a name, and each name gave birth to a new thought.
-% --- Helen Keller (1880-1968) in The Day Language Came into My Life
+% --- Helen Keller (1880--1968) in The Day Language Came into My Life
 
 
 % https://www.pval.org/cms/lib/NY19000481/Centricity/Domain/105/The%20Day%20Language%20Came%20into%20my%20Life.pdf
@@ -127,23 +124,25 @@
 
 
 \begin{frame}{Rosenpass going Rube-Goldberg}
-  \begin{columns}[fullwidth,T]
-
-    \begin{column}{.8\linewidth}
-      \includegraphics[height=.85\textheight]{graphics/python-proofs.pdf}
-    \end{column}
-
-    \begin{column}{.2\linewidth}
+  \begin{columns}[fullwidth]
+    \begin{column}{.7\linewidth}
+      \includegraphics[width=\linewidth]{graphics/python-proofs.pdf}
+    \end{column}\hfill
+    \begin{column}{.28\linewidth}
+\stretchcolumn{
       \textbf{Idea:} Build a framework around existing tools
-      \medskip
+      \vfil
 
       \textbf{Keep} expressivity and preciseness
 
-      \medskip
+      \vfil
       \textbf{Generate and parse} their languages
 
-      \medskip
+      \vfil
       \textbf{Open them up} to ecosystems in Python, Lisp, XML
+
+	\vfil
+}
     \end{column}
 
   \end{columns}
