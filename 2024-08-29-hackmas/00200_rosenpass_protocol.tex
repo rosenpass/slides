@@ -29,6 +29,7 @@
 \begin{frame}[T]{Glossary: Post-Quantum Security}
 \small
   \begin{columns}[t,fullwidth]
+   \hfill
     \begin{column}{.30\linewidth}
       \begin{block}{Pre-quantum cryptography is …}
 
@@ -43,7 +44,6 @@
       \end{itemize}
       \end{block}
     \end{column}
-\hfill
     \begin{column}{.3\linewidth}
       \begin{block}{Post-quantum cryptography is …}
 
@@ -59,7 +59,6 @@
       \end{itemize}
       \end{block}
     \end{column}
-\hfill
     \begin{column}{.3\linewidth}
       \begin{block}{Hybrid cryptography combines …}
         … the combination of the previous two. It is …
@@ -71,6 +70,7 @@
         \end{itemize}
       \end{block}
     \end{column}
+    \hfill
   \end{columns}
 \end{frame}
 
@@ -85,7 +85,9 @@
 
 
 \begin{frame}[fragile,T]{KEMs and NIKEs}
-  \begin{columns}[fullwidth]
+\small
+  \begin{columns}[t,fullwidth]
+\hfill
     \begin{column}{.48\linewidth}
 \begin{rustblock}{Key Encapsulation Method}
 fn Kem::encaps(Pk) -> (Shk, Ct);
@@ -127,6 +129,7 @@ assert!(nike(sk1, pk2) =
             also have their secret key)
         \end{itemize}
     \end{column}
+    \hfill
   \end{columns}
 \end{frame}
 
@@ -198,7 +201,7 @@ assert!(nike(sk1, pk2) =
         \begin{description}[]
           \item[\textbf{Responder Authentication}:] Static-static NIKE since NIKE gives mutual authentication.
           \item[\textbf{Initiator Authentication}:] Static-static NIKE since NIKE gives mutual authentication.
-          \item[\textbf{Forward-secrecy}:] Another NIKE, involving a temporary keypair.
+          \item[\textbf{Forward secrecy}:] Another NIKE, involving a temporary keypair.
 
 		\bigskip
           \item[How to do this properly?] See the Noise Protocol Framework. % TODO: Cite
