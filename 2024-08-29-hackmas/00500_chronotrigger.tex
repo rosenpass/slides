@@ -48,13 +48,13 @@
   \begin{column}{.46\linewidth}
   \small
     \begin{itemize}
-      \item Replay attacks thwarted by counter
-      \item Counter is based on real-time clock
-      \item Responder is semi-stateful (one retransmission at program start may be accepted, but this does not affect protocol security)
+      \item replay attacks thwarted by counter
+      \item counter is based on real-time clock
+      \item responder is semi-stateful (one retransmission at program start may be accepted, but this does not affect protocol security)
       \item[$\Rightarrow$]
          WG requires \emph{either} reliable real-time clock \emph{or} stateful initiator
       \item[$\Rightarrow$]
-        Adversary can attempt replay, but this cannot interrupt a valid handshake by the initiator
+        adversary can attempt replay, but this cannot interrupt a valid handshake by the initiator
       \item[!] Assumption of reliable system time is invalid in practice!
     \end{itemize}
   \end{column}
@@ -92,7 +92,7 @@
       \begin{itemize}
         \item Network Time Protocol is insecure,\\
         Mitigations are of limited use
-        \item[$\Rightarrow$] Break NTP \emph{once}; kill token lasts forever
+        \item[$\Rightarrow$] break NTP \emph{once}; kill token lasts forever
       \end{itemize}
       \unskip
       \end{block}
@@ -101,22 +101,22 @@
     \only<+|handout:+>{%
       \leavevmode\begin{block}{Attacker gains}
       \begin{itemize}
-        \item Extremely cheap protocol-level DoS
+        \item extremely cheap protocol-level DoS
       \end{itemize}
       \unskip
       \end{block}
 
       \begin{block}{Preparation phase, attacker needs:}
       \begin{itemize}
-        \item Eavesdropping of initiator packets
-        \item Access to system time
+        \item eavesdropping of initiator packets
+        \item access to system time
       \end{itemize}
       \unskip
       \end{block}
 
       \begin{block}{Delayed execution, attacker needs:}
       \begin{itemize}
-        \item No access beyond message transmission to responder
+        \item no access beyond message transmission to responder
       \end{itemize}
       \unskip
       \end{block}
@@ -163,10 +163,10 @@
     \small
       \begin{itemize}
         \item InitHello is unauthenticated because responder still needs to encapsulate secret with initiator key
-        \item Since InitHello is unauthenticated, retransmission protection is impossible
-        \item Responder state is moved into a cookie called \emph{Biscuit}; this renders the responder stateless
-        \item Retransmission of InitHello is now easily possible, but does not lead to a state disruption attack
-        \item[$\Rightarrow$] Stateless responder prevents ChronoTrigger attack
+        \item since InitHello is unauthenticated, retransmission protection is impossible
+        \item responder state is moved into a cookie called \emph{Biscuit}; this renders the responder stateless
+        \item retransmission of InitHello is now easily possible, but does not lead to a state disruption attack
+        \item[$\Rightarrow$] stateless responder prevents ChronoTrigger attack
       \end{itemize}
     \end{column}
   \end{columns}
