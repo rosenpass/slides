@@ -97,6 +97,7 @@ fn Kem::decaps(Pk, Ct) -> Shk;
 assert!(decaps(sk, ct) = shk)
 \end{rustblock}
 \end{column}
+\hfill
 \begin{column}{.47\linewidth}
 \begin{rustblock}{Non-Interactive Key Exchange}
 fn nike(sk: Sk, pk: Pk) -> Shk;
@@ -119,6 +120,7 @@ assert!(nike(sk1, pk2) =
             also have their secret key)
         \end{itemize}
 \end{column}
+\hfill
 \begin{column}{.47\linewidth}
         Aka. Diffie-Hellman. Note how the
         keypairs are \emph{crossing over} to each other.

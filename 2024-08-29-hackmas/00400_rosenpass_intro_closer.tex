@@ -1,19 +1,25 @@
 \begin{frame}{Full Protocol Reference in the Whitepaper}
-  \begin{columns}[c,fullwidth]
-
+  \begin{columns}[t,fullwidth]
     \begin{column}{.65\linewidth}
-      \only<1>{\includegraphics[height=.91\textheight]{graphics/rosenpass-wp-message-handling-code-rgb.pdf}}
-      \only<2>{\includegraphics[height=.91\textheight]{graphics/rosenpass-wp-hashing-tree-rgb.pdf}}
+    \stretchcolumn{%
+    \centering
+      \includegraphics[width=\linewidth,clip,trim=0 310 0 0]{graphics/rosenpass-wp-message-handling-code-rgb.pdf}
+
+      \ldots
+
+      \vfill
+      \includegraphics[width=\linewidth,clip,trim=0 270 0 0]{graphics/rosenpass-wp-hashing-tree-rgb.pdf}
+      \par
+	\vskip-.5\baselineskip
+      }
     \end{column}
 
-    \begin{column}{.35\linewidth}
-
-      \qrcode[height=1.2cm]{https://rosenpass.eu/docs}
-      \\ \url{rosenpass.eu/docs}
-
-      \vspace{1em}
-      \qrcode[height=1.2cm]{https://rosenpass.eu/whitepaper.pdf}
-      \\ \url{rosenpass.eu/whitepaper.pdf}
+    \begin{column}{.2\linewidth}
+\stretchcolumn{
+      \QRCode{rosenpass.eu/docs}
+	\vfil
+      \QRCode{rosenpass.eu/whitepaper.pdf}
+}
     \end{column}
 
   \end{columns}
