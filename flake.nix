@@ -57,15 +57,8 @@
             documents);
 
         devShells.default = (pkgs.devshell.mkShell {
-          imports = [ "${devshell}/extra/git/hooks.nix" ];
           name = "rosenpass-slides-dev-shell";
           packages = with pkgs; [ tex nixpkgs-fmt google-fonts nodePackages.prettier ];
-          git.hooks = {
-            enable = true;
-            pre-commit.text = ''
-              nix flake check
-            '';
-          };
           commands = [
             {
               name = "build";
