@@ -88,7 +88,7 @@
 \small
   \begin{columns}[t,fullwidth]
 \hfill
-    \begin{column}{.48\linewidth}
+    \begin{column}{.47\linewidth}
 \begin{rustblock}{Key Encapsulation Method}
 fn Kem::encaps(Pk) -> (Shk, Ct);
 fn Kem::decaps(Pk, Ct) -> Shk;
@@ -96,18 +96,19 @@ fn Kem::decaps(Pk, Ct) -> Shk;
 (shk, ct) = encaps(pk);
 assert!(decaps(sk, ct) = shk)
 \end{rustblock}
-\end{column}\hfill
-\begin{column}{.49\linewidth}
+\end{column}
+\begin{column}{.47\linewidth}
 \begin{rustblock}{Non-Interactive Key Exchange}
 fn nike(sk: Sk, pk: Pk) -> Shk;
 
 assert!(nike(sk1, pk2) =
         nike(sk2, pk1));
 \end{rustblock}
-\end{column}
-\end{columns}\hfill
+\end{column}\hfill
+\end{columns}
 \begin{columns}[t,fullwidth]
-\begin{column}{.48\linewidth}
+\hfill
+\begin{column}{.47\linewidth}
   Think of it as encrypting a key and sending it
         to the partner.
 
@@ -117,8 +118,8 @@ assert!(nike(sk1, pk2) =
             (assuming they have the shared key, they must
             also have their secret key)
         \end{itemize}
-\end{column}\hfill
-\begin{column}{.48\linewidth}
+\end{column}
+\begin{column}{.47\linewidth}
         Aka. Diffie-Hellman. Note how the
         keypairs are \emph{crossing over} to each other.
 
@@ -129,45 +130,44 @@ assert!(nike(sk1, pk2) =
             also have their secret key)
         \end{itemize}
     \end{column}
-    \hfill
+    \hfill\strut
   \end{columns}
 \end{frame}
 
 
-\begin{frame}[fragile,T]{Protocol Security Properties}
+\begin{frame}[T,s]{Protocol Security Properties}
   \small
-
-  \vspace{.2em}
   \begin{columns}[t,fullwidth]
-    \begin{column}{.44\linewidth}
+  \hfill
+    \begin{column}{.45\linewidth}
       \begin{block}{Implicit authentication}
         \say{If you have access to this shared symmetric key then you must have a particular asymmetric secret key.}
       \end{block}
     \end{column}
-
     \hfill
-
-    \begin{column}{.54\linewidth}
+    \begin{column}{.45\linewidth}
       \begin{block}{Explicit authentication}
         \say{I know you have access to this shared key because I checked by making you use it, therefore you also have a particular asymmetric secret key.}
       \end{block}
     \end{column}
+    \hfill
   \end{columns}
 
-
-  \vspace{2em}
+	\bigskip
   \begin{columns}[t,fullwidth]
-    \begin{column}{.54\linewidth}
+  \hfill
+    \begin{column}{.45\linewidth}
       \begin{block}{Secrecy}
         \say{The data we exchange cannot be decrypted unless someone gets their hands on some of our static keys!}
       \end{block}
     \end{column}
     \hfill
-    \begin{column}{.44\linewidth}
+    \begin{column}{.45\linewidth}
       \begin{block}{Forward secrecy}
        \say{Even if our static keys are exposed, the data we exchanged cannot be retroactively decrypted!} *
       \end{block}
     \end{column}
+    \hfill
   \end{columns}
 
   \vspace{1.5em}
@@ -182,6 +182,7 @@ assert!(nike(sk1, pk2) =
 
 \begin{frame}[fragile,T]{KEMs and NIKEs: Key Exchange}
   \begin{columns}[t,fullwidth]
+  \hfill
     \begin{column}{.48\linewidth}
       \begin{block}{Key Encapsulation Method}
         \begin{description}[]
@@ -207,8 +208,7 @@ assert!(nike(sk1, pk2) =
           \item[How to do this properly?] See the Noise Protocol Framework. % TODO: Cite
         \end{description}
       \end{block}
-    \end{column}
-
+    \end{column}\hfill\strut
   \end{columns}
 \end{frame}
 
@@ -217,6 +217,7 @@ assert!(nike(sk1, pk2) =
 
 \begin{frame}[fragile,T]{KEMs and NIKEs}
   \begin{columns}[t,fullwidth]
+      \hfill
     \begin{column}{.48\linewidth}
 \begin{rustblock}{Key Encapsulation Method}
 trait Kem {
@@ -234,7 +235,7 @@ fn test<K: Kem>() {
   assert_eq!(shk1, shk2);
 }
 \end{rustblock}
-    \end{column}\hfill
+    \end{column}
     \begin{column}{.48\linewidth}
 \begin{rustblock}{Non-Interactive Key Exchange}
 trait Nike {
@@ -253,7 +254,7 @@ fn test<N: Nike>() {
 }
 \end{rustblock}
     \end{column}
-
+	\hfill
   \end{columns}
 \end{frame}
 
