@@ -136,6 +136,7 @@ assert!(nike(sk1, pk2) =
 
 
 \begin{frame}[T,s]{Protocol Security Properties}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
   \small
   \begin{columns}[t,fullwidth]
   \hfill
@@ -164,18 +165,13 @@ assert!(nike(sk1, pk2) =
     \hfill
     \begin{column}{.45\linewidth}
       \begin{block}{Forward secrecy}
-       \say{Even if our static keys are exposed, the data we exchanged cannot be retroactively decrypted!} *
+       \say{Even if our static keys are exposed, the data we exchanged cannot be retroactively decrypted!}\footnotemark
       \end{block}
     \end{column}
     \hfill
-  \end{columns}
-
-  \vspace{1.5em}
-  \footnotesize
-  * Terms and conditions apply: We are using an extra key that we do not call a \emph{static} key. This key is generated on the fly,
-  not written to disk and immediately erased after use, so it is more secure than our static keys. Engaging in cryptography is a magical
-  experience but technological constructs can – at best – be asymptotically indistinguishable from miracles.
-
+  \end{columns}\footnotetext{Terms and conditions apply: \newline \tiny We are using an extra key that we do not call a \emph{static} key. This key is generated on the fly,
+    not written to disk and immediately erased after use, so it is more secure than our static keys. Engaging in cryptography is a magical
+    experience but technological constructs can – at best – be asymptotically indistinguishable from miracles.}
 \end{frame}
 
 
