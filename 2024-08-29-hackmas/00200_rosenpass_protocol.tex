@@ -84,11 +84,11 @@
 
 
 
-\begin{frame}[fragile,T]{KEMs and NIKEs}
+\begin{frame}[fragile,T,s]{KEMs and NIKEs}
 \small
   \begin{columns}[t,fullwidth]
 \hfill
-    \begin{column}{.47\linewidth}
+\begin{column}{.47\linewidth}
 \begin{rustblock}{Key Encapsulation Method}
 fn Kem::encaps(Pk) -> (Shk, Ct);
 fn Kem::decaps(Pk, Ct) -> Shk;
@@ -134,38 +134,39 @@ assert!(nike(sk1, pk2) =
     \end{column}
     \hfill\strut
   \end{columns}
+  \vfill
 \end{frame}
 
 
-\begin{frame}[T,s]{Protocol Security Properties}
-\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\begin{frame}[T,s]{Protocol Security Properties}%
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}%
   \small
   \begin{columns}[t,fullwidth]
   \hfill
-    \begin{column}{.45\linewidth}
+    \begin{column}{.47\linewidth}
       \begin{block}{Implicit authentication}
         \say{If you have access to this shared symmetric key then you must have a particular asymmetric secret key.}
       \end{block}
     \end{column}
     \hfill
-    \begin{column}{.45\linewidth}
+    \begin{column}{.47\linewidth}
       \begin{block}{Explicit authentication}
         \say{I know you have access to this shared key because I checked by making you use it, therefore you also have a particular asymmetric secret key.}
       \end{block}
     \end{column}
     \hfill
   \end{columns}
-
-	\bigskip
+\vfill
+%	\bigskip
   \begin{columns}[t,fullwidth]
   \hfill
-    \begin{column}{.45\linewidth}
+    \begin{column}{.47\linewidth}
       \begin{block}{Secrecy}
         \say{The data we exchange cannot be decrypted unless someone gets their hands on some of our static keys!}
       \end{block}
     \end{column}
     \hfill
-    \begin{column}{.45\linewidth}
+    \begin{column}{.47\linewidth}
       \begin{block}{Forward secrecy}
        \say{Even if our static keys are exposed, the data we exchanged cannot be retroactively decrypted!}\footnotemark
       \end{block}
@@ -174,11 +175,13 @@ assert!(nike(sk1, pk2) =
   \end{columns}\footnotetext{Terms and conditions apply: \newline \tiny We are using an extra key that we do not call a \emph{static} key. This key is generated on the fly,
     not written to disk and immediately erased after use, so it is more secure than our static keys. Engaging in cryptography is a magical
     experience but technological constructs can – at best – be asymptotically indistinguishable from miracles.}
+    \vfill
 \end{frame}
 
 
 
-\begin{frame}[fragile,T]{KEMs and NIKEs: Key Exchange}
+\begin{frame}[fragile,T,s]{KEMs and NIKEs: Key Exchange}
+\small
   \begin{columns}[t,fullwidth]
   \hfill
     \begin{column}{.47\linewidth}
@@ -207,12 +210,14 @@ assert!(nike(sk1, pk2) =
       \end{block}
     \end{column}\hfill
   \end{columns}
+  \vfill
 \end{frame}
 
 
 
 
-\begin{frame}[fragile,T]{KEMs and NIKEs}
+\begin{frame}[fragile,T,s]{KEMs and NIKEs}
+\small
   \begin{columns}[t,fullwidth]
       \hfill
     \begin{column}{.47\linewidth}
@@ -254,6 +259,7 @@ fn test<N: Nike>() {
     \end{column}
 	\hfill
   \end{columns}
+  \vfill
 \end{frame}
 
 \begin{frame}{Rosenpass Key Exchange Parts}
