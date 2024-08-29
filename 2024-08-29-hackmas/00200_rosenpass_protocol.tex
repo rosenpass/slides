@@ -179,7 +179,7 @@ assert!(nike(sk1, pk2) =
 \begin{frame}[fragile,T]{KEMs and NIKEs: Key Exchange}
   \begin{columns}[t,fullwidth]
   \hfill
-    \begin{column}{.48\linewidth}
+    \begin{column}{.47\linewidth}
       \begin{block}{Key Encapsulation Method}
         \begin{description}[]
           \item[\textbf{Responder Authentication}:] Initiator encapsulates key under the responder public key.
@@ -193,7 +193,7 @@ assert!(nike(sk1, pk2) =
       \end{block}
     \end{column}
 \hfill
-    \begin{column}{.48\linewidth}
+    \begin{column}{.47\linewidth}
       \begin{block}{Non-Interactive Key Exchange}
         \begin{description}[]
           \item[\textbf{Responder Authentication}:] Static-static NIKE since NIKE gives mutual authentication.
@@ -214,7 +214,7 @@ assert!(nike(sk1, pk2) =
 \begin{frame}[fragile,T]{KEMs and NIKEs}
   \begin{columns}[t,fullwidth]
       \hfill
-    \begin{column}{.48\linewidth}
+    \begin{column}{.47\linewidth}
 \begin{rustblock}{Key Encapsulation Method}
 trait Kem {
   // Secret, Public, Symmetric, Ciphertext
@@ -232,7 +232,8 @@ fn test<K: Kem>() {
 }
 \end{rustblock}
     \end{column}
-    \begin{column}{.48\linewidth}
+    \hfill
+    \begin{column}{.47\linewidth}
 \begin{rustblock}{Non-Interactive Key Exchange}
 trait Nike {
   // Secret, Public, Symmetric
@@ -256,7 +257,7 @@ fn test<N: Nike>() {
 
 \begin{frame}{Rosenpass Key Exchange Parts}
   \centering
-  \includegraphics[height=0.91\textheight,page=6,clip=true,trim=40 189 41 74]{rosenpass-key-exchanges-nike-kem}
+  \includegraphics[height=\defaultframetextheight,page=6,clip=true,trim=42 186 42 74]{rosenpass-key-exchanges-nike-kem}
 \end{frame}
 
 
@@ -280,10 +281,12 @@ fn test<N: Nike>() {
 \begin{frame}{Rosenpass Protocol Features}
   \begin{columns}[fullwidth,c]
     \begin{column}{.6\linewidth}
-      \includegraphics[width=\linewidth]{graphics/rosenpass-wp-key-exchange-protocol-rgb.pdf}
+      \includegraphics[height=\defaultframetextheight]{graphics/rosenpass-wp-key-exchange-protocol-rgb.pdf}
     \end{column}
 
     \begin{column}{.4\linewidth}
+    \stretchcolumn{
+    \vfill
       \begin{itemize}
         \item authenticated key exchange
         \item three KEM operations interleaved to achieve mutual authentication and forward secrecy
@@ -291,6 +294,8 @@ fn test<N: Nike>() {
         \item first package (InitHello) is unauthenticated
         \item stateless responder to avoid disruption attacks
       \end{itemize}
+      \vfill
+      }
     \end{column}
   \end{columns}
 \end{frame}

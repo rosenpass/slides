@@ -172,6 +172,7 @@
 }
 \newcommand{\stretchcolumn}[1]{
 	\vbox_to_ht:nn {\ifrosenpass@notopskip\defaultframetextheight\else\extendedframetextheight\fi} {
+		\dim_set:cn {beamer@frametopskip}{0pt}
 		\skip_vertical:n {\c_zero_dim plus .5fil}
 		#1
 		\skip_vertical:n {\c_zero_dim plus .5fil}
