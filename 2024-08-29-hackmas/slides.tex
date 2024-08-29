@@ -185,7 +185,7 @@
 
 \ExplSyntaxOn
 \newcommand{\QRCode}[1]{
-	\tl_if_in:nnTF {#1} {//} {\tl_set:Nn \l_tmpa_tl {#1}} {\tl_set:Nn \l_tmpa_tl {https://#1}}
+	\tl_if_in:nnTF {#1} {//} {\tl_set:Nn \l_tmpa_tl {#1}} {\tl_set:Ne \l_tmpa_tl {https\c_colon_str//}\tl_put_right:Nn \l_tmpa_tl {#1}}
 	\parbox{1.2cm}{
 		\tiny
 		\exp_args:NnV \use:n {\qrcode[height=\linewidth]}\l_tmpa_tl
