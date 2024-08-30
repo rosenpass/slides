@@ -74,15 +74,37 @@
   \end{columns}
 \end{frame}
 
+\begin{frame}{Attacks from Quantum Computers: Shor's algorithm}
+  \textbf{With Jargon}: Solves a couple of mathematical problems that most modern cryptography is based upon.
+  \vfill
+  \begin{itemize}
+      \item RSA, \say{Rivest-Shamir-Adleman}, based on the problem of factorizing prime numbers
+      \item DH, \say{Diffie-Hellmann}, based on the discrete logarithm problem
+      \item ECDH, \say{Elliptic Curve Diffie-Hellmann}, based on elliptic curve discrete logarithm problem
+  \end{itemize}
+  \vfill
+  \textbf{Less Jargon}: Breaks most modern, asymmetric cryptography.
+\end{frame}
 
+\begin{frame}{Munch now decrypt later}
+  \begin{columns}[c]
+    \begin{column}{.6\textwidth}
+      \begin{itemize}
+        \item Post-Quantum Cryptography was just standardized \citeMlkem
+        \item Attackers can store important data and decrypt it once quantum computers are available
+      \end{itemize}
+    \end{column}
 
-
+    \begin{column}{.4\textwidth}
+      \includegraphics[height=.5\textheight]{graphics/gray-hamster-eating-sunflower-seed.jpeg}
+    \end{column}
+  \end{columns}
+  % \footnotetext{\say{Jetzt speichern später entschlüsseln}. Warnung: Geheimdienste sind nicht so cute wie dieser Hamster.}
+\end{frame}
 
 \begin{frame}{What Post-Quantum got}
   \includegraphics[width=\linewidth,page=1,clip=true,trim=39 314 39 85]{rosenpass-key-exchanges-nike-kem}
 \end{frame}
-
-
 
 \begin{frame}[fragile,T,s]{KEMs and NIKEs}
 \small
