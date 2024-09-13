@@ -1,0 +1,123 @@
+\interlude[0]{About cryptology}
+\section{About cryptology}
+
+\begin{frame}{To build real-world cryptography solutions}
+  TODO
+\end{frame}
+
+\begin{frame}{Proofs of security are fundamental: Reduction proofs}
+  \small
+  Proof by reduction to a well-known mathematical problem or existing cryptographic construction.
+  \vfill
+  \textbf{If} an attack against my cryptosystem exists,
+  \\ \textbf{then} this other cryptosystem can be attacked or this math problem can be solved.
+  \vfill
+  Proof ad-absurdum:
+  \begin{itemize}
+    \item Assume an attacker against the new cryptosystem exists
+    \item Construct a solution to the underlying math problem using the assumed attacker
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Proofs are fundamental: Using information theory}
+  \small
+
+  Showing that each \emph{plain text} is plausible for each \emph{ciphertext}.
+
+  \vfill
+
+  Cryptosystem should be formulated as a function:
+
+  $$F : K \times D \to C$$
+
+  \begin{description}
+    \item[$K$] Key material; secret information held by all parties
+    \item[$D$] Protected information
+    \item[$C$] Leaked information; any information known to the attacker after protocol execution
+  \end{description}
+
+  Now it needs to be shown, that for every value of the leaked information,
+  every value of the protected information is equally plausible.
+
+
+  $$\forall c : C, d_1 : D, d_2 : D; |\{ k \in K | F(k, d_1) = c \}| = |\{ k \in K | F(k, d_1) = c \}|$$
+\end{frame}
+
+\begin{frame}{Proofs are fundamental: Implementation security}
+  \begin{columns}[t,fullwidth]
+
+    \begin{column}{.40\textwidth}
+      \begin{block}{Functional Correctness}
+        Using formal methods from computer science that a cryptographic implementation is equivalent to its specification.
+      \end{block}
+      
+      \vfill
+
+      \begin{block}{Efficiency}
+        Using complexity theoretic analysis to ensure that the implementation can not be slowed down by an attacker.
+      \end{block}
+    \end{column}
+
+    \begin{column}{.55\textwidth}
+      \begin{block}{Implementation security}
+        Ensuring cryptographic implementation fulfill various extra security properties.
+        For example:
+        \vfill
+        \begin{itemize}
+          \item Timing side-channel resistance (certain assembly operations are forbidden)
+          \item Memory-safety (advanced programming languages such as Rust to avoid bugs such as buffer-overflows)
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}{Practical security is essential}
+  \small
+
+  It is not enough to build a system that is secure in theory but vulnerable on real hardware.
+  Some dangers include:
+
+  \begin{itemize}
+    \item Timing side-channels
+    \item Power side-channels
+    \item Hardware bugs in the CPU (Rowhammer, Spectre, or Meltdown)
+    \item Lack of usability (Implementations that are easy to misuse)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Open-Source \& Open-Science are mandatory}
+  \begin{itemize}
+    \item Cryptology is about creating trust
+    \item Incremental peer review of implementations and abstract constructions is part of the process
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{More than encryption}
+  \small
+  Key-exchanges are a subfield in cryptography, not the whole thing!
+
+  \begin{description}
+    \item[Multi-Party Computation] Arbitrary computation on encrypted data without cheating by consortium
+    \item[Homomorphic Encryption] Arbitrary computation on asymmetrically encrypted data
+    \item[Robust Combiners] Redundancy in cryptographic systems
+    \item[Private Information Retrieval] Databases without leakage about user activity
+    \item[Censorship circumvention]
+  \end{description}
+\end{frame}
+
+\begin{frame}{To integrate QKD in cryptology}
+  \small
+  \begin{itemize}
+    \item Integrate with community of cryptography researchers
+    \item Adopt comprehensive approach of cryptology
+    \item Adopt open-source/open-science approach
+    \item Define security properties in cryptographic terms to be comparable
+    \item \textbf{Use QKD within cryptographic systems}, not as an alternative to!
+  \end{itemize}
+
+  The field we are looking at when building cryptographic systems including QKD is called:
+
+  \centering\large Secure Channels
+\end{frame}

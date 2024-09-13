@@ -1,0 +1,111 @@
+\interlude[1]{Secure Channels \vfill \Large and their Security Properties}
+
+\begin{frame}{Secure Channel Protocols}
+  \begin{columns}[T]
+    \begin{column}{.4\linewidth}
+      \small
+
+      Secure channel protocols like TLS, OpenSSH, or the Noise Protocol Framework \citeNoise are used everywhere on the internet. They are
+
+      \begin{itemize}
+        \item Cheap
+        \item Fast
+        \item Secure
+        \item Well analyzed
+        \item Authenticated
+        \item Usually not secure against quantum attacks
+      \end{itemize}
+    \end{column}
+    \begin{column}{.55\linewidth}
+     \includegraphics[width=\linewidth]{graphics/2024-09-13-rosenpass-tls-cert.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Security against quantum attacks}
+  \begin{columns}[fullwidth,c]
+    \begin{column}{.6\linewidth}
+      \includegraphics[height=\defaultframetextheight]{graphics/rosenpass-wp-key-exchange-protocol-rgb.pdf}
+    \end{column}
+
+    \begin{column}{.4\linewidth}
+    \stretchcolumn{
+    \vfill
+      \begin{itemize}
+        \item Migration to post-quantum security is definetly possible
+        \item Rosenpass (pictured) is an example
+        \item Alternatives such as KEM-TLS have also been proposed
+        \item Some high security protocols such as OpenSSH and the Signal protocol are already using hybrid PQC
+        \item Modest increase in resource usage
+      \end{itemize}
+      \vfill
+      }
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Active \& Passive Security}
+  TODO
+\end{frame}
+
+\begin{frame}{Secrecy \& Authenticity}
+  TODO
+\end{frame}
+
+\begin{frame}{Identity hiding, deniability}
+  TODO
+\end{frame}
+
+\begin{frame}{Advanced properties}
+  Often provided by secure messaging protocols such as Signal or MLS
+
+  \begin{itemize}
+    \item Post-compromise security (recovering security after a compromise)
+    \item Group messaging
+    \item Metadata obfuscation
+    \item Asynchronous handshakes (one party offline)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Forward secrecy}
+  TODO
+\end{frame}
+
+\begin{frame}{Everlasting secrecy}
+  TODO
+\end{frame}
+
+\begin{frame}{QKD Caveats}
+  \begin{columns}
+    \begin{column}{.4\textwidth}
+
+      % TODO(marei): Can we use proper checkmark/cross symbols here here?
+      % Can we use a light-green background for green, a light-red one for cross and a yellow one for impractical?
+      % Can we generally make this look nice and graphic-y?
+      \begin{tabular}{ l c c }
+        \textbf{Security property} & \textbf{QKD} & \textbf{Software encryption} \\
+
+        Post-Quantum        & Check           & Check           \\
+        Forward-secrecy     &                 & Check           \\
+        Everlasting-Secrecy & Impractical     & Cross           \\
+        End-2-End           & Impractical     & Check           \\
+        Active Attackers    & Cross           & Check           \\
+        Authenticity        & Cross           & Check           \\
+        Deniability         & Cross           & Check           \\
+        Non-repudiation     & Cross           & Check           \\
+        Identity hiding     & Cross           & Check           \\
+      \end{tabular}
+    \end{column}
+    \begin{column}{.6\textwidth}
+      QKD is…
+
+      \begin{itemize}
+        \item Expensive
+        \item Inefficient
+        \item Everlasting secrecy would be nice, but is impractical for real-world setups
+        \item Multi-hop security is impractical
+        \item End-2-end security is missing entirely (no QKD on my end-user device fiesable for now)
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}

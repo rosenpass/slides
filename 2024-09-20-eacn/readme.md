@@ -2,6 +2,14 @@
 
 Encryption, the old-fashioned way
 
+## Abstract
+
+I am the main researcher behind Rosenpass, the only actively-used post-quantum secure protocol with authentication. Rosenpass can be used together with WireGuard and QKD to create hybrid setups, but this is not what I will focus on in this talk. Instead, as the cryptographer of the group, I will attempt to explain the goals and constraints of such a system from a cryptographic perspective.
+
+Together, we will try to get an overview over the many disciplines involved in the construction of real-world cryptographic systems and discuss how these disciplines continuously collaborate to secure systems step by step. We will explore the yardsticks by which high-quality encryption systems are measured and contrast the security properties provided by computational encryption systems any by QKD.
+
+I can not hide the fact that, to many cryptographers, QKD is an inferior technology and for good reason. This however should not discourage proponents of the technology. The need for hybrid systems is an established fact and so we will discuss which properties can only be provided by computational encryption and how extra-security can be achieved even before information-theoretic security becomes practical.
+
 ## Value statement
 
 - Computational cryptography secures communication using modest computational resources
@@ -287,7 +295,7 @@ Panel with engineer: "Our cable was attacked! Good thing we also used cryptograp
 | Post-Quantum | check Green | Supported Green | Supposed Green | 
 | Attacker-mode | passive RED | Active Green | Active Green | 
 | Forward-secrecy | Pairwise Yellow | Green | check green
-| Everlasting-Secrecy | Pairwise Yellow | No Red | Pairwise Yellow | 
+| Everlasting-Secrecy | Pairwise, Extremely Slow Yellow | No Red | Pairwise Yellow | 
 | Authenticity | cross Red | check Green | check green | 
 | Deniability | cross Red | check Green | check green | 
 | Non-repudiation | cross Red | check Green | check Green | 
@@ -297,3 +305,15 @@ Panel with engineer: "Our cable was attacked! Good thing we also used cryptograp
 - Expensive
 - Inefficient
 - Even if QKD devices are not well-reviewed, no security is lost by using them.
+
+## Three pillars in redundant encryption with QKD
+
+- Think of security as redundant, not as additive
+
+- Classical Security
+- PQC
+- QKD
+
+=== Symmetric Encryption ===
+
+- Tie-in reduction proofs/math problems

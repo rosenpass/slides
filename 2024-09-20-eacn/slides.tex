@@ -1,0 +1,208 @@
+\pdfvariable minorversion 7\relax
+\documentclass[aspectratio=169]{rosenpass-beamer}
+\usepackage[english]{babel}
+\usepackage{tikzsymbols}
+\usepackage{pgfornament}
+\usetikzlibrary{calc}
+\usepackage[export]{adjustbox}
+\usepackage{minted}
+\tcbuselibrary{minted}
+\usepackage[autostyle]{csquotes}
+\usepackage{dirtytalk}
+\usepackage{qrcode}
+\usepackage{breakurl}
+
+\usepackage{bbding}
+
+% \usepackage{fontspec} % already loaded
+% not required \usepackage{caption}
+
+\makeatletter
+ \newenvironment{rustblock}[2][]
+    {\VerbatimEnvironment
+    \begin{block}{#2}
+      \let\FVB@VerbatimOut\minted@FVB@VerbatimOut
+      \let\FVE@VerbatimOut\minted@FVE@VerbatimOut
+      \minted@configlang{rust}%
+      \setkeys{minted@opt@cmd}{fontsize=\small,#1}%
+      \minted@fvset
+      \begin{VerbatimOut}[codes={\catcode`\^^I=12},firstline,lastline]{\minted@jobname.pyg}}%
+    {\end{VerbatimOut}%
+        \minted@langlinenoson
+        \expandafter\minted@pygmentize\expandafter{\minted@lang}%
+        \minted@langlinenosoff%
+        \end{block}%
+        }
+\makeatother
+
+\usetikzlibrary{positioning,decorations.pathreplacing,svg.path}
+
+\definecolor{RPPink}{rgb}{274,4,132}
+\definecolor{RPOrange}{rgb}{255, 166, 48}
+\definecolor{RPAquamarine}{rgb}{255, 166, 48}
+\definecolor{RPLightGray}{rgb}{160, 159, 164}
+\definecolor{RPTurquoise}{rgb}{114, 161, 229}
+
+\usepackage{bbding}
+\newcommand*\itemtick{\item[\Checkmark]}
+\newcommand*\itemfail{\item[\XSolidBrush]}
+\newcommand*{\heading}[1]{%
+  {
+    \hspace*{-0.5cm}#1
+    \vspace{1.0em}
+  }
+}
+
+%TODO Short title for the headline?
+\title{Computational, Authenticated Key Distribution}
+\subtitle{Encryption the old-fashioned way}
+\author[Karolin Varner]{\textbf{Karolin Varner}\\ \strut\footnotesize with support from Benjamin Lipp, Lisa Schmidt, and Marei Peischl}
+\institute{\url{https://rosenpass.eu}}
+
+\conference{Workshop on Entanglement Assisted Communication Networks}
+\date{2024-09-20}
+
+\usepackage{biblatex}
+\addbibresource{sources.bib}
+
+\graphicspath{{}{graphics/}}
+
+\ExplSyntaxOn
+\makeatletter
+\tl_new:N \l__ptxcd_rosenpass_interlude_tl
+\tl_set_eq:NN \l__ptxcd_rosenpass_interlude_tl \c_novalue_tl
+\int_new:N \g__ptxcd_interlude_page_int
+\defbeamertemplate{background}{rosenpass-interlude}{
+	\exp_args:NV \tl_if_novalue:nTF {\l__ptxcd_rosenpass_interlude_tl} {
+		\int_gincr:N \g__ptxcd_interlude_page_int
+		\file_if_exist:nF {graphics/rosenpass-interlude-generic-\int_use:N \g__ptxcd_interlude_page_int.jpeg} {
+				\file_if_exist:nF {rosenpass-interlude-generic-\int_use:N \g__ptxcd_interlude_page_int.jpeg} {\int_gset:Nn \g__ptxcd_interlude_page_int {1}}
+		}
+		\includegraphics[width=\paperwidth,height=\paperheight]{rosenpass-interlude-generic-\int_use:N \g__ptxcd_interlude_page_int}
+	} {
+		\includegraphics[width=\paperwidth,height=\paperheight]{rosenpass-interlude-\l__ptxcd_rosenpass_interlude_tl}
+	}
+}
+
+
+\cs_new:cpn {ps@interlude} {%
+	\setbeamertemplate{background}[rosenpass-interlude]
+	\use:c {ps@navigation}%
+}
+
+\setbeamercolor{interlude}{fg=white,bg=}
+
+%\keys_define:nn {ptxcd/rosenpass-interlude}{
+
+\NewDocumentCommand{\interlude}{sD<>{}O{\c_novalue_tl}d<>md<>}{
+	\begingroup
+		\tl_set:Nn \l__ptxcd_rosenpass_interlude_tl  {#3}
+%		\IfNoValueF{#2}{\keys_set:nn {ptxcd/rosenpass-interlude}{#2}}
+		\begin{frame}[c]
+			\leavevmode
+			\thispagestyle{interlude}
+			\IfBooleanT{#1}{\setbeamercolor{interlude}{fg=black}}
+			\begin{beamercolorbox}[wd=\dimexpr\paperwidth-6ex,sep=3ex,center,#2]{interlude}
+				\IfNoValueF{#4}{{\usebeamerfont{interlude-annotation}#4}\par}
+				\usebeamerfont{interlude}#5\par
+				\IfNoValueF{#6}{{\usebeamerfont{interlude-annotation}#6}\par}
+			\end{beamercolorbox}
+		\end{frame}
+	\endgroup
+}
+
+\setbeamerfont{interlude}{size=\Huge}
+\setbeamerfont{interlude-annotation}{size=\large}
+
+\newcounter{enumblock}[page]
+\ExplSyntaxOff
+\newenvironment<>{enumblock}[1]{\renewcommand*{\theenumblock}{\Alph{enumblock}.}\refstepcounter{enumblock}\begin{block}#2{\theenumblock~#1}}{\end{block}}
+\newenvironment<>{enumblock*}[1]{\renewcommand*{\theenumblock}{(\arabic{enumblock})}\refstepcounter{enumblock}\begin{block}#2{\theenumblock~#1}}{\end{block}}
+
+\newcommand{\tikzmark}[2][south]{\tikz[overlay,remember picture] \node[anchor=#1] (#2) {\strut};}
+\usepackage{transparent}
+
+
+\AddToHook{env/columns/begin}{%
+	\setlength\leftmargini{\labelwidth-\labelsep}% spacing adjustment inside the blocks
+ 	\setbeamertemplate{block begin}[rosenpass]
+}
+
+
+\RenewDocumentCommand{\blockquote}{o+m}{%
+\begingroup%
+\arrayrulecolor{rosenpass-blue}\setlength{\arrayrulewidth}{1pt}%
+\begin{tabular}{|p{\dimexpr\linewidth-\tabcolsep-\arrayrulewidth}@{}}
+#2
+\IfNoValueF{#1}{ \tabularnewline\vskip-\parskip\raggedleft#1}
+\end{tabular}\par
+\endgroup
+}
+
+\usepackage{colortbl}
+
+\usepackage{pdfpc}
+
+% test to adjust column spacing
+    \defbeamertemplate{block begin}{rosenpass}
+    {%
+      \begin{beamercolorbox}[colsep*=.75ex]{block title}
+        \usebeamerfont*{block title}\insertblocktitle%
+      \end{beamercolorbox}%
+      {\parskip0pt\par}%
+      \ifbeamercolorempty[bg]{block title}
+      {}
+      {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+      \usebeamerfont{block body}%
+      \begin{beamercolorbox}[colsep*=.75ex,vmode]{block body}%
+        \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+    }
+
+\newlength{\defaultframetextheight}
+\newlength{\extendedframetextheight}
+\ExplSyntaxOn
+\hook_gput_code:nnn {begindocument/end} {calculate-defaultframetextheight} {
+\begingroup
+	\def\insertframetitle{\strut}
+	\vbox_set:Nn \l_tmpa_box {
+		\vbox{}%
+		{\parskip0pt\usebeamertemplate***{frametitle}\vskip0.25em}%
+	}%
+	\dim_gset:Nn \defaultframetextheight {\textheight - \box_ht:N \l_tmpa_box -  \box_dp:N \l_tmpa_box -\ht\strutbox-\dp\strutbox}
+	\dim_gset:Nn {\extendedframetextheight}{\defaultframetextheight + \ht\strutbox}
+\endgroup
+}
+\newcommand{\stretchcolumn}[1]{
+	\vbox_to_ht:nn {\ifrosenpass@notopskip\defaultframetextheight\else\extendedframetextheight\fi} {
+		\dim_set:cn {beamer@frametopskip}{0pt}
+		\skip_vertical:n {\c_zero_dim plus .5fil}
+		#1
+		\skip_vertical:n {\c_zero_dim plus .5fil}
+	}
+}
+\ExplSyntaxOff
+
+\setbeamercolor{overlaybox}{bg=white}
+
+\ExplSyntaxOn
+\NewDocumentCommand{\QRCode}{sm}{
+	\tl_if_in:nnTF {#2} {//} {\tl_set:Nn \l_tmpa_tl {#2}} {\tl_set:Ne \l_tmpa_tl {https\c_colon_str//}\tl_put_right:Nn \l_tmpa_tl {#2}}
+	\parbox{1.2cm}{
+		\tiny
+		\exp_args:NnV \use:n {\qrcode[height=\linewidth]}\l_tmpa_tl
+		\IfBooleanF{#1}{
+			\par\smallskip
+			\makebox[\linewidth][c]{\nolinkurl{#2}}
+		}
+	}
+}
+\ExplSyntaxOff
+
+
+\begin{document}
+
+\maketitle
+
+\input{content}
+
+\end{document}
