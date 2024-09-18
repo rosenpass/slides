@@ -7,7 +7,7 @@
 
 \begin{frame}{Proofs of security are fundamental: Reduction proofs}
   \small
-  Proof by reduction to a well-known mathematical problem or existing cryptographic construction.
+  Proof by reduction to a well-known mathematical problem \emph{assumed to be hard} or existing cryptographic construction \emph{assumed to be secure}.
   \vfill
   \textbf{If} an attack against my cryptosystem exists,
   \\ \textbf{then} this other cryptosystem can be attacked or this math problem can be solved.
@@ -31,7 +31,7 @@
   $$F : K \times D \to C$$
 
   \begin{description}
-    \item[$K$] Key material; secret information held by all parties
+    \item[$K$] Key material; secret information held by the trusted parties
     \item[$D$] Protected information
     \item[$C$] Leaked information; any information known to the attacker after protocol execution
   \end{description}
@@ -40,7 +40,7 @@
   every value of the protected information is equally plausible.
 
 
-  $$\forall c : C, d_1 : D, d_2 : D; |\{ k \in K | F(k, d_1) = c \}| = |\{ k \in K | F(k, d_1) = c \}|$$
+  $$\forall c : C, d_1 : D, d_2 : D; |\{ k \in K | F(k, d_1) = c \}| = |\{ k \in K | F(k, d_2) = c \}|$$
 \end{frame}
 
 \begin{frame}{Proofs are fundamental: Implementation security}
@@ -48,7 +48,7 @@
 
     \begin{column}{.40\textwidth}
       \begin{block}{Functional Correctness}
-        Using formal methods from computer science that a cryptographic implementation is equivalent to its specification.
+        Using formal methods from computer science that a cryptographic implementation is functionally equivalent to its specification.
       \end{block}
       
       \vfill
@@ -88,9 +88,11 @@
 \end{frame}
 
 
-\begin{frame}{Open-Source \& Open-Science are mandatory}
+\begin{frame}{Implementations and specifications must be open}
   % TODO(marei): Can we render this as full-size background image
   \includegraphics{graphics-repo/misc/kryptoparty.jpg}
+
+  % TODO(karolin): Copy/paste kerkoffs principle
 \end{frame}
 
 \begin{frame}{Open-Source \& Open-Science are mandatory}
