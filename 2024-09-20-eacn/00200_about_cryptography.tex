@@ -87,40 +87,36 @@
   \end{itemize}
 \end{frame}
 
-
+%\setbeamertemplate{background-canvat}{\include}
 \begin{frame}{Implementations and specifications must be open}
   % TODO(marei): Can we render this as full-size background image
   \includegraphics{graphics-repo/misc/kryptoparty.jpg}
-
   % TODO(karolin): Copy/paste kerkoffs principle
 \end{frame}
 
 \begin{frame}{Open-Source \& Open-Science are mandatory}
-  \begin{columns}[fullwidth,T]
-    \only<1>{
-      \begin{column}{.6\textwidth}
-        \includegraphics[width=.45\textwidth]{graphics-repo/comic/rosenpass-comic_01-obscurity1.jpg}
-        \includegraphics[width=.45\textwidth]{graphics-repo/comic/rosenpass-comic_01-obscurity2.jpg}
+  \begin{columns}[onlytextwidth,c]
+      \begin{column}<only@+|handout:+>{\defaultframetextheight}
+        \includegraphics[width=.5\linewidth]{graphics-repo/comic/rosenpass-comic_01-obscurity1.jpg}%
+        \includegraphics[width=.5\linewidth]{graphics-repo/comic/rosenpass-comic_01-obscurity2.jpg}
 
-        \includegraphics[width=.45\textwidth]{graphics-repo/comic/rosenpass-comic_01-obscurity3.jpg}
-        \includegraphics[width=.45\textwidth]{graphics-repo/comic/rosenpass-comic_01-obscurity4.jpg}
+        \includegraphics[width=.5\linewidth]{graphics-repo/comic/rosenpass-comic_01-obscurity3.jpg}%
+        \includegraphics[width=.5\linewidth]{graphics-repo/comic/rosenpass-comic_01-obscurity4.jpg}
       \end{column}
-
-      \begin{column}{.4\textwidth}
+		
+      \begin{column}<only@.|handout:.>{.4\linewidth}
         Keeping details about a security system secret creates mistrust and risks obscuring obvious security flaws
       \end{column}
-    }
 
-    \only<2>{
-      \begin{column}{.4\textwidth}
+      % 2nd overlay
+      \begin{column}<only@+|handout:+>{.4\linewidth}
         Cryptography is about creating trust; so peer review and open processes are a crucial part of the process.
       \end{column}
-
-      \begin{column}{.6\textwidth}
-        \includegraphics[width=.45\textwidth]{graphics-repo/comic/rosenpass-comic_02-disclosure1.jpg}
-        \includegraphics[width=.45\textwidth]{graphics-repo/comic/rosenpass-comic_02-disclosure2.jpg}
+	\hfill
+      \begin{column}<only@.|handout:.>{\defaultframetextheight}
+        \includegraphics[width=.5\linewidth]{graphics-repo/comic/rosenpass-comic_02-disclosure1.jpg}%
+        \includegraphics[width=.5\linewidth]{graphics-repo/comic/rosenpass-comic_02-disclosure2.jpg}
       \end{column}
-    }
   \end{columns}
 \end{frame}
 

@@ -1,7 +1,7 @@
 \interlude[1]{Secure Channels}
 
 \begin{frame}{Secure Channel Protocols}
-  \begin{columns}[T]
+  \begin{columns}[T,onlytextwidth]
     \begin{column}{.4\linewidth}
       \small
 
@@ -17,7 +17,8 @@
       \end{itemize}
     \end{column}
     \begin{column}{.55\linewidth}
-     \includegraphics[width=\linewidth]{graphics/2024-09-13-rosenpass-tls-cert.png}
+    \raggedleft
+    \includegraphics[height=\defaultframetextheight]{graphics/2024-09-13-rosenpass-tls-cert.png}
     \end{column}
   \end{columns}
 \end{frame}
@@ -47,12 +48,12 @@
 \interlude[1]{Secure channels: Security Properties}
 
 \begin{frame}{Active \& Passive Security: Passive attacker}
-  \includegraphics[width=.95\linewidth]{graphics-repo/comic/rosenpass-comic_03-interception1.jpeg}
+  \includegraphics[height=\defaultframetextheight]{graphics-repo/comic/rosenpass-comic_03-interception1.jpeg}
 \end{frame}
 
 \begin{frame}{Active \& Passive Security: Active attacker}
   \raggedright
-  \includegraphics[width=.95\linewidth]{graphics-repo/comic/rosenpass-comic_03-interception2.jpeg}
+  \includegraphics[height=\defaultframetextheight]{graphics-repo/comic/rosenpass-comic_03-interception2.jpeg}
 \end{frame}
 
 \begin{frame}{Secrecy}
@@ -91,6 +92,7 @@
 \begin{frame}{Advanced properties}
   Often provided by secure messaging protocols such as Signal or MLS
 
+\bigskip
   \begin{itemize}
     \item Post-compromise security (recovering security after a compromise)
     \item Group messaging
