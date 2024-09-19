@@ -21,7 +21,7 @@ Handshake graphic
 
 - Introduce the methods used in cryptography
 - Identify the value statement QKD can provide given the above constraints
-- Contrast QKD and computational cryptography 
+- Contrast QKD and computational cryptography
 
 ## About me
 
@@ -37,7 +37,8 @@ My picture
 ## Rosenpass
 
 … Rosenpass slide
-+ Interdisciplinary
+
+- Interdisciplinary
 
 ## Cryptography Science Workflow
 
@@ -48,38 +49,37 @@ My picture
 This might be to complex as it is here in writing.
 I can create a template graphic for you.
 
-
 Swirls
 
 - Identify goals colloquially "Secure communication"
 - Operationalize goals "Authenticity, Secrecy"
-(Philosophical)
+  (Philosophical)
 
 - Formalize security notions "IND-CCA2, forward secrecy"
 - Compare contrast and compose "eCK-PFS-PSK"
-(Mathematical)
+  (Mathematical)
 
 - Develop mathematical construction (e.g. Noise-IK)
-- Create security proof 
-(Mathematical)
+- Create security proof
+  (Mathematical)
 
 - Implement concrete protocol (e.g. WireGuard)
 - Optimize concrete protocol
 - Find & Attack implementation flaws
-(Computer science)
+  (Computer science)
 
 - Analyze practical security concerns (e.g. side-channel attacks)
 - Analyze usability of implementation
-(Computer science, Electrical Engineering, Physics, etc.)
+  (Computer science, Electrical Engineering, Physics, etc.)
 
 - Disseminate
 - Deploy
-- Analyze practical security aspects 
+- Analyze practical security aspects
 - Improve usability
-(Operations, Psychology, Social sciences, Human interface design)
+  (Operations, Psychology, Social sciences, Human interface design)
 
 - Analyze social impact
-(Social sciences)
+  (Social sciences)
 
 Lots of circles in one bigger circle spiraling out.
 Each subcirle has an arrow going out "novel attacks"
@@ -96,15 +96,16 @@ Reduction to mathematical problem:
 Information theoretic.
 
 1. Formulate cryptosystems as a function where
-    * K – key material –  represents any secret information held by all parties
-    * D – protected information – represents any information to be protected
-    * C – leaked information –  represents any information known to the attacker after execution of the cryptosystem
 
-    $F : K \times D \to C$ 
+   - K – key material – represents any secret information held by all parties
+   - D – protected information – represents any information to be protected
+   - C – leaked information – represents any information known to the attacker after execution of the cryptosystem
+
+   $F : K \times D \to C$
 
 2. Show that every every possible value of the leaked information, every possible protected information is equally likely
 
-    $\forall c : C, d_1 : D, d_2 : D; |{ k \in K | F(k, d_1) = c }| = |{ k \in K | F(k, d_1) = c }|$
+   $\forall c : C, d_1 : D, d_2 : D; |{ k \in K | F(k, d_1) = c }| = |{ k \in K | F(k, d_1) = c }|$
 
 Functional correctness of implementations:
 
@@ -113,8 +114,8 @@ Functional correctness of implementations:
 Implementation security:
 
 1. Using mechanized verification to show that an implementation fulfills security properties such as
-    - Timing side-channel resistance (certain assembly operations are forbidden)
-    - Memory-safety (utilize advanced programming languages such as Rust to avoid buffer overflow and other memory safety errors)
+   - Timing side-channel resistance (certain assembly operations are forbidden)
+   - Memory-safety (utilize advanced programming languages such as Rust to avoid buffer overflow and other memory safety errors)
 
 Efficiency of implementation:
 
@@ -141,6 +142,7 @@ Efficiency of implementation:
 @mullana Comic strip style illustration of cryptography as a community process
 
 Panel:
+
 - Single person saying: "Trust me, I built this, this is secure"
 - Other person saying: "Can I see it"; single person: "No, its a secret!"; "but what if you made a mistake"
 - Single person saying: "Just trust me already!"
@@ -191,7 +193,7 @@ Active – man in the middle: Graphic of alice communicating with attacker; atta
 
 @mullana Two strip-style graphics
 
-Secrecy: Panel of attacker trying to pry into a delivery package. 
+Secrecy: Panel of attacker trying to pry into a delivery package.
 
 Authenticity: Panel of attacker glueing a patch over the package address, but package contains a certificate when bob takes it out.
 
@@ -207,7 +209,7 @@ Identity hiding: Panels of klandestine package-dropoff, delivery. Panel of empty
 
 Deniability: Panel of Bob going to a judge: "Alice sent me this". Panel of judge looking at package (with a spyglass?) "I can see no fingerprings. Guess you can't prove it".
 
-Non-repudiation:  Panel of Bob going to a judge: "Alice sent me this". Panel of judge looking at a certificate: "This is clearly Alice's seal!"
+Non-repudiation: Panel of Bob going to a judge: "Alice sent me this". Panel of judge looking at a certificate: "This is clearly Alice's seal!"
 
 :::
 
@@ -233,7 +235,7 @@ Forward secrecy can be broken when a cryptographic scheme itself is broken: Pict
 
 Everlasting secrecy: Picture of destroying the package using some quantum device. Picture of attacker dissapointed at the remains being quantum. "Damn, these are quantum ashes."
 
-Comic style scientific illustration: 
+Comic style scientific illustration:
 A computer network of machines (feel free to represent as dots or circles),
 alice & bob communicating through multiple nodes on that network.
 The path through that network is marked one color; annotated "Software encryption".
@@ -254,16 +256,16 @@ Subtitle: Software encryption is end-to-end, but QKD is not. What if an attacker
 - Expensive
 - Inefficient
 
-| Security property | QKD | Software encryption |
-| --- | --- | --- | 
-| Post-Quantum | check Green | Possibly Green | 
-| Attacker-mode | passive RED | Active Green
-| Forward-secrecy | Pairwise Yellow | Green |
-| Everlasting-Secrecy | Pairwise Yellow | No Red |
-| Authenticity | cross Red | check Green |
-| Deniability | cross Red | check Green |
-| Non-repudiation | cross Red | check Green |
-| Identity hiding | cross Red | check Green | 
+| Security property   | QKD             | Software encryption |
+| ------------------- | --------------- | ------------------- |
+| Post-Quantum        | check Green     | Possibly Green      |
+| Attacker-mode       | passive RED     | Active Green        |
+| Forward-secrecy     | Pairwise Yellow | Green               |
+| Everlasting-Secrecy | Pairwise Yellow | No Red              |
+| Authenticity        | cross Red       | check Green         |
+| Deniability         | cross Red       | check Green         |
+| Non-repudiation     | cross Red       | check Green         |
+| Identity hiding     | cross Red       | check Green         |
 
 ## QKD as a measure of hardware security
 
@@ -290,17 +292,16 @@ Panel with engineer: "Our cable was attacked! Good thing we also used cryptograp
 
 :::
 
-| Security property | QKD | Software encryption | Hybrid | 
-| --- | --- | --- | 
-| Post-Quantum | check Green | Supported Green | Supposed Green | 
-| Attacker-mode | passive RED | Active Green | Active Green | 
-| Forward-secrecy | Pairwise Yellow | Green | check green
-| Everlasting-Secrecy | Pairwise, Extremely Slow Yellow | No Red | Pairwise Yellow | 
-| Authenticity | cross Red | check Green | check green | 
-| Deniability | cross Red | check Green | check green | 
-| Non-repudiation | cross Red | check Green | check Green | 
-| Identity hiding | cross Red | check Green | check Green | 
-
+| Security property   | QKD                             | Software encryption | Hybrid          |
+| ------------------- | ------------------------------- | ------------------- | --------------- |
+| Post-Quantum        | check Green                     | Supported Green     | Supposed Green  |
+| Attacker-mode       | passive RED                     | Active Green        | Active Green    |
+| Forward-secrecy     | Pairwise Yellow                 | Green               | check green     |
+| Everlasting-Secrecy | Pairwise, Extremely Slow Yellow | No Red              | Pairwise Yellow |
+| Authenticity        | cross Red                       | check Green         | check green     |
+| Deniability         | cross Red                       | check Green         | check green     |
+| Non-repudiation     | cross Red                       | check Green         | check Green     |
+| Identity hiding     | cross Red                       | check Green         | check Green     |
 
 - Expensive
 - Inefficient
