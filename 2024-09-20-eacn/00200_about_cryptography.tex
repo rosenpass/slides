@@ -44,21 +44,19 @@
 \end{frame}
 
 \begin{frame}{Proofs are fundamental: Implementation security}
-  \begin{columns}[t,fullwidth]
+  \begin{columns}[t]
 
-    \begin{column}{.40\textwidth}
-      \begin{block}{Functional Correctness}
+    \begin{column}{.5\linewidth}
+      \begin{block}{Functional Correctness\rule[-.5\dp\strutbox]{0pt}{.5\dp\strutbox}}%TODO template Marei: hacky -> add half dp strut to block template
         Using formal methods from computer science that a cryptographic implementation is functionally equivalent to its specification.
       \end{block}
-      
-      \vfill
 
       \begin{block}{Efficiency}
         Using complexity theoretic analysis to ensure that the implementation can not be slowed down by an attacker.
       \end{block}
     \end{column}
 
-    \begin{column}{.55\textwidth}
+    \begin{column}{.5\linewidth}
       \begin{block}{Implementation security}
         Ensuring cryptographic implementation fulfill various extra security properties.
         For example:
