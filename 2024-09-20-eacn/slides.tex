@@ -13,6 +13,20 @@
 \usepackage{breakurl}
 
 \usepackage{bbding}
+% Add proper “actual text“ for checkmark and cross
+\usepackage{accsupp}
+\let\bbdingCheckmark\Checkmark
+\let\bbdingXSolidBrush\XSolidBrush
+\renewcommand*{\Checkmark}{%
+	\BeginAccSupp{method=hex,unicode,ActualText=2713}%
+	\bbdingCheckmark%
+	\EndAccSupp{}%
+}
+\renewcommand*{\XSolidBrush}{%
+	\BeginAccSupp{method=hex,unicode,ActualText=2717}%
+	\bbdingXSolidBrush%
+	\EndAccSupp{}%
+}
 
 % \usepackage{fontspec} % already loaded
 % not required \usepackage{caption}

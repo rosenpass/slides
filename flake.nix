@@ -23,7 +23,7 @@
             eso-pic biblatex biblatex-trad biblatex-software xkeyval xurl
             xifthen biber dirtytalk tikzsymbols pgfornament pgfopts bbding
             transparent pdfpc hyperxmp luacode luatexbase adjustbox
-            tikzfill caption qrcode upquote breakurl;
+            tikzfill caption qrcode upquote breakurl accsupp;
         };
 
         documents = (builtins.fromTOML (builtins.readFile ./documents.toml)).documents;
