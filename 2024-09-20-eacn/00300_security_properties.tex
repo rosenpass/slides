@@ -108,27 +108,28 @@
 \end{frame}
 
 \begin{frame}{QKD Caveats}
-  \begin{columns}
-    \begin{column}{.4\textwidth}
-
-      % TODO(marei): Can we use proper checkmark/cross symbols here here?
+\def\Check{\cellcolor{rosenpass-lightblue}\Checkmark}
+\def\Cross{\cellcolor{red!10}\XSolidBrush}
+\def\Impractical{\cellcolor{yellow!20}{Impractical}}%TODO Ideas for some icon?
+  \begin{columns}[fullwidth]
+      % TODO(marei):
       % Can we use a light-green background for green, a light-red one for cross and a yellow one for impractical?
       % Can we generally make this look nice and graphic-y?
-      \begin{tabular}{ l c c }
-        \textbf{Security property} & \textbf{QKD} & \textbf{Software encryption} \\
+      \begin{tabular}{l c c}
+        \textbf{Security property} & \textbf{QKD} & \multicolumn{1}{p{\widthof{\bfseries encryption}}}{\centering\bfseries Software encryption} \\
 
-        Post-Quantum        & Check           & Check           \\
-        Forward-secrecy     &                 & Check           \\
-        Everlasting-Secrecy & Impractical     & Cross           \\
-        End-2-End           & Impractical     & Check           \\
-        Active Attackers    & Cross           & Check           \\
-        Authenticity        & Cross           & Check           \\
-        Deniability         & Cross           & Check           \\
-        Non-repudiation     & Cross           & Check           \\
-        Identity hiding     & Cross           & Check           \\
-      \end{tabular}
-    \end{column}
-    \begin{column}{.6\textwidth}
+        Post-Quantum        & \Check           & \Check           \\
+        Forward-secrecy     &                 & \Check           \\
+        Everlasting-Secrecy & \Impractical     & \Cross           \\
+        End-2-End           & \Impractical     & \Check           \\
+        Active Attackers    & \Cross           & \Check           \\
+        Authenticity        & \Cross           & \Check           \\
+        Deniability         & \Cross           & \Check           \\
+        Non-repudiation     & \Cross           & \Check           \\
+        Identity hiding     & \Cross           & \Check           \\
+      \end{tabular}\qquad
+    \begin{column}{.48\textwidth}
+
       QKD is…
 
       \begin{itemize}
@@ -139,5 +140,6 @@
         \item End-2-end security is missing entirely (no QKD on my end-user device fiesable for now)
       \end{itemize}
     \end{column}
+    \hfill
   \end{columns}
 \end{frame}
