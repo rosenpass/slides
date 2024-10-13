@@ -40,6 +40,7 @@
                   sourceRoot = "./${name}";
                   nativeBuildInputs = with pkgs; [
                     google-fonts
+                    python3Packages.pygments
                     tex
                   ];
                   buildPhase = ''
