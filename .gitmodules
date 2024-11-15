@@ -1,3 +1,3 @@
-[submodule "2024-09-20-eacn/graphics-repo"]
-	path = 2024-09-20-eacn/graphics-repo
-	url = https://github.com/rosenpass/graphics
+[submodule "tex"]
+	path = tex
+	url = git@github.com:rosenpass/rosenpass-LaTeX.git
