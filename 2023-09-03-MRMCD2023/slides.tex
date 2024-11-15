@@ -1,10 +1,7 @@
-\documentclass{rosenpass-beamer}
-\usepackage[german]{babel}
+\documentclass[german]{rosenpass-beamer}
 
-\usepackage{emoji}
-
-\usepackage{xurl}
-\urlstyle{same}
+\input{../common-setup}
+\usepackage{relsize}
 
 \homepage{\url{https://rosenpass.eu}}
 \social{\url{https://chaos.social/@rosenpass}}
@@ -59,13 +56,17 @@
   }
 }
 
+\newcommand*{\heading}[1]{%
+  {
+    \hspace*{-0.5cm}#1
+    \vspace{1.0em}
+  }
+}
+
 
 % reduce itemize indent
 \setlength{\leftmargini}{0pt}
 
-\usepackage{biblatex}
-\addbibresource{sources.bib}
-\graphicspath{{}{graphics/}}
 
 \begin{document}
 
@@ -199,7 +200,7 @@
 \end{frame}
 
 \begin{frame}{Zum Nachbauen… aus dem Whitepaper:}
-  \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-message-handling-code.pdf}
+  \includegraphics[height=.9\textheight]{rosenpass-whitepaper-message-handling-code.pdf}
 \end{frame}
 
 \begin{frame}{Zum Nachbauen… go-rosenpass – Steffen Vogel FTW}
