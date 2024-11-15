@@ -89,12 +89,16 @@
 \defbeamertemplate{background}{rosenpass-interlude}{
 	\exp_args:NV \tl_if_novalue:nTF {\l__ptxcd_rosenpass_interlude_tl} {
 		\int_gincr:N \g__ptxcd_interlude_page_int
-		\file_if_exist:nF {graphics/rosenpass-interlude-generic-\int_use:N \g__ptxcd_interlude_page_int.jpeg} {
-				\file_if_exist:nF {rosenpass-interlude-generic-\int_use:N \g__ptxcd_interlude_page_int.jpeg} {\int_gset:Nn \g__ptxcd_interlude_page_int {1}}
-		}
-		\includegraphics[width=\paperwidth,height=\paperheight]{rosenpass-interlude-generic-\int_use:N \g__ptxcd_interlude_page_int}
+%		\file_if_exist:nF {graphics/rosenpass-interlude-generic-\int_use:N \g__ptxcd_interlude_page_int.jpeg} {
+%				\file_if_exist:nF {rosenpass-interlude-generic-\int_use:N \g__ptxcd_interlude_page_int.jpeg} {\int_gset:Nn \g__ptxcd_interlude_page_int {1}}
+%		}
+		\includegraphics[width=\paperwidth,height=\paperheight]{
+			artsy-slide-backgrounds-smaller-hd/artsy-mild-bg-\int_use:N \g__ptxcd_interlude_page_int}
+			%rosenpass-interlude-generic-\int_use:N \g__ptxcd_interlude_page_int}
 	} {
-		\includegraphics[width=\paperwidth,height=\paperheight]{rosenpass-interlude-\l__ptxcd_rosenpass_interlude_tl}
+		\includegraphics[width=\paperwidth,height=\paperheight]{
+			artsy-slide-backgrounds-smaller-hd/artsy-mild-bg-1\l__ptxcd_rosenpass_interlude_tl}
+			%rosenpass-interlude-\l__ptxcd_rosenpass_interlude_tl}
 	}
 }
 
