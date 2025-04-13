@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-use log *
+use std log
 
 # cd to git root
 cd (git rev-parse --show-toplevel)
