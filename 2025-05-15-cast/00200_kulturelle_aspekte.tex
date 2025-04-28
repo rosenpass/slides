@@ -38,20 +38,35 @@
     \item Hohes Zuverlässigkeit nötig
     \item Analyse von Softwaresystemen in reeller Hardware
     \item Rigorose Validierungsprozesse
-    \item -> limitieren minimale, maximale Validierungsgüte
+    \item -> Gesetzliche Anforderungen verpflichten zur Mittelmäßigkeit
+    \item Dokumentation von Systemzielen ist sehr wertvoll
   \end{itemize}
 \end{frame}
 
 
-\begin{frame}[T]{Methodiken}
+\begin{frame}[T]{Akzeptanzkriterien}
   \begin{itemize}
-    \item Sicherheit kann durch bewährte Praxis argumentiert werden, oft gilt „alt==Gold“
-    \item Sicherheit kann nicht so argumentiert werden, der goldene Weg ist die formale Verifizierung
-    \item => niemand behauptet, dass 3DES aufgrund seines Alters gut ist
+    \item Safety
+    \begin{itemize}
+      \item Requirements-getriebenes Testen % üblich
+      \item "Proven in use" % unüblich
+      \item Formale Verifikation % selten
+    \end{frame}
+
+    \item Security
+    \begin{itemize}
+      \item "Proven in use" reicht nicht, aber neuen Verfahren wird dennoch misstraut
+      \item Testen unzureichend aufgrund gezielter Angriffe
+      \item Formale Verifikation ist der Goldweg
+      \item Security kann nicht so argumentiert werden, der goldene Weg ist die formale Verifizierung
+    \end{itemize}
+
+    %\item -> niemand behauptet, dass 3DES aufgrund seines Alters gut ist
     \item => aber auch neuartigen Algorithmen wird weniger vertraut...
-    \item Sicherheit geht (oft) von zufälligem Versagen aus
-    \item Sicherheit geht von gezielten Angriffen aus
-    \item Sicherheit, die gegen entschlossene Angreifer gilt, gilt auch gegen zufälliges Versagen
-    \item Redundanz funktioniert in beiden Bereichen
+    % \item Sicherheit geht (oft) von zufälligem Versagen aus
+    % \item Sicherheit geht von gezielten Angriffen aus
+    % \item Sicherheit, die gegen entschlossene Angreifer gilt, gilt auch gegen zufälliges Versagen
+
+    \item Redundanz um Ansprüche an Einzelkomponenten zu senken
   \end{itemize}
 \end{frame}
