@@ -1,4 +1,4 @@
-\interlude[1]{Kryptografie und Avionik im Dialog}
+\interlude[1]{Kryptografie in der Avionik}
 
 \begin{frame}{Die Vier Domänen der Sicherheit sind…}
   \begin{columns}[c]
@@ -41,18 +41,37 @@
 \end{frame}
 
 \begin{frame}[c]{Ansätze für Verbesserung in beiden Bereichen}
+  % TODO wucke refine 
 
   Verifikationstechniken
   \vspace{0.5em}
 
   {\footnotesize Zertifizierung <-> Sicherheitsbeweise}
   \vspace{1.5em}
+  % Formaler Beweis kann Teil der Evidence für Zertifizierung sein
+  % Annahmen und Anforderungen müssen in den Zertifizierungsdokumenten festgehalten werden
+  % Evidence = Belege, warum Annahmen wahr sind oder Anforderungen erfüllt sind
+  % Unabhängigkeit zwischen Implementierer und Verifizierer
 
   Kompartmentalisierung
   \vspace{0.5em}
 
   {\footnotesize Partitionierung <-> Brokerarchitekturen}
   \vspace{1.5em}
+  % Aufteilung erleichtert sukzessive Absicherung einzelner Komponent
+  % Gleichzeitig: Faultcontainment
+  % Modularisierung macht updates einfacher, da klare interfaces zwischen Modulen
+
+  % Diagram Idee: Konfidenzarchitektur
+  %
+  % 1. Identifiziere mögliche Fehlerursachen
+  % 2. Ist ein Fehler relevant?
+  %   - Falls Nein, warum nicht? Evidence!
+  % 3. Welche Effekte hat der Fehler?
+  % 4. Wie kann der Fehler verhindert/eingedämmt/mitigiert werden?
+  % 5. Wie kann der Fehler erkannt werden?
+  % 6. Validiere Annahmen von 3. - 5.
+  % 7. Review durch unabhängigen Assesor
 
   => Kryptoagilität
 \end{frame}
