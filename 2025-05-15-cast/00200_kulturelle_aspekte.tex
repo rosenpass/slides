@@ -1,10 +1,40 @@
 \interlude[0]{Safety \& Security \\ \Large \hrule \vspace{1.2em} Kulturelle Aspekte}
 \section{Safety \& Security}
 
+\begin{frame}[T]{Safety \& Security: Definition}
+% GOAL Beide Begriffe einführen
+\small
+  \begin{columns}[t,fullwidth]
+   \hfill
+    \begin{column}{.45\linewidth}
+      \begin{block}{Safety}
+      \begin{itemize}
+        \item Schutz von Lebewesen
+        \item Zumeist Cyber-Physisch, z.B. Computer + Elektromechanischer Aktuator
+      \end{itemize}
+      \end{block}
+    \end{column}
+    \hfill
+    \begin{column}{.45\linewidth}
+      \begin{block}{Security}
+      \begin{itemize}
+        \item Schutz von Informationen
+        \item Entweder: Information wird Dritten Zugänglich
+        \item Oder: Information wird durch Dritte Manipuliret
+      \end{itemize}
+      \end{block}
+    \end{column}
+    \hfill
+  \end{columns}
+\end{frame}
 % TODO Definitions slide für Safety und Security hinzufügen
 
-\begin{frame}[T]{Safety \& Security: Unterschiede}
-% GOAL Klar machen, dass beide Begriff verschieden sind und verschiedene Vorgehen erfordern
+\begin{frame}[T]{Problemstellungen}
+% GOAL Verfahren sind beim ersten Hinblick inkompatibel, Klar machen, dass beide Begriff verschieden sind und verschiedene Vorgehen erfordern
+% Folien 6, 8,: Problemstellung
+% Folie 9: Es gibt gründe für die Unvereinbarkeit
+% Folie 7: Es gibt aber auch gemeinsamkeiten
+% TODO Grafik aus Poster einfügen
 \small
   \begin{columns}[t,fullwidth]
    \hfill
@@ -35,28 +65,16 @@
   \end{columns}
 \end{frame}
 
-
-\begin{frame}[T]{Safety \& Security: Gemeinsamkeiten}
-  % GOAL Klar machen, dass beide Begriffe aber auch wichtige Gemeinsamkeiten haben
-  \begin{itemize}
-    \item Hohes Zuverlässigkeit nötig
-    \item Analyse von Softwaresystemen in reeller Hardware
-    \item Rigorose Validierungsprozesse
-    \item -> Gesetzliche Anforderungen verpflichten zur Mittelmäßigkeit
-    \item Dokumentation von Systemzielen ist sehr wertvoll
-  \end{itemize}
-\end{frame}
-
 %
 \begin{frame}[T]{Akzeptanzkriterien}
   % GOAL erklären, wie man in Safety/Security Konfidenz erzeugt, einen guten Job gemacht zu haben
-   % TODO make this horizontal?
+  % TODO make this a table
   \begin{itemize}
     \item Safety
     \begin{itemize}
-      \item Requirements-getriebenes Testen % üblich
-      \item "Proven in use" % unüblich
-      \item Formale Verifikation % selten
+      \item Goldstandard: Requirements-getriebenes Testen % üblich
+      \item Alternative: "Proven in use" % unüblich
+      \item Alternative: Formale Verifikation % selten
     \end{itemize}
 
     \item Security
@@ -66,15 +84,11 @@
       \item Formale Verifikation ist der Goldweg
     \end{itemize}
 
-    \item Gemeinsamkeit
-    \begin{itemize}
-      \item Redundanz um Ansprüche an Einzelkomponenten zu senken
-      \item Unabhängiges Review
-    \end{itemize}
   \end{itemize}
 \end{frame}
 
-\begin{frame}[T]{Safety- \& Securitykultur}
+\begin{frame}[T]{Kulturen}
+  % GOAL Es gibt Unterschiede, die Begründet sind. Wenn Safety und Security verbunden werden sollen, müssen beide Gründe verstanden werden.
   \begin{itemize}
     \item Safety
     \begin{itemize}
@@ -89,5 +103,23 @@
       \item Problemtypen sind dynamisch und ändern sich dauernd
       \item => Progressive Ingenieurskultur
     \end{itemize}
+
+    \item Security und Safety Kombiniert:
+    \begin{itemize}
+      \item Menschen sterben bei Versagen
+      \item Aber die Probleme sind dynamisch, die Zielsetzung in Bewegung
+      \item Konservativ \todo{blitz} Progressiv
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[T]{Versöhnung} % TODO more scientific term
+  % GOAL Klar machen, dass beide Domänen nicht unversöhnbar sind
+  \begin{itemize}
+    \item Hohes Zuverlässigkeit nötig
+    \item Analyse von Softwaresystemen in reeller Hardware
+    \item Rigorose Validierungsprozesse (Peer-Review)
+    \item Klarheit der Systemziele ist essentiell
+    \item Umsetzung redundanter Systeme verbreitet
   \end{itemize}
 \end{frame}
