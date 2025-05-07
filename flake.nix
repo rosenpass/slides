@@ -50,6 +50,7 @@
             relsize
             soul
             unicode-math
+            lineno
             lualatex-math
             gitinfo2
             eso-pic
@@ -78,6 +79,7 @@
             breakurl
             accsupp
             metafont
+            xstring
             ;
         };
 
@@ -122,6 +124,7 @@
               nixpkgs-fmt
               google-fonts
               nodePackages.prettier
+              python3Packages.pygments # for pygmentize
             ];
             commands = [
               {
