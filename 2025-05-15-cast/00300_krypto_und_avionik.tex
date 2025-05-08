@@ -2,6 +2,7 @@
 
 \begin{frame}{Die Vier Domänen der Sicherheit sind…}
   % GOAL Orientierung, wo wie gerade hinschauen für das Fallbeispiel
+  \Large
   \begin{columns}[c]
     \begin{column}{.5\linewidth}
       \textbf{Luftfahrt}
@@ -34,16 +35,52 @@
 \end{frame}
 
 \begin{frame}[c]{Zum erschrecken aller…}
-  \vspace{10em}
-  \footnotesize
-  …wird in der Luftfahrt heutzutage keine sichere Kryptografie eingesetzt. 
 
-  \vspace{1em}
-  Der eine Ernstzunehmende Vorschlag den wir gefunden hatten -- ein System zum kryptografischen absichern von LDACS --
-  setzte auf post-quanten chiffren (SIKE), gegen die ein Jahr später Angriffe gefunden wurden.
+  \begin{columns}[fullwidth,c]
+    \begin{column}{.5\linewidth}
+      \begin{itemize}
 
-  \vspace{1em}
-  TODO: Insert REFERENCE
+        \footnotesize
+        …wird in der Luftfahrt heutzutage keine sichere Kryptografie eingesetzt. 
+
+        \vspace{1em}
+        Der eine Ernstzunehmende Vorschlag den wir gefunden hatten -- ein System zum kryptografischen absichern von LDACS --
+        setzte auf post-quanten chiffren (SIKE), gegen die ein Jahr später Angriffe gefunden wurden.
+
+        % TODO: Insert REFERENCE
+      \end{itemize}
+    \end{column}%
+    \begin{column}{.5\linewidth}
+      \includegraphics[width=.92\linewidth]{graphics/history of cryptography in avionics}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}[c]{Lösungsvorschlag: Kryptographie}
+
+  \begin{columns}[fullwidth,c]
+    \begin{column}{.4\linewidth}
+      \begin{itemize}
+        \item HPKE als Schema
+        \item Verschiedne Primitive nutzbari
+        \begin{itemize}
+
+        \end{itemize}
+        \item Gemeinsames Interface
+        \begin{itemize}
+          \item Seal
+          \item Open
+        \end{itemize}
+
+        % TODO placement and size of graphics
+        \includegraphics[width=0.5\linewidth]{graphics/hpke}
+      \end{itemize}
+    \end{column}%
+    \begin{column}{.6\linewidth}
+      \includegraphics[width=\linewidth]{graphics/hpke variants}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 % TODO: neue Folie zu unserem Paper

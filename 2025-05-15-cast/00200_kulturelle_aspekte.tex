@@ -10,7 +10,10 @@
       \begin{block}{Safety}
       \begin{itemize}
         \item Schutz von Lebewesen
-        \item Zumeist Cyber-Physisch, z.B. Computer + Elektromechanischer Aktuator
+        \item Zumeist Cyber-Physisch,
+      \begin{itemize}
+         \item z.B. Computer + Elektromechanischer Aktuator
+      \end{itemize}
       \end{itemize}
       \end{block}
     \end{column}
@@ -19,22 +22,20 @@
       \begin{block}{Security}
       \begin{itemize}
         \item Schutz von Informationen
-        \item Entweder: Information wird Dritten Zugänglich
-        \item Oder: Information wird durch Dritte Manipuliret
+        \begin{itemize}
+          \item Information vor Dritten geheimhalten
+          \item Information vor Manipulation durch Dritte schützen
+        \end{itemize}
       \end{itemize}
       \end{block}
     \end{column}
     \hfill
   \end{columns}
 \end{frame}
-% TODO Definitions slide für Safety und Security hinzufügen
 
-\begin{frame}[T]{Problemstellungen}
+\begin{frame}[T]{Problemstellungen \& Rahmenbedingungen}
 % GOAL Verfahren sind beim ersten Hinblick inkompatibel, Klar machen, dass beide Begriff verschieden sind und verschiedene Vorgehen erfordern
-% Folien 6, 8,: Problemstellung
-% Folie 9: Es gibt gründe für die Unvereinbarkeit
-% Folie 7: Es gibt aber auch gemeinsamkeiten
-% TODO Grafik aus Poster einfügen
+% TODO Grafik aus Poster einfügen? Problem: Graifk misch Problem, Kultur und Dialog. Grafik ist english.
 \small
   \begin{columns}[t,fullwidth]
    \hfill
@@ -68,23 +69,41 @@
 %
 \begin{frame}[T]{Akzeptanzkriterien}
   % GOAL erklären, wie man in Safety/Security Konfidenz erzeugt, einen guten Job gemacht zu haben
-  % TODO make this a table
-  \begin{itemize}
-    \item Safety
-    \begin{itemize}
-      \item Goldstandard: Requirements-getriebenes Testen % üblich
-      \item Alternative: "Proven in use" % unüblich
-      \item Alternative: Formale Verifikation % selten
-    \end{itemize}
 
-    \item Security
-    \begin{itemize}
-      \item "Proven in use" reicht nicht, aber neuen Verfahren wird dennoch misstraut
-      \item Testen unzureichend, aufgrund gezielter Angriffe
-      \item Formale Verifikation ist der Goldweg
-    \end{itemize}
 
-  \end{itemize}
+  \begin{table}[]
+    \begin{tabular}{lcccc}
+      \multirow{2}{*}{\bfseries Kriterium}
+        & \multicolumn{2}{c}{\bfseries Konfidenz}
+        & \multicolumn{2}{c}{\bfseries Verbreitung} \\
+                           & \bfseries Safety & \bfseries Security & \bfseries Safety & \bfseries Security \\
+    \hline \\
+    Requirements-getriebenes Testen & +++    & +        & +++        & +        \\
+    Proven-in-use                   & ++     & -        & +          & +        \\
+    Formale Methoden                & +++    & +++      & -          & ++       \\
+    Unabhängiges Review             & ++     & +++      & +++        & +++      \\
+    \end{tabular}
+    \caption{
+  Übersicht der Akzeptanzkriterien in Safety und Security. \textbf{Verbreitung} zeigt an, wie häufig ein Kriterium als tragendes Argument im Assurance-Case benutzt wird. \textbf{Konfidenz} indiziert, wie viel Vertrauen dem Ergebniss eines Kriteriums geschenkt wird. 
+    }
+  \end{table}
+
+  % \begin{itemize}
+  %   \item Safety
+  %   \begin{itemize}
+  %     \item Goldstandard: Requirements-getriebenes Testen % üblich
+  %     \item Alternative: "Proven in use" % unüblich
+  %     \item Alternative: Formale Verifikation % selten
+  %   \end{itemize}
+
+  %   \item Security
+  %   \begin{itemize}
+  %     \item "Proven in use" reicht nicht, aber neuen Verfahren wird dennoch misstraut
+  %     \item Testen unzureichend, aufgrund gezielter Angriffe
+  %     \item Formale Verifikation ist der Goldweg
+  %   \end{itemize}
+  % \end{itemize}
+
 \end{frame}
 
 \begin{frame}[T]{Kulturen}
@@ -94,33 +113,33 @@
     \begin{itemize}
       \item Menschen Sterben bei Versagen
       \item Probleme sind Verstanden und Stabil
-      \item => Konservative Ingenieurskultur
+      \item[$\Rightarrow$] Konservative Ingenieurskultur
     \end{itemize}
 
     \item Security
     \begin{itemize}
       \item Versagen erzeugt eher Finanziellen Schaden
       \item Problemtypen sind dynamisch und ändern sich dauernd
-      \item => Progressive Ingenieurskultur
+      \item[$\Rightarrow$] Progressive Ingenieurskultur
     \end{itemize}
 
     \item Security und Safety Kombiniert:
     \begin{itemize}
       \item Menschen sterben bei Versagen
       \item Aber die Probleme sind dynamisch, die Zielsetzung in Bewegung
-      \item Konservativ \unicode{x21af} Progressiv
+      \item[$\Leftrightarrow$] Konservativ $\lightning$ Progressiv
     \end{itemize}
   \end{itemize}
 \end{frame}
 
-\begin{frame}[T]{Versöhnung} % TODO more scientific term
+\begin{frame}[T]{Vereinigung von Safety \& Security}
   % GOAL Klar machen, dass beide Domänen nicht unversöhnbar sind
   \begin{itemize}
-    \item Hohes Zuverlässigkeit nötig
+    \item Hohe Zuverlässigkeit
+    \item Klarheit über Systemziele
+    \item Rigorose Validierungsprozesse (Unabhängiges Review)
     \item Analyse von Softwaresystemen in reeller Hardware
-    \item Rigorose Validierungsprozesse (Peer-Review)
-    \item Klarheit der Systemziele ist essentiell
-    \item Umsetzung redundanter Systeme verbreitet
-    \item Kryptoagilität Nötig
+    \item Umsetzung Dissimilar-Redundanter Systeme
+    \item Kryptoagilität
   \end{itemize}
 \end{frame}
