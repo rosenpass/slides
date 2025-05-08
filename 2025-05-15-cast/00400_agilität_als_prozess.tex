@@ -2,45 +2,99 @@
 
 \begin{frame}{Technik}
   \begin{itemize}
-    \item Modularisierung (erleichtert Austauschbarkeit)
-    \item Freiheitsgerade müssen existieren (wir brauchen mehrere alternativen um echt agil zu sein)
-    \item Stabile interfaces/Modulgrenzen
-    \item Infrastruktur für Kontinuierliche Entwicklung, Auslieferung
-    \item Threat Szenarien
-    \item Technische Anforderungen
+    \item Klare Zielsetzung
+    %            {  - Motive 1
+    % TODO Need -{
+    %            {  - Motive 2
+    \begin{itemize}
+      \item Modularisierung reduziert Scope, ermöglicht Fokus
+      \item Tiefgreifendes Problemverständnis, Schutz Wie und Wogegen?
+    \end{itemize}
+    \item Spielraum
+    \begin{itemize}
+      \item Infrastruktur für Continuous Delivery
+      \item Freiheit, technische Neuerungen zu Integrieren
+    \end{itemize}
+
+    % \item Modularisierung (erleichtert Austauschbarkeit)
+    % \item 
+    % \item Stabile interfaces/Modulgrenzen
+    % \item Freiheitsgrade einräumen
+    % \item Freiheitsgerade müssen existieren (wir brauchen mehrere alternativen um echt agil zu sein)
+    % \item Alternative Chiffren müssen entwickelt sein
+    % \item Infrastruktur für Kontinuierliche Entwicklung, Auslieferung
+    % \item Threat Szenarien
+    % \item Technische Anforderungen
   \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Prozess}
   \begin{itemize}
+    
+    \item Knowledge-Management
+    \begin{itemize}
+      \item Dokumentation von Anforderungen und Entscheidungen
+    \end{itemize}
+
+    \item Change-Management % muss Veränderte Umstände, daraus folgend neue Anforderungen, daraus folgend Softwareanpassungen einfangen
+    \begin{itemize}
+      \item Incident Response
+      \item Neue mit alten Anforderungen zusammenführen
+    \end{itemize}
+    
     \item Continuous \ldots
     \begin{itemize}
       \item \dots Development
       \item \dots Delivery
       \item \dots Deployment
     \end{itemize}
-    \item Change-Management muss Veränderte Umstände, daraus folgend neue Anforderungen, daraus folgend Softwareanpassungen einfangen
-    \item Anforderungen müssen dokumentiert sein (nur so kann nach $n$ Jahren eine gute Alternative identifiziert werden)
-    \item Incident Response (Bekannte Probleme müssen überhaupt erkannt, und resultierende Reaktionen abgeleitet werden)
-    \item Threat Szenarien analysieren, katalogisieren, aktualisieren
+
   \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Kultur}
+  % \begin{tikzpicture}[
+  %   node distance = 0.5em,
+  %   roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm},
+  %   squarednode/.style={rectangle, draw=red!60, fill=red!5, very thick, minimum size=5mm},
+  %   good/.style={},
+  %   bad/.style={}
+  % ]
+
+  % %Nodes
+  % \node[]                  (fehlerkultur)    {\textcolor{BlueViolet}{Fehlerkultur}};
+  % \node[good,above left = of fehlerkultur]   (vorrausschauend) {Vorrausschauend};
+  % \node[good, above right = of fehlerkultur] (rapidresponse) {Rapid-Response};
+  % \node[bad, above left = of fehlerkultur]   (vorrausschauend) {Vorrausschauend};
+  % \node[bad, above right = of fehlerkultur]  (rapidresponse) {Rapid-Response};
+  % \end{tikzpicture}
+
+  % TODO good bad arrow for State-Oversight
+
+  % TODO rote und blaue Begriffe in Wordcloud
   \begin{itemize}
-    \item Gute Vorbereitung muss belohnt werden
-    \item Gute Reaktion muss belohnt werden
-    \item Scham und Bestrafung nur bei absichtlicher Verheimlichung/ Grober Fahrlässigkeit
-    \item Staatliche Prüfung ist wichtiges instrument
-    \item Aber auch zweischneidige Klinge; "Verpflichtung zur Mittelmäßigkeit"
-    \item Forderungen müssen mit Förderungen gematched werden, um Wettbewerbsnachteil zu vermeiden
+    \item \textcolor{BlueViolet}{Fehlerkultur}
     \begin{itemize}
-      \item Staatliche Förderung insebsondere für Bildung und Werkzeuge die Compliance mit Staatlichen Anforderungen vereinfachen
-      \item Stätige Weiterentwicklung der Methoden -> Forschung
-      \item Aber grace-period in den staatlichen Anforderungen, um Abschreckung zu vermeiden\
-      \item Competitions für Implementierungen, siehe NIST PQ-Crypto
+      \item \textcolor{BlueViolet}{Vorrausschauend}
+      \item \textcolor{BlueViolet}{Rapid-Response}
+      \item \textcolor{BrickRed}{Verheimlichung}
+      \item \textcolor{BrickRed}{Fahrlässigkeit}
+    \end{itemize}
+
+    \item \textcolor{BlueViolet}{Oversight}
+    \begin{itemize}
+      \item Zweischneidige Klinge; "Verpflichtung zur Mittelmäßigkeit"
+      \item Peer Review
+      \item Forderungen $\Leftrightarrow$ Förderungen \tiny \\ sonst Wettbewerbsnachteil
+    \end{itemize}
+    
+    \begin{itemize}
+      \item \textcolor{BlueViolet}{Compliance-Tools}
+      \item \textcolor{BlueViolet}{Methoden-Forschung}
+      \item \textcolor{BlueViolet}{Chiffren-Wettbewerbe}
+      % \item Grace-period bei Kontrollenin
     \end{itemize}
   \end{itemize}
 \end{frame}
