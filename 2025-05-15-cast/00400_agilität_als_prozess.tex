@@ -1,124 +1,164 @@
 \interlude[2]{Erkenntnisse \\ \Large \hrule \vspace{1.2em} Kryptoagilität als Prozess}
 
-% EMPFEHLUNGEN:
-
-% Kryptoagil von Anfang an
-% Modularisierung für Agilitätsziele Nutzen
-% Regulator: Fördern und Fordern
-
-\begin{frame}{Kryptoagil von Anfang an}
-  % GOAL Zeigen, das Proaktives Vorgehen sich auszeichnet, und sogar notwendig ist um Reaktives Verhalten (=> Kryptoagilität) zu ermöglichen
-  % GOAL Kryptoagilität braucht technische vorbereitung
-  % GOAL Modularisierung auf vielen Ebenen ist Schlüssel für Kryptoagilität
-  % GOAL Prozesse müssen bereit stehen für Kryptoagilität; Change-Management
-  \begin{columns}[t,fullwidth]
-    \begin{column}{.3\linewidth}
-      Reaktiv vs Proaktiv
-      \tiny
-      \vspace{0.5em}
-      \begin{itemize}
-        \item Externe Validierung essenziell (Sicherheitsbeweise, Zertifizierung)
-        \item Ansätze sollten kombiniert werden; "Defense in Depth"
-        \item Proaktive Methoden sind in Safety und Security weit verbreitet
-      \end{itemize}
-    \end{column}
-
-    \vrule
-
-    \begin{column}{.65\linewidth}
-      Proaktives Vorgehen ist besonders schwer
-      \tiny
-      \vspace{0.5em}
-      \begin{itemize}
-        \item Hoher Grad an präziser Planung erforderlich % Benötigt Turbo-Glaskugel
-        \item Avionik: Zertifizierung ist schwer
-        \item Kryptografie: Formelle Beweise sind schwer
-        \item Die Bürde der Verifikation erdrückt Innovation
-      \end{itemize}
-    \end{column}
-
-  \end{columns}
-
-  \hrule
-
-  Schritte für den Anfang
-
-  \tiny
+\begin{frame}{Technik}
   \begin{itemize}
-    \item Investition in Lehrmaterialien, Handbücher, Nutzerfreundliche Verifikationssysteme
-    \item Benutzbare Beweistools, Menschenfreundliche Zertifizierungsbehörden
-    \item Innovation für bessere, effektivere Verifikation müssen gefördert werden
-    \item Erhöhung der Bringschuld nur Hand in Hand mit Ausbau von Tooling und Prozesshilfen
-    \item Kontinuierliche Verifikation in Aktiver Zusammenarbeit zwischen allen Akteuren
+    \item Modularisierung (erleichtert Austauschbarkeit)
+    \item Freiheitsgerade müssen existieren (wir brauchen mehrere alternativen um echt agil zu sein)
+    \item Stabile interfaces/Modulgrenzen
+    \item Infrastruktur für Kontinuierliche Entwicklung, Auslieferung
+    \item Threat Szenarien
+    \item Technische Anforderungen
   \end{itemize}
 \end{frame}
 
 
-\begin{frame}{Modularisierung für Agilitätsziele Nutzen}
-  % GOAL aufzeigen, dass Modularität schlüssel ist
-  % TODO das ist eine wiederholung zu unserem Paper, vielleicht entfernen?
-  \begin{columns}[t,fullwidth]
-    \begin{column}{.3\linewidth}
-      Möglichkeiten:
-      \tiny
-      \vspace{0.5em}
-      \begin{itemize}
-        \item Rapider Komponentenaustausch
-        \item Vereinfachtes Systemdesign
-        \item Separate Validierung einzelner Komponentent
-      \end{itemize}
-    \end{column}
-
-    \vrule
-
-    \begin{column}{.65\linewidth}
-      Herausforderungen:
-      \tiny
-      \vspace{0.5em}
-      \begin{itemize}
-        \item Abstraktionen sind häufig unvollständig
-        \item Gute Modulgrenzen finden braucht Erfahrung
-        \item Viele funktionelle \& nicht-funktionelle Anforderungen
-        \item Schlecht gewählte module bringen eine Illustion von Sicherheit
-        \item Cargo Culting
-      \end{itemize}
-    \end{column}
-
-  \end{columns}
-
-  \hrule
-
-  Ein agiler Lebenszyklus für Module
-
-    \tiny
+\begin{frame}{Prozess}
   \begin{itemize}
-    \item Laufende, agile Modulentwicklung
-    \item Enge zusammenarbeit zwischen Modul- und Systemdesignern
-    \item Einsatz besonders Erfahrener Ingenieure
-    \item Breite, industrieübergreifende Zusammenarbeit hilfreich
-    \item Continuous Certification Process
-    \item Continuous Deployment Infrastruktur
-  \end{itemize}
-
-\end{frame}
-
-
-\begin{frame}{Regulator soll Fördern und Fordern}
-  % GOAL unklar
-  % TODO klar machen, das staatliche Regulireung mit staatlicher Investition in Prozesse und Tooling hand in hand gehen muss -> Wettbewerbsvorteil falls ja, wettbewerbsnachteil falls nein
-  % TODO klar machen, dass wir von Safety Prozessen lernenen können, insbesodere was dokumentation von anforderungen angeht -> Ohne dokumentierte Anforderungen ist Kryptoagilität schwierig.
-  % TODO Gefahr bennen, das staatliche über-regulierung zur Mittelmäßigkeit verpflichtet
-  \begin{itemize}
-    \item  Sicherheit: Hochgradig formalisierte Prozesse
-    \item  Krypto: Strenge ethische, weniger formalisierte Prozesse 
-    \item  => Kerckhoff Prinzip
-    \item  => Verantwortungsvolle Offenlegung
-    \item  => Staatlich vorgeschriebene Berichterstattung über Schwachstellen
-    \item  => Es geht darum, eine Umgebung zu schaffen, in der man aus Fehlern lernen kann
-    % TODO this is a challenge, not a solution -> move somewhere
-    \item -> Gesetzliche Anforderungen sind Chance und Gefahr
+    \item Continuous \ldots
     \begin{itemize}
-      \item verpflichten zur Mittelmäßigkeit
+      \item \dots Development
+      \item \dots Delivery
+      \item \dots Deployment
+    \end{itemize}
+    \item Change-Management muss Veränderte Umstände, daraus folgend neue Anforderungen, daraus folgend Softwareanpassungen einfangen
+    \item Anforderungen müssen dokumentiert sein (nur so kann nach $n$ Jahren eine gute Alternative identifiziert werden)
+    \item Incident Response (Bekannte Probleme müssen überhaupt erkannt, und resultierende Reaktionen abgeleitet werden)
+    \item Threat Szenarien analysieren, katalogisieren, aktualisieren
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Kultur}
+  \begin{itemize}
+    \item Gute Vorbereitung muss belohnt werden
+    \item Gute Reaktion muss belohnt werden
+    \item Scham und Bestrafung nur bei absichtlicher Verheimlichung/ Grober Fahrlässigkeit
+    \item Staatliche Prüfung ist wichtiges instrument
+    \item Aber auch zweischneidige Klinge; "Verpflichtung zur Mittelmäßigkeit"
+    \item Forderungen müssen mit Förderungen gematched werden, um Wettbewerbsnachteil zu vermeiden
+    \begin{itemize}
+      \item Staatliche Förderung insebsondere für Bildung und Werkzeuge die Compliance mit Staatlichen Anforderungen vereinfachen
+      \item Stätige Weiterentwicklung der Methoden -> Forschung
+      \item Aber grace-period in den staatlichen Anforderungen, um Abschreckung zu vermeiden\
+      \item Competitions für Implementierungen, siehe NIST PQ-Crypto
     \end{itemize}
   \end{itemize}
 \end{frame}
+
+
+% \begin{frame}{Kryptoagil von Anfang an}
+%   % GOAL Zeigen, das Proaktives Vorgehen sich auszeichnet, und sogar notwendig ist um Reaktives Verhalten (=> Kryptoagilität) zu ermöglichen
+%   % GOAL Kryptoagilität braucht technische vorbereitung
+%   % GOAL Modularisierung auf vielen Ebenen ist Schlüssel für Kryptoagilität
+%   % GOAL Prozesse müssen bereit stehen für Kryptoagilität; Change-Management
+%   \begin{columns}[t,fullwidth]
+%     \begin{column}{.3\linewidth}
+%       Reaktiv vs Proaktiv
+%       \tiny
+%       \vspace{0.5em}
+%       \begin{itemize}
+%         \item Externe Validierung essenziell (Sicherheitsbeweise, Zertifizierung)
+%         \item Ansätze sollten kombiniert werden; "Defense in Depth"
+%         \item Proaktive Methoden sind in Safety und Security weit verbreitet
+%       \end{itemize}
+%     \end{column}
+
+%     \vrule
+
+%     \begin{column}{.65\linewidth}
+%       Proaktives Vorgehen ist besonders schwer
+%       \tiny
+%       \vspace{0.5em}
+%       \begin{itemize}
+%         \item Hoher Grad an präziser Planung erforderlich % Benötigt Turbo-Glaskugel
+%         \item Avionik: Zertifizierung ist schwer
+%         \item Kryptografie: Formelle Beweise sind schwer
+%         \item Die Bürde der Verifikation erdrückt Innovation
+%       \end{itemize}
+%     \end{column}
+
+%   \end{columns}
+
+%   \hrule
+
+%   Schritte für den Anfang
+
+%   \tiny
+%   \begin{itemize}
+%     \item Investition in Lehrmaterialien, Handbücher, Nutzerfreundliche Verifikationssysteme
+%     \item Benutzbare Beweistools, Menschenfreundliche Zertifizierungsbehörden
+%     \item Innovation für bessere, effektivere Verifikation müssen gefördert werden
+%     \item Erhöhung der Bringschuld nur Hand in Hand mit Ausbau von Tooling und Prozesshilfen
+%     \item Kontinuierliche Verifikation in Aktiver Zusammenarbeit zwischen allen Akteuren
+%   \end{itemize}
+% \end{frame}
+
+
+% \begin{frame}{Modularisierung für Agilitätsziele Nutzen}
+%   % GOAL aufzeigen, dass Modularität schlüssel ist
+%   % TODO das ist eine wiederholung zu unserem Paper, vielleicht entfernen?
+%   \begin{columns}[t,fullwidth]
+%     \begin{column}{.3\linewidth}
+%       Möglichkeiten:
+%       \tiny
+%       \vspace{0.5em}
+%       \begin{itemize}
+%         \item Rapider Komponentenaustausch
+%         \item Vereinfachtes Systemdesign
+%         \item Separate Validierung einzelner Komponentent
+%       \end{itemize}
+%     \end{column}
+
+%     \vrule
+
+%     \begin{column}{.65\linewidth}
+%       Herausforderungen:
+%       \tiny
+%       \vspace{0.5em}
+%       \begin{itemize}
+%         \item Abstraktionen sind häufig unvollständig
+%         \item Gute Modulgrenzen finden braucht Erfahrung
+%         \item Viele funktionelle \& nicht-funktionelle Anforderungen
+%         \item Schlecht gewählte module bringen eine Illustion von Sicherheit
+%         \item Cargo Culting
+%       \end{itemize}
+%     \end{column}
+
+%   \end{columns}
+
+%   \hrule
+
+%   Ein agiler Lebenszyklus für Module
+
+%     \tiny
+%   \begin{itemize}
+%     \item Laufende, agile Modulentwicklung
+%     \item Enge zusammenarbeit zwischen Modul- und Systemdesignern
+%     \item Einsatz besonders Erfahrener Ingenieure
+%     \item Breite, industrieübergreifende Zusammenarbeit hilfreich
+%     \item Continuous Certification Process
+%     \item Continuous Deployment Infrastruktur
+%   \end{itemize}
+
+% \end{frame}
+
+
+% \begin{frame}{Regulator soll Fördern und Fordern}
+%   % GOAL unklar
+%   % TODO klar machen, das staatliche Regulireung mit staatlicher Investition in Prozesse und Tooling hand in hand gehen muss -> Wettbewerbsvorteil falls ja, wettbewerbsnachteil falls nein
+%   % TODO klar machen, dass wir von Safety Prozessen lernenen können, insbesodere was dokumentation von anforderungen angeht -> Ohne dokumentierte Anforderungen ist Kryptoagilität schwierig.
+%   % TODO Gefahr bennen, das staatliche über-regulierung zur Mittelmäßigkeit verpflichtet
+%   \begin{itemize}
+%     \item  Sicherheit: Hochgradig formalisierte Prozesse
+%     \item  Krypto: Strenge ethische, weniger formalisierte Prozesse 
+%     \item  => Kerckhoff Prinzip
+%     \item  => Verantwortungsvolle Offenlegung
+%     \item  => Staatlich vorgeschriebene Berichterstattung über Schwachstellen
+%     \item  => Es geht darum, eine Umgebung zu schaffen, in der man aus Fehlern lernen kann
+%     % TODO this is a challenge, not a solution -> move somewhere
+%     \item -> Gesetzliche Anforderungen sind Chance und Gefahr
+%     \begin{itemize}
+%       \item verpflichten zur Mittelmäßigkeit
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
