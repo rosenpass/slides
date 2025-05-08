@@ -27,15 +27,14 @@
 \begin{frame}[c]{Sichere Kryptografie in der Avionik}
   % TODO: Screenshot von Economy Class cryptography Paper, und von LDACS paper
   % TODO: Both papers in two-column?
-  % GOAL Aufzeigen, das gut Cryptography in Avionik keine Selbstverständlichkeit ist
-  % GOAL Aufzeigen, dass auch fortschrittliche Planung durch Mangelnde Kryptoagilität zum scheitern verurteilt ist (LDACS Paper)
+  % GOAL Aufzeigen, das (gute) Cryptography in Avionik fehlt
   \vspace{4em}
   \footnotesize
   (Gähnende Leere)
 \end{frame}
 
 \begin{frame}[c]{Zum erschrecken aller…}
-
+  % GOAL Aufzeigen, dass auch fortschrittliche Planung durch Mangelnde Kryptoagilität zum scheitern verurteilt ist (LDACS Paper)
   \begin{columns}[fullwidth,c]
     \begin{column}{.5\linewidth}
       \begin{itemize}
@@ -51,13 +50,19 @@
       \end{itemize}
     \end{column}%
     \begin{column}{.5\linewidth}
+      % GOAL Digital Drahtlos Kommunikation seit 45 jahren
+      % GOAL Erste ernste zunehmende Kryptographie in 2007 eingeführt, aber quasi keine Verbreitung
+      % GOAL 2021 dann der erste Vorschlag, für einen hybridig post-quaten sicheren Datalink...
+      % GOAL ... aber noch vor dem Rollout und nach nur einem Jahr ist die chiffre gebrochen :(
       \includegraphics[width=.92\linewidth]{graphics/history of cryptography in avionics}
     \end{column}
   \end{columns}
 \end{frame}
 
 
-\begin{frame}[c]{Kryptographischer Ansatz}
+\begin{frame}[c]{Kryptographisches Rahmenwerk}
+  % TODO check graphics from slides from HACMAS
+  % TODO größerere Graphic, in die mitte
   \begin{columns}[fullwidth,c]
     \begin{column}{.65\linewidth}
       \begin{itemize}
@@ -65,23 +70,33 @@
 
         \item Festes Interface
         \begin{itemize}
-          \item Seal
-          \item Open
+          \item Seal: Nachricht verschlüsseln (und signieren)
+          \item Open: Nachricht entschlüsseln (und prüfen)
         \end{itemize}
 
         \item Modularität der Primitive
+        \begin{itemize}
+          \item KEM: Key Encapsulation Funktion\\Eigener Privater Schlüssel, Öffentlicher Schlüssel Addressat $\rightarrow$ Sym. Schlüssel
+          \item KDF: Key Derivation Function\\Schlüsselmaterial, Entropie $\rightarrow$ Schlüssel
+          \item AEAD: Authenticated Encryption with Associated Data\\
+            Symetrische Chiffre mit Authentisierung\\
+            Klartext, Sym. Schlüssel $\rightarrow$ Cyphertext\\
+            Cyphertext, Sym. Schlüssel $\rightarrow$ Klartext. Authentisiert?
+        \end{itemize}
 
         % TODO placement and size of graphics
       \end{itemize}
     \end{column}%
     \begin{column}{.35\linewidth}
+      
         \includegraphics[width=0.8\linewidth]{graphics/hpke}
+        % TODO explain every detail of this Graphic
     \end{column}
   \end{columns}
 \end{frame}
 
 
-\begin{frame}[c]{Bedarfsgerechte Security Eigenschaften}
+\begin{frame}[c]{Bedarfsgerechte Security}
   \begin{columns}[fullwidth,c]
     \begin{column}{.35\linewidth}
       \begin{itemize}
@@ -103,7 +118,7 @@
     \begin{column}{.4\linewidth}
       \begin{itemize}
         \item Bündelung der Kyrypto-Implementierung
-        \item Modul der Luftfahrt: Partition\footnote{Partitionen sind voneinander isoliert, und dürfen daher in der Zulassung separat betrachtet werden}
+        \item Modul der Avionik: Partition\footnote{Partitionen sind voneinander isoliert, und dürfen daher in der Zulassung separat betrachtet werden}
         \item Einfacher Austausch der Krypto-Partition
       \end{itemize}
       \vspace{8.5em} % TODO This is a hack, maybe marei can fix it?
@@ -117,52 +132,56 @@
 % GOAL Aufzeigen, dass und wie Modularität der Schlüssel für Kryptoagilität in der Safety ist
 % GOAL Aufzeigen, dass Integration einfach möglich, und zulassungsfreundlich gemacht werden kann
 
-\begin{frame}[c]{Ansätze für Verbesserung in beiden Bereichen}
-  % GOAL ist mir unklar
-  % TODO wucke refine 
 
-  Verifikationstechniken
-  \vspace{0.5em}
+% TODO eine folie über Benchmarks?
 
-  {\footnotesize Zertifizierung <-> Sicherheitsbeweise}
-  \vspace{1.5em}
-  % Formaler Beweis kann Teil der Evidence für Zertifizierung sein
-  % Annahmen und Anforderungen müssen in den Zertifizierungsdokumenten festgehalten werden
-  % Evidence = Belege, warum Annahmen wahr sind oder Anforderungen erfüllt sind
-  % Unabhängigkeit zwischen Implementierer und Verifizierer
-  % 
-  % - Wanja
-  %
-  % Agreed; geht mir eher darum die generelle Vorgehensweise zu beschreiben als formell korrekt jede Möglichkeit durchzugehen.
-  % Ist beweisführung in der Avionik denn üblich?
-  % 
-  % – Karolin
 
-  Kompartmentalisierung
-  \vspace{0.5em}
+% \begin{frame}[c]{Ansätze für Verbesserung in beiden Bereichen}
+%   % GOAL ist mir unklar
+%   % TODO wucke refine 
 
-  {\footnotesize Partitionierung <-> Brokerarchitekturen}
-  \vspace{1.5em}
-  % Aufteilung erleichtert sukzessive Absicherung einzelner Komponent
-  % Gleichzeitig: Faultcontainment
-  % Modularisierung macht updates einfacher, da klare interfaces zwischen Modulen
+%   Verifikationstechniken
+%   \vspace{0.5em}
 
-  % Diagram Idee: Konfidenzarchitektur
-  %
-  % 1. Identifiziere mögliche Fehlerursachen
-  % 2. Ist ein Fehler relevant?
-  %   - Falls Nein, warum nicht? Evidence!
-  % 3. Welche Effekte hat der Fehler?
-  % 4. Wie kann der Fehler verhindert/eingedämmt/mitigiert werden?
-  % 5. Wie kann der Fehler erkannt werden?
-  % 6. Validiere Annahmen von 3. - 5.
-  % 7. Review durch unabhängigen Assesor
-  %
-  % -- wucke13
-  %
-  % Passt das denn in das Gegenüberstellungsscheme? Also wie bringen wir den Vergleich Avionik vs Crypto rein.
-  %
-  % -- karolin
+%   {\footnotesize Zertifizierung <-> Sicherheitsbeweise}
+%   \vspace{1.5em}
+%   % Formaler Beweis kann Teil der Evidence für Zertifizierung sein
+%   % Annahmen und Anforderungen müssen in den Zertifizierungsdokumenten festgehalten werden
+%   % Evidence = Belege, warum Annahmen wahr sind oder Anforderungen erfüllt sind
+%   % Unabhängigkeit zwischen Implementierer und Verifizierer
+%   % 
+%   % - Wanja
+%   %
+%   % Agreed; geht mir eher darum die generelle Vorgehensweise zu beschreiben als formell korrekt jede Möglichkeit durchzugehen.
+%   % Ist beweisführung in der Avionik denn üblich?
+%   % 
+%   % – Karolin
 
-  => Kryptoagilität
-\end{frame}
+%   Kompartmentalisierung
+%   \vspace{0.5em}
+
+%   {\footnotesize Partitionierung <-> Brokerarchitekturen}
+%   \vspace{1.5em}
+%   % Aufteilung erleichtert sukzessive Absicherung einzelner Komponent
+%   % Gleichzeitig: Faultcontainment
+%   % Modularisierung macht updates einfacher, da klare interfaces zwischen Modulen
+
+%   % Diagram Idee: Konfidenzarchitektur
+%   %
+%   % 1. Identifiziere mögliche Fehlerursachen
+%   % 2. Ist ein Fehler relevant?
+%   %   - Falls Nein, warum nicht? Evidence!
+%   % 3. Welche Effekte hat der Fehler?
+%   % 4. Wie kann der Fehler verhindert/eingedämmt/mitigiert werden?
+%   % 5. Wie kann der Fehler erkannt werden?
+%   % 6. Validiere Annahmen von 3. - 5.
+%   % 7. Review durch unabhängigen Assesor
+%   %
+%   % -- wucke13
+%   %
+%   % Passt das denn in das Gegenüberstellungsscheme? Also wie bringen wir den Vergleich Avionik vs Crypto rein.
+%   %
+%   % -- karolin
+
+%   => Kryptoagilität
+% \end{frame}
