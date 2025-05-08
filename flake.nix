@@ -71,6 +71,7 @@
             hyperxmp
             luacode
             luatexbase
+            multirow
             adjustbox
             tikzfill
             caption
@@ -80,6 +81,7 @@
             accsupp
             metafont
             xstring
+            stmaryrd
             ;
         };
 
@@ -133,6 +135,12 @@
                   latexmk
                 '';
                 help = "build the slides";
+              }
+              {
+                name = "tolerant-build";
+                command = ''
+                  latexmk -pdf -pvc -interaction=nonstopmode -lualatex
+                '';
               }
               {
                 name = "clean";

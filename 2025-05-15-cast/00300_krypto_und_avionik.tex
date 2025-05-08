@@ -57,33 +57,63 @@
 \end{frame}
 
 
-\begin{frame}[c]{Lösungsvorschlag: Kryptographie}
-
+\begin{frame}[c]{Kryptographischer Ansatz}
   \begin{columns}[fullwidth,c]
-    \begin{column}{.4\linewidth}
+    \begin{column}{.65\linewidth}
       \begin{itemize}
         \item HPKE als Schema
-        \item Verschiedne Primitive nutzbari
-        \begin{itemize}
 
-        \end{itemize}
-        \item Gemeinsames Interface
+        \item Festes Interface
         \begin{itemize}
           \item Seal
           \item Open
         \end{itemize}
 
+        \item Modularität der Primitive
+
         % TODO placement and size of graphics
-        \includegraphics[width=0.5\linewidth]{graphics/hpke}
       \end{itemize}
     \end{column}%
-    \begin{column}{.6\linewidth}
+    \begin{column}{.35\linewidth}
+        \includegraphics[width=0.8\linewidth]{graphics/hpke}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}[c]{Bedarfsgerechte Security Eigenschaften}
+  \begin{columns}[fullwidth,c]
+    \begin{column}{.35\linewidth}
+      \begin{itemize}
+        \item Pre oder Post-Quantum?
+        \item Mehr oder weniger Speicherbedarf?
+        \item Schenelle or langsame Berechnung?
+        \item Post-quantum Authentisierung? 
+      \end{itemize}
+    \end{column}%
+    \begin{column}{.65\linewidth}
       \includegraphics[width=\linewidth]{graphics/hpke variants}
     \end{column}
   \end{columns}
 \end{frame}
 
-% TODO: neue Folie zu unserem Paper
+
+\begin{frame}[c]{Integration in die Avionik}
+  \begin{columns}[fullwidth,c]
+    \begin{column}{.4\linewidth}
+      \begin{itemize}
+        \item Bündelung der Kyrypto-Implementierung
+        \item Modul der Luftfahrt: Partition\footnote{Partitionen sind voneinander isoliert, und dürfen daher in der Zulassung separat betrachtet werden}
+        \item Einfacher Austausch der Krypto-Partition
+      \end{itemize}
+      \vspace{8.5em} % TODO This is a hack, maybe marei can fix it?
+    \end{column}%
+    \begin{column}{.6\linewidth}
+      \includegraphics[width=\linewidth]{graphics/crypto partition}
+    \end{column}
+  \end{columns}
+\end{frame}
+
 % GOAL Aufzeigen, dass und wie Modularität der Schlüssel für Kryptoagilität in der Safety ist
 % GOAL Aufzeigen, dass Integration einfach möglich, und zulassungsfreundlich gemacht werden kann
 
