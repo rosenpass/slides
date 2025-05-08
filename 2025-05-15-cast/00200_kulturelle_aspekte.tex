@@ -10,9 +10,8 @@
       \begin{block}{Safety}
       \begin{itemize}
         \item Schutz von Lebewesen
-        \item Zumeist Cyber-Physisch
       \begin{itemize}
-         \item z.B. Computer + Elektromechanischer Aktuator
+         \item Maschine, die Computer enthält
       \end{itemize}
       \end{itemize}
       \end{block}
@@ -44,9 +43,9 @@
       \begin{itemize}
         \item Zufällige Fehler
         \item Im Fehlerfall: Weiterbetrieb ermöglichen!
-        \item Stabile Zieldefinition: Physik bleibt gleich
-        \item Abgehangene Software -> Stabile Software!
-        \item Rigide Validierungsprozesse
+        \item Stabile Zieldefinition:\\Physik bleibt gleich
+        \item Abgehangene Software $\rightarrow$ Stabil!
+        \item Normierte Validierungsprozesse
       \end{itemize}
       \end{block}
     \end{column}
@@ -54,11 +53,11 @@
     \begin{column}{.45\linewidth}
       \begin{block}{Security}
       \begin{itemize}
-        \item Intelligente Angreifer
+        \item Gezielte Fehler durch Angreifer
         \item Im Fehlerfall: Lieber das System stoppen
-        \item Zieldefinition ist in Bewegung: Angreifer lernen auch dazu
-        \item Abgehangene Software -> CVEs bekannt?
-        \item Viele Freiheitsgrade in Validierung
+        \item Zieldefinition ist in Bewegung:\\Angreifer lernen auch dazu
+        \item Abgehangene Software $\rightarrow$ Unsicher?
+        \item Dynamische Validierungsprozesse
       \end{itemize}
       \end{block}
     \end{column}
@@ -70,21 +69,23 @@
 \begin{frame}[T]{Akzeptanzkriterien}
   % GOAL erklären, wie man in Safety/Security Konfidenz erzeugt, einen guten Job gemacht zu haben
 
-
+  % TODO marei vertical bar in table is weird
   \begin{table}[]
-    \begin{tabular}{lcccc}
+    \begin{tabular}{l|cc|cc}
       \multirow{2}{*}{\bfseries Kriterium}
-        & \multicolumn{2}{c}{\bfseries Konfidenz}
-        & \multicolumn{2}{c}{\bfseries Verbreitung} \\
-                           & \bfseries Safety & \bfseries Security & \bfseries Safety & \bfseries Security \\
+        & \multicolumn{2}{c}{\bfseries Safety}
+        & \multicolumn{2}{c}{\bfseries Security} \\ %TODO transpose
+                           & \bfseries Konfidenz & \bfseries Verbreitung & \bfseries Konfidenz & \bfseries Verbreitung \\
     \hline \\
-    Requirements-getriebenes Testen & +++    & +        & +++        & +        \\
-    Proven-in-use                   & ++     & -        & +          & +        \\
-    Formale Methoden                & +++    & +++      & -          & ++       \\
-    Unabhängiges Review             & ++     & +++      & +++        & +++      \\
+    Praktische Tests          & +++    & +++     & +           & ++       \\
+    Proven-in-use             & ++     & +       & -           & +        \\
+    Mathematische Beweise     & +++    & -       & +++         & ++       \\
+    Externe Audits            & ++     & +++     & +++         & +++      \\
     \end{tabular}
     \caption{
-  Übersicht der Akzeptanzkriterien in Safety und Security. \textbf{Verbreitung} zeigt an, wie häufig ein Kriterium als tragendes Argument im Assurance-Case benutzt wird. \textbf{Konfidenz} indiziert, wie viel Vertrauen dem Ergebniss eines Kriteriums geschenkt wird. 
+      Übersicht der Akzeptanzkriterien in Safety und Security\\
+      \textbf{Verbreitung} Häufigkeit als tragendes Argument im Assurance-Case\\
+      \textbf{Konfidenz} Vertrauen in das Kriterium
     }
   \end{table}
 
@@ -132,14 +133,14 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[T]{Vereinigung von Safety \& Security}
+\begin{frame}[T]{Safety + Security Benötigt}
   % GOAL Klar machen, dass beide Domänen nicht unversöhnbar sind
   \begin{itemize}
     \item Hohe Zuverlässigkeit
     \item Klarheit über Systemziele
     \item Rigorose Validierungsprozesse (Unabhängiges Review)
     \item Analyse von Softwaresystemen in reeller Hardware
-    \item Umsetzung Dissimilar-Redundanter Systeme
-    \item Kryptoagilität
+    \item Redundante Systeme
+    \item[$\Rightarrow$] \textbf{Kryptoagilität}
   \end{itemize}
 \end{frame}

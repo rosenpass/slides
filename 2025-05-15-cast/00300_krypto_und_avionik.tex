@@ -41,12 +41,6 @@
 
         \footnotesize
         …wird in der Luftfahrt heutzutage keine sichere Kryptografie eingesetzt. 
-
-        \vspace{1em}
-        Der eine Ernstzunehmende Vorschlag den wir gefunden hatten -- ein System zum kryptografischen absichern von LDACS --
-        setzte auf post-quanten chiffren (SIKE), gegen die ein Jahr später Angriffe gefunden wurden.
-
-        % TODO: Insert REFERENCE
       \end{itemize}
     \end{column}%
     \begin{column}{.5\linewidth}
@@ -60,29 +54,33 @@
 \end{frame}
 
 
-\begin{frame}[c]{Kryptographisches Rahmenwerk}
+\begin{frame}[c]{Kryptographie in der Avionik: Ansatz}
+  % GOAL HPKE ist ein standard  mit festen interface, dennoch sind die internen Primitive modular
   % TODO check graphics from slides from HACMAS
   % TODO größerere Graphic, in die mitte
   \begin{columns}[fullwidth,c]
     \begin{column}{.65\linewidth}
       \begin{itemize}
-        \item HPKE als Schema
+        \item HPKE-Standard als Basis
 
-        \item Festes Interface
+        \item Schnittstelle aus HPKE
         \begin{itemize}
           \item Seal: Nachricht verschlüsseln (und signieren)
           \item Open: Nachricht entschlüsseln (und prüfen)
         \end{itemize}
 
-        \item Modularität der Primitive
-        \begin{itemize}
-          \item KEM: Key Encapsulation Funktion\\Eigener Privater Schlüssel, Öffentlicher Schlüssel Addressat $\rightarrow$ Sym. Schlüssel
-          \item KDF: Key Derivation Function\\Schlüsselmaterial, Entropie $\rightarrow$ Schlüssel
-          \item AEAD: Authenticated Encryption with Associated Data\\
-            Symetrische Chiffre mit Authentisierung\\
-            Klartext, Sym. Schlüssel $\rightarrow$ Cyphertext\\
-            Cyphertext, Sym. Schlüssel $\rightarrow$ Klartext. Authentisiert?
-        \end{itemize}
+        \item Interne Umsetzung Modular basiert auf Modulen\\ % TODO fußnote an alles dranpacken
+         (KEM, KDF \& AEAD\footnote{Avioniker und auch Kryptographen lieben Akronyme}) % TODO marei Fußnote zieht blauen balken hoch
+
+        % \item Modularität der Primitive
+        % \begin{itemize}
+        %   \item KEM: Key Encapsulation Funktion\\Eigener Privater Schlüssel, Öffentlicher Schlüssel Addressat $\rightarrow$ Sym. Schlüssel
+        %   \item KDF: Key Derivation Function\\Schlüsselmaterial, Entropie $\rightarrow$ Schlüssel
+        %   \item AEAD: Authenticated Encryption with Associated Data\\
+        %     Symetrische Chiffre mit Authentisierung\\
+        %     Klartext, Sym. Schlüssel $\rightarrow$ Cyphertext\\
+        %     Cyphertext, Sym. Schlüssel $\rightarrow$ Klartext. Authentisiert?
+        % \end{itemize}
 
         % TODO placement and size of graphics
       \end{itemize}
@@ -96,7 +94,8 @@
 \end{frame}
 
 
-\begin{frame}[c]{Bedarfsgerechte Security}
+\begin{frame}[c]{Flexible Einsatzszenarien, gleiche Schnittstelle}
+  % GOAL Auswahl der Primitive erlaubt tradeoffs, Schnittstelle bleibt gleich
   \begin{columns}[fullwidth,c]
     \begin{column}{.35\linewidth}
       \begin{itemize}
@@ -113,20 +112,21 @@
 \end{frame}
 
 
-\begin{frame}[c]{Integration in die Avionik}
-  \begin{columns}[fullwidth,c]
-    \begin{column}{.4\linewidth}
-      \begin{itemize}
-        \item Bündelung der Kyrypto-Implementierung
-        \item Modul der Avionik: Partition\footnote{Partitionen sind voneinander isoliert, und dürfen daher in der Zulassung separat betrachtet werden}
-        \item Einfacher Austausch der Krypto-Partition
-      \end{itemize}
-      \vspace{8.5em} % TODO This is a hack, maybe marei can fix it?
-    \end{column}%
-    \begin{column}{.6\linewidth}
-      \includegraphics[width=\linewidth]{graphics/crypto partition}
-    \end{column}
-  \end{columns}
+\begin{frame}[c]{Partitionen zur Integration in die Avionik}
+  % \begin{columns}[fullwidth,c]
+  %   \begin{column}{.4\linewidth}
+  %     \begin{itemize}
+  %       \item Bündelung der Kyrypto-Implementierung
+  %       \item Modul der Avionik: Partition\footnote{Partitionen sind voneinander isoliert, und dürfen daher in der Zulassung separat betrachtet werden}
+  %       \item Einfacher Austausch der Krypto-Partition
+  %     \end{itemize}
+  %     \vspace{8.5em} % TODO This is a hack, maybe marei can fix it?
+  %   \end{column}%
+  %   \begin{column}{.6\linewidth}
+      \centering 
+      \includegraphics[width=0.8\linewidth]{graphics/crypto partition}
+  %   \end{column}
+  % \end{columns}
 \end{frame}
 
 % GOAL Aufzeigen, dass und wie Modularität der Schlüssel für Kryptoagilität in der Safety ist
