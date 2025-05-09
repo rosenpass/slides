@@ -70,24 +70,23 @@
   % GOAL erklären, wie man in Safety/Security Konfidenz erzeugt, einen guten Job gemacht zu haben
 
   % TODO marei vertical bar in table is weird
-  \begin{table}[]
+%  \begin{table}[]
     \begin{tabular}{l|cc|cc}
       \multirow{2}{*}{\bfseries Kriterium}
-        & \multicolumn{2}{c}{\bfseries Safety}
+        & \multicolumn{2}{c|}{\bfseries Safety}
         & \multicolumn{2}{c}{\bfseries Security} \\ %TODO transpose
                            & \bfseries Konfidenz & \bfseries Verbreitung & \bfseries Konfidenz & \bfseries Verbreitung \\
-    \hline \\
+    \hline
+%     \\% TODO (also eigentlich Hinweis) Wanja: Hier ist eine Leerzeile die keine zweite/dritte Spalte hat, daher wird die vertikale linie nicht durchgezogen, aber vertikale linien sind eh doof
+	% alternativ &&\\
     Praktische Tests          & +++    & +++     & +           & ++       \\
     Proven-in-use             & ++     & +       & -           & +        \\
     Mathematische Beweise     & +++    & -       & +++         & ++       \\
     Externe Audits            & ++     & +++     & +++         & +++      \\
     \end{tabular}
-    \caption{
-      Übersicht der Akzeptanzkriterien in Safety und Security\\
       \textbf{Verbreitung} Häufigkeit als tragendes Argument im Assurance-Case\\
       \textbf{Konfidenz} Vertrauen in das Kriterium
-    }
-  \end{table}
+
 
   % \begin{itemize}
   %   \item Safety
