@@ -26,7 +26,7 @@
 \begin{frame}{Security against quantum attacks}
   \begin{columns}[fullwidth,c]
     \begin{column}{.6\linewidth}
-      \includegraphics[height=\defaultframetextheight]{graphics/rosenpass-wp-key-exchange-protocol-rgb.pdf}
+      \includegraphics[height=\defaultframetextheight]{rosenpass-whitepaper-key-exchange-protocol}
     \end{column}
 
     \begin{column}{.4\linewidth}
@@ -46,52 +46,52 @@
 \interlude[1]{Secure channels: Security Properties}
 
 \begin{frame}{Passive attacker are eavesdropping}
-  \includegraphics[height=\defaultframetextheight]{graphics-repo/comic/rosenpass-comic_03-interception1.jpeg}
+  \includegraphics[height=\defaultframetextheight]{comic/rosenpass-comic_03-interception1.jpeg}
 \end{frame}
 
 \begin{frame}{Active attackers are intercepting}
-  \includegraphics[height=\defaultframetextheight]{graphics-repo/comic/rosenpass-comic_03-interception2.jpeg}
+  \includegraphics[height=\defaultframetextheight]{comic/rosenpass-comic_03-interception2.jpeg}
 \end{frame}
 
 \begin{frame}{Secrecy}
   \centering
-  \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_04-secrecy1.jpeg}
-  \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_04-secrecy2.jpeg}
-  \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_04-secrecy3.jpeg}
+  \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_04-secrecy1.jpeg}
+  \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_04-secrecy2.jpeg}
+  \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_04-secrecy3.jpeg}
   \large
   \\ The data being transmitted must never be leaked.
 \end{frame}
 
 \begin{frame}{Authenticity}
   \centering
-  \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_05-authenticity1.jpeg}
-  \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_05-authenticity2.jpeg}
-  \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_05-authenticity3.jpeg}
+  \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_05-authenticity1.jpeg}
+  \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_05-authenticity2.jpeg}
+  \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_05-authenticity3.jpeg}
   \large
   \\ Sender and receiver must be certain about each others identity.
 \end{frame}
 
 \begin{frame}{Identity hiding}
   \centering
-  \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_06-identity-hiding1.jpeg}
-  \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_06-identity-hiding2.jpeg}
-  \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_06-identity-hiding3.jpeg}
+  \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_06-identity-hiding1.jpeg}
+  \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_06-identity-hiding2.jpeg}
+  \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_06-identity-hiding3.jpeg}
   \large
   \\ The data being transmitted must not leak sender and recipient identities (although the metadata may).
 \end{frame}
 
 \begin{frame}{Deniability}
   \centering
-  \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_07-deniability1.jpeg}
-  \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_07-deniability2.jpeg}
+  \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_07-deniability1.jpeg}
+  \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_07-deniability2.jpeg}
   \large
   \\ The receiver must be unable to prove (mathematically) what data the sender had transmitted to allow for informal communication.
 \end{frame}
 
 \begin{frame}{Non-Repudiation}
   \centering
-  \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_08-non-repudiation1.jpeg}
-  \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_08-non-repudiation2.jpeg}
+  \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_08-non-repudiation1.jpeg}
+  \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_08-non-repudiation2.jpeg}
   \large
   \\ Sometimes it is appropriate instead to ensure that the recipient can prove what the sender had sent them.
 \end{frame}
@@ -111,24 +111,24 @@
 \begin{frame}{Forward secrecy}
   \centering
   \only<1>{
-    \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_09-forward-secrecy1.jpeg}
-    \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_09-forward-secrecy2.jpeg}
-    \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_09-forward-secrecy3.jpeg}
+    \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_09-forward-secrecy1.jpeg}
+    \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_09-forward-secrecy2.jpeg}
+    \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_09-forward-secrecy3.jpeg}
     \large
     \\ An attacker must not be able to decrypt past communication by breaking into the server:
     \normalsize
     \\ An extra asymmetric keypair is generated on the fly and immediately shredded after the key exchange.
   }
   \only<2>{
-    \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_09-forward-secrecy6.jpeg}
-    \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_09-forward-secrecy8.jpeg}
+    \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_09-forward-secrecy6.jpeg}
+    \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_09-forward-secrecy8.jpeg}
     \large
     \\ Which is no help against active attackers -- interception -- though.
   }
   \only<3>{
-    \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_09-forward-secrecy4.jpeg}
-    \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_09-forward-secrecy5.jpeg}
-    \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_09-forward-secrecy8.jpeg}
+    \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_09-forward-secrecy4.jpeg}
+    \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_09-forward-secrecy5.jpeg}
+    \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_09-forward-secrecy8.jpeg}
     \large
     \\ Nor against future attacks against the cryptographic schemes themselves.
   }
@@ -137,15 +137,15 @@
 \begin{frame}{Everlasting secrecy (QKD)}
   \centering
   \only<1>{
-    \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_10-everlasting-secrecy1.jpeg}
-    \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_10-everlasting-secrecy2.jpeg}
-    \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_10-everlasting-secrecy3.jpeg}
+    \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_10-everlasting-secrecy1.jpeg}
+    \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_10-everlasting-secrecy2.jpeg}
+    \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_10-everlasting-secrecy3.jpeg}
     \large
     \\ It would be great to be able to defend even against future attacks against cryptography.
   }
   \only<2>{
-    \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_09-forward-secrecy6.jpeg}
-    \includegraphics[width=.32\textwidth]{graphics-repo/comic/rosenpass-comic_09-forward-secrecy8.jpeg}
+    \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_09-forward-secrecy6.jpeg}
+    \includegraphics[width=.32\textwidth]{comic/rosenpass-comic_09-forward-secrecy8.jpeg}
     \large
     \\ Though even QKD can not help against interception, which is why we will always need cryptography.
   }

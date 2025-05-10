@@ -11,18 +11,15 @@
 \urlstyle{same}
 
 
-\usetikzlibrary{positioning,decorations.pathreplacing,svg.path}
+\usetikzlibrary{svg.path}
 
-\usepackage{bbding}
-\newcommand*\itemtick{\item[\Checkmark]}
-\newcommand*\itemfail{\item[\XSolidBrush]}
-
-\newcommand*{\heading}[1]{
-  {
+\newcommand*{\heading}[1]{%
+  {%
     \hspace*{-0.5cm}#1
-    \vspace{1.0em}
-  }
+    \vspace{1.0em}%
+  }%
 }
+
 
 \title{Rosenpass}
 %\subtitle{VPN \& Struktur für Translationsforschung in der Kryptografie}
@@ -34,29 +31,6 @@ Wanja Zaeske, Stephan Ajuvo, Marei Peischl, Benjamin Lipp, Lisa~Schmidt, Karolin
 
 \conference{Formosa Retreat Juli 2023}
 \date{2023-07-11}
-
-\parskip\smallskipamount
-
-\ExplSyntaxOn
-\newcommand*{\sourcename}{Quelle}
-\newcommand*{\sourcesep}{:~}
-
-\newcommand*{\imgNote}[1]{\begin{center}\setlength{\parskip}{0pt}\tiny\raggedright#1\end{center}}
-\NewDocumentCommand{\mgSource}{smm}{%
-%\hbox_set:Nn \l_tmpa_box {#1}
-
-\hbox_set:Nn \l_tmpa_box {#2}
-
-\hbox_set:Nn \l_tmpa_box {
-\dim_set:Nn \l_tmpa_dim {\box_ht:N \l_tmpa_box}
-\hbox_unpack_drop:N \l_tmpa_box \rotatebox{90}{\parbox{\dim_eval:n {\IfBooleanTF {#1} {\linewidth} {\l_tmpa_dim}}}{\tiny\raggedright\sourcename\sourcesep#3}}
-}
-\box_use:N \l_tmpa_box
-}
-\ExplSyntaxOff
-
-% reduce itemize indent
-\setlength{\leftmargini}{0pt}
 
 \usepackage{biblatex}
 \addbibresource{sources.bib}
@@ -127,7 +101,7 @@ Wanja Zaeske, Stephan Ajuvo, Marei Peischl, Benjamin Lipp, Lisa~Schmidt, Karolin
 \end{frame}
 
 \begin{frame}{ProVerif in Technicolor}
-  \includegraphics[height=.9\textheight]{assets/2023-03-20-symbolic-analysis-screenshot.png}
+  \includegraphics[height=.9\textheight]{2023-03-20-symbolic-analysis-screenshot.png}
 \end{frame}
 
 \begin{frame}{Having worked in industry has some advantages}
@@ -141,11 +115,11 @@ Wanja Zaeske, Stephan Ajuvo, Marei Peischl, Benjamin Lipp, Lisa~Schmidt, Karolin
 \end{frame}
 
 \begin{frame}{The spec makes it easy to implement Rosenpass}
-  \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-message-handling-code.pdf}
+  \includegraphics[height=.9\textheight]{rosenpass-whitepaper-message-handling-code.pdf}
 \end{frame}
 
 \begin{frame}{Professional illustrators create stunning graphics}
-  \includegraphics[height=.9\textheight]{graphics/rosenpass-wp-hashing-tree.pdf}
+  \includegraphics[height=.9\textheight]{rosenpass-whitepaper-hashing-tree.pdf}
 \end{frame}
 
 \begin{frame}{Creating successful projects by knowing what not to do}

@@ -13,20 +13,7 @@
 
 % bold math
 \usepackage{bm}
-
-\usepackage{xcolor,soul}
-\definecolor{lightblue}{rgb}{.90,.95,1}
-\definecolor{lightred}{rgb}{1,.80,.80}
-\definecolor{lightgreen}{rgb}{.80,1.,.80}
-%\definecolor{lightred}{red!40}
-\sethlcolor{lightblue}
-
-\definecolor{rosenpass-pink}{RGB}{247, 4, 132}
-\definecolor{rosenpass-orange}{RGB}{255, 166, 48}
-\definecolor{rosenpass-gray}{RGB}{64, 63, 76}
-\definecolor{rosenpass-lightblue}{RGB}{211, 243, 238}
-\definecolor{rosenpass-blue}{RGB}{114, 161, 229}
-
+\usepackage{rosenpass-colors}
 \setbeamercolor{progress bar}{fg=rosenpass-pink,bg=blue}
 \setbeamercolor{title separator}{fg=rosenpass-pink,bg=blue}
 
@@ -104,34 +91,34 @@
 \usepackage{array}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
-
-\def\makeuppercase#1{
-\expandafter\newcommand\csname cal#1\endcsname{\mathcal{#1}}
-\expandafter\newcommand\csname adv#1\endcsname{\mathcal{#1}}
-\expandafter\newcommand\csname frak#1\endcsname{\mathfrak{#1}}
-\expandafter\newcommand\csname bb#1\endcsname{\mathbb{#1}}
-\expandafter\newcommand\csname bf#1\endcsname{\textbf{#1}}
-}
-
-
-
-
-\def\makelowercase#1{
-\expandafter\newcommand\csname frak#1\endcsname{\mathfrak{#1}}
-\expandafter\newcommand\csname bf#1\endcsname{\textbf{#1}}
-}
-
-\newcounter{char}
-\setcounter{char}{1}
-
-\loop
-	\edef\letter{\alph{char}}
-	\edef\Letter{\Alph{char}}
-	\expandafter\makelowercase\letter
-	\expandafter\makeuppercase\Letter
-	\stepcounter{char}
-	\unless\ifnum\thechar>26
-\repeat
+%
+%\def\makeuppercase#1{
+%\expandafter\newcommand\csname cal#1\endcsname{\mathcal{#1}}
+%\expandafter\newcommand\csname adv#1\endcsname{\mathcal{#1}}
+%\expandafter\newcommand\csname frak#1\endcsname{\mathfrak{#1}}
+%\expandafter\newcommand\csname bb#1\endcsname{\mathbb{#1}}
+%\expandafter\newcommand\csname bf#1\endcsname{\textbf{#1}}
+%}
+%
+%
+%
+%
+%\def\makelowercase#1{
+%\expandafter\newcommand\csname frak#1\endcsname{\mathfrak{#1}}
+%\expandafter\newcommand\csname bf#1\endcsname{\textbf{#1}}
+%}
+%
+%\newcounter{char}
+%\setcounter{char}{1}
+%
+%\loop
+%	\edef\letter{\alph{char}}
+%	\edef\Letter{\Alph{char}}
+%	\expandafter\makelowercase\letter
+%	\expandafter\makeuppercase\Letter
+%	\stepcounter{char}
+%	\unless\ifnum\thechar>26
+%\repeat
 
 
 \newcommand{\quotes}[1]{``#1''}
@@ -211,7 +198,6 @@ morestring=[b]",
 \usepackage{bbding}
 \newcommand*\itemtick{\item[\Checkmark]}
 \newcommand*\itemfail{\item[\XSolidBrush]}
-
 \title{%
   Rosenpass
 }
@@ -220,7 +206,7 @@ morestring=[b]",
 }
 \author{\textbf{Karolin Varner}, with Benjamin Lipp, Wanja Zaeske, Lisa Schmidt}
 \institute{RWPQC23 | \url{https://rosenpass.eu/whitepaper.pdf}}
-\titlegraphic{\hfill\includegraphics[height=2.5cm]{tex/RosenPass-Logo.pdf}}
+\titlegraphic{\hfill\includegraphics[height=2.5cm]{RosenPass-Logo.pdf}}
 
 \usepackage[autostyle]{csquotes}
 
