@@ -1,0 +1,28 @@
+name: Build and publish PDF
+
+# Only run if enforced
+on:
+
+permissions:
+  contents: write
+
+jobs:
+  build-on-iot-texlive:
+    # build using full TeX Live images by Island of TeX: https://gitlab.com/islandoftex/images/texlive
+    runs-on: ubuntu-22.04
+    name: "Build and upload PDF artifact using texlive:latest"
+    container:
+      image: registry.gitlab.com/islandoftex/images/texlive:latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Run latexmk
+        run: "latexmk"
+      - name: Archive .pdf
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf-output
+          path: "*.pdf"
+          retention-days: 3
