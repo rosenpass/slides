@@ -2,11 +2,10 @@
 \section{Safety \& Security}
 
 
-\SetNextBackground{\includegraphics[width=\paperwidth,page=1]{hpke-slide-designs-2024-05-09}}
+\SetNextBackground{\includegraphics[width=\paperwidth,page=1]{hpke-slide-designs}}
 \begin{frame}[T]{Safety \& Security in Computersystemen}
 % GOAL Beide Begriffe einführen
 %\small
-%% TODO Grafik einfügen
 %  \begin{columns}[t,fullwidth]
 %   \hfill
 %    \begin{column}{.45\linewidth}
@@ -177,7 +176,6 @@
 		\hfill
 	\end{columns}
 
-	\hskip.5\LeftSlideIndent
     \begin{block}{Security + Safety $\Longleftrightarrow$ Konservativ $\lightning$ Progressiv}
 	    \begin{itemize}
 	      \item Menschen sterben bei Versagen
@@ -188,15 +186,14 @@
 
 \begin{frame}[T]{Safety + Security: Checkliste}
   % GOAL Klar machen, dass beide Domänen nicht unversöhnbar sind
-  \begin{enumerate}
-	% TODO marei smallcaps
-	% TODO marei checkbox right aligned after the items, all checkboxes but the last one checked
-    \item Hohe Zuverlässigkeit\hfill $[ ]$
-    \item Klarheit über Systemziele
-    \item Umfassende Validierung
-	\item Unabhängiges Review
-    \item Analyse von Softwaresystemen in reeller Hardware
-    \item Redundante Systeme
-    \item \textbf{Kryptoagilität}
-  \end{enumerate}
+
+	\begin{tabular*}{\linewidth}{@{}>{\stepcounter{enumi}\theenumi.}l@{\space}l@{\extracolsep{\fill}}r@{}}
+     Hohe Zuverlässigkeit\hfill $[ ]$\\
+     Klarheit über Systemziele &\\
+     Umfassende Validierung&\\
+	 Unabhängiges Review&\\
+     Analyse von Softwaresystemen in reeller Hardware&\\
+     Redundante Systeme&\\
+     \textbf{Kryptoagilität} &\\
+	\end{tabular*}
 \end{frame}
