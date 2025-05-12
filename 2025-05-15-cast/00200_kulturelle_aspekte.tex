@@ -184,16 +184,21 @@
   	\end{block}
 \end{frame}
 
-\begin{frame}[T]{Safety + Security: Checkliste}
+\begin{frame}[c]
   % GOAL Klar machen, dass beide Domänen nicht unversöhnbar sind
 
-	\begin{tabular*}{\linewidth}{@{}>{\stepcounter{enumi}\theenumi.}l@{\space}l@{\extracolsep{\fill}}r@{}}
-     Hohe Zuverlässigkeit\hfill $[ ]$\\
-     Klarheit über Systemziele &\\
-     Umfassende Validierung&\\
-	 Unabhängiges Review&\\
-     Analyse von Softwaresystemen in reeller Hardware&\\
-     Redundante Systeme&\\
-     \textbf{Kryptoagilität} &\\
-	\end{tabular*}
-\end{frame}
+\addfontfeature{Letters=Uppercase}
+
+	\begin{tcolorbox}[sharp corners,title=Safety + Security: Checkliste,left=.2ex,right=.2ex,toptitle=.5ex,bottomtitle=.5ex]
+	\begin{tabular}{@{}>{\stepcounter{enumi}\theenumi.\space}p{\linewidth}@{}}
+     Hohe Zuverlässigkeit  \dotfill \CheckedBox\\
+     Klarheit über Systemziele \dotfill\CheckedBox\\
+     Umfassende Validierung\dotfill\CheckedBox\\
+	 Unabhängiges Review\dotfill\CheckedBox\\
+     Analyse von Softwaresystemen in reeller Hardware\dotfill\CheckedBox\\
+     Redundante Systeme\dotfill\CheckedBox\\
+     \textbf{Kryptoagilität} \dotfill\UncheckedBox
+	\end{tabular}
+	\end{tcolorbox}
+	
+	\end{frame}
