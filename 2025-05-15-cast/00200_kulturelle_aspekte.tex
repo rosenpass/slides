@@ -1,18 +1,19 @@
 \interlude[0]{Safety \& Security \\ \Large \hrule \vspace{1.2em} Kulturelle Aspekte}
 \section{Safety \& Security}
 
-\begin{frame}[T]{Safety \& Security: Definition}
+\begin{frame}[T]{Safety \& Security in Computersystemen}
 % GOAL Beide Begriffe einführen
 \small
+	% TODO Grafik einfügen
   \begin{columns}[t,fullwidth]
    \hfill
     \begin{column}{.45\linewidth}
       \begin{block}{Safety}
       \begin{itemize}
         \item Schutz von Lebewesen
-      \begin{itemize}
-         \item Maschine, die Computer enthält
-      \end{itemize}
+      % \begin{itemize}
+      % \end{itemize}
+
       \end{itemize}
       \end{block}
     \end{column}
@@ -35,13 +36,15 @@
 \begin{frame}[T]{Problemstellungen \& Rahmenbedingungen}
 % GOAL Verfahren sind beim ersten Hinblick inkompatibel, Klar machen, dass beide Begriff verschieden sind und verschiedene Vorgehen erfordern
 % TODO Grafik aus Poster einfügen? Problem: Graifk misch Problem, Kultur und Dialog. Grafik ist english.
+% Tabelle anstatt grafik
 \small
   \begin{columns}[t,fullwidth]
    \hfill
+	% TODO make table
     \begin{column}{.45\linewidth}
       \begin{block}{Safety}
       \begin{itemize}
-        \item Zufällige Fehler
+        \item Fehler: Zufällig
         \item Im Fehlerfall: Weiterbetrieb ermöglichen!
         \item Stabile Zieldefinition:\\Physik bleibt gleich
         \item Abgehangene Software $\rightarrow$ Stabil!
@@ -53,9 +56,9 @@
     \begin{column}{.45\linewidth}
       \begin{block}{Security}
       \begin{itemize}
-        \item Gezielte Fehler durch Angreifer
+        \item Fehler: Gezielt durch Angreifer
         \item Im Fehlerfall: Lieber das System stoppen
-        \item Zieldefinition ist in Bewegung:\\Angreifer lernen auch dazu
+        \item Zieldefinition ist in Bewegung:\\Angreifer lernen dazu
         \item Abgehangene Software $\rightarrow$ Unsicher?
         \item Dynamische Validierungsprozesse
       \end{itemize}
@@ -84,8 +87,6 @@
 
 \begin{frame}[T]{Vertrauen schaffen: Akzeptanzkriterien}
   % GOAL erklären, wie man in Safety/Security Konfidenz erzeugt, einen guten Job gemacht zu haben
-
-  % TODO marei vertical bar in table is weird
 %  \begin{table}[]
     \begin{tabular}{l|cc|cc}
       \multirow{2}{*}{\bfseries Kriterium}
@@ -123,48 +124,50 @@
 \end{frame}
 \endgroup
 
-\begin{frame}[T]{Kulturen}
+\begin{frame}[T]{Ingenieurskulturen}
   % GOAL Es gibt Unterschiede, die Begründet sind. Wenn Safety und Security verbunden werden sollen, müssen beide Gründe verstanden werden.
 	\begin{columns}[t,fullwidth]
 		\hfill
 		\begin{column}{.45\linewidth}
-			\begin{block}{Safety}
+			\begin{block}{Safety $\Longrightarrow$ Konservativ}
 				\begin{itemize}
 				\item Menschen Sterben bei Versagen
 				\item Probleme sind Verstanden und Stabil
-				\item[$\Rightarrow$] Konservative Ingenieurskultur
 				\end{itemize}
 			\end{block}
 		\end{column}
 		\begin{column}{.45\linewidth}
-			\begin{block}{Security}
+			\begin{block}{Security $\Longrightarrow$ Progressive}
 				\begin{itemize}
-				\item Versagen erzeugt eher Finanziellen Schaden
+				\item Versagen erzeugt eher finanziellen Schaden
 				\item Problemtypen sind dynamisch und ändern sich dauernd
-				\item[$\Rightarrow$] Progressive Ingenieurskultur
 				\end{itemize}
 			\end{block}
 		\end{column}
 		\hfill
 	\end{columns}
 
-    \begin{block}{Security und Safety Kombiniert:}
+	% TODO marei center this block?
+    \begin{block}{Security + Safety $\Longleftrightarrow$ Konservativ $\lightning$ Progressiv}
 	    \begin{itemize}
 	      \item Menschen sterben bei Versagen
-	      \item Aber die Probleme sind dynamisch, die Zielsetzung in Bewegung
-	      \item[$\Leftrightarrow$] Konservativ $\lightning$ Progressiv
+	      \item Probleme sind dynamisch, Zielsetzung in Bewegung
 	    \end{itemize}
   	\end{block}
 \end{frame}
 
-\begin{frame}[T]{Safety + Security Benötigt}
+\begin{frame}[T]{Safety + Security: Checkliste}
   % GOAL Klar machen, dass beide Domänen nicht unversöhnbar sind
-  \begin{itemize}
+  \begin{enumerate}
+	% TODO add checkmarks checkboxes für mehr Checklisten Vibe
+	% TODO smallcaps
+	% TODO checkbox right aligend
     \item Hohe Zuverlässigkeit
     \item Klarheit über Systemziele
-    \item Rigorose Validierungsprozesse (Unabhängiges Review)
+    \item Umfassende Validierung
+	\item Unabhängiges Review
     \item Analyse von Softwaresystemen in reeller Hardware
     \item Redundante Systeme
-    \item[$\Rightarrow$] \textbf{Kryptoagilität}
-  \end{itemize}
+    \item \textbf{Kryptoagilität}
+  \end{enumerate}
 \end{frame}

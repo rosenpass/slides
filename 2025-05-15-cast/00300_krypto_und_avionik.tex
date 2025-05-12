@@ -1,7 +1,8 @@
 % TODO klar benennen, dass wir uns jetzt ein Fallbeispiel Anschauen
 
-\begin{frame}{Die Vier Domänen der Sicherheit sind…}
+\begin{frame}{Die vier Domänen der Sicherheit sind…}
   % GOAL Orientierung, wo wie gerade hinschauen für das Fallbeispiel
+  % TODO grafik einfügen
   \Large
   \begin{columns}[c]
     \begin{column}{.5\linewidth}
@@ -25,16 +26,16 @@
 \interlude[1]{Kryptografie in der Avionik}
 
 \begin{frame}[c]{Sichere Kryptografie in der Avionik}
-  % TODO: Screenshot von Economy Class cryptography Paper, und von LDACS paper
-  % TODO: Both papers in two-column?
   % GOAL Aufzeigen, das (gute) Cryptography in Avionik fehlt
+  % TODO grillenbild einfügen
   \vspace{4em}
   \footnotesize
   (Gähnende Leere)
 \end{frame}
 
-\begin{frame}[c]{Zum erschrecken aller…}
+\begin{frame}[c]{Zum Erschrecken aller…}
   % GOAL Aufzeigen, dass auch fortschrittliche Planung durch Mangelnde Kryptoagilität zum scheitern verurteilt ist (LDACS Paper)
+  % TODO kleinere Zeithistorien Grafik einfügen
   \begin{columns}[fullwidth,c]
     \begin{column}{.5\linewidth}
 %      \begin{itemize}
@@ -54,34 +55,22 @@
 \end{frame}
 
 
-\begin{frame}[c]{Kryptographie in der Avionik: Ansatz}
+\begin{frame}[c]{Kryptographie in der Avionik: Unser Ansatz}
   % GOAL HPKE ist ein standard  mit festen interface, dennoch sind die internen Primitive modular
   % TODO check graphics from slides from HACMAS
   % TODO größerere Graphic, in die mitte
   \begin{columns}[fullwidth,c]
     \begin{column}{.65\linewidth}
       \begin{itemize}
-        \item HPKE-Standard als Basis
-
+        \item Kryptographischer Standard:\\
+        Hybridge Public Key Encryption (HPKE)
         \item Schnittstelle aus HPKE
         \begin{itemize}
           \item Seal: Nachricht verschlüsseln (und signieren)
           \item Open: Nachricht entschlüsseln (und prüfen)
         \end{itemize}
 
-        \item Interne Umsetzung Modular basiert auf Modulen\\ % TODO fußnote an alles dranpacken
-         (KEM, KDF \& AEAD\footnote{Avioniker und auch Kryptographen lieben Akronyme}) % TODO marei Fußnote zieht blauen balken hoch
-
-        % \item Modularität der Primitive
-        % \begin{itemize}
-        %   \item KEM: Key Encapsulation Funktion\\Eigener Privater Schlüssel, Öffentlicher Schlüssel Addressat $\rightarrow$ Sym. Schlüssel
-        %   \item KDF: Key Derivation Function\\Schlüsselmaterial, Entropie $\rightarrow$ Schlüssel
-        %   \item AEAD: Authenticated Encryption with Associated Data\\
-        %     Symetrische Chiffre mit Authentisierung\\
-        %     Klartext, Sym. Schlüssel $\rightarrow$ Cyphertext\\
-        %     Cyphertext, Sym. Schlüssel $\rightarrow$ Klartext. Authentisiert?
-        % \end{itemize}
-
+        % TODO Neue Graphik einfügen
         % TODO placement and size of graphics
       \end{itemize}
     \end{column}%
@@ -99,13 +88,14 @@
   \begin{columns}[fullwidth,c]
     \begin{column}{.35\linewidth}
       \begin{itemize}
-        \item Pre oder Post-Quantum?
+        \item Pre oder post-Quantum?
         \item Mehr oder weniger Speicherbedarf?
-        \item Schenelle or langsame Berechnung?
+        \item Schnell oder langsam?
         \item Post-quantum Authentisierung? 
       \end{itemize}
     \end{column}%
     \begin{column}{.65\linewidth}
+      % TODO update graphik
       \includegraphics[width=\linewidth]{graphics/hpke variants}
     \end{column}
   \end{columns}
@@ -113,20 +103,9 @@
 
 
 \begin{frame}[c]{Partitionen zur Integration in die Avionik}
-  % \begin{columns}[fullwidth,c]
-  %   \begin{column}{.4\linewidth}
-  %     \begin{itemize}
-  %       \item Bündelung der Kyrypto-Implementierung
-  %       \item Modul der Avionik: Partition\footnote{Partitionen sind voneinander isoliert, und dürfen daher in der Zulassung separat betrachtet werden}
-  %       \item Einfacher Austausch der Krypto-Partition
-  %     \end{itemize}
-  %     \vspace{8.5em} % TODO This is a hack, maybe marei can fix it?
-  %   \end{column}%
-  %   \begin{column}{.6\linewidth}
-      \centering 
-      \includegraphics[width=0.8\linewidth]{graphics/crypto partition}
-  %   \end{column}
-  % \end{columns}
+  % TODO update graphiken
+  \centering 
+  \includegraphics[width=0.8\linewidth]{graphics/crypto partition}
 \end{frame}
 
 % GOAL Aufzeigen, dass und wie Modularität der Schlüssel für Kryptoagilität in der Safety ist
