@@ -84,6 +84,7 @@
             metafont
             xstring
             stmaryrd
+            booktabs
             ;
         };
 
