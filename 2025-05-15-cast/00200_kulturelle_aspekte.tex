@@ -89,11 +89,24 @@
 \definecolor{green2}{RGB}{130, 221, 207}
 \colorlet{green3}{rosenpass-lightblue}
 \newcommand*{\Level}[1]{
+
 	\str_case:nnF {#1} {
-		{+}{\cellcolor{green3}+}
-		{++}{\cellcolor{green2}+\,+}
-		{+++}{\cellcolor{green1}+\,+\,+}
-		{-}{\cellcolor{red!10}}
+		{+}{
+      \begin{tikzpicture}[/tikzsymbolsstyle]
+        \draw[fill=green3] (0,0) circle [radius=0.21];
+      \end{tikzpicture}%
+    }
+		{++}{
+      \begin{tikzpicture}[/tikzsymbolsstyle]
+        \draw[fill=green2] (0,0) circle [radius=0.21];
+      \end{tikzpicture}%
+    }
+		{+++}{
+      \begin{tikzpicture}[/tikzsymbolsstyle]
+        \draw[fill=green1] (0,0) circle [radius=0.21];
+      \end{tikzpicture}%
+    }
+		{-}{-}
 	}
 	{#1}
 }
@@ -102,20 +115,24 @@
 \begin{frame}[T]{Vertrauen schaffen: Akzeptanzkriterien}
   % GOAL erklären, wie man in Safety/Security Konfidenz erzeugt, einen guten Job gemacht zu haben
 %  \begin{table}[]
-    \begin{tabular}{l|cc|cc}
-      \multirow{2}{*}{\bfseries Kriterium}
-        & \multicolumn{2}{c|}{\bfseries Safety}
-        & \multicolumn{2}{c}{\bfseries Security} \\
-                           & \bfseries Konfidenz & \bfseries Verbreitung & \bfseries Konfidenz & \bfseries Verbreitung \\
-    \hline
-	% alternativ &&\\
-    Praktische Tests          & \Level{+++}    & \Level{+++}     & \Level{+}           & \Level{++}       \\
-    Proven-in-use             & \Level{++}     & \Level{+}       & \Level{-}           & \Level{+}        \\
-    Mathematische Beweise     & \Level{+++}    & \Level{-}       & \Level{+++}         & \Level{++}       \\
-    Externe Audits            & \Level{++}     & \Level{+++}     & \Level{+++}         & \Level{+++}      \\
+    \begin{tabular}{lrlrl}
+      \multirow{2}{*}{}
+                          & \multicolumn{2}{c}{\bfseries Safety} & \multicolumn{2}{c}{\bfseries Security} \\[0.2em]
+                          &      Konfidenz     &  Verbreitung    &  Konfidenz          &  Verbreitung     \\[0.9em]
+
+    \arrayrulecolor{lightgray}
+
+    Praktische Tests      & \Level{+++}    & \Level{+++}     & \Level{+}           & \Level{++}           \\[-0.10em]
+    \midrule                                                                                              \\[-1.20em]
+    Proven-in-use         & \Level{++}     & \Level{+}       & \Level{-}           & \Level{+}            \\[-0.10em]
+    \midrule                                                                                              \\[-1.20em]
+    Mathematische Beweise & \Level{+++}    & \Level{-}       & \Level{+++}         & \Level{++}           \\[-0.10em]
+    \midrule                                                                                              \\[-1.20em]
+    Externe Audits        & \Level{++}     & \Level{+++}     & \Level{+++}         & \Level{+++}          \\[-0.10em]
     \end{tabular}
-      \textbf{Verbreitung} Häufigkeit als tragendes Argument im Assurance-Case\\
-      \textbf{Konfidenz} Vertrauen in das Kriterium
+    \\[1em]
+    \textbf{Verbreitung} Häufigkeit als tragendes Argument im Assurance-Case\\
+    \textbf{Konfidenz} Vertrauen in das Kriterium
 
 
   % \begin{itemize}
