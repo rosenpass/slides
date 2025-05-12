@@ -1,5 +1,6 @@
 {
   inputs = {
+    self.submodules = true;
     nixpkgs.url = "github:NixOS/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
     devshell.url = "github:numtide/devshell";
@@ -137,10 +138,11 @@
                 help = "build the slides";
               }
               {
-                name = "tolerant-build";
+                name = "watch-tolerant";
                 command = ''
-                  latexmk -pdf -pvc -interaction=nonstopmode -lualatex
+                  latexmk -pdf -pvc -interaction=nonstopmode
                 '';
+                help = "build continously, continue on errors";
               }
               {
                 name = "clean";
@@ -148,6 +150,13 @@
                   latexmk -c
                 '';
                 help = "build the slides";
+              }
+              {
+                name = "checkout-submodules";
+                command = ''
+                  git submodule update --init --recursive
+                '';
+                help = "pull all submodules, checking out the prescribed commit";
               }
             ];
           }
