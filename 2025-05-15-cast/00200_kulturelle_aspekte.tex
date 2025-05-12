@@ -88,24 +88,24 @@
 \definecolor{green2}{RGB}{130, 221, 207}
 \colorlet{green3}{rosenpass-lightblue}
 \newcommand*{\Level}[1]{
-
 	\str_case:nnF {#1} {
 		{+}{
-      \begin{tikzpicture}[/tikzsymbolsstyle]
-        \draw[fill=green3] (0,0) circle [radius=0.21];
+      \begin{tikzpicture}
+        \draw[green3] (0,0) circle [radius=0.21];
       \end{tikzpicture}%
-    }
+		}
 		{++}{
-      \begin{tikzpicture}[/tikzsymbolsstyle]
-        \draw[fill=green2] (0,0) circle [radius=0.21];
+      \begin{tikzpicture}[fill=green2,draw=green2]
+        \fill (-135\c_colon_str .21) arc [radius=0.21,start~angle=-135,end~angle=45];
+        \draw (0,0) circle [radius=0.21];
       \end{tikzpicture}%
     }
 		{+++}{
-      \begin{tikzpicture}[/tikzsymbolsstyle]
-        \draw[fill=green1] (0,0) circle [radius=0.21];
+      \begin{tikzpicture}
+        \fill[green1] (0,0) circle [radius=0.21];
       \end{tikzpicture}%
     }
-		{-}{-}
+		{-}{\color{black!70}\rule[.3\ht\strutbox]{.41cm}{1pt}}
 	}
 	{#1}
 }
@@ -176,12 +176,18 @@
 		\hfill
 	\end{columns}
 
-    \hskip.5\LeftSlideIndent\begin{block}{Security + Safety $\Longleftrightarrow$ Konservativ $\lightning$ Progressiv}
+	\begin{columns}[t,fullwidth]
+			\hfill
+	\begin{column}{\textwidth}
+		\hfill\begin{block}{Security + Safety $\Longleftrightarrow$ Konservativ $\lightning$ Progressiv}
 	    \begin{itemize}
 	      \item Menschen sterben bei Versagen
 	      \item Probleme sind dynamisch, Zielsetzung in Bewegung
 	    \end{itemize}
   	\end{block}
+  			\end{column}
+  					\hfill
+  	\end{columns}
 \end{frame}
 
 \begin{frame}[c]
