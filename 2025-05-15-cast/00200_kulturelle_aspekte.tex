@@ -65,7 +65,23 @@
   \end{columns}
 \end{frame}
 
-%
+
+\begingroup
+\ExplSyntaxOn
+\definecolor{green1}{RGB}{48, 175, 155}
+\definecolor{green2}{RGB}{130, 221, 207}
+\colorlet{green3}{rosenpass-lightblue}
+\newcommand*{\Level}[1]{
+	\str_case:nnF {#1} {
+		{+}{\cellcolor{green3}+}
+		{++}{\cellcolor{green2}+\,+}
+		{+++}{\cellcolor{green1}+\,+\,+}
+		{-}{\cellcolor{red!10}}
+	}
+	{#1}
+}
+\ExplSyntaxOff
+
 \begin{frame}[T]{Vertrauen schaffen: Akzeptanzkriterien}
   % GOAL erklären, wie man in Safety/Security Konfidenz erzeugt, einen guten Job gemacht zu haben
 
@@ -79,10 +95,10 @@
     \hline
 %     \\% TODO (also eigentlich Hinweis) Wanja: Hier ist eine Leerzeile die keine zweite/dritte Spalte hat, daher wird die vertikale linie nicht durchgezogen, aber vertikale linien sind eh doof
 	% alternativ &&\\
-    Praktische Tests          & +++    & +++     & +           & ++       \\
-    Proven-in-use             & ++     & +       & -           & +        \\
-    Mathematische Beweise     & +++    & -       & +++         & ++       \\
-    Externe Audits            & ++     & +++     & +++         & +++      \\
+    Praktische Tests          & \Level{+++}    & \Level{+++}     & \Level{+}           & \Level{++}       \\
+    Proven-in-use             & \Level{++}     & \Level{+}       & \Level{-}           & \Level{+}        \\
+    Mathematische Beweise     & \Level{+++}    & \Level{-}       & \Level{+++}         & \Level{++}       \\
+    Externe Audits            & \Level{++}     & \Level{+++}     & \Level{+++}         & \Level{+++}      \\
     \end{tabular}
       \textbf{Verbreitung} Häufigkeit als tragendes Argument im Assurance-Case\\
       \textbf{Konfidenz} Vertrauen in das Kriterium
@@ -105,6 +121,7 @@
   % \end{itemize}
 
 \end{frame}
+\endgroup
 
 \begin{frame}[T]{Kulturen}
   % GOAL Es gibt Unterschiede, die Begründet sind. Wenn Safety und Security verbunden werden sollen, müssen beide Gründe verstanden werden.
