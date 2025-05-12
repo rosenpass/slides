@@ -1,6 +1,7 @@
 {
   inputs = {
-    self.submodules = true;
+    # TODO activate this once Nix 2.27.0 is released
+    #self.submodules = true;
     nixpkgs.url = "github:NixOS/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
     devshell.url = "github:numtide/devshell";
@@ -140,9 +141,9 @@
               {
                 name = "watch-tolerant";
                 command = ''
-                  latexmk -pdf -pvc -interaction=nonstopmode
+                  latexmk -pvc -interaction=nonstopmode
                 '';
-                help = "build continously, continue on errors";
+                help = "build slides continously, continue on errors";
               }
               {
                 name = "clean";
