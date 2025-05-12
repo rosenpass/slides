@@ -1,38 +1,42 @@
 % TODO klar benennen, dass wir uns jetzt ein Fallbeispiel Anschauen
 
+\SetNextBackground{\includegraphics[width=\paperwidth,page=3]{hpke-slide-designs-2024-05-09}}
 \begin{frame}{Die vier Domänen der Sicherheit sind…}
   % GOAL Orientierung, wo wie gerade hinschauen für das Fallbeispiel
   % TODO grafik einfügen
-  \Large
-  \begin{columns}[c]
-    \begin{column}{.5\linewidth}
-      \textbf{Luftfahrt}
-    \end{column}
-    \begin{column}{.5\linewidth}
-      Automobile
-    \end{column}
-  \end{columns}
-  \vfill
-  \begin{columns}[c]
-    \begin{column}{.5\linewidth}
-      Medizintechnik
-    \end{column}
-    \begin{column}{.5\linewidth}
-      Automatisierung
-    \end{column}
-  \end{columns}
+%  \Large
+%  \begin{columns}[c]
+%    \begin{column}{.5\linewidth}
+%      \textbf{Luftfahrt}
+%    \end{column}
+%    \begin{column}{.5\linewidth}
+%      Automobile
+%    \end{column}
+%  \end{columns}
+%  \vfill
+%  \begin{columns}[c]
+%    \begin{column}{.5\linewidth}
+%      Medizintechnik
+%    \end{column}
+%    \begin{column}{.5\linewidth}
+%      Automatisierung
+%    \end{column}
+%  \end{columns}
 \end{frame}
 
 \interlude[1]{Kryptografie in der Avionik}
 
+
+\SetNextBackground{\includegraphics[width=\paperwidth,page=4]{hpke-slide-designs-2024-05-09}}
 \begin{frame}[c]{Sichere Kryptografie in der Avionik}
-  % GOAL Aufzeigen, das (gute) Cryptography in Avionik fehlt
-  % TODO grillenbild einfügen
-  \vspace{4em}
-  \footnotesize
-  (Gähnende Leere)
+%  % GOAL Aufzeigen, das (gute) Cryptography in Avionik fehlt
+%  % TODO grillenbild einfügen
+%  \vspace{4em}
+%  \footnotesize
+%  (Gähnende Leere)
 \end{frame}
 
+\SetNextBackground{\includegraphics[width=\paperwidth,page=5]{hpke-slide-designs-2024-05-09}}
 \begin{frame}[c]{Zum Erschrecken aller…}
   % GOAL Aufzeigen, dass auch fortschrittliche Planung durch Mangelnde Kryptoagilität zum scheitern verurteilt ist (LDACS Paper)
   % TODO kleinere Zeithistorien Grafik einfügen
@@ -44,21 +48,21 @@
         …wird in der Luftfahrt heutzutage keine sichere Kryptografie eingesetzt. 
 %      \end{itemize}
     \end{column}%
-    \begin{column}{.5\linewidth}
-      % GOAL Digital Drahtlos Kommunikation seit 45 jahren
-      % GOAL Erste ernste zunehmende Kryptographie in 2007 eingeführt, aber quasi keine Verbreitung
-      % GOAL 2021 dann der erste Vorschlag, für einen hybridig post-quaten sicheren Datalink...
-      % GOAL ... aber noch vor dem Rollout und nach nur einem Jahr ist die chiffre gebrochen :(
-      \includegraphics[width=.92\linewidth]{graphics/history of cryptography in avionics}
-    \end{column}
+    \hfill
+%    \begin{column}{.5\linewidth}
+%      % GOAL Digital Drahtlos Kommunikation seit 45 jahren
+%      % GOAL Erste ernste zunehmende Kryptographie in 2007 eingeführt, aber quasi keine Verbreitung
+%      % GOAL 2021 dann der erste Vorschlag, für einen hybridig post-quaten sicheren Datalink...
+%      % GOAL ... aber noch vor dem Rollout und nach nur einem Jahr ist die chiffre gebrochen :(
+%      \includegraphics[width=.92\linewidth]{graphics/history of cryptography in avionics}
+%    \end{column}
   \end{columns}
 \end{frame}
 
 
+\SetNextBackground{\includegraphics[width=\paperwidth,page=6]{hpke-slide-designs-2024-05-09}}
 \begin{frame}[c]{Kryptographie in der Avionik: Unser Ansatz}
   % GOAL HPKE ist ein standard  mit festen interface, dennoch sind die internen Primitive modular
-  % TODO check graphics from slides from HACMAS
-  % TODO größerere Graphic, in die mitte
   \begin{columns}[fullwidth,c]
     \begin{column}{.65\linewidth}
       \begin{itemize}
@@ -69,23 +73,18 @@
           \item Seal: Nachricht verschlüsseln (und signieren)
           \item Open: Nachricht entschlüsseln (und prüfen)
         \end{itemize}
-
-        % TODO Neue Graphik einfügen
-        % TODO placement and size of graphics
       \end{itemize}
     \end{column}%
-    \begin{column}{.35\linewidth}
-      
-        \includegraphics[width=0.8\linewidth]{graphics/hpke}
-        % TODO explain every detail of this Graphic
-    \end{column}
+    \hfill
   \end{columns}
 \end{frame}
 
 
+\SetNextBackground{\includegraphics[width=\paperwidth,page=8]{hpke-slide-designs-2024-05-09}}
 \begin{frame}[c]{Flexible Einsatzszenarien, gleiche Schnittstelle}
   % GOAL Auswahl der Primitive erlaubt tradeoffs, Schnittstelle bleibt gleich
   \begin{columns}[fullwidth,c]
+  \hfill
     \begin{column}{.35\linewidth}
       \begin{itemize}
         \item Pre oder post-Quantum?
@@ -94,18 +93,19 @@
         \item Post-quantum Authentisierung? 
       \end{itemize}
     \end{column}%
-    \begin{column}{.65\linewidth}
-      % TODO update graphik
-      \includegraphics[width=\linewidth]{graphics/hpke variants}
-    \end{column}
+%    \begin{column}{.65\linewidth}
+%      % TODO update graphik
+%      \includegraphics[width=\linewidth]{graphics/hpke variants}
+%    \end{column}
   \end{columns}
 \end{frame}
 
 
+\SetNextBackground{\includegraphics[width=\paperwidth,page=9]{hpke-slide-designs-2024-05-09}}
 \begin{frame}[c]{Partitionen zur Integration in die Avionik}
-  % TODO update graphiken
-  \centering 
-  \includegraphics[width=0.8\linewidth]{graphics/crypto partition}
+%  % TODO update graphiken
+%  \centering 
+%  \includegraphics[width=0.8\linewidth]{graphics/crypto partition}
 \end{frame}
 
 % GOAL Aufzeigen, dass und wie Modularität der Schlüssel für Kryptoagilität in der Safety ist
