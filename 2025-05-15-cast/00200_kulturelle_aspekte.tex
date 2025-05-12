@@ -4,16 +4,13 @@
 \begin{frame}[T]{Safety \& Security in Computersystemen}
 % GOAL Beide Begriffe einführen
 \small
-	% TODO Grafik einfügen
+% TODO Grafik einfügen
   \begin{columns}[t,fullwidth]
    \hfill
     \begin{column}{.45\linewidth}
       \begin{block}{Safety}
       \begin{itemize}
         \item Schutz von Lebewesen
-      % \begin{itemize}
-      % \end{itemize}
-
       \end{itemize}
       \end{block}
     \end{column}
@@ -35,37 +32,49 @@
 
 \begin{frame}[T]{Problemstellungen \& Rahmenbedingungen}
 % GOAL Verfahren sind beim ersten Hinblick inkompatibel, Klar machen, dass beide Begriff verschieden sind und verschiedene Vorgehen erfordern
-% TODO Grafik aus Poster einfügen? Problem: Graifk misch Problem, Kultur und Dialog. Grafik ist english.
-% Tabelle anstatt grafik
 \small
-  \begin{columns}[t,fullwidth]
-   \hfill
-	% TODO make table
-    \begin{column}{.45\linewidth}
-      \begin{block}{Safety}
-      \begin{itemize}
-        \item Fehler: Zufällig
-        \item Im Fehlerfall: Weiterbetrieb ermöglichen!
-        \item Stabile Zieldefinition:\\Physik bleibt gleich
-        \item Abgehangene Software $\rightarrow$ Stabil!
-        \item Normierte Validierungsprozesse
-      \end{itemize}
-      \end{block}
-    \end{column}
-    \hfill
-    \begin{column}{.45\linewidth}
-      \begin{block}{Security}
-      \begin{itemize}
-        \item Fehler: Gezielt durch Angreifer
-        \item Im Fehlerfall: Lieber das System stoppen
-        \item Zieldefinition ist in Bewegung:\\Angreifer lernen dazu
-        \item Abgehangene Software $\rightarrow$ Unsicher?
-        \item Dynamische Validierungsprozesse
-      \end{itemize}
-      \end{block}
-    \end{column}
-    \hfill
-  \end{columns}
+
+	\begin{table}[]
+	\begin{tabular}{l|llll}
+	                    & \textbf{Safety}              & \textbf{Security}              \\
+	\hline
+	Fehlerauftreten     & Zufällig                     & Gezielt durch Angreifer        \\
+	Fehlerbehandlung    & Weiterbetrieb Ermöglichen    & Lieber das System stoppen      \\
+	Zieldefinition      & Stabil, Physik bleibt gleich & In Bewegung, Angreifer lernen  \\
+	Abgehangene Sofware & $\rightarrow$ Stabil         & $\rightarrow$ Unsicher?        \\
+	Validierung         & Normierte Prozesse           & Dynamische Prozesse            \\
+	                    &                              &
+	\end{tabular}
+	\end{table}
+
+  % OLD slide with two-column bullet points
+  % \begin{columns}[t,fullwidth]
+  %  \hfill
+  %   \begin{column}{.45\linewidth}
+  %     \begin{block}{Safety}
+  %     \begin{itemize}
+  %       \item Fehler: Zufällig
+  %       \item Im Fehlerfall: Weiterbetrieb ermöglichen!
+  %       \item Stabile Zieldefinition:\\Physik bleibt gleich
+  %       \item Abgehangene Software $\rightarrow$ Stabil!
+  %       \item Normierte Validierungsprozesse
+  %     \end{itemize}
+  %     \end{block}
+  %   \end{column}
+  %   \hfill
+  %   \begin{column}{.45\linewidth}
+  %     \begin{block}{Security}
+  %     \begin{itemize}
+  %       \item Fehler: Gezielt durch Angreifer
+  %       \item Im Fehlerfall: Lieber das System stoppen
+  %       \item Zieldefinition ist in Bewegung:\\Angreifer lernen dazu
+  %       \item Abgehangene Software $\rightarrow$ Unsicher?
+  %       \item Dynamische Validierungsprozesse
+  %     \end{itemize}
+  %     \end{block}
+  %   \end{column}
+  %   \hfill
+  % \end{columns}
 \end{frame}
 
 
@@ -91,10 +100,9 @@
     \begin{tabular}{l|cc|cc}
       \multirow{2}{*}{\bfseries Kriterium}
         & \multicolumn{2}{c|}{\bfseries Safety}
-        & \multicolumn{2}{c}{\bfseries Security} \\ %TODO transpose
+        & \multicolumn{2}{c}{\bfseries Security} \\
                            & \bfseries Konfidenz & \bfseries Verbreitung & \bfseries Konfidenz & \bfseries Verbreitung \\
     \hline
-%     \\% TODO (also eigentlich Hinweis) Wanja: Hier ist eine Leerzeile die keine zweite/dritte Spalte hat, daher wird die vertikale linie nicht durchgezogen, aber vertikale linien sind eh doof
 	% alternativ &&\\
     Praktische Tests          & \Level{+++}    & \Level{+++}     & \Level{+}           & \Level{++}       \\
     Proven-in-use             & \Level{++}     & \Level{+}       & \Level{-}           & \Level{+}        \\
@@ -159,10 +167,9 @@
 \begin{frame}[T]{Safety + Security: Checkliste}
   % GOAL Klar machen, dass beide Domänen nicht unversöhnbar sind
   \begin{enumerate}
-	% TODO add checkmarks checkboxes für mehr Checklisten Vibe
-	% TODO smallcaps
-	% TODO checkbox right aligend
-    \item Hohe Zuverlässigkeit
+	% TODO marei smallcaps
+	% TODO marei checkbox right aligned after the items, all checkboxes but the last one checked
+    \item Hohe Zuverlässigkeit\hfill $[ ]$
     \item Klarheit über Systemziele
     \item Umfassende Validierung
 	\item Unabhängiges Review
