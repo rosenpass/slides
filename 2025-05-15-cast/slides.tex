@@ -35,7 +35,10 @@
 
 % Syntaxerweiterung \SetNextBackground{Bild} oder image= option bei frame
 
-\partnerlogo{\rule{2cm}{2cm}}
+\partnerlogo{%
+	\includegraphics[height=2\baselineskip]{MPI-SP}%
+	\includegraphics[height=2\baselineskip]{dlr}%
+}
 
 \ExplSyntaxOn
 \tl_gset:Nn \g__ptxcd_interlude_prefix_tl  {artsy-slide-backgrounds-smaller-hd/artsy-mild-bg-2}
