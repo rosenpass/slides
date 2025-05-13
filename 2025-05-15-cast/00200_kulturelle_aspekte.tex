@@ -91,7 +91,7 @@
 	\str_case:nnF {#1} {
 		{+}{
       \begin{tikzpicture}
-        \draw[green3] (0,0) circle [radius=0.21];
+        \draw[green2] (0,0) circle [radius=0.21];
       \end{tikzpicture}%
 		}
 		{++}{
@@ -105,7 +105,7 @@
         \fill[green1] (0,0) circle [radius=0.21];
       \end{tikzpicture}%
     }
-		{-}{\color{black!70}\rule[.3\ht\strutbox]{.41cm}{1pt}}
+    {-}{\raisebox{.08cm}{\color{lightgray!70}\rule[.3\ht\strutbox]{.41cm}{1pt}}}
 	}
 	{#1}
 }
