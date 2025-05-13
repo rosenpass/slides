@@ -39,15 +39,15 @@
                                & \textbf{Safety}              & \textbf{Security}              \\[1.4em]
 
   \arrayrulecolor{lightgray}
-  \textbf{Fehlerauftreten}     & Zufällig                     & Gezielt (durch Angreifer)      \\[0.35em]
-  \midrule                                                                                     \\[-0.75em]
-	\textbf{Fehlerbehandlung}    & Weiterbetrieb notwendig      & System stoppen                 \\[0.35em]
+  \textbf{Abgehangene Sofware} & Stabil!                      & Unsicher?                      \\[0.35em]
   \midrule                                                                                     \\[-0.75em]
   \textbf{Zieldefinition}      & Stabil (Physik bleibt gleich) & In Bewegung (Angreifer lernen)  \\[0.35em]
   \midrule                                                                                     \\[-0.75em]
-	\textbf{Abgehangene Sofware} & Stabil!                      & Unsicher?                      \\[0.35em]
+  \textbf{Fehlerauftreten}     & Zufällig                     & Gezielt (durch Angreifer)      \\[0.35em]
   \midrule                                                                                     \\[-0.75em]
-	\textbf{Validierungsprozess} & Normiert                     & Dynamisch                      \\
+  \textbf{Fehlerbehandlung}    & Weiterbetrieb notwendig      & System stoppen                 \\[0.35em]
+  \midrule                                                                                     \\[-0.75em]
+  \textbf{Validierungsprozess} & Normiert                     & Dynamisch                      \\
 	                             &                              &
 	\end{tabular}
 
@@ -121,13 +121,13 @@
 
     \arrayrulecolor{lightgray}
 
-    Praktische Tests      & \Level{+++}    & \Level{+++}     & \Level{+}           & \Level{++}           \\[-0.10em]
-    \midrule                                                                                              \\[-1.20em]
     Proven-in-use         & \Level{++}     & \Level{+}       & \Level{-}           & \Level{+}            \\[-0.10em]
     \midrule                                                                                              \\[-1.20em]
-    Mathematische Beweise & \Level{+++}    & \Level{-}       & \Level{+++}         & \Level{++}           \\[-0.10em]
+    Praktische Tests      & \Level{+++}    & \Level{+++}     & \Level{+}           & \Level{++}           \\[-0.10em]
     \midrule                                                                                              \\[-1.20em]
     Externe Audits        & \Level{++}     & \Level{+++}     & \Level{+++}         & \Level{+++}          \\[-0.10em]
+    \midrule                                                                                              \\[-1.20em]
+    Mathematische Beweise & \Level{+++}    & \Level{-}       & \Level{+++}         & \Level{++}           \\[-0.10em]
     \end{tabular}
     \\[1em]
     \textbf{Verbreitung} Häufigkeit als tragendes Argument im Assurance-Case\\
@@ -194,7 +194,7 @@
   % GOAL Klar machen, dass beide Domänen nicht unversöhnbar sind
 
 \addfontfeature{Letters=Uppercase}
-
+	% TODO remove enumeration, make it items
 	\begin{tcolorbox}[sharp corners,title=Safety + Security: Checkliste,left=.2ex,right=.2ex,toptitle=.5ex,bottomtitle=.5ex]
 	\begin{tabular}{@{}>{\stepcounter{enumi}\theenumi.\space}p{\linewidth}@{}}
      Hohe Zuverlässigkeit  \dotfill \CheckedBox\\
