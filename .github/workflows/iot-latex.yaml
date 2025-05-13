@@ -3,17 +3,38 @@ name: Build all PDFs
 # only run manually
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+        - dev
+  pull_request:
 
 permissions:
   contents: write
 
 jobs:
+  generate-matrix:
+    runs-on: ubuntu-22.04
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Generate matrix using 20* directory which contain a *slides.tex file
+        id: set-matrix
+        run: |
+          dirlist=$(for dir in 20*/*slides.tex; do echo "\"${dir%/*}\","; done)
+          echo matrix=[${dirlist%*,}] >> "$GITHUB_OUTPUT"
+
   build-on-iot-texlive:
     # build using full TeX Live images by Island of TeX: https://gitlab.com/islandoftex/images/texlive
     runs-on: ubuntu-22.04
     name: "Build and upload PDF artifact using texlive:latest"
     container:
       image: registry.gitlab.com/islandoftex/images/texlive:latest
+    strategy:
+        matrix:
+          dir: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,10 +42,10 @@ jobs:
           submodules: recursive
           token: ${{ secrets.ROSENPASS_LATEX_TOKEN }}
       - name: Run latexmk
-        run: "latexmk"
+        run: latexmk "${{ matrix.dir }}/*slides.tex"
       - name: Archive .pdf
         uses: actions/upload-artifact@v4
         with:
           name: pdf-output
-          path: "*.pdf"
+          path: "**/*.pdf"
           retention-days: 3
