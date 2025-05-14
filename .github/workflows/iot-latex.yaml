@@ -3,18 +3,13 @@ name: Build all PDFs
 # only run manually
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-        - dev
-  pull_request:
 
 permissions:
   contents: write
 
 jobs:
   generate-matrix:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
@@ -23,12 +18,13 @@ jobs:
       - name: Generate matrix using 20* directory which contain a *slides.tex file
         id: set-matrix
         run: |
-          dirlist=$(for dir in 20*/*slides.tex; do echo "\"${dir%/*}\","; done)
-          echo matrix=[${dirlist%*,}] >> "$GITHUB_OUTPUT"
+          dirlist=$(for dir in 20*/*slides.tex; do printf "\"${dir%/*}\","; done)
+          printf  "matrix=[%s]\n" "${dirlist%*,}" >> "$GITHUB_OUTPUT"
 
   build-on-iot-texlive:
+    needs: generate-matrix
     # build using full TeX Live images by Island of TeX: https://gitlab.com/islandoftex/images/texlive
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     name: "Build and upload PDF artifact using texlive:latest"
     container:
       image: registry.gitlab.com/islandoftex/images/texlive:latest
