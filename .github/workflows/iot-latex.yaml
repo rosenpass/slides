@@ -18,14 +18,14 @@ jobs:
       - name: Generate matrix using 20* directory which contain a *slides.tex file
         id: set-matrix
         run: |
-          dirlist=$(for dir in 20*/*slides.tex; do printf "\"${dir%/*}\","; done)
+          dirlist=$(for dir in $(ls -r 20*/*slides.tex); do printf "\"${dir%/*}\","; done)
           printf  "matrix=[%s]\n" "${dirlist%*,}" >> "$GITHUB_OUTPUT"
 
   build-on-iot-texlive:
     needs: generate-matrix
     # build using full TeX Live images by Island of TeX: https://gitlab.com/islandoftex/images/texlive
     runs-on: ubuntu-latest
-    name: "Build and upload PDF artifact using texlive:latest"
+    name: "build PDF"
     container:
       image: registry.gitlab.com/islandoftex/images/texlive:latest
     strategy:
@@ -38,7 +38,7 @@ jobs:
           submodules: recursive
           token: ${{ secrets.ROSENPASS_LATEX_TOKEN }}
       - name: Run latexmk
-        run: latexmk "${{ matrix.dir }}/*slides.tex"
+        run: latexmk "${{ matrix.dir }}/"*slides.tex
       - name: Archive .pdf
         uses: actions/upload-artifact@v4
         with:
