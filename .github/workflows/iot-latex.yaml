@@ -29,6 +29,7 @@ jobs:
     container:
       image: registry.gitlab.com/islandoftex/images/texlive:latest
     strategy:
+        fail-fast: false
         matrix:
           dir: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
     steps:
