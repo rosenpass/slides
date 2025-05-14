@@ -38,10 +38,10 @@ jobs:
           submodules: recursive
           token: ${{ secrets.ROSENPASS_LATEX_TOKEN }}
       - name: Run latexmk
-        run: latexmk "${{ matrix.dir }}/"*slides.tex
+        run: latexmk --jobname="${{ matrix.dir }}-%A" "${{ matrix.dir }}/"*slides.tex
       - name: Archive .pdf
         uses: actions/upload-artifact@v4
         with:
           name: pdf-output
-          path: "**/*.pdf"
+          path: "20*/*slides.pdf"
           retention-days: 3
