@@ -104,8 +104,11 @@
                 ];
                 sourceRoot = "./${name}";
                 nativeBuildInputs = with pkgs; [
-                  google-fonts
                   tex
+                  nixpkgs-fmt
+                  google-fonts
+                  nodePackages.prettier
+                  python3Packages.pygments # for pygmentize
                 ];
                 buildPhase = ''
                   export HOME=$(mktemp -d)
