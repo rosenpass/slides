@@ -1,0 +1,62 @@
+\interlude{Migration zur Post-Quanten Sicherheit}
+
+\begin{frame}[T]{Migration zur Post-Quantum-Sicherheit}
+
+Bild: Timeline
+\begin{itemize}
+  \item 1978: McEliece Kryptosystem publiziert (erstes mit PQ-Sicherheit) 
+  \item 1994: Shors Algorithmus Publiziert (Quantenangriffe Entdeckt) %  – https://en.wikipedia.org/wiki/Shor%27s_algorithm
+  \item 2016: NIST-Wettbewerb für PQ-Sichere Kryptosysteme angekündigt % – https://csrc.nist.gov/Projects/post-quantum-cryptography/news
+  \item 2019: Experiment zur nutzung von PQ-Sicherheit auf Websiten % – https://blog.cloudflare.com/towards-post-quantum-cryptography-in-tls/
+  \item 2022: OpenSSH-Release abgesichert % – https://www.openssh.com/txt/release-9.0
+  \item 2023: Rosenpass veröffentlicht (WireGuard abgesichert)
+  \item 2023: Signal Messenger abgesichert % began migration – https://signal.org/blog/pqxdh/
+  \item 2024: NIST-Wettbewerb führt zum ersten Standard % – https://csrc.nist.gov/News/2024/postquantum-cryptography-fips-approved
+  \item Zukunft: Umfassender einsatz von PQ-Sicherheit
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[T]{Die Systeme sind die Probleme}
+
+Bild:
+\begin{itemize}
+  \item Doktor / Patient kommunizieren
+  \item Dritter Server der Schlüssel verteilt (Vierter fünter server)
+  \item Pfeil auf patientencomputer: Windows XP, Virusverseucht
+  \item Mensch mit Besen beim Arzt "Haut computer wenn das internet stottert"
+  \item "Heriberts-Kneipe" – Promo USB Stick (Einziger Speicher der Geheimen Schlüssel) steckt im Zertifikatscomputer
+\end{itemize}
+
+Sichere Verschlüsselungssysteme bestehen aus vielen Komponenten,
+die müssen alle abgesichert werden.
+\end{frame}
+
+% \begin{frame}[T]{Und inkompatible Bausteine auch}
+
+% Bild:
+% \begin{itemize}
+%   \item NIST: "Hey we have this shiny new encryption method from the nist competition" (Visualize as puzzle piece)
+%   \item Protocol designer: "It does not work in my system"
+%   \item Outcome one: "Systemupgrade als ganzes"
+%     \begin{itemize}
+%         \item Sweaty engineer: I made it fit
+%     \end{itemize}
+%   \item Outcome two: "Systemupgrade mit Zusatzkomponente"
+%     \begin{itemize}
+%       \item I bolted an extra heisenberg crypto condensator
+%     \end{itemize}
+% \end{itemize}
+
+% \end{frame}
+
+\begin{frame}[T]{Kryptoagilität}
+
+\begin{itemize}
+  \item Es gibt keine Garantie dass Kryptografische Systeme für immer sicher bleiben
+  \item Wir müssen bei der Aktuellen Migration systeme so umbauen, dass zukünftige migration einfacher wird
+\end{itemize}
+
+Bild: Buzzer "Crypto agility" mit Hand die ihn Drückt
+
+\end{frame}
