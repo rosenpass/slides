@@ -1,0 +1,54 @@
+\pdfvariable minorversion 7\relax
+\documentclass[aspectratio=169]{rosenpass-beamer}
+\usepackage[english]{babel}
+\usepackage{booktabs}
+
+\usepackage{tikzsymbols}
+\usepackage{multirow}
+\usepackage{stmaryrd}
+\usepackage[dvipsnames]{xcolor}
+
+\newcommand*{\heading}[1]{%
+  {
+    \hspace*{-0.5cm}#1
+    \vspace{1.0em}
+  }
+}
+
+%TODO Short title for the headline?
+\title{Sicherheit\textsuperscript{2}}
+\subtitle{\texorpdfstring{\vspace{0.2em}}{}Das Zusammenspiel von Safety \& Security im Fokus der Kryptoagilität}
+\author[Karolin Varner, Wanja Zaeske]{Karolin Varner \& Wanja Zaeske}
+\institute{\url{https://rosenpass.eu}}
+
+\conference{CAST-Workshop}
+\date{2025-05-15}
+
+\usepackage{biblatex}
+\addbibresource{sources.bib}
+
+\graphicspath{{}{graphics/}}
+
+\usepackage{transparent}
+\usepackage{colortbl}
+\usepackage{pdfpc}
+
+% Syntaxerweiterung \SetNextBackground{Bild} oder image= option bei frame
+
+\partnerlogo{%
+	\includegraphics[height=2\baselineskip]{MPI-SP}%
+	\includegraphics[height=2\baselineskip]{dlr}%
+}
+
+\ExplSyntaxOn
+\tl_gset:Nn \g__ptxcd_interlude_prefix_tl  {artsy-slide-backgrounds-smaller-hd/artsy-mild-bg-2}
+\int_gset:Nn \g__ptxcd_interlude_page_int {-1}
+\ExplSyntaxOff
+
+\begin{document}
+
+\maketitle
+
+\input{content}
+
+\end{document}
