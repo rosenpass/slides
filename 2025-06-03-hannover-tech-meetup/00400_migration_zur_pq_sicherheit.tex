@@ -1,30 +1,39 @@
 \interlude{Migration zur Post-Quanten Sicherheit}
 
+\NewDocumentCommand{\timelineentry}{O{#2}mms}{
+	\node[anchor=north west] (#2) at ([yshift=-1.2ex]lastnode)  {#1: #3};
+	\coordinate(lastnode) at (#2.south west);
+	% Frame?
+%	\draw(#2.north west)--(#2.south west) -- ++(1cm,0);
+	\IfBooleanF{#4}{
+		\draw(0,#2)--(#2.west);
+		\fill[](0,#2) circle [radius=.2ex];
+	}
+}
+
 \begin{frame}[T]{Migration zur Post-Quantum-Sicherheit}
-
-Bild: Timeline
-%TODO(marei): Können wir den NIST-Wettbewerb als ein Zeitraum statt zeitpunkte absichern?
-%
-%       2016                  2024
-%       |                     | 
-% … ---------------------------------------> ...
-%       |                     |
-%       ======================+============> ...
-%       NIST-Wettbewerb        \
-%                               \ Erster Standard verabschiedet
-
-\begin{itemize}
-  \item 1978: Classic McEliece: 1. PQ-Sichere Chiffre
-  \item 1994: Kritische Quantenangriffe gefunden
-  \item 2016: Wettbewerb angekündigt: PQ-Sichere Standardchiffren % – https://csrc.nist.gov/Projects/post-quantum-cryptography/news
-  \item 2019: Experiment: PQ-Sicherheit auf öffentlichen Websiten % – https://blog.cloudflare.com/towards-post-quantum-cryptography-in-tls/
-  \item 2022: OpenSSH abgesichert % – https://www.openssh.com/txt/release-9.0
-  \item 2023: Rosenpass veröffentlicht (WireGuard abgesichert)
-  \item 2023: Signal Messenger abgesichert % began migration – https://signal.org/blog/pqxdh/
-  \item 2024: NIST-Wettbewerb: Erster Standard verabschiedet % – https://csrc.nist.gov/News/2024/postquantum-cryptography-fips-approved
-  \item Zukunft: Umfassender einsatz von PQ-Sicherheit
-\end{itemize}
-
+\begin{tikzpicture}[y=-0.013\textheight,rosenpass-diagram]
+	\draw[->,rosenpass-blue]
+	(0,1973)--(0,1973.5)
+	(0,1974)--(0,1974.3)
+	(0,1974.6)--(0,1975)
+	(0,1975.5)--(0,2030);
+	\foreach \year in {1980,1990,...,2020} {
+	\draw (-.1,\year) node[left,font=\footnotesize,rosenpass-gray]{\year}--++(.2,0);
+	}
+	\coordinate (lastnode) at (.2\textwidth,1970);
+	\timelineentry{1978}{Classic McEliece: 1. PQ-Sichere Chiffre}
+	\timelineentry{1994}{Kritische Quantenangriffe gefunden}
+	\timelineentry{2016}{Wettbewerb angekündigt: PQ-Sichere Standardchiffren}% – https://csrc.nist.gov/Projects/post-quantum-cryptography/news
+	\timelineentry{2019}{Experiment: PQ-Sicherheit auf öffentlichen Websiten}% – https://blog.cloudflare.com/towards-post-quantum-cryptography-in-tls/
+	\timelineentry{2022}{OpenSSH abgesichert}% – https://www.openssh.com/txt/release-9.0
+	\timelineentry{2023}{Rosenpass veröffentlicht (WireGuard abgesichert)}
+	\timelineentry{2023}{Signal Messenger abgesichert }% began migration – https://signal.org/blog/pqxdh/
+	\timelineentry[seit 2024]{2024}{NIST-Wettbewerb: Erster Standard verabschiedet }*% – https://csrc.nist.gov/News/2024/postquantum-cryptography-fips-approved
+	\timelineentry[Zukunft]{2030}{Umfassender einsatz von PQ-Sicherheit}*% –
+	\draw[->](2024.west)to[out=220,in=80](-2mm,2028);
+	\draw[->](2030.west)to[out=190,in=70](2mm,2034);
+	\end{tikzpicture}
 \end{frame}
 
 \begin{frame}[T]{Die Systeme sind die Probleme}
