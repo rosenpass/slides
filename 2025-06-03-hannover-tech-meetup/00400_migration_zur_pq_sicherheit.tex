@@ -1,7 +1,7 @@
 \interlude{Migration zur Post-Quanten Sicherheit}
 
 \NewDocumentCommand{\timelineentry}{O{#2}mms}{
-	\node[anchor=north west] (#2) at ([yshift=-1.2ex]lastnode)  {#1: #3};
+	\node[anchor=north west] (#2) at ([yshift=-1.15ex]lastnode)  {#1: #3};
 	\coordinate(lastnode) at (#2.south west);
 	% Frame?
 %	\draw(#2.north west)--(#2.south west) -- ++(1cm,0);
@@ -32,7 +32,7 @@
 	\timelineentry[seit 2024]{2024}{NIST-Wettbewerb: Erster Standard verabschiedet }*% – https://csrc.nist.gov/News/2024/postquantum-cryptography-fips-approved
 	\timelineentry[Zukunft]{2030}{Umfassender einsatz von PQ-Sicherheit}*% –
 	\draw[->](2024.west)to[out=220,in=80](-2mm,2028);
-	\draw[->](2030.west)to[out=190,in=70](2mm,2034);
+	\draw[->](2030.west)to[out=190,in=70](2mm,2031);
 	\end{tikzpicture}
 \end{frame}
 
