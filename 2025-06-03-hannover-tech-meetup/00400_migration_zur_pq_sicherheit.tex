@@ -13,6 +13,7 @@
 }
 
 \begin{frame}[T]{Migration zur Post-Quantum-Sicherheit}
+\vspace{0.8em}
 \begin{tikzpicture}[y=-0.013\textheight,rosenpass-diagram]
 	\draw[->,rosenpass-blue]
 	(0,1973)--(0,1973.5)
@@ -40,20 +41,29 @@
 	\end{tikzpicture}
 \end{frame}
 
-
-\begin{frame}[T]{Die Systeme sind die Probleme}
-
-Bild:
-\begin{itemize}
-  \item Doktor / Patient kommunizieren
-  \item Dritter Server der Schlüssel verteilt (Vierter fünter server)
-  \item Pfeil auf patientencomputer: Windows XP, Virusverseucht
-  \item Mensch mit Besen beim Arzt "Haut computer wenn das internet stottert"
-  \item "Heriberts-Kneipe" – Promo USB Stick (Einziger Speicher der Geheimen Schlüssel) steckt im Zertifikatscomputer
-\end{itemize}
-
-Sichere Verschlüsselungssysteme bestehen aus vielen Komponenten,
-die müssen alle abgesichert werden.
+\begin{frame}[T]{Systemkomplexität ist eine Herausforderung}
+  \only<1>{
+    \includegraphics[height=\defaultframetextheight]{graphics-repo/comic/rosenpass-comic-rgm-2.png}
+  }
+  \only<2>{
+    \begin{columns}[T,fullwidth]
+      \hfill
+      \begin{column}{.33\linewidth}
+        \vspace{3.8em}
+        \begin{itemize}
+          \item Unsere Kryptografische Infrastruktur besteht aus vielen Einzelkomponenten
+          \item Wir wissen nicht genau welche
+          \item Fast alle müssen Migriert werden
+        \end{itemize}
+      \end{column}
+      \begin{column}{.62\linewidth}
+        \includegraphics[height=\defaultframetextheight,trim=75 0 0 0,clip]{graphics-repo/comic/rosenpass-comic-rgm-3.png}
+      \end{column}
+      \hfill
+    \end{columns}
+  }
+% Sichere Verschlüsselungssysteme bestehen aus vielen Komponenten,
+% die müssen alle abgesichert werden.
 \end{frame}
 
 % \begin{frame}[T]{Und inkompatible Bausteine auch}
@@ -75,12 +85,21 @@ die müssen alle abgesichert werden.
 % \end{frame}
 
 \begin{frame}[T]{Kryptoagilität}
-
-\begin{itemize}
-  \item Es gibt keine Garantie dass Kryptografische Systeme für immer sicher bleiben
-  \item Wir müssen bei der Aktuellen Migration systeme so umbauen, dass zukünftige migration einfacher wird
-\end{itemize}
-
-Bild: Buzzer "Crypto agility" mit Hand die ihn Drückt
-
+  \begin{columns}[T,fullwidth]
+    \hfill
+    \begin{column}{.30\linewidth}
+      \includegraphics[height=1.2\defaultframetextheight,trim=0 0 385 80,clip]{graphics-repo/comic/rosenpass-comic-rgm-3.png}
+    \end{column}
+    \begin{column}{.65\linewidth}
+      \vspace{5em}
+      \begin{itemize}
+        \item Dokumentieren welche Kryptografische Infrastruktur vorliegt
+        \vspace{1.2em}
+        \item Prozesse für einen schnellen Austausch etablieren
+        \vspace{1.2em}
+        \item Nachhaltig und Dauerhaft
+      \end{itemize}
+    \end{column}
+    \hfill
+  \end{columns}
 \end{frame}
