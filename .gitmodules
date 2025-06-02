@@ -1,3 +1,6 @@
 [submodule "tex"]
 	path = tex
 	url = ../rosenpass-LaTeX.git
+[submodule "2025-06-03-hannover-tech-meetup/graphics-repo"]
+	path = 2025-06-03-hannover-tech-meetup/graphics-repo
+	url = https://github.com/rosenpass/graphics/
