@@ -1,0 +1,55 @@
+\pdfvariable minorversion 7\relax
+\documentclass[aspectratio=169]{rosenpass-beamer}
+\usepackage[english]{babel}
+\usepackage{booktabs}
+
+\usepackage{tikzsymbols}
+\usepackage{multirow}
+\usepackage{stmaryrd}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{ulem}
+
+\newcommand*{\heading}[1]{%
+  {
+    \hspace*{-0.5cm}#1
+    \vspace{1.0em}
+  }
+}
+
+%TODO Short title for the headline?
+\title{The real-world security of Rosenpass \& WireGuard}
+% \subtitle{\texorpdfstring{\vspace{0.2em}}{}}
+\author{Karolin Varner \\ \footnotesize with support from Benjamin Lipp, Lisa Schmidt, and Marei Peischl}
+\institute{\url{https://rosenpass.eu}}
+
+\conference{Bergische Universität Wuppertal}
+\date{2025-07-16}
+
+\usepackage{biblatex}
+\addbibresource{sources.bib}
+
+\graphicspath{{}{graphics/}}
+
+\usepackage{transparent}
+\usepackage{colortbl}
+\usepackage{pdfpc}
+
+% Syntaxerweiterung \SetNextBackground{Bild} oder image= option bei frame
+
+% \partnerlogo{%
+% 	\includegraphics[height=2\baselineskip]{MPI-SP}%
+% 	\includegraphics[height=2\baselineskip]{dlr}%
+% }
+
+% \ExplSyntaxOn
+% \tl_gset:Nn \g__ptxcd_interlude_prefix_tl  {artsy-slide-backgrounds-smaller-hd/artsy-mild-bg-2}
+% \int_gset:Nn \g__ptxcd_interlude_page_int {-1}
+% \ExplSyntaxOff
+
+\begin{document}
+
+\maketitle
+
+\input{content}
+
+\end{document}

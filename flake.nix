@@ -85,6 +85,7 @@
             xstring
             stmaryrd
             booktabs
+            ulem
             ;
         };
 

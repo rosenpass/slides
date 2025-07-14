@@ -1,0 +1,189 @@
+\interlude{State-disruption resistance\\[1.1em]\Large{}Even more attack-worthy mitigations}
+
+\begin{frame}{State Disruption Attacks}
+  \only<1>{
+    \centering
+    An attacker, trying to prevent a successful key exchange
+    \\[1.3em] by exploiting flaws in the protocol state machine.
+    \\[1.3em] \textbf{A protocol-level denial of service.}
+  } 
+  \only<2>{
+    \begin{itemize}
+      \item Attacker wants to mount a protocol-level DOS attack
+      \item Attacker may observe messages
+      \item Attacker may insert messages, but they may not drop or modify messages
+      \item Halfway between an active and passive attacker:
+        \begin{itemize}
+          \item For a fully active attacker state disruption is trivial; they can just drop messages
+        \end{itemize}
+    \end{itemize}
+  }
+\end{frame}
+
+\begin{frame}{Non-Interruptability: More Formally}
+    For every pair of traces $\mathtt{tmin}, \mathtt{tmax}$ where trace $\mathtt{tmax}$ can be formed by
+    insertion of messages/oracle calls into $\mathtt{tmin}$, the result of $\mathtt{tmin}$ and $\mathtt{tmax}$
+    should remain the same.
+
+    \begin{itemize}
+      \item Let $\mathtt{Result}$ be the set of possible protocol results
+      \item Let $\mathtt{Trace}$ be the set of possible protocol traces
+      \item Let $\mathtt{res}(\mathtt{t}) : \mathtt{Trace} \to \mathtt{Result}$ determine the protocol result given $\mathtt{t} : \mathtt{Trace}$
+      \item Let $\mathtt{t1} \supseteq \mathtt{t2} : \mathtt{Trace} \to \mathtt{Trace} \to \mathtt{Prop}$ denote that $\mathtt{t}2$ can be formed by insertion of elements into $\mathtt{t}1$
+      \item $\forall (\mathtt{tmin}, \mathtt{tmax}) : \mathtt{Trace} \times \mathtt{Trace}; \mathtt{tmin} \supseteq \mathtt{tmax} \to \mathtt{res}(\mathtt{tmin}) = \mathtt{res}(\mathtt{tmax})$
+    \end{itemize}
+    \pdfpcnote{Karo}
+\end{frame}
+
+\interlude[2]{The ChronoTrigger attack\\[1.1em]\Large{}DoS by exploiting retransmission protection}
+
+\begin{frame}{Retransmission Protection in WireGuard}
+  \small
+  \begin{columns}[fullwidth,T]
+    \begin{column}{.5\linewidth}
+      \vspace{-.05\textheight}
+      \rlap{\includegraphics[height=.90\textheight,page=3,clip,trim=0 20 0 50]{graphics/scientific/rosenpass-wireguard-attack-types.pdf}}
+    \end{column}%
+    \begin{column}{.46\linewidth}
+      \small
+      \begin{itemize}
+        \item Replay attacks thwarted by counter
+        \item Counter is based on real-time clock
+        \item Responder is semi-stateful (one retransmission at program start may be accepted, but this does not affect protocol security)
+        \item[$\Rightarrow$]
+          WG requires \emph{either} reliable real-time clock \emph{or} stateful initiator
+        \item[$\Rightarrow$]
+          Adversary can attempt replay, but this cannot interrupt a valid handshake by the initiator
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{ChronoTrigger Attack: Delayed Execution}
+  \small
+  \begin{columns}[fullwidth,T]
+    \begin{column}{.5\linewidth}
+      \vspace{-.05\textheight}
+      \rlap{\includegraphics[height=.89\textheight,page=5,clip,trim=0 20 0 50]{graphics/scientific/rosenpass-wireguard-attack-types.pdf}}
+    \end{column}
+
+    \begin{column}{.46\linewidth}
+      \only<+|handout:+>{
+        \begin{enumblock}{Preparation phase:}
+          \begin{enumerate}
+            \item \textbf{Attacker} sets \emph{initiator system time} to a future value
+            \item \textbf{Attacker} records \emph{InitHello} as \emph{KillToken} while both peers are performing a valid handshake
+          \end{enumerate}
+        \end{enumblock}
+        \begin{enumblock}{Delayed execution phase:}
+          \begin{enumerate}
+            \item \textbf{Attacker} sends \emph{KillToken} to responder, setting their timestamp to a future value
+            \item[$\Rightarrow$] Initiation now fails again due to timestamp mismatch
+          \end{enumerate}
+        \end{enumblock}
+      }
+
+      \only<+|handout:+>{%
+        \leavevmode\begin{block}{Attacker gains}
+          \begin{itemize}
+            \item Extremely cheap protocol-level DOS
+          \end{itemize}
+          \unskip
+        \end{block}
+
+        \begin{block}{Preparation phase, attacker needs:}
+          \begin{itemize}
+            \item Eavesdropping of initiator packets
+            \item Access to system time
+          \end{itemize}
+          \unskip
+        \end{block}
+
+        \begin{block}{Delayed execution, attacker needs:}
+          \begin{itemize}
+            \item No access beyond message transmission to responder
+          \end{itemize}
+          \unskip
+        \end{block}
+
+        }
+
+        \only<+|handout:+>{%
+
+          \begin{block}{Gaining access to system time:}
+            \begin{itemize}
+              \item Network Time Protocol is insecure,\\
+                Mitigations are of limited use
+              \item[$\Rightarrow$] Break NTP \emph{once}; kill token lasts forever
+            \end{itemize}
+            \unskip
+          \end{block}
+          }
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Fixing ChronoTrigger}
+  \centering
+  Rosenpass uses a stateless-responder
+  \\[1.3em] so there is no state to disrupt.
+\end{frame}
+
+\interlude[3]{The CookieCutter attack\\[1.1em]\Large{}DoS by exploiting proof-of-ip-ownership}
+
+\begin{frame}{Proof-of-IP ownership in WireGuard}
+  \textbf{CookieReply} (responder to initiator):
+  \\[1.3em]\blockquote{I am under load. Prove you are not using an IP spoofing attack with this \emph{cookie key}.}
+\end{frame}
+
+\begin{frame}{CookieCutter Attack}
+  \small
+  \begin{columns}[fullwidth,T]
+    \begin{column}{.4\linewidth}
+      \vspace{-.05\textheight}
+      \rlap{\includegraphics[height=.89\textheight,page=9,clip,trim=0 20 0 50]{graphics/scientific/rosenpass-wireguard-attack-types.pdf}}
+    \end{column}
+    \begin{column}{.47\linewidth}
+      \only<1>{
+        \begin{enumerate}
+          \item \textbf{Attacker:} continuous DOS attack against responder
+          \item \textbf{Initiator:} begin handshake, sends \emph{InitHello}
+          \item \textbf{Responder:} sends \emph{CookieReply}
+          \item \textbf{Initiator:} store cookie key \& waits for retransmission timer
+          \item \textbf{Attacker:} forge a cookie reply with fake \emph{cookie key}
+          \item \textbf{Initiator:} overwrites valid cookie key with the fake one
+          \item[…] Repeat ad nauseam
+        \end{enumerate}
+      }
+      \only<2>{
+        \begin{block}{Attacker gains:}
+          \begin{itemize}
+            \item Cheap protocol-level DOS
+          \end{itemize}
+          \unskip
+        \end{block}
+        \begin{block}{Attacker needs:}
+          \begin{itemize}
+            \item Knowledge of public keys
+            \item Good timing 
+          \end{itemize}
+          \unskip
+        \end{block}
+        \begin{block}{Role switching:}
+          \begin{itemize}
+            \item WireGuard sometimes uses role switching
+            \item To account for that, the attack can be performed against both peers 
+          \end{itemize}
+          \unskip
+        \end{block}
+      }
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Fixing CookieCutter}
+  \centering
+  Immediately retransmit InitHello on receiving CookieReply.
+  \pause
+  \\[1.6em] (Or find a better knock-pattern than proof-of-ip ownership.)
+\end{frame}

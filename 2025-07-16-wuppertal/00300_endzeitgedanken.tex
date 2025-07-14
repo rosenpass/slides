@@ -1,0 +1,110 @@
+\interlude{Knowing cryptography \\[1.1em] vs. \\[1.1em] Practicing cryptography \\[1.3em] \footnotesize Real World Concerns}
+
+
+
+\SetNextBackground{\includegraphics[width=\paperwidth,page=10]{hpke-in-avionics-slide-designs}}
+\begin{frame}
+  \begin{minipage}{.6\pagewidth}
+    \centering
+    Research is going to the moon.
+    \\[3em]
+    Engineering is going to the moon, routinely.
+  \end{minipage}
+\end{frame}
+
+\SetNextBackground{\includegraphics[width=\paperwidth,page=10]{hpke-in-avionics-slide-designs}}
+\begin{frame}{Cryptography as \only<1>{an engineering}\only<2>{a \sout{engineering} social} process}
+  \begin{minipage}{.6\pagewidth}
+    \textbf{Agile (Maintainable)}
+    \\ \only<1>{Provide bug fixes, updates, and improvements.}
+       \only<2>{Guarantee updates, even if you are unavailable. Create a team.}
+    % We need to be able to change the code and the proofs
+    % All artifacts are part of a continous engineering process
+    \\[1.3em] \textbf{Usable}
+    \\ \only<1>{Easy to read, clean code. High-quality documentation. User interface makes sense.}
+       \only<2>{The product needs to uplift non-experts to do things, previously only experts could do.}
+    % People need to read this stuff. All of it. 
+    % Including less experienced ones.
+    \\[1.3em] \textbf{Suitable}
+    \\ \only<1>{Efficient, available on the user's platform.\\}
+       \only<2>{The product needs to be created with an under-\\standing of the context its going to be used in.}
+    % We need to synchronize information across papers, code bases, specifications, proofs, and so on
+  \end{minipage}
+\end{frame}
+
+\SetNextBackground{\reflectbox{\includegraphics[width=\paperwidth,page=10]{hpke-in-avionics-slide-designs}}}
+\begin{frame}{From merely knowing towards doing cryptography}
+  \raggedleft
+  \begin{minipage}{.45\pagewidth}
+    \centering
+    A cryptographer of practice must:
+    \\[1.3em] \textbf{Accept the loss of their singular status as an expert}
+    \\[1.3em] \textbf{Work team-based}
+    \\[1.3em] \textbf{Acts as a project-diplomat}
+    \\[1.3em] \textbf{Makes a choice to depart from merely-knowing}
+  \end{minipage}
+\end{frame}
+
+\SetNextBackground{\includegraphics[width=\paperwidth,page=13]{hpke-in-avionics-slide-designs}}
+\begin{frame}{Sometimes, availability beats everything else}
+  \begin{minipage}{.45\pagewidth}
+    There is no fail-safe way to stop a plane.
+    \\[1.3em] If your cipher depends on dropping packets, it won't encrypt pilot radio.
+  \end{minipage}
+\end{frame}
+
+\SetNextBackground{}
+\begin{frame}{Real-world Rosenpass: DoS resistance}
+  \begin{columns}[]
+    \begin{column}{.2\textwidth}
+      % Somehow, I can not place the vrule after the graphic, hence the double reflectbox
+      \includegraphics[width=\textwidth-.4pt,clip,trim=0 0 2300 0]{graphics/wireguard-and-rp-bunny-rose.png}\rule{.4pt}{.45\textheight}
+      % \begin{minipage}[][.4pt]{.4pt}
+      %   \rule{.4pt}{.35\textheight}
+      % \end{minipage}
+    \end{column}
+
+    \begin{column}{.7\textwidth}
+      \centering
+      \begin{minipage}{\textwidth}
+        \begin{itemize}
+          \item Protocol-level DoS (\say{State Disruption Attacks})
+          \item Memory-DoS (attacker-triggered allocations)
+          \item CPU-exhaustion DoS
+          \item DoS-Amplification (e.g. abusing DNS)
+        \end{itemize}
+      \end{minipage}
+    \end{column}
+    \begin{column}{.2\textwidth}
+      \rule{.4pt}{.45\textheight}\includegraphics[width=\textwidth-.4pt,clip,trim=2300 0 0 0]{graphics/wireguard-and-rp-bunny-rose.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\SetNextBackground{\vspace{.5\pageheight}\begin{minipage}[T][5pt]{.6\pagewidth}~\end{minipage}\reflectbox{\includegraphics[width=.7\pagewidth,trim=0 130 300 0,clip]{graphics/gray-hamster-eating-sunflower-seed.jpeg}}}
+\begin{frame}{Real-world Rosenpass: Stealth}
+  \begin{minipage}{.5\pagewidth}
+    \centering
+    The protocol should not respond to authentication.
+    \\[1.3em] This prevents port-scanning.
+    \\[1.3em] Rosenpass and WireGuard archieve this using symmetric pre-authentication.
+    \\[1.3em] Breaking identity-hiding in the process.
+  \end{minipage}
+\end{frame}
+
+\ExplSyntaxOn
+\int_gset:Nn \g__ptxcd_interlude_page_int {0}
+\ExplSyntaxOff
+\interlude{Knock-patterns\\[1.1em]\Large{}How to introduce real-world attacks}
+
+\SetNextBackground{}
+\begin{frame}{}
+  \centering
+  \includegraphics[height=\pageheight,page=1,clip,trim=0 30 0 60]{graphics/scientific/rosenpass-wireguard-attack-types}
+\end{frame}
+
+\SetNextBackground{}
+\begin{frame}{}
+  \centering
+  \includegraphics[height=\pageheight,page=2,clip,trim=0 5 0 50]{graphics/scientific/rosenpass-wireguard-attack-types}
+\end{frame}
