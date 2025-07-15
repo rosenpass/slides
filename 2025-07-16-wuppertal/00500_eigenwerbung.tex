@@ -12,7 +12,32 @@
   \includegraphics[height=\pageheight,page=2,clip,trim=0 5 0 50]{graphics/scientific/rosenpass-wireguard-attack-types}
 \end{frame}
 
-\interlude{Knowing cryptography \\[1.1em] vs. \\[1.1em] Practicing cryptography \\[1.3em] \footnotesize Real World Concerns}
+\interlude{From merely knowing cryptography \\[0.6em] towards\\practicing cryptography}
+
+\SetNextBackground{}
+\begin{frame}{Real-World Impact---Working Definition}
+  Something, that people rely on regularly and preceive as a trusted resource.
+  \\[1.3em] Providing continuity.
+\end{frame}
+
+\SetNextBackground{}
+\begin{frame}{Cryptography as an engineering process}
+  \only<1,3>{
+    \small
+    \textbf{Maintained}
+    \\ Provide bug fixes, updates, and improvements\only<1>{.}%
+    \only<3>{---for the definitive resource on the security of the thing that you research.}
+    \\[1.3em] \textbf{Suitable}
+    \\ Efficient, available on the user's platform\only<1>{.}%
+    \only<3>{---and analyzing the security properties your target audience cares about.}
+    \\[1.3em] \textbf{Usable}
+    \\ Easy to read, clean code, high-quality documentation, user interface makes sense\only<1>{.}%
+    \only<3>{---accessible and comprehensible to readers with vastly differing backgrounds and levels of expertise.}
+  }
+  \only<2>{
+    Apply this to a cryptography project, by trying to supply the definitive resource on the thing that you research.
+  }
+\end{frame}
 
 \SetNextBackground{\includegraphics[width=\paperwidth,page=11]{hpke-in-avionics-slide-designs}}
 \begin{frame}
@@ -24,36 +49,53 @@
   \end{minipage}
 \end{frame}
 
-\SetNextBackground{\includegraphics[width=\paperwidth,page=11]{hpke-in-avionics-slide-designs}}
-\begin{frame}{Cryptography as \only<1>{an engineering}\only<2>{a \sout{engineering} social} process}
-  \begin{minipage}{.6\pagewidth}
-    \textbf{Agile (Maintainable)}
-    \\ \only<1>{Provide bug fixes, updates, and improvements.}
-       \only<2>{Guarantee updates, even if you are unavailable. Create a team.}
-    % We need to be able to change the code and the proofs
-    % All artifacts are part of a continous engineering process
-    \\[1.3em] \textbf{Usable}
-    \\ \only<1>{Easy to read, clean code. High-quality documentation. User interface makes sense.}
-       \only<2>{The product needs to uplift non-experts to do things, previously only experts could do.}
-    % People need to read this stuff. All of it. 
-    % Including less experienced ones.
-    \\[1.3em] \textbf{Suitable}
-    \\ \only<1>{Efficient, available on the user's platform.\\}
-       \only<2>{The product needs to be created with an under-\\standing of the context its going to be used in.}
-    % We need to synchronize information across papers, code bases, specifications, proofs, and so on
-  \end{minipage}
+\SetNextBackground{}
+\begin{frame}{Cryptography as a community process}
+  \only<1>{
+    \centering
+
+    Maintained, suitable, and usable
+    \\[1.3em] is more than a single person can achieve on their own.
+  }
+  \only<2>{
+    \small
+    \textbf{Dependable, persistent} (Maintained)
+    \\ Provide bug fixes, updates, and improvements, event when you are indisposed.
+    \\[1.1em] Maintain the resource as a team or community.
+    \\[1.3em] \textbf{Client-centered} (Suitable)
+    \\ Serving the client's needs, on their terms.
+    \\[1.1em] Accept the client as an expert on their use-case.
+    \\[1.3em] \textbf{Empowering} (Usable)
+    \\ Grant a new super-power to the client.
+    \\[1.1em] Turn, what previously was your special experise, into a mundane tool for the user.
+  }
+  \only<3>{
+    \centering
+    Empower client, team, (and critics).
+    \\[1.3em]De-center your own expertise and status.
+  }
+\end{frame}
+
+\begin{frame}{}
+  \centering
+  Real-world success is about getting people to use, be excited about, reccomend, and depend on your stuff.
+  \\[1.3em] To make this happen, you need to be a project-diplomat
+  \\who invests a lot of time to schmooze with the users.
 \end{frame}
 
 \SetNextBackground{\reflectbox{\includegraphics[width=\paperwidth,page=10]{hpke-in-avionics-slide-designs}}}
-\begin{frame}{From merely knowing towards doing cryptography}
+\begin{frame}{}
   \raggedleft
-  \begin{minipage}{.45\pagewidth}
+  \begin{minipage}[fullwidth]{.50\pagewidth}
     \centering
-    A cryptographer of practice must:
-    \\[1.3em] \textbf{Accept the loss of their singular status as an expert}
-    \\[1.3em] \textbf{Work team-based}
-    \\[1.3em] \textbf{Acts as a project-diplomat}
-    \\[1.3em] \textbf{Makes a choice to depart from merely-knowing}
+    To practice cryptography, you must:
+    \\[1.3em] \textbf{Make a choice to depart from merely-knowing.}
+    \\[1.3em] \textbf{Accept the loss of your singular status as an expert.}
+    \vspace{1em}
+    \hrule
+    \vspace{1.3em}
+    \textbf{Become a member of}
+    \\[1.1em] \textbf{and serve}
+    \\[1.1em] \textbf{the project community.}
   \end{minipage}
 \end{frame}
-
