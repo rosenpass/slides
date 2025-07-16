@@ -2,7 +2,7 @@
 \int_gset:Nn \g__ptxcd_interlude_page_int {2}
 \ExplSyntaxOff
 
-\interlude{State-disruption resistance\\[1.1em]\Large{}Even more attack-worthy mitigations}
+\interlude{State-disruption resistance}
 
 \begin{frame}{State Disruption Attacks}
   \only<1>{
@@ -13,7 +13,7 @@
   } 
   \only<2>{
     \begin{itemize}
-      \item Attacker wants to mount a protocol-level DOS attack
+      \item Attacker wants to mount a protocol-level DoS attack
       \item Attacker may observe messages
       \item Attacker may insert messages, but they may not drop or modify messages
       \item Halfway between an active and passive attacker:
@@ -24,7 +24,7 @@
   }
 \end{frame}
 
-\begin{frame}{Non-Interruptability: More Formally}
+\begin{frame}{Non-Interruptability: More formally}
     For every pair of traces $\mathtt{tmin}, \mathtt{tmax}$ where trace $\mathtt{tmax}$ can be formed by
     insertion of messages/oracle calls into $\mathtt{tmin}$, the result of $\mathtt{tmin}$ and $\mathtt{tmax}$
     should remain the same.
@@ -90,7 +90,7 @@
       \only<+|handout:+>{%
         \leavevmode\begin{block}{Attacker gains}
           \begin{itemize}
-            \item Extremely cheap protocol-level DOS
+            \item Extremely cheap protocol-level DoS
           \end{itemize}
           \unskip
         \end{block}
@@ -136,8 +136,10 @@
 \interlude[3]{The CookieCutter attack\\[1.1em]\Large{}DoS by exploiting proof-of-ip-ownership}
 
 \begin{frame}{Proof-of-IP ownership in WireGuard}
-  \textbf{CookieReply} (responder to initiator):
-  \\[1.3em]\blockquote{I am under load. Prove you are not using an IP spoofing attack with this \emph{cookie key}.}
+  Defend against amplification DoS,
+  \\ where the attacker gets other servers to forward packags.
+  \\[1.3em] \textbf{CookieReply} (responder to initiator):
+  \\[1.1em]\blockquote{I am under load. Prove you are not using an IP spoofing attack with this \emph{cookie key}.}
 \end{frame}
 
 \begin{frame}{CookieCutter Attack}
@@ -150,7 +152,7 @@
     \begin{column}{.47\linewidth}
       \only<1>{
         \begin{enumerate}
-          \item \textbf{Attacker:} continuous DOS attack against responder
+          \item \textbf{Attacker:} continuous DoS attack against responder
           \item \textbf{Initiator:} begin handshake, sends \emph{InitHello}
           \item \textbf{Responder:} sends \emph{CookieReply}
           \item \textbf{Initiator:} store cookie key \& waits for retransmission timer
@@ -162,7 +164,7 @@
       \only<2>{
         \begin{block}{Attacker gains:}
           \begin{itemize}
-            \item Cheap protocol-level DOS
+            \item Cheap protocol-level DoS
           \end{itemize}
           \unskip
         \end{block}

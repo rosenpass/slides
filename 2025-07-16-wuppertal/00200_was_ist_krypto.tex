@@ -53,11 +53,11 @@
         \centering
         InitHello achieves no initiator authentication at all.
         \\[.8em]
-        It is trivial to forge this package, overwriting any legitimate ongoing handshake.
+        It is trivial to forge this package, displaying any legitimate ongoing handshake.
         \\[.8em]
-        Therefor, the responder state is stored in an encrypted cookie called "biscuit", not responder memory.
+        Therefor, the responder state is stored in an encrypted cookie called "biscuit", not in responder memory.
         \\[.8em]
-        This does not prevent replay or forgery attacks, but it renders them harmless.
+        This does not prevent replay or forgery attacks, but it 
     \end{column}
   \end{columns}
 \end{frame}
@@ -106,7 +106,6 @@
       \begin{itemize}
         \item Mechanized verification using ProVerif
         \item Proofs treated as part of the codebase
-        \item Uses a model internally that is based on a fairly comprehensive Maximum Exposure Attacks (MEX) variant
         \item Mechanized proof in the computational model is something we want
       \end{itemize}};
     \end{column}
