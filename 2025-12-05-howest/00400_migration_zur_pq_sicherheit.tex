@@ -1,0 +1,108 @@
+\interlude{Migrating to post-quantum security}
+
+
+\NewDocumentCommand{\timelineentry}{O{#2}mms}{
+	\node[anchor=north west] (#2) at ([yshift=-1.15ex]lastnode)  {#1: #3};
+	\coordinate(lastnode) at (#2.south west);
+	% Frame?
+%	\draw(#2.north west)--(#2.south west) -- ++(1cm,0);
+	\fill[](0,#2) circle [radius=.2ex];
+	\IfBooleanF{#4}{
+		\draw(0,#2)--(#2.west);
+	}
+}
+
+\begin{frame}[T]{Migrating to post-quantum security}
+\vspace{0.8em}
+\begin{tikzpicture}[y=-0.013\textheight,rosenpass-diagram]
+	\draw[->,rosenpass-blue]
+	(0,1973)--(0,1973.5)
+	(0,1974)--(0,1974.3)
+	(0,1974.6)--(0,1975)
+	(0,1975.5)--(0,2030);
+	\foreach \year in {1980,1990,...,2020} {
+	\draw (-.1,\year) node[left,font=\footnotesize,rosenpass-gray]{\year}--++(.2,0);
+	}
+	\coordinate (lastnode) at (.2\textwidth,1970);
+	\timelineentry{1978}{Classic McEliece: 1st PQ-secure cipher}
+	\timelineentry{1994}{Critical quantum attacks found}
+	\timelineentry{2016}{NIST-Competition for post-quantum cryptography started}% – https://csrc.nist.gov/Projects/post-quantum-cryptography/news
+	\timelineentry{2019}{Experiment: Post-quantum secure website delivery}% – https://blog.cloudflare.com/towards-post-quantum-cryptography-in-tls/
+	\timelineentry{2022}{OpenSSH secured}% – https://www.openssh.com/txt/release-9.0
+	\timelineentry{2023}{Rosenpass published (WireGuard secure)}
+	\timelineentry{2023}{Signal Messenger secured }% began migration – https://signal.org/blog/pqxdh/
+	\timelineentry[seit 2024]{2024}{NIST-Competition: first standard published}*% – https://csrc.nist.gov/News/2024/postquantum-cryptography-fips-approved
+	\draw[sharp corners,rosenpass-pink,->,opacity=.5](2024.west)--(0,2024)--++(0,4);
+	\draw[draw=rosenpass-pink](2024.west)--(0,2024);
+	\fill(0,2024) circle [radius=.2ex];
+	\begin{scope}[overlay]
+	\timelineentry[Future]{2032}{Comprehensive use of post-quantum cryptography}% –
+	\end{scope}
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[T]{System complexity is a major challenge}
+  \only<1>{
+    \includegraphics[height=\defaultframetextheight]{comic/rosenpass-comic-rgm-5.png}
+  }
+  \only<2>{
+    \includegraphics[height=\defaultframetextheight]{comic/rosenpass-comic-rgm-3.png}
+  }
+  \only<3>{
+    \begin{columns}[T,fullwidth]
+      \hfill
+      \begin{column}{.33\linewidth}
+        \vspace{3.8em}
+        \begin{itemize}
+          \item Our cryptographic infrastructure is a massive mess of components
+          \item We don't even precisely know which components are used
+          \item Almost all must be migrated
+        \end{itemize}
+      \end{column}
+      \begin{column}{.62\linewidth}
+        \includegraphics[height=\defaultframetextheight,trim=75 0 0 0,clip]{comic/rosenpass-comic-rgm-3.png}
+      \end{column}
+      \hfill
+    \end{columns}
+  }
+% Sichere Verschlüsselungssysteme bestehen aus vielen Komponenten,
+% die müssen alle abgesichert werden.
+\end{frame}
+
+% \begin{frame}[T]{Und inkompatible Bausteine auch}
+
+% Bild:
+% \begin{itemize}
+%   \item NIST: "Hey we have this shiny new encryption method from the nist competition" (Visualize as puzzle piece)
+%   \item Protocol designer: "It does not work in my system"
+%   \item Outcome one: "Systemupgrade als ganzes"
+%     \begin{itemize}
+%         \item Sweaty engineer: I made it fit
+%     \end{itemize}
+%   \item Outcome two: "Systemupgrade mit Zusatzkomponente"
+%     \begin{itemize}
+%       \item I bolted an extra heisenberg crypto condensator
+%     \end{itemize}
+% \end{itemize}
+
+% \end{frame}
+
+\begin{frame}[T]{Kryptoagilität}
+  \begin{columns}[T,fullwidth]
+    \hfill
+    \begin{column}{.30\linewidth}
+      \includegraphics[height=1.2\defaultframetextheight,trim=0 0 385 80,clip]{comic/rosenpass-comic-rgm-3.png}
+    \end{column}
+    \begin{column}{.65\linewidth}
+      \vspace{5em}
+      \begin{itemize}
+        \item Document existing cryptographic infrastructure
+        \vspace{1.2em}
+        \item Introduce procedures for rapid upgrades
+        \vspace{1.2em}
+        \item Sustainable \& enduring
+      \end{itemize}
+    \end{column}
+    \hfill
+  \end{columns}
+\end{frame}

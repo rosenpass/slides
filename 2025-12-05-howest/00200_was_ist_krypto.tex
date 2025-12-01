@@ -1,0 +1,90 @@
+\interlude{What is Cryptography?}
+\section{What is Cryptography?}
+
+
+\begin{frame}[T]{Creating trustful communication spaces}
+  \begin{columns}[t,fullwidth]
+    \hfill
+    \begin{column}{.35\linewidth}
+      \centering
+      \includegraphics[width=.305\pagewidth]{comic/rosenpass-comic-diary.png}   
+      \\ Protecting privacy
+    \end{column}
+    \begin{column}{.55\linewidth}
+      \centering
+      \includegraphics[width=.30\pagewidth]{comic/rosenpass-comic-safe.png}   
+      \\ Protecting belongings \& capital
+    \end{column}
+    \hfill
+  \end{columns}
+% -> Viel heutzutage im Internet
+% -> Die Kommunikation muss abgesichert werden
+\end{frame}
+
+\begin{frame}[T]{Digital spaces, as trustful as the analog ones}
+  \includegraphics[height=\defaultframetextheight]{comic/rosenpass-comic-rgm-1.png}
+\end{frame}
+
+\begin{frame}[T]{Data communication is usually public}
+  \includegraphics[height=\defaultframetextheight]{comic/rosenpass-comic-rgm-2.png}
+\end{frame}
+
+\begin{frame}[T]{Data streams become gibberish}
+  \begin{columns}[T,fullwidth]
+    \hfill
+    \begin{column}{.55\linewidth}
+      \includegraphics[height=\defaultframetextheight,trim=65 0 65 0,clip]{comic/rosenpass-comic-rgm-2.png}
+    \end{column}
+    \begin{column}{.38\linewidth}
+      \vspace{0.8em}
+      \begin{itemize}
+        \item Patient and doctor exchange a secret number
+        \item Both computer use this number to encrypt \& decrypt
+        \item Patient and doctor can understand each other
+        \item For everyone else, the data stream looks like gibberish (random)
+        \item Well-made cryptography even protects info about who is communicating
+      \end{itemize}
+    \end{column}
+    \hfill
+  \end{columns}
+\end{frame}
+
+
+%\begin{frame}[T]{Kryptografische Sicherheit ist exponentiell}
+%  \begin{itemize}
+%    \item Eine Einheit mehr Arbeit für ehrliche Parteien
+%    \item => Doppelte Arbeit für Angreifer (oder ein anderer Faktor)
+%  \end{itemize}
+%\end{frame}
+%
+%\begin{frame}[T]{Exponentialrechnung: Krishna's Rice Pudding}
+%  Bild: 
+%  \begin{itemize}
+%    \item Ambalappuzha Sree Krishna Swamy Temple Legend
+%    \item \url{https://en.wikipedia.org/wiki/Ambalappuzha_Sree_Krishna_Swamy_Temple}
+%    \item Schachbrett mit figuren
+%    \item "Hey, können sie die Weltreisproduktion um den Faktor 1300 erhöhen"
+%    \item Höchster turm reicht bis weit hinter pluto (13 licht-tage)
+%    \item Planet pluto mit messer und gabel
+%  \end{itemize}
+%\end{frame}
+%
+%\begin{frame}[T]{Exponentialrechnung: Weltwirtschaftswachstum}
+%  \begin{itemize}
+%    \item Angenommen Wirtschaftswachstum von 2.5\%
+%    \item Angenommen Energienutzung proportional zum Wirtschaftswachstum
+%    \item Erdenergiebudget in 300 Jahren überschritten
+%    \item Weitere 600 Jahre: Sonnenenergiebudget überschritten
+%    \item Weitere 2500 Jahre: Energiebudget des Universums überschritten
+%    \item (Das geht nicht weil Lichtgeschwindigkeit)
+%  \end{itemize}
+%\end{frame}
+%
+%\begin{frame}[T]{Exponenzielle Sicherheit}
+%  \begin{itemize}
+%    \item Kleinstmögliche energiekosten (Landauer Limit) für kostenschritte
+%    \item Energiebudget der Erde verbraucht: ~150 Verdopplungsschritte oder 4200 schritte bei faktor 2.5\%
+%    \item Energiebudget der Sonne verbraucht: ~180 Verdopplungsschritte oder 5000 bei faktor 2.5\%
+%    \item Energieinhalt des Universums verbraucht: ~300 Verdopplungsschritte oder 8500 bei faktor 2.5\%
+%  \end{itemize}
+%\end{frame}
