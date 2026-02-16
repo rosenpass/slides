@@ -1,0 +1,54 @@
+\pdfvariable minorversion 7\relax
+\documentclass[aspectratio=169]{rosenpass-beamer}
+\usepackage[english]{babel}
+\usepackage{booktabs}
+
+\usepackage{tikzsymbols}
+\usepackage{multirow}
+\usepackage{stmaryrd}
+\usepackage[dvipsnames]{xcolor}
+
+\newcommand*{\heading}[1]{%
+  {
+    \hspace*{-0.5cm}#1
+    \vspace{1.0em}
+  }
+}
+
+%TODO Short title for the headline?
+\title{Plug and Play – How to enter the Quantum Internet without Fuzz, Buzz, or KMS}
+% \subtitle{\texorpdfstring{\vspace{0.2em}}{}}
+\author{Karolin Varner}
+\institute{\url{https://rosenpass.eu}}
+
+\conference{QR.N-Workshop II}
+\date{2025-12-05}
+
+\usepackage{biblatex}
+\addbibresource{sources.bib}
+
+\graphicspath{{}{graphics/}}
+
+\usepackage{transparent}
+\usepackage{colortbl}
+\usepackage{pdfpc}
+
+% Syntaxerweiterung \SetNextBackground{Bild} oder image= option bei frame
+
+% \partnerlogo{%
+% 	\includegraphics[height=2\baselineskip]{MPI-SP}%
+% 	\includegraphics[height=2\baselineskip]{dlr}%
+% }
+
+\ExplSyntaxOn
+\tl_gset:Nn \g__ptxcd_interlude_prefix_tl  {artsy-slide-backgrounds-smaller-hd/artsy-mild-bg-2}
+\int_gset:Nn \g__ptxcd_interlude_page_int {-1}
+\ExplSyntaxOff
+
+\begin{document}
+
+\maketitle
+
+\input{content}
+
+\end{document}
