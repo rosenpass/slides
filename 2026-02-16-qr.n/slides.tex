@@ -33,6 +33,22 @@
 \usepackage{colortbl}
 \usepackage{pdfpc}
 
+% Title Scaling effect, where each line is scaled until it looks like a box
+\ExplSyntaxOn
+\NewDocumentCommand{\fitline}{ O{\linewidth} m }
+  { \fitline_do:nn {#1} {#2} }
+
+\cs_new_protected:Npn \fitline_do:nn #1 #2
+  {
+    \hbox_set:Nn \l_tmpa_box {#2} % measure natural width
+    \fp_set:Nn \l_tmpa_fp
+      { \dim_to_fp:n{#1} / \dim_to_fp:n{\box_wd:N \l_tmpa_box} }
+    \scalebox{\fp_use:N \l_tmpa_fp}[1]{#2}% horizontal only
+  }
+\ExplSyntaxOff
+
+\newfontfamily{\bsixonetwo}{B612}
+
 % Syntaxerweiterung \SetNextBackground{Bild} oder image= option bei frame
 
 % \partnerlogo{%

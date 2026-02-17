@@ -1,54 +1,69 @@
+\ExplSyntaxOn
+\int_gset:Nn \g__ptxcd_interlude_page_int {-1}
+\ExplSyntaxOff
+
 \interlude{What do we want?}
 
 \begin{frame}[T]{}
   \centering
+  \bsixonetwo
 
-  What do we want?
-
-  \only<2,3,4>{Data communication}
-  \only<3,4>{\\Securely}
-  \only<4>{\\Something something quantum}
+  { \footnotesize What do we want? }
+  \\[-0.00cm] \resizebox{10cm}{!}{\bfseries \Large data communication}
+  \\[.2cm] { \footnotesize How do we want it? }
+  \\[-0.32cm] \resizebox{10cm}{!}{\bfseries \Large securely}
+  \\[-0.15cm] { \footnotesize Specifically? }
+  \\[.08cm] \resizebox{10cm}{!}{\bfseries \Large post-quantum secure}
 \end{frame}
 
 \begin{frame}[T]{}
-  \begin{tabular}{lrr}
-                         & QKD                                 & Computational Cryptography \\
-    End to End Security  & No                                  & Yes                        \\
-    Authentication       & Yes\footnote{Through Wegman-Carter} & Yes                        \\
-    Commodity Hardware   & No                                  & Yes                        \\
-    Data rates           & kilobits                            & Arbitrary                  \\
+  \begin{tabular}{lrrr}
+                         & \textbf{QKD}                         & \textbf{Bricks} & \textbf{Crypto.} \\
+    End to End Security  & No                                   & Yes        & Yes          \\
+    Authentication       & Yes\footnote{Through Wegman-Carter}  & Yes        & Yes          \\
+    Commodity Hardware   & No                                   & No         & Yes          \\
+    Data rates           & kilobits                             & Arbitrary  & Arbitrary    \\
     Information-theoretic security\footnote{Everlasting Secrecy, the lack of algorithmic hardness assumptions}
       & (No)\footnote{Not with these data rates}
+      & (Yes)\footnote{Assuming pressure hammer attacks are detected}
       & (Yes)\footnote{With a suitcase of hard drives containing keys} 
   \end{tabular}
 \end{frame}
 
-\begin{frame}[T]{How to secure the internet against quantum attacks}
+\begin{frame}[T]{}
   \centering
-  With computational cryptography!
+  \bsixonetwo
+  { \small How to secure the internet against quantum attacks? }
+  \\[0.3cm] \resizebox{14.3cm}{!}{\bfseries \Large With computational cryptography}
 \end{frame}
 
-\begin{frame}[T]{How to think about quantum key distribution?}
-  \centering
-  \includegraphics[height=\defaultframetextheight]{scientific/rosenpass-qkd.pdf}
-  As a fail-over in case Post-Quantum Cryptography fails.
-\end{frame}
+\interlude{How do we think about QKD then?}
 
-\begin{frame}[T]{Data streams become gibberish}
+\begin{frame}[T]{}
   \centering
-  PLACEHOLDER \\
-  As a hardware-security measure.
+  \includegraphics[height=1.15\defaultframetextheight,clip,trim=0 25 0 65]{scientific/rosenpass-qkd.pdf}
+  \\ \textbf{QKD:} A fail-over in case Post-Quantum Cryptography fails.
 \end{frame}
 
 \begin{frame}[T]{}
   \centering
+  PLACEHOLDER
+  \\ \textbf{QKD:} A measure of hardware security.
+\end{frame}
 
-  What do we want?
+\begin{frame}[T]{}
+  \centering
+  \bsixonetwo
 
-  \only<2,3,4,5>{Data communication}
-  \only<3,4,5>{\\on highly secure institutional networks}
-  \only<4,5>{\\with hardware security measures\\especially QKD}
-  \only<5>{\\interoperable with the internet}
+  { \footnotesize What do we want? }
+  \\[-0.00cm] \resizebox{10cm}{!}{\bfseries \Large secure data communication}
+  \\[.08cm] { \footnotesize Where do we want it? }
+  \\[.2cm] \resizebox{10cm}{!}{\bfseries \Large on highly secure institutional networks}
+  \\[.0cm] { \footnotesize In what particular manner? }
+  \\[.00cm] \resizebox{10cm}{!}{\bfseries \Large with hardware security measures}
+  \\[.08cm] \resizebox{10cm}{!}{\bfseries \Large especially QKD}
+  \\[.1cm] { \footnotesize Anything else else? }
+  \\[.1cm] \resizebox{10cm}{!}{\bfseries \Large interoperability with the internet}
 \end{frame}
 
 \ExplSyntaxOn
@@ -80,7 +95,7 @@
 \begin{frame}[T]{}
   \centering
   \includegraphics[height=\defaultframetextheight]{comic/rosenpass-comic-rgm-3.png}
-  Key management systems evoke the image of a rube-goldberg machine.
+  \\ Key management systems evoke the image of a rube-goldberg machine.
 \end{frame}
 
 \begin{frame}[T]{}
@@ -99,7 +114,7 @@
 \int_gset:Nn \g__ptxcd_interlude_page_int {-1}
 \ExplSyntaxOff
 
-\interlude{The end!}
+\interlude{That's a wrap, problem solved!}
 
 \begin{frame}[T]{}
   \begin{columns}[T,fullwidth]
@@ -220,7 +235,7 @@
       Key takeaways:
       \begin{itemize}
         \item QKD is a hardware security measure, not a replacement for cryptography
-        \item Key management systems are overcomplicated and not actually needed
+        \item Open Source, Open Source, Open Source
         \item We can use or extend standard internet technologies, to build the quantum internet
       \end{itemize}
     \end{column}

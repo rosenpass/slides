@@ -92,38 +92,39 @@
         documents = (builtins.fromTOML (builtins.readFile ./documents.toml)).documents;
       in
       {
-        packages = builtins.listToAttrs (
-          builtins.map (
-            { name, ... }@meta:
-            {
-              inherit name;
-              value = pkgs.stdenvNoCC.mkDerivation {
+        packages = 
+          builtins.listToAttrs (
+            builtins.map (
+              { name, ... }@meta:
+              {
                 inherit name;
-                srcs = [
-                  (./. + "/${name}")
-                  ./tex
-                ];
-                sourceRoot = "./${name}";
-                nativeBuildInputs = with pkgs; [
-                  tex
-                  nixpkgs-fmt
-                  google-fonts
-                  nodePackages.prettier
-                  python3Packages.pygments # for pygmentize
-                ];
-                buildPhase = ''
-                  export HOME=$(mktemp -d)
-                  latexmk
-                '';
-                installPhase = ''
-                  mkdir --parent -- $out
-                  mv *.pdf $out/
-                '';
-                passthru = meta;
-              };
-            }
-          ) documents
-        );
+                value = pkgs.stdenvNoCC.mkDerivation {
+                  inherit name;
+                  srcs = [
+                    (./. + "/${name}")
+                    ./tex
+                  ];
+                  sourceRoot = "./${name}";
+                  nativeBuildInputs = with pkgs; [
+                    tex
+                    nixpkgs-fmt
+                    google-fonts
+                    nodePackages.prettier
+                    python3Packages.pygments # for pygmentize
+                  ];
+                  buildPhase = ''
+                    export HOME=$(mktemp -d)
+                    latexmk
+                  '';
+                  installPhase = ''
+                    mkdir --parent -- $out
+                    mv *.pdf $out/
+                  '';
+                  passthru = meta;
+                };
+              }
+            ) documents
+          );
 
         devShells.default = (
           pkgs.devshell.mkShell {
