@@ -15,19 +15,77 @@
   \\[-0.15cm] { \footnotesize Specifically? }
   \\[.08cm] \resizebox{10cm}{!}{\bfseries \Large post-quantum secure}
 \end{frame}
-
 \begin{frame}[T]{}
-  \begin{tabular}{lrrr}
-                         & \textbf{QKD}                         & \textbf{Bricks} & \textbf{Crypto.} \\
-    End to End Security  & No                                   & Yes        & Yes          \\
-    Authentication       & Yes\footnote{Through Wegman-Carter}  & Yes        & Yes          \\
-    Commodity Hardware   & No                                   & No         & Yes          \\
-    Data rates           & kilobits                             & Arbitrary  & Arbitrary    \\
-    Information-theoretic security\footnote{Everlasting Secrecy, the lack of algorithmic hardness assumptions}
-      & (No)\footnote{Not with these data rates}
-      & (Yes)\footnote{Assuming pressure hammer attacks are detected}
-      & (Yes)\footnote{With a suitcase of hard drives containing keys} 
-  \end{tabular}
+  \begin{columns}[T,fullwidth]
+    \begin{column}{.72\linewidth}
+      \begin{tabular}{rlccc}
+        % HEADER: Encryption Technologies
+          & % Image
+          & \textbf{QKD}
+          & \textbf{Guards}
+          & \textbf{Crypto.}
+        \\
+        \includegraphics[height=0.12\defaultframetextheight,trim=14 92 6 86,clip]{visualizations/comic/rosenpass-comic-qrn-mini-e2e.png}
+          &
+          \begin{minipage}{0.2\textwidth}
+            E2E-Security
+          \end{minipage}
+          & \XSolidBrush
+          & \Checkmark\textsuperscript{1}
+          & \Checkmark
+        \\
+        \includegraphics[height=0.2\defaultframetextheight,trim=4 77 4 55,clip]{visualizations/comic/rosenpass-comic-qrn-mini-auth.png}
+          &
+          \begin{minipage}{0.2\textwidth}
+            Auth.
+          \end{minipage}
+          & \Checkmark\textsuperscript{2}
+          & \Checkmark\textsuperscript{1}
+          & \Checkmark
+        \\
+        \includegraphics[height=0.2\defaultframetextheight,trim=41 58 54 61,clip]{visualizations/comic/rosenpass-comic-qrn-mini-legacy.png}
+          &
+          \begin{minipage}{0.2\textwidth}
+            Commodity \\ Hardware
+          \end{minipage}
+          & \XSolidBrush
+          & \XSolidBrush
+          & \Checkmark
+        \\
+        \includegraphics[height=0.2\defaultframetextheight,trim=15 50 22 42,clip]{visualizations/comic/rosenpass-comic-qrn-mini-datarates2.png}
+          &
+          \begin{minipage}{0.2\textwidth}
+            Data Rates
+          \end{minipage}
+          & kb
+          & Any
+          & Any
+        \\
+        \includegraphics[height=0.2\defaultframetextheight,trim=40 50 40 50,clip]{visualizations/comic/rosenpass-comic-qrn-mini-hardness.png}
+          &
+          \begin{minipage}{0.2\textwidth}
+            Everlasting \\ Secrecy\textsuperscript{3}
+          \end{minipage}
+          & (\XSolidBrush)\textsuperscript{4}
+          & (\Checkmark)\textsuperscript{1}
+          & (\Checkmark)\textsuperscript{5}
+      \end{tabular}
+    \end{column}
+    \begin{column}{.32\linewidth}
+      \vspace{2em}
+      \shiftbox{-.32\linewidth}{
+        \begin{minipage}{\linewidth}
+          \raggedright
+          \footnotesize
+          \textsuperscript{1}Assuming resistance against sneak attacks
+          \\[0.4em] \textsuperscript{2}Through Wegman-Carter
+          \\[0.4em] \textsuperscript{3}Information-Theoretic Security, the lack of algorithmic hardness assumptions
+          \\[0.4em] \textsuperscript{4}Not at these data rates
+          \\[0.4em] \textsuperscript{5}With a suitcase of hard drives containing keys
+        \end{minipage}
+      }
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}[T]{}
@@ -39,16 +97,19 @@
 
 \interlude{How do we think about QKD then?}
 
-\begin{frame}[T]{}
+\begin{frame}[T]{Conceptualize QKD}
+  \vspace{3em}
   \centering
-  \includegraphics[height=1.15\defaultframetextheight,clip,trim=0 25 0 65]{scientific/rosenpass-qkd.pdf}
-  \\ \textbf{QKD:} A fail-over in case Post-Quantum Cryptography fails.
+  \shiftbox{-0.12\textwidth}{
+    \includegraphics[width=1.20\textwidth,page=9,trim=95 340 90 590]{slide-graphics-qrn.pdf}
+  }
+  \\[1.5em] \textbf{QKD} as measure of hardware security.
 \end{frame}
 
 \begin{frame}[T]{}
   \centering
-  PLACEHOLDER
-  \\ \textbf{QKD:} A measure of hardware security.
+  \includegraphics[height=1.15\defaultframetextheight,clip,trim=0 25 0 65]{scientific/rosenpass-qkd.pdf}
+  \\ \textbf{QKD:} A fail-over in case Post-Quantum Cryptography fails.
 \end{frame}
 
 \begin{frame}[T]{}
@@ -62,8 +123,6 @@
   \\[.0cm] { \footnotesize In what particular manner? }
   \\[.00cm] \resizebox{10cm}{!}{\bfseries \Large with hardware security measures}
   \\[.08cm] \resizebox{10cm}{!}{\bfseries \Large especially QKD}
-  \\[.1cm] { \footnotesize Anything else else? }
-  \\[.1cm] \resizebox{10cm}{!}{\bfseries \Large interoperability with the internet}
 \end{frame}
 
 \ExplSyntaxOn
@@ -75,11 +134,12 @@
 \begin{frame}[T]{How about a key management system?}
   \begin{columns}[T,fullwidth]
     \hfill
-    \begin{column}{.55\linewidth}
-      \includegraphics[height=\defaultframetextheight,trim=65 0 65 0,clip]{comic/rosenpass-comic-rgm-2.png}
+    \begin{column}{.45\linewidth}
+      \centering
+      \includegraphics[height=\defaultframetextheight,page=7,trim=1200 50 1200 130]{slide-graphics-qrn.pdf}
     \end{column}
-    \begin{column}{.38\linewidth}
-      \vspace{0.8em}
+    \begin{column}{.45\linewidth}
+      \vspace{1.6em}
       \begin{itemize}
         \item Pretty expensive
         \item Pretty complicated
@@ -94,20 +154,29 @@
 
 \begin{frame}[T]{}
   \centering
-  \includegraphics[height=\defaultframetextheight]{comic/rosenpass-comic-rgm-3.png}
-  \\ Key management systems evoke the image of a rube-goldberg machine.
+  \includegraphics[height=1.2\defaultframetextheight]{comic/rosenpass-comic-rgm-3.png}
+  \\[-0.6em] Key management systems evoke the image of a rube-goldberg machine.
 \end{frame}
 
 \begin{frame}[T]{}
+  \vspace{3em}
   \centering
-  PLACEHOLDER \\
-  The internet is an architecture for \textbf{transport-agnostic} networking.
-\end{frame}
+  \setlength{\fboxsep}{0pt}
+  \fbox{\includegraphics[height=0.4\defaultframetextheight]{visualizations/comic/rosenpass-comic-qrn-present}}
+  \\ The internet is \textbf{packet-routed} and \textbf{stateless}.
 
-\begin{frame}[T]{}
-  \centering
-  PLACEHOLDER \\
-  Then QKD is just another transport technology, with extra security features.
+  \only<1>{
+    \shiftbox{-0.12\textwidth}{
+      \includegraphics[width=1.20\textwidth,page=10,trim=95 340 90 590]{slide-graphics-qrn.pdf}
+    }
+    \\[1.5em] The internet is an architecture for \textbf{transport-agnostic} networking.
+  }
+  \only<2>{
+    \shiftbox{-0.12\textwidth}{
+      \includegraphics[width=1.20\textwidth,page=11,trim=95 340 90 590]{slide-graphics-qrn.pdf}
+    }
+    \\[1.5em] Then QKD is just another transport technology, with extra security features.
+  }
 \end{frame}
 
 \ExplSyntaxOn
@@ -235,7 +304,7 @@
       Key takeaways:
       \begin{itemize}
         \item QKD is a hardware security measure, not a replacement for cryptography
-        \item Open Source, Open Source, Open Source
+        \item Focus on secure data paths, not on key forwarding in complex networks
         \item We can use or extend standard internet technologies, to build the quantum internet
       \end{itemize}
     \end{column}

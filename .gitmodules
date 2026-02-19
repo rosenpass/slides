@@ -1,3 +1,6 @@
 [submodule "tex"]
 	path = tex
 	url = ../rosenpass-LaTeX.git
+[submodule "2026-02-16-qr.n/visualizations"]
+	path = 2026-02-16-qr.n/visualizations
+	url = https://github.com/rosenpass/graphics/
