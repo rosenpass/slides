@@ -86,6 +86,8 @@
             stmaryrd
             booktabs
             ulem
+            tabularray
+            ninecolors
             ;
         };
 
