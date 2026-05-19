@@ -1,0 +1,79 @@
+\pdfvariable minorversion 7\relax
+\documentclass[aspectratio=169]{rosenpass-beamer}
+\usepackage[english]{babel}
+\usepackage{booktabs}
+
+\usepackage{tikzsymbols}
+\usepackage{multirow}
+\usepackage{stmaryrd}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tabularray}
+\usepackage{adjustbox}
+
+\newcommand*{\heading}[1]{%
+  {
+    \hspace*{-0.5cm}#1
+    \vspace{1.0em}
+  }
+}
+
+%TODO Short title for the headline?
+\title{In communication, not incommunicado: \\ What it takes to build cryptographic internet infrastructure}
+% \subtitle{\texorpdfstring{\vspace{0.2em}}{}}
+\author{\textbf{Karolin Varner}, \textbf{Rose Turing}, Lisa (mullana) Schmidt}
+\institute{\url{https://rosenpass.eu}}
+
+\conference{Cryptography Days 2026}
+\date{2026-05-21}
+
+\usepackage{biblatex}
+\addbibresource{sources.bib}
+
+\graphicspath{{}{graphics/}}
+
+\usepackage{transparent}
+\usepackage{colortbl}
+\usepackage{pdfpc}
+
+% Title Scaling effect, where each line is scaled until it looks like a box
+\ExplSyntaxOn
+\NewDocumentCommand{\fitline}{ O{\linewidth} m }
+  { \fitline_do:nn {#1} {#2} }
+
+\cs_new_protected:Npn \fitline_do:nn #1 #2
+  {
+    \hbox_set:Nn \l_tmpa_box {#2} % measure natural width
+    \fp_set:Nn \l_tmpa_fp
+      { \dim_to_fp:n{#1} / \dim_to_fp:n{\box_wd:N \l_tmpa_box} }
+    \scalebox{\fp_use:N \l_tmpa_fp}[1]{#2}% horizontal only
+  }
+\ExplSyntaxOff
+
+\newfontfamily{\bsixonetwo}{B612}
+
+% Syntaxerweiterung \SetNextBackground{Bild} oder image= option bei frame
+
+% \partnerlogo{%
+% 	\includegraphics[height=2\baselineskip]{MPI-SP}%
+% 	\includegraphics[height=2\baselineskip]{dlr}%
+% }
+
+\ExplSyntaxOn
+\tl_gset:Nn \g__ptxcd_interlude_prefix_tl  {artsy-slide-backgrounds-smaller-hd/artsy-mild-bg-2}
+\int_gset:Nn \g__ptxcd_interlude_page_int {-1}
+\ExplSyntaxOff
+
+\makeatletter
+\newcommand*{\shiftbox}[2]{%
+  \settowidth{\@tempdima}{#2}%
+  \makebox[\@tempdima]{\hspace*{#1}#2}%
+}
+\makeatother
+
+\begin{document}
+
+\maketitle
+
+\input{content}
+
+\end{document}
