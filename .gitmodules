@@ -4,3 +4,6 @@
 [submodule "2026-02-16-qr.n/visualizations"]
 	path = 2026-02-16-qr.n/visualizations
 	url = https://github.com/rosenpass/graphics/
+[submodule "2026-05-19-turin/visualizations"]
+	path = 2026-05-19-turin/visualizations
+	url = https://github.com/rosenpass/graphics/
