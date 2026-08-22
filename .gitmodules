@@ -1,9 +1,9 @@
 [submodule "tex"]
 	path = tex
-	url = git@github.com:rosenpass/rosenpass-LaTeX
+	url = https://github.com/rosenpass/rosenpass-LaTeX
 [submodule "2026-02-16-qr.n/visualizations"]
 	path = 2026-02-16-qr.n/visualizations
-	url = git@github.com:rosenpass/graphics/
+	url = https://github.com/rosenpass/graphics/
 [submodule "2026-05-19-turin/visualizations"]
 	path = 2026-05-19-turin/visualizations
-	url = git@github.com:rosenpass/graphics/
+	url = https://github.com/rosenpass/graphics/
